@@ -1,0 +1,2 @@
+User-Agent: *
+Sitemap: ynotstartups.github.io/sitemap.xml

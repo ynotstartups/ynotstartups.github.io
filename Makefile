@@ -9,10 +9,6 @@ install:
 	pip install -r requirements.txt
 	pre-commit install
 
-process-images:
-	. .venv/bin/activate
-	python bin/process-images.py
-
 format:
 	. .venv/bin/activate
 	pre-commit run --all-files

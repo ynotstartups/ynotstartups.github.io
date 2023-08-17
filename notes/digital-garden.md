@@ -56,14 +56,10 @@ Perhaps unlike other websites, this site works more like a open source software 
 
 ## Infrastructure
 
-My notes are markdown files in a folder called `notes` within a [Github repository](https://github.com/ynotstartups/notes). By using `MkDocs`, I setup a `pre-push` git hook to publish `notes` folder to Github page.
-
-For images, [a python
-script](https://github.com/ynotstartups/notes/blob/cab5b87590fba2ed931b514e9833b387ec0ff4af/bin/process-images.py#L1)
-removes Exif (GPS) data from images and convert to webp.
+These html sites are all markdown files in [Github Repository](https://github.com/ynotstartups/ynotstartups.github.io). By using [MkDocs](https://www.mkdocs.org/), `mkdocs gh-deploy` publishes to Github page.
 
 I value the simplicity of this setup.
 
 Because I have been writing code in Vim for years and I recently got used to writing documentations in Vim, so writing these notes in Vim feels easy and natural to me. I don't need any mental transition to write notes.
 
-Vim is my primary interface to interact with these notes, I prioritise the file presentations in Vim first, HTML output second. Some notes might not look great in HTML!
+Vim is my primary interface to interact with these notes, I prioritise the file presentations in Vim first, HTML output second. So some notes might not look great in HTML!

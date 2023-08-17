@@ -1,13 +1,22 @@
 .DEFAULT_GOAL := serve
 SHELL:=/bin/bash
 serve:
-	source .venv/bin/activate && mkdocs serve;
+	. .venv/bin/activate
+	mkdocs serve
 
 install:
-	./install.sh;
+	source .venv/bin/activate
+	pip install -r requirements.txt
+	pre-commit install
 
 process-images:
-	python bin/process-images.py;
+	. .venv/bin/activate
+	python bin/process-images.py
 
 format:
-	pre-commit run --all-files;
+	. .venv/bin/activate
+	pre-commit run --all-files
+
+deploy-gh-pages:
+	. .venv/bin/activate
+	mkdocs gh-deploy

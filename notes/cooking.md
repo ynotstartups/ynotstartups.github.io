@@ -217,7 +217,7 @@ Ginger's drawing
 
 ## Handmade Noodle - 手工面
 
-![Handmade Noodle](images/cooking/handmade-noodle.webp){ loading=lazy }
+![Handmade Noodle](images/cooking/handmade_noodle.webp){ loading=lazy }
 
 ## 炒米粉
 

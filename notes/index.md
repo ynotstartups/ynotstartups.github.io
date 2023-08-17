@@ -8,7 +8,7 @@ Welcome to my [digital garden](digital-garden.md)!
 
 I am starting a new job as python backend engineer at Saltus!
 
-I consider myself a [minimalist](minimalism.md), [see my possessions](all-things.md).
+I consider myself a [minimalist](minimalism.md).
 
 My biggest hobby is [home cooking](cooking.md), [coffee brewing](tasted-coffee-beans.md) and [eating out](restaurant-recommendations.md). I also find washing dishes to be meditating :)
 
@@ -18,7 +18,6 @@ I am also interested in
 [coding](https://github.com/ynotstartups),
 [personal finance](https://www.bilibili.com/video/BV1u54y1x7zF),
 art,
-classical music,
 ...
 
 My wildest dream is to open a cafe called "Tou",

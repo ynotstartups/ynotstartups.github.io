@@ -195,27 +195,6 @@ For cappuccino, the flavour is very balanced, it is not sour, not bitter, tastes
 >
 > Cup profile: Jammy & thick body, dark cherries & maple syrup
 
-![Banka](images/coffee/banka.webp){width="400"}
-
-## Gui Ben
-
-![gui-ben-description](images/coffee/gui-ben-description.webp){width="400"}
-![gui-ben-package](images/coffee/gui-ben-package.webp){width="350"}
-
 ## CABALLERO #131
 
 These beans have a very strong chili paste smell and flavour, it is too much for my taste.
-
-![caballero-131](images/coffee/caballero-131.webp){width="350"}
-
-## El Vendaval
-
-![el-vendaval](images/coffee/el-vendaval.webp){width="350"}
-
-## Los Pinos
-
-![los-pinos](images/coffee/los-pinos.webp){width="350"}
-
-## Yabitu
-
-![yabitu](images/coffee/yabitu.webp){width="350"}

@@ -1,6 +1,6 @@
 # Cooking Photos
 
-I love to cook!
+I love cooking!
 
 # Breakfast - 早餐类
 
@@ -13,6 +13,8 @@ I love to cook!
 ![breakfast Egg Sandwich](images/egg-sandwich.webp){ loading=lazy }
 
 ![breakfast Luxurious Sandwich](images/luxurious-sandwich.webp){ loading=lazy }
+
+![Handmade Bao Bun](images/bao_bun.png){ loading=lazy }
 
 # Starter - 前菜
 

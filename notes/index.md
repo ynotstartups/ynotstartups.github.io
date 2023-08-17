@@ -6,22 +6,23 @@ My name is Tiger Yuhao Huang.
 
 Welcome to my [digital garden](digital-garden.md)!
 
-I am starting a new job as python backend engineer at Saltus!
+I work as a python backend engineer at [Saltus](https://www.saltus.co.uk/)!
 
 I consider myself a [minimalist](minimalism.md).
 
-My biggest hobby is [home cooking](cooking.md), [coffee brewing](tasted-coffee-beans.md) and [eating out](restaurant-recommendations.md). I also find washing dishes to be meditating :)
+My biggest hobby is [home cooking](cooking.md), [coffee brewing](tasted-coffee-beans.md). I even find washing dishes to be meditating :)
 
 I am also interested in
 [reading](reading.md),
 [writing](digital-garden.md),
 [coding](https://github.com/ynotstartups),
 [personal finance](https://www.bilibili.com/video/BV1u54y1x7zF),
+[eating out](restaurant-recommendations.md),
 art,
 ...
 
 My wildest dream is to open a cafe called "Tou",
-it sells Man Tou, black filter coffee, latte.
+it sells Man Tou (chinece steamed bun with no filling), black filter coffee, latte.
 
 Ginger and I had made some videos during lock down, see our [youtube channel](https://www.youtube.com/channel/UCQE6i7tcSbBQMD8KSeUQYvQ) and [bilibili channel](https://space.bilibili.com/1281157300).
 

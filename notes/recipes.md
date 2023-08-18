@@ -1,8 +1,7 @@
 # Recipes
 
-## Japanese Soft Toast
+## Japanese Soft Toast - 汤种面包
 
-*汤种*
 
 |             |      |
 | ----------- | ---- |
@@ -12,7 +11,7 @@
 |             |       |
 | ----------- | ----- |
 | bread flour | 250g  |
-| 汤种          | 108g  |
+| 汤种        | 108g  |
 | yeast       | 4g    |
 | salt        | 3.75g |
 | egg         | 38g   |
@@ -21,6 +20,12 @@
 | cream       | 35g   |
 | milk        | 23g   |
 | butter      | 18g   |
+
+- dissolve yeast and sugar in water
+- optionally wait for 20 - 60 minutes before kneading to let gluten develops automatically
+- knead bread for 20 minutes, add butter at the 10 minutes mark
+- 60 minutes proof + optionally 15 minutes wait + 60 minutes proof
+- bake with 180 degree for 25 minutes
 
 ## European Soft Bread
 

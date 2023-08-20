@@ -193,4 +193,3 @@ Notes:
 - documentations
 - strict typing
 - detailed tickets
-

@@ -2,7 +2,7 @@
 
 I love cooking!
 
-# Breakfast - 早餐类
+## Breakfast - 早餐类
 
 ![breakfast Porridge](images/oyster-porridge.webp){ loading=lazy }
 
@@ -16,7 +16,7 @@ I love cooking!
 
 ![Handmade Bao Bun](images/bao_bun.png){ loading=lazy }
 
-# Starter - 前菜
+## Starter - 前菜
 
 ## Spanish Omelette - 西班牙烘蛋
 
@@ -26,7 +26,7 @@ I love cooking!
 
 ![Beef, Potato And Tomato Soup](images/beef-potato-and-tomato-soup.webp){ loading=lazy }
 
-# Main - Meat - 肉类
+## Main - Meat - 肉类
 
 ## Sweet and Sour Chicken - 咕噜肉
 
@@ -91,11 +91,11 @@ Ginger's drawing
 
 ![蜜汁叉烧](images/%E8%9C%9C%E6%B1%81%E5%8F%89%E7%83%A7.webp){ loading=lazy }
 
-## 梅菜蒸肉饼
+## Steamed Minced Pork with Preserved Vegetables - 梅菜蒸肉饼
 
 ![梅菜蒸肉饼](images/%E6%A2%85%E8%8F%9C%E8%92%B8%E8%82%89%E9%A5%BC.webp){ loading=lazy }
 
-## 鱼香茄子
+## Japanese Pork Tender Bone Stew - 鱼香茄子
 
 [recipe](https://www.xiachufang.com/recipe/104416071/)
 
@@ -121,7 +121,7 @@ Ginger's drawing
 
 ![Homemade Fry Chicken and Chips](images/homemade-fried-chicken-and-chips.webp){ loading=lazy }
 
-# Main - Seafood - 海鲜类
+## Main - Seafood - 海鲜类
 
 ## Squid Ink Pasta - 墨鱼汁意面
 
@@ -151,7 +151,7 @@ Ginger's drawing
 
 ![Garlic Scallop](images/garlic_scallop.webp){ loading=lazy }
 
-# Vegetables - 蔬菜类
+## Vegetables - 蔬菜类
 
 ## Marbled Tea Eggs - 茶叶蛋
 
@@ -167,11 +167,11 @@ Ginger's drawing
 
 ![西班牙小辣椒](images/%E8%A5%BF%E7%8F%AD%E7%89%99%E5%B0%8F%E8%BE%A3%E6%A4%92.webp){ loading=lazy }
 
-## 干锅花菜
+## Fried Cauliflower with Chili - 干锅花菜
 
 ![干锅花菜](images/%E5%B9%B2%E9%94%85%E8%8A%B1%E8%8F%9C.webp){ loading=lazy }
 
-## 干煸豆角肉末
+## Fried Sauteed Green Beans - 干煸豆角肉末
 
 ![Stir Fry Beans With Mince](images/stir-fry-beans-with-mince.webp){ loading=lazy }
 
@@ -187,7 +187,7 @@ Ginger's drawing
 
 ![Spiced Mashed Potato](images/spiced-mashed-potatoes.webp){ loading=lazy }
 
-# Dessert - 点心
+## Dessert - 点心
 
 ## Homemade Cookies - 曲奇
 
@@ -205,7 +205,7 @@ Ginger's drawing
 
 ![Carrot Cake](images/white_carrot_cake.webp){ loading=lazy }
 
-# Rice, Noodle, Porridge - 主食
+## Rice, Noodle, Porridge - 主食
 
 ## Man Tou - 馒头
 
@@ -221,7 +221,7 @@ Ginger's drawing
 
 ![Handmade Noodle](images/handmade_noodle.webp){ loading=lazy }
 
-## 炒米粉
+## fried rice noodles - 炒米粉
 
 ![Rice Noodle](images/rice-noodle.webp){ loading=lazy }
 
@@ -246,7 +246,7 @@ Ginger's drawing
 
 ![Oyster Porridge](images/oyster-porridge.webp){ loading=lazy }
 
-# Drinks - 饮品
+## Drinks - 饮品
 
 ## Cold Brew On Rock - 冷萃咖啡
 

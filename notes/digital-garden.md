@@ -8,6 +8,9 @@ Digital garden are forever work in progress/developing personal notes.
 
 [A brief history](https://maggieappleton.com/garden-history)
 
+- Every note is always work in progress
+- Every note is by default public on day 1, similar to the idea [open source by default](https://artsy.github.io/blog/2018/08/21/OSS-by-Default-Docs/)
+
 ## Why do I write these notes?
 
 - practise writing
@@ -47,19 +50,10 @@ These notes record my random ideas, for whatever reason, my brain is running mos
 
 - Do not be afraid to write down raw thoughts, because I can always develop it later
 
-## How does this site work?
+## Site Infrastructure
 
-Perhaps unlike other websites, this site works more like a open source software and this [Digital Garden Idea](https://maggieappleton.com/garden-history).
-
-- Every note is always work in progress
-- Every note is by default public on day 1, similar to the idea [open source by default](https://artsy.github.io/blog/2018/08/21/OSS-by-Default-Docs/)
-
-## Infrastructure
-
-These html sites are all markdown files in [Github Repository](https://github.com/ynotstartups/ynotstartups.github.io). By using [MkDocs](https://www.mkdocs.org/), `mkdocs gh-deploy` publishes to Github page.
+These html pages are all markdown files in [Github Repository](https://github.com/ynotstartups/ynotstartups.github.io). By using [MkDocs](https://www.mkdocs.org/), `mkdocs gh-deploy` publishes to Github page.
 
 I value the simplicity of this setup.
 
 Because I have been writing code in Vim for years and I recently got used to writing documentations in Vim, so writing these notes in Vim feels easy and natural to me. I don't need any mental transition to write notes.
-
-Vim is my primary interface to interact with these notes, I prioritise the file presentations in Vim first, HTML output second. So some notes might not look great in HTML!

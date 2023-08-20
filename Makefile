@@ -10,4 +10,6 @@ format:
 	. .venv/bin/activate; pre-commit run --all-files
 
 deploy-gh-pages:
-	. .venv/bin/activate; mkdocs gh-deploy
+	# strict to abort building gh pages when there are warnings such as
+	# incorrect link after renamed markdowns
+	. .venv/bin/activate; mkdocs gh-deploy --strict

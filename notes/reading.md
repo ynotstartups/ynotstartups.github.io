@@ -136,12 +136,3 @@
 
 - To understand life
 - To kill time
-
-## What do I read?
-
-- classics
-- modern classics
-- best sellers
-- non-fictions
-- software engineering books
-- sci-fi

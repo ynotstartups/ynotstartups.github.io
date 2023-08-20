@@ -2,7 +2,6 @@
 
 ## Japanese Soft Toast - 汤种面包
 
-
 |             |      |
 | ----------- | ---- |
 | bread flour | 20g  |
@@ -15,8 +14,7 @@
 | yeast       | 4g    |
 | salt        | 3.75g |
 | egg         | 38g   |
-| sugar       | 38g   |
-| milk powder | 9g    |
+| honey       | 30g   |
 | cream       | 35g   |
 | milk        | 23g   |
 | butter      | 18g   |

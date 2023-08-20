@@ -13,7 +13,7 @@ I consider myself a [minimalist](minimalism.md).
 My biggest hobby is [home cooking](cooking.md), [coffee brewing](tasted-coffee-beans.md). I even find washing dishes to be meditating :)
 
 I am also interested in
-[reading](reading.md),
+[reading](books.md),
 [writing](digital-garden.md),
 [coding](https://github.com/ynotstartups),
 [personal finance](https://www.bilibili.com/video/BV1u54y1x7zF),

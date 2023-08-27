@@ -79,3 +79,22 @@
 | all purpose flour | 150g      |
 | water             | 83g / 55% |
 | yeast             | 1.5g      |
+
+## 广式绿豆糕
+
+https://www.xiachufang.com/recipe/102936844/
+
+熟粉
+
+|                    |      |
+| ------------------ | ---- |
+| boiled green beans | 200g |
+| water              | 330g |
+| 冰糖                 | 100g |
+
+生粉
+
+|       |      |
+| ----- | ---- |
+| 马蹄粉   | 80g  |
+| water | 100g |

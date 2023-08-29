@@ -2,10 +2,8 @@
 
 ## London - UK
 
-- [BúnBúnBún](http://www.bunbunbun.co/)
-  - only order pho + Vietnamese drip coffee
-- [Dragon Castle](https://www.dragoncastlelondon.com/)
-  - best dimsum
+- [My Old Place - 老地方](https://my-old-place.business.site/)
+  - authentic chinese north-eastern food
 - [Franco Manca](https://www.francomanca.co.uk/)
   - only order Pizza No.5
 - [Honest Burger](https://www.honestburgers.co.uk/)

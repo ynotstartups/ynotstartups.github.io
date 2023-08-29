@@ -2,6 +2,7 @@
 
 | Year | Name                                                            | Author                          |
 | ---- | --------------------------------------------------------------- | ------------------------------- |
+| 2023 | classic shell scripting                                         | Robbins & Beebe                 |
 | 2023 | 流言                                                              | 张爱玲                             |
 | 2023 | Shards Of Earth                                                 | Adrian Tchaikovsky              |
 | 2023 | Chemistry Essentials For Dummies                                | John Moore                      |

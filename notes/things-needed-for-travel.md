@@ -7,9 +7,10 @@ water bottle,
 book, pen, paper,
 earphone, universal socket adapter, phone charger,
 passport, BRP, phone, wallet, keys,
+ber ber ber,
 
 Tepe toothbrush, floss, make ups, camera, 35mm film, invisalign, invisalign cleaning capsule,
-hair brush, contact lenses,
+hair brush, contact lenses, M clothes, hair brush, face wash,
 
 ## For longer trip
 

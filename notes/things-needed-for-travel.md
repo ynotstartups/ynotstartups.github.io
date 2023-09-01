@@ -13,3 +13,7 @@ shaver, shaving blade, shaving cream,
 coffee equipments, coffee beans,
 gloves, cotton gloves,
 **no** laptop, **not too much** clothes, **one** book only
+
+## For working remotely
+
+disposable blue clothes, laptop, laptop charger

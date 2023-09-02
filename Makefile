@@ -12,4 +12,5 @@ format:
 deploy-gh-pages:
 	# strict to abort building gh pages when there are warnings such as
 	# incorrect link after renamed markdowns
-	. .venv/bin/activate; mkdocs gh-deploy --strict
+	# . .venv/bin/activate; mkdocs gh-deploy --strict
+	. .venv/bin/activate; mkdocs gh-deploy

@@ -9,17 +9,17 @@
       
       
       
-        <link rel="prev" href="../27-Aug-23-git-reset/">
+        <link rel="prev" href="../05-Sep-23-git-..-vs-.../">
       
       
-        <link rel="next" href="../31-Aug-23-python-wheel/">
+        <link rel="next" href="../06-Sep-23-Some-links-about-mapping/">
       
       <link rel="icon" href="../../images/favicon.webp">
       <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.18">
     
     
       
-        <title>TIL - vim man page search for short option - 27/Aug/23 - Tiger's Digital Garden</title>
+        <title>TIL - gq: formatoption - 05/Sep/23 - Tiger's Digital Garden</title>
       
     
     
@@ -75,7 +75,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#til-vim-man-page-search-for-short-option-27aug23" class="md-skip">
+        <a href="#til-gq-formatoption-05sep23" class="md-skip">
           Skip to content
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              TIL - vim man page search for short option                         - 27/Aug/23
+              TIL - gq: formatoption                                             - 05/Sep/23
             
           </span>
         </div>
@@ -431,11 +431,21 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../05-Sep-23-gq%3A-formatoption/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         TIL - gq: formatoption                                             - 05/Sep/23
       </a>
+      
     </li>
   
 
@@ -683,21 +693,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../27-Aug-23-vim-man-page-search-for-short-option/" class="md-nav__link">
         TIL - vim man page search for short option                         - 27/Aug/23
       </a>
-      
     </li>
   
 
@@ -805,13 +805,37 @@
                   
 
 
-<h1 id="til-vim-man-page-search-for-short-option-27aug23">TIL - vim man page search for short option                         - 27/Aug/23</h1>
-<p>combine <code>/</code> <code>\C</code>  <code>\&lt;</code>  <code>-g</code>  <code>\&gt;</code></p>
-<ul>
-<li><code>\C</code> to turn on the case sentitivity case</li>
-<li><code>\&lt;</code> <code>\&gt;</code> for word search</li>
-<li><code>\g</code> example for short option</li>
-</ul>
+<h1 id="til-gq-formatoption-05sep23">TIL - gq: formatoption                                             - 05/Sep/23</h1>
+<p>Current formatoption for markdown is <code>formatoption=jtln</code> from <code>set
+formatoptions?</code></p>
+<pre><code>                        *fo-j*
+</code></pre>
+<p>j   Where it makes sense, remove a comment leader when joining lines.  For
+    example, joining:
+        int i;   // the index ~
+                 // in the list ~
+    Becomes:
+        int i;   // the index in the list ~</p>
+<pre><code>                        *fo-t*
+</code></pre>
+<p>t   Auto-wrap text using 'textwidth'</p>
+<pre><code>                        *fo-l*
+</code></pre>
+<p>l   Long lines are not broken in insert mode: When a line was longer than
+    'textwidth' when the insert command started, Vim does not
+    automatically format it.</p>
+<pre><code>                        *fo-n*
+</code></pre>
+<p>n   When formatting text, recognize numbered lists.  This actually uses
+    the 'formatlistpat' option, thus any kind of list can be used.  The
+    indent of the text after the number is used for the next line.  The
+    default is to find a number, optionally followed by '.', ':', ')',
+    ']' or '}'.  Note that 'autoindent' must be set too.  Doesn't work
+    well together with "2".
+    Example: &gt;
+        1. the first item
+           wraps
+        2. the second item</p>
 
 
   

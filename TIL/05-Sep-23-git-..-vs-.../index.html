@@ -9,17 +9,17 @@
       
       
       
-        <link rel="prev" href="../27-Aug-23-git-reset/">
+        <link rel="prev" href="../02-Sep-23-ASCII-encoding/">
       
       
-        <link rel="next" href="../31-Aug-23-python-wheel/">
+        <link rel="next" href="../05-Sep-23-gq%3A-formatoption/">
       
       <link rel="icon" href="../../images/favicon.webp">
       <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.18">
     
     
       
-        <title>TIL - vim man page search for short option - 27/Aug/23 - Tiger's Digital Garden</title>
+        <title>TIL - git .. vs ... - 05/Sep/23 - Tiger's Digital Garden</title>
       
     
     
@@ -75,7 +75,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#til-vim-man-page-search-for-short-option-27aug23" class="md-skip">
+        <a href="#til-git-vs-05sep23" class="md-skip">
           Skip to content
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              TIL - vim man page search for short option                         - 27/Aug/23
+              TIL - git .. vs ...                                                - 05/Sep/23
             
           </span>
         </div>
@@ -417,11 +417,21 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../05-Sep-23-git-..-vs-.../" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         TIL - git .. vs ...                                                - 05/Sep/23
       </a>
+      
     </li>
   
 
@@ -683,21 +693,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../27-Aug-23-vim-man-page-search-for-short-option/" class="md-nav__link">
         TIL - vim man page search for short option                         - 27/Aug/23
       </a>
-      
     </li>
   
 
@@ -805,13 +805,33 @@
                   
 
 
-<h1 id="til-vim-man-page-search-for-short-option-27aug23">TIL - vim man page search for short option                         - 27/Aug/23</h1>
-<p>combine <code>/</code> <code>\C</code>  <code>\&lt;</code>  <code>-g</code>  <code>\&gt;</code></p>
-<ul>
-<li><code>\C</code> to turn on the case sentitivity case</li>
-<li><code>\&lt;</code> <code>\&gt;</code> for word search</li>
-<li><code>\g</code> example for short option</li>
-</ul>
+<h1 id="til-git-vs-05sep23">TIL - git .. vs ...                                                - 05/Sep/23</h1>
+<p>TLDR: to see what is new in master but not in prod branch? use the following
+<div class="highlight"><pre><span></span><code>git diff origin/env/prod...origin/master --stat
+git log  origin/env/prod...origin/master --stat
+</code></pre></div>
+Note this is not the same as <code>git diff origin/master...origin/env/prod --stat</code>!</p>
+<p>Use the three dots like this <code>git diff before...after</code>.</p>
+<div class="highlight"><pre><span></span><code>  B---C---D origin/master (Branch)
+ /
+A
+ \
+  H---I origin/feature (Branch)
+</code></pre></div>
+<p>Two dots - show the diffs between all changes on both sides,
+use the <code>git diff origin/master..origin/feature</code>,
+output: ( H, I against B, C, D )</p>
+<p>Three dots - to show the diffs between the last common ancestor (A), aka the
+commit we started the feature branch,
+use <code>git diff origin/master...origin/feature</code>,
+output: (H, I against A).</p>
+<p><strong>What about git log?</strong></p>
+<blockquote>
+<p>However, "diff" is about comparing two endpoints, not ranges, and the range
+notations ("<commit>..<commit>" and "<commit>...<commit>") do not mean a range
+as defined in the "SPECIFYING RANGES" section in gitrevisions[7].</p>
+</blockquote>
+<p>The <strong>best stack overflow</strong> explanation <a href="https://stackoverflow.com/a/7256391">see here</a></p>
 
 
   

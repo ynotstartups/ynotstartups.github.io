@@ -12,7 +12,7 @@
         <link rel="prev" href="../../things-needed-for-travel/">
       
       
-        <link rel="next" href="../07-Aug-23-What-Errors-To-Catch-For-Requests%3F/">
+        <link rel="next" href="../05-Sep-23-git-..-vs-.../">
       
       <link rel="icon" href="../../images/favicon.webp">
       <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.18">
@@ -429,6 +429,76 @@
   
   
     <li class="md-nav__item">
+      <a href="../05-Sep-23-git-..-vs-.../" class="md-nav__link">
+        TIL - git .. vs ...                                                - 05/Sep/23
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-Sep-23-gq%3A-formatoption/" class="md-nav__link">
+        TIL - gq: formatoption                                             - 05/Sep/23
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-Sep-23-Some-links-about-mapping/" class="md-nav__link">
+        TIL - Some links about mapping                                     - 06/Sep/23
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-Sep-23-Thoughts-On-Shortcuts/" class="md-nav__link">
+        TIL - Thoughts On Shortcuts                                        - 06/Sep/23
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-Sep-23-Tips-about-Fugitive/" class="md-nav__link">
+        TIL - Tips about Fugitive                                          - 06/Sep/23
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../07-Aug-23-What-Errors-To-Catch-For-Requests%3F/" class="md-nav__link">
         TIL - What Errors To Catch For Requests?                           - 07/Aug/23
       </a>
@@ -501,6 +571,20 @@
     <li class="md-nav__item">
       <a href="../10-Aug-23-Resolve-DNS-ip-addresses-in-Mac/" class="md-nav__link">
         TIL - Resolve DNS ip addresses in Mac                              - 10/Aug/23
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-Sep-23-Find-out-vim%27s-python/" class="md-nav__link">
+        TIL - Find out vim's python                                        - 10/Sep/23
       </a>
     </li>
   
@@ -724,7 +808,7 @@
 <h1 id="til-ascii-encoding-02sep23">TIL - ASCII encoding                                               - 02/Sep/23</h1>
 <p><strong>hexadecimal dump of ascii charaters</strong></p>
 <p>from <code>man ascii</code></p>
-<div class="highlight"><pre><span></span><code>00 nul   01 soh   02 stx   03 etx   04 eot   05 enq   06 ack   07 bel
+<p><div class="highlight"><pre><span></span><code>00 nul   01 soh   02 stx   03 etx   04 eot   05 enq   06 ack   07 bel
 08 bs    09 ht    0a nl    0b vt    0c np    0d cr    0e so    0f si
 10 dle   11 dc1   12 dc2   13 dc3   14 dc4   15 nak   16 syn   17 etb
 18 can   19 em    1a sub   1b esc   1c fs    1d gs    1e rs    1f us
@@ -741,39 +825,37 @@
 70  p    71  q    72  r    73  s    74  t    75  u    76  v    77  w
 78  x    79  y    7a  z    7b  {    7c  |    7d  }    7e  ~    7f del
 </code></pre></div>
-<p>The control characters in ASCII still in common use include:</p>
+The control characters in ASCII still in common use include:</p>
 <ul>
-<li><code>0x00 (null, NUL, \0, ^@)</code>, originally intended to be an ignored character, but now used by many programming languages including C to mark the end of a string.</li>
-</ul>
-<ul>
-<li><code>0x07 (bell, BEL, \a, ^G)</code>, which may cause the device to emit a warning such as a bell or beep sound or the screen flashing.</li>
-</ul>
-<ul>
+<li><code>0x00 (null, NUL, \0, ^@)</code>, originally intended to be an ignored character,
+  but now used by many programming languages including C to mark the end of a
+  string.</li>
+<li><code>0x07 (bell, BEL, \a, ^G)</code>, which may cause the device to emit a warning such
+  as a bell or beep sound or the screen flashing.</li>
 <li><code>0x08 (backspace, BS, \b, ^H)</code>, may overprint the previous character.</li>
-</ul>
-<ul>
-<li><code>0x09 (horizontal tab, HT, \t, ^I)</code>, moves the printing position right to the next tab stop.</li>
-</ul>
-<ul>
-<li><code>0x0A (line feed, LF, \n, ^J)</code>, moves the print head down one line, or to the left edge and down. Used as the end of line marker in most UNIX systems and variants.</li>
-</ul>
-<ul>
+<li><code>0x09 (horizontal tab, HT, \t, ^I)</code>, moves the printing position right to the
+  next tab stop.</li>
+<li><code>0x0A (line feed, LF, \n, ^J)</code>, moves the print head down one line, or to the
+  left edge and down. Used as the end of line marker in most UNIX systems and
+  variants.</li>
 <li><code>0x0B (vertical tab, VT, \v, ^K)</code>, vertical tabulation.</li>
-</ul>
-<ul>
-<li><code>0x0C (form feed, FF, \f, ^L)</code>, to cause a printer to eject paper to the top of the next page, or a video terminal to clear the screen.</li>
-</ul>
-<ul>
-<li><code>0x0D (carriage return, CR, \r, ^M)</code>, moves the printing position to the start of the line, allowing overprinting. Used as the end of line marker in Classic Mac OS, OS-9, FLEX (and variants). A CR+LF pair is used by CP/M-80 and its derivatives including DOS and Windows, and by Application Layer protocols such as FTP, SMTP, and HTTP.</li>
-</ul>
-<ul>
-<li><code>0x1A (Control-Z, SUB, ^Z)</code>, Acts as an end-of-file for the Windows text-mode file i/o.</li>
-</ul>
-<ul>
+<li><code>0x0C (form feed, FF, \f, ^L)</code>, to cause a printer to eject paper to the top
+  of the next page, or a video terminal to clear the screen.</li>
+<li><code>0x0D (carriage return, CR, \r, ^M)</code>, moves the printing position to the start
+  of the line, allowing overprinting. Used as the end of line marker in Classic
+  Mac OS, OS-9, FLEX (and variants). A CR+LF pair is used by CP/M-80 and its
+  derivatives including DOS and Windows, and by Application Layer protocols such
+  as FTP, SMTP, and HTTP.</li>
+<li><code>0x1A (Control-Z, SUB, ^Z)</code>, Acts as an end-of-file for the Windows text-mode
+  file i/o.</li>
 <li><code>0x1B (escape, ESC, \e (GCC only), ^[)</code>. Introduces an escape sequence.</li>
 </ul>
 <ul>
-<li>Control characters may be described as doing something when the user inputs them, such as code 3 (End-of-Text character, ETX, ^C) to interrupt the running process, or code 4 (End-of-Transmission character, EOT, ^D), used to end text input on Unix or to exit a Unix shell. These uses usually have little to do with their use when they are in text being output.</li>
+<li>Control characters may be described as doing something when the user inputs
+  them, such as code 3 (End-of-Text character, ETX, ^C) to interrupt the running
+  process, or code 4 (End-of-Transmission character, EOT, ^D), used to end text
+  input on Unix or to exit a Unix shell. These uses usually have little to do
+  with their use when they are in text being output.</li>
 </ul>
 <p><strong>to see the hex value for characters</strong></p>
 <p><code>od -t a -t x1 -t c</code></p>
@@ -793,16 +875,14 @@
 <p><code>\033</code> is actually ESC character in ascii octal format,
 <code>\e</code> is equivalent in zsh shell, however, don't use <code>\e</code>,
 <code>\e</code> is not recognised in <code>awk</code> nor <code>python</code>.</p>
-<div class="highlight"><pre><span></span><code>&gt; echo &quot;\033[31mRed Text\033[0m&quot;
+<p><div class="highlight"><pre><span></span><code>&gt; echo &quot;\033[31mRed Text\033[0m&quot;
 Red Text
 ❯ echo &quot;\e[31mRed Text\e[0m&quot;
 Red Text
 </code></pre></div>
-<ul>
-<li><code>\033[</code>  - Begin the color modifications</li>
-<li><code>CODEm</code> - CODE + <code>m</code> at the end</li>
-<li><code>\e[0m</code>  - End the color modifications</li>
-</ul>
+- <code>\033[</code>  - Begin the color modifications
+- <code>CODEm</code> - CODE + <code>m</code> at the end
+- <code>\e[0m</code>  - End the color modifications</p>
 <table>
 <thead>
 <tr>
@@ -898,6 +978,7 @@ Red Text
 <span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;\\e[&#39;</span><span class="nv">$i</span><span class="s1">&#39;m&#39;</span><span class="w"> </span><span class="s2">&quot;\e[</span><span class="si">${</span><span class="nv">i</span><span class="si">}</span><span class="s2">mtext\e[0m&quot;</span>
 <span class="k">done</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>column
 </code></pre></div>
+<p><img alt="bash color" src="images/bash_color.png" /></p>
 
 
   

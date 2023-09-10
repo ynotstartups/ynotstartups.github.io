@@ -419,6 +419,76 @@
   
   
     <li class="md-nav__item">
+      <a href="../05-Sep-23-git-..-vs-.../" class="md-nav__link">
+        TIL - git .. vs ...                                                - 05/Sep/23
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-Sep-23-gq%3A-formatoption/" class="md-nav__link">
+        TIL - gq: formatoption                                             - 05/Sep/23
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-Sep-23-Some-links-about-mapping/" class="md-nav__link">
+        TIL - Some links about mapping                                     - 06/Sep/23
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-Sep-23-Thoughts-On-Shortcuts/" class="md-nav__link">
+        TIL - Thoughts On Shortcuts                                        - 06/Sep/23
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-Sep-23-Tips-about-Fugitive/" class="md-nav__link">
+        TIL - Tips about Fugitive                                          - 06/Sep/23
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../07-Aug-23-What-Errors-To-Catch-For-Requests%3F/" class="md-nav__link">
         TIL - What Errors To Catch For Requests?                           - 07/Aug/23
       </a>
@@ -501,6 +571,20 @@
     <li class="md-nav__item">
       <a href="../10-Aug-23-Resolve-DNS-ip-addresses-in-Mac/" class="md-nav__link">
         TIL - Resolve DNS ip addresses in Mac                              - 10/Aug/23
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-Sep-23-Find-out-vim%27s-python/" class="md-nav__link">
+        TIL - Find out vim's python                                        - 10/Sep/23
       </a>
     </li>
   
@@ -724,14 +808,12 @@
 <h1 id="til-understanding-git-log-09aug23">TIL - Understanding Git Log                                        - 09/Aug/23</h1>
 <ol>
 <li>commit object filename/hash <code>5a761fe</code> actually sits in <code>.git/objects/5a/761</code></li>
-<li><code>index a871d21e..00000000</code> means <code>file hash before commit..file hash after commit</code><ul>
-<li><code>a871d21e</code> is the object representing the file, <code>000000</code> is no index /dev/null, this means deleting a file.</li>
-<li>If it's new file it would be <code>00000000..a871d21e</code></li>
-<li>If it's change of some file contents, not new or delete, it would be <code>hash..hash</code> e.g. <code>abcs23rr..a871d21e</code></li>
-</ul>
-</li>
+<li><code>index a871d21e..00000000</code> means <code>file hash before commit..file hash after commit</code>
+    - <code>a871d21e</code> is the object representing the file, <code>000000</code> is no index /dev/null, this means deleting a file.
+    - If it's new file it would be <code>00000000..a871d21e</code>
+    - If it's change of some file contents, not new or delete, it would be <code>hash..hash</code> e.g. <code>abcs23rr..a871d21e</code></li>
 </ol>
-<div class="highlight"><pre><span></span><code>commit 5a761fe301ebfe45e0a72d99e619102cba149e6d (HEAD -&gt; ON-1987-tiger-test-remove-aws-credentials, origin/ON-1987-tiger-test-remove-aws-credentials)
+<div class="highlight"><pre><span></span><code>commit 5a761fe301ebfe45e0a72d99e619102cba149e6d (HEAD -&gt; ON-1987-tiger-test-remove-aws-credentials, origin/ON-1987-tiger-test-remove-aws-credentials) 
 Author: ynotstartups &lt;ynotstartups@gmail.com&gt;
 Date:   Tue Aug 8 18:15:54 2023 +0100
 

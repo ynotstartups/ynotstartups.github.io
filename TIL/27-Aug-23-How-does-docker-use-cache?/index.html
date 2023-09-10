@@ -809,10 +809,10 @@
 <p><strong>Docker uses cache when the following two rules are met.</strong></p>
 <ol>
 <li>when the docker command is not <code>ADD</code> or <code>COPY</code>, e.g. <code>RUN</code>
-    a. given parent image in cache 
-    b. look at next instruction
-    c. if there is any child image (derived from parents) with the <em>exact same
-    instruction use</em> it as cache</li>
+   a. given parent image in cache
+   b. look at next instruction
+   c. if there is any child image (derived from parents) with the <em>exact same
+   instruction use</em> it as cache</li>
 <li>For <code>ADD</code> and <code>COPY</code> command, compare checksum of each file with exsiting
    images, if checksum is different then cache is invalidated</li>
 </ol>

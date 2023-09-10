@@ -808,13 +808,13 @@
 <h1 id="til-git-reset-27aug23">TIL - git reset                                                    - 27/Aug/23</h1>
 <blockquote>
 <p>Reset, restore and revert
-   There are three commands with similar names: git reset, git restore and git revert.
-   •   git-revert(1) is about making a new commit that reverts the changes made by other commits.
-   •   git-restore(1) is about restoring files in the working tree from either the index or another commit. This command does not update your branch. The
-       command can also be used to restore files in the index from another commit.
-   •   git-reset(1) is about updating your branch, moving the tip in order to add or remove commits from the branch. This operation changes the commit
-       history.
-   git reset can also be used to restore the index, overlapping with git restore.</p>
+There are three commands with similar names: git reset, git restore and git revert.
+•   git-revert(1) is about making a new commit that reverts the changes made by other commits.
+•   git-restore(1) is about restoring files in the working tree from either the index or another commit. This command does not update your branch. The
+command can also be used to restore files in the index from another commit.
+•   git-reset(1) is about updating your branch, moving the tip in order to add or remove commits from the branch. This operation changes the commit
+history.
+git reset can also be used to restore the index, overlapping with git restore.</p>
 </blockquote>
 <ul>
 <li><code>git reset --soft    &lt;commit&gt;</code> - changes HEAD to point to commit, put changes

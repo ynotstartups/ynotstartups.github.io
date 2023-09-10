@@ -806,36 +806,35 @@
 
 
 <h1 id="til-gq-formatoption-05sep23">TIL - gq: formatoption                                             - 05/Sep/23</h1>
-<p>Current formatoption for markdown is <code>formatoption=jtln</code> from <code>set
-formatoptions?</code></p>
-<pre><code>                        *fo-j*
-</code></pre>
+<p>Current formatoption for markdown is <code>formatoption=jtln</code> from <code>set formatoptions?</code></p>
+<div class="highlight"><pre><span></span><code>                        *fo-j*
+</code></pre></div>
 <p>j   Where it makes sense, remove a comment leader when joining lines.  For
-    example, joining:
-        int i;   // the index ~
-                 // in the list ~
-    Becomes:
-        int i;   // the index in the list ~</p>
-<pre><code>                        *fo-t*
-</code></pre>
+example, joining:
+int i;   // the index ~
+// in the list ~
+Becomes:
+int i;   // the index in the list ~</p>
+<div class="highlight"><pre><span></span><code>                        *fo-t*
+</code></pre></div>
 <p>t   Auto-wrap text using 'textwidth'</p>
-<pre><code>                        *fo-l*
-</code></pre>
+<div class="highlight"><pre><span></span><code>                        *fo-l*
+</code></pre></div>
 <p>l   Long lines are not broken in insert mode: When a line was longer than
-    'textwidth' when the insert command started, Vim does not
-    automatically format it.</p>
-<pre><code>                        *fo-n*
-</code></pre>
+'textwidth' when the insert command started, Vim does not
+automatically format it.</p>
+<div class="highlight"><pre><span></span><code>                        *fo-n*
+</code></pre></div>
 <p>n   When formatting text, recognize numbered lists.  This actually uses
-    the 'formatlistpat' option, thus any kind of list can be used.  The
-    indent of the text after the number is used for the next line.  The
-    default is to find a number, optionally followed by '.', ':', ')',
-    ']' or '}'.  Note that 'autoindent' must be set too.  Doesn't work
-    well together with "2".
-    Example: &gt;
-        1. the first item
-           wraps
-        2. the second item</p>
+the 'formatlistpat' option, thus any kind of list can be used.  The
+indent of the text after the number is used for the next line.  The
+default is to find a number, optionally followed by '.', ':', ')',
+']' or '}'.  Note that 'autoindent' must be set too.  Doesn't work
+well together with "2".
+Example: &gt;
+1. the first item
+wraps
+2. the second item</p>
 
 
   

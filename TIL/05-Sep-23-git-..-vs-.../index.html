@@ -806,11 +806,11 @@
 
 
 <h1 id="til-git-vs-05sep23">TIL - git .. vs ...                                                - 05/Sep/23</h1>
-<p>TLDR: to see what is new in master but not in prod branch? use the following
+<p>TLDR: to see what is new in master but not in prod branch? use the following</p>
 <div class="highlight"><pre><span></span><code>git diff origin/env/prod...origin/master --stat
 git log  origin/env/prod...origin/master --stat
 </code></pre></div>
-Note this is not the same as <code>git diff origin/master...origin/env/prod --stat</code>!</p>
+<p>Note this is not the same as <code>git diff origin/master...origin/env/prod --stat</code>!</p>
 <p>Use the three dots like this <code>git diff before...after</code>.</p>
 <div class="highlight"><pre><span></span><code>  B---C---D origin/master (Branch)
  /

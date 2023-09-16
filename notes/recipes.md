@@ -98,3 +98,11 @@ https://www.xiachufang.com/recipe/102936844/
 | ----- | ---- |
 | 马蹄粉   | 80g  |
 | water | 100g |
+
+## 番茄土豆炖牛腩
+
+https://www.xiachufang.com/recipe/102811100/
+
+## 馒头
+
+https://www.xiachufang.com/recipe/104300946/

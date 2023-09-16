@@ -106,3 +106,9 @@ https://www.xiachufang.com/recipe/102811100/
 ## 馒头
 
 https://www.xiachufang.com/recipe/104300946/
+
+## Microwave Aubergine
+
+- 6 minutes in Microwave
+- add garlic sauce on top of Aubergine
+- another 6 minutes in Microwave

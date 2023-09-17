@@ -26,3 +26,4 @@ something like delete the first `<>`
 
 `sed -n 's/\(<.*\)<.*>/\1/p'`
 changes `cnoremap <c-j>   <down>` to `cnoremap <c-j>`,
+something like delete the second `<>`

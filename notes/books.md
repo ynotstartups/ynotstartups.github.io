@@ -2,6 +2,7 @@
 
 | Year | Name                                                            | Author                          |
 | ---- | --------------------------------------------------------------- | ------------------------------- |
+| 2023 | Do Androids Dream of Electric Sheep?                            | Philip K. Dick                  |
 | 2023 | classic shell scripting                                         | Robbins & Beebe                 |
 | 2023 | 流言                                                              | 张爱玲                             |
 | 2023 | Shards Of Earth                                                 | Adrian Tchaikovsky              |

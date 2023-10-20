@@ -15,7 +15,8 @@ face wash,
 
 ## For working remotely
 
-laptop, laptop charger, laptop keyboard, touchpad
+laptop, laptop charger, laptop keyboard, touchpad,
+coffee equipments, coffee beans,
 
 ## For going home
 

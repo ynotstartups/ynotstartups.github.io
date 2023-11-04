@@ -10,7 +10,6 @@ format:
 	source .venv/bin/activate.fish; pre-commit run --all-files
 
 deploy-gh-pages:
-	# strict to abort building gh pages when there are warnings such as
+	# --strict to abort building gh pages when there are warnings such as
 	# incorrect link after renamed markdowns
-	source .venv/bin/activate.fish; mkdocs gh-deploy --strict
-	# source .venv/bin/activate.fish; mkdocs gh-deploy
+	source .venv/bin/activate.fish; mkdocs gh-deploy --strict --verbose

@@ -69,7 +69,7 @@
 | ------------------------------------------- | --- |
 | AWS Cloudwatch Logs User Guide Query Syntax |     |
 
-# Cheatsheets
+## Cheatsheets
 
 - awk
 - bash

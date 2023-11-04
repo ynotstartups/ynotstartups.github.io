@@ -10,7 +10,7 @@ I work as a python backend engineer at [Saltus](https://www.saltus.co.uk/)!
 
 I consider myself a [minimalist](minimalism.md).
 
-My biggest hobby is [home cooking](cooking.md), [coffee brewing](tasted-coffee-beans.md). I even find washing dishes to be meditating :)
+My biggest hobby is [home cooking](cooking.md), coffee brewing. I even find washing dishes to be meditating :)
 
 I am also interested in
 [reading](books.md),

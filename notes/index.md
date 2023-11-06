@@ -6,25 +6,45 @@ My name is Tiger Yuhao Huang.
 
 Welcome to my [digital garden](digital-garden.md)!
 
-I work as a python backend engineer at [Saltus](https://www.saltus.co.uk/)!
+I am currently work as a python backend engineer at
+[Saltus](https://www.saltus.co.uk/)!
 
 I consider myself a [minimalist](minimalism.md).
 
-My biggest hobby is [home cooking](cooking.md), coffee brewing. I even find washing dishes to be meditating :)
+My biggest passions are software engineering, [home cooking](cooking.md),
+coffee brewing. Fun fact: I find dish washing meditating :)
 
 I am also interested in
 [reading](books.md),
 [writing](digital-garden.md),
-[coding](https://github.com/ynotstartups),
-[personal finance](https://www.bilibili.com/video/BV1u54y1x7zF),
 [eating out](restaurant-recommendations.md),
-art,
 ...
 
-My wildest dream is to open a cafe called "Tou",
-it sells Man Tou (chinece steamed bun with no filling), black filter coffee, latte.
+My wildest dream is to open a cafe called "Tou", it sells Man Tou (Chinese
+steamed bun with no filling), black filter coffee, latte.
 
-Ginger and I had made some videos during lock down, see our [youtube channel](https://www.youtube.com/channel/UCQE6i7tcSbBQMD8KSeUQYvQ) and [bilibili channel](https://space.bilibili.com/1281157300).
+## Software Engineering Wisdom
+
+### Behavioral
+
+- Read documentation/manual/user’s guide before using a new tool/cli
+  - this implies prefer using tool with good doc e.g. `fish` instead `bash`
+- Be more curious about understanding how things work
+- Prepare because I am bad at ac-hoc talk and thinking
+  - ask for agenda for meetings so that I can be prepared
+- Validate assumptions earlier
+
+### Documentations
+
+- Write comment first
+  - Distinguish Interface documentation between Implementation documentation
+
+### Design
+
+- Design it twice
+- Architect great design rather than just working codes, then writing comments
+  should be fun since that’s how you identify the best design
+- Check if the abstraction design reduce complexity?
 
 ## Meaning Of Life
 

@@ -1,15 +1,10 @@
-.DEFAULT_GOAL := serve
-SHELL:=/opt/homebrew/bin/fish
+# note that `make` uses bash instead of fish shell
 serve:
-	source .venv/bin/activate.fish; mkdocs serve
-
-install:
-	source .venv/bin/activate.fish; pip install -r requirements.txt; pre-commit install
-
-format:
-	source .venv/bin/activate.fish; pre-commit run --all-files
+	docker run --rm -it -p 8001:8000 \
+		-v ${PWD}:/docs squidfunk/mkdocs-material
 
 deploy-gh-pages:
-	# --strict to abort building gh pages when there are warnings such as
-	# incorrect link after renamed markdowns
-	source .venv/bin/activate.fish; mkdocs gh-deploy --strict --verbose
+	docker run --rm -it \
+		-v ~/.ssh:/root/.ssh \
+		-v ${PWD}:/docs squidfunk/mkdocs-material \
+		gh-deploy --strict --verbose

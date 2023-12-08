@@ -7,15 +7,16 @@ water bottle,
 book, pen, paper,
 earphone, universal socket adapter, phone charger,
 passport, BRP, phone, wallet, keys,
+floss,
 ber ber ber,
 
-Tepe toothbrush, floss, make ups, camera, 35mm film, invisalign, invisalign
+Tepe toothbrush, waterfloss, make ups, camera, 35mm film, invisalign, invisalign
 cleaning capsule, hair brush, contact lenses, M clothes, hair brush,
 face wash,
 
 ## For working remotely
 
-laptop, laptop charger, laptop keyboard, touchpad,
+laptop, laptop charger, laptop keyboard,
 coffee equipments, coffee beans,
 
 ## For going home

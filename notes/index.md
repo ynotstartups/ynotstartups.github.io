@@ -12,7 +12,7 @@ I am currently work as a python backend engineer at
 I consider myself a [minimalist](minimalism.md).
 
 My biggest passions are software engineering, [home cooking](cooking.md),
-coffee brewing. Fun fact: I find dish washing meditating :)
+coffee brewing, boardgames. Fun fact: I find dish washing meditating :)
 
 I am also interested in
 [reading](books.md),

@@ -8,11 +8,13 @@ book, pen, paper,
 earphone, universal socket adapter, phone charger,
 passport, BRP, phone, wallet, keys,
 floss,
+glove, cotton glove,
+belts,
 ber ber ber,
 
 Tepe toothbrush, waterfloss, make ups, camera, 35mm film, invisalign, invisalign
-cleaning capsule, hair brush, contact lenses, M clothes, hair brush,
-face wash,
+cleaning capsule, contact lenses, M clothes, hair brush,
+face wash, usbc to usb converter,
 
 ## For working remotely
 
@@ -23,5 +25,4 @@ coffee equipments, coffee beans,
 
 shaver, shaving blade, shaving cream,
 coffee equipments, coffee beans,
-gloves, cotton gloves,
 **no** laptop, **not too much** clothes, **one** book only

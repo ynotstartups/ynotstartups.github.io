@@ -14,11 +14,11 @@ ber ber ber,
 
 Tepe toothbrush, waterfloss, make ups, camera, 35mm film, invisalign, invisalign
 cleaning capsule, contact lenses, M clothes, hair brush,
-face wash, usbc to usb converter,
+face wash, usbc to usb converter, ricoh battery charger, 
 
 ## For working remotely
 
-laptop, laptop charger, laptop keyboard,
+laptop, laptop charger, laptop keyboard, laptop touchpad, 
 coffee equipments, coffee beans,
 
 ## For going home

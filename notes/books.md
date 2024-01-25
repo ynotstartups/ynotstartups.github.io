@@ -2,6 +2,8 @@
 
 | Year | Name                                                            | Author                          |
 | ---- | --------------------------------------------------------------- | ------------------------------- |
+| 2024 | Children of Memory                                              | Adrian Tchaikovsky              |
+| 2023 | The Doors of Eden                                               | Adrian Tchaikovsky              |
 | 2023 | Do Androids Dream of Electric Sheep?                            | Philip K. Dick                  |
 | 2023 | classic shell scripting                                         | Robbins & Beebe                 |
 | 2023 | 流言                                                              | 张爱玲                             |

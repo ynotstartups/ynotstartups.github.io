@@ -6,18 +6,16 @@ My name is Tiger Yuhao Huang.
 
 Welcome to my [digital garden](digital-garden.md)!
 
-I am currently work as a python backend engineer at
+I am currently working as a python backend engineer at
 [Saltus](https://www.saltus.co.uk/)!
 
-I consider myself a [minimalist](minimalism.md).
-
-My biggest passions are software engineering, [home cooking](cooking.md),
-coffee brewing, boardgames. Fun fact: I find dish washing meditating :)
-
-I am also interested in
-[reading](books.md),
-[writing](digital-garden.md),
+My biggest passions are
+boardgames, 
+coffee brewing,
 [eating out](restaurant-recommendations.md),
+[home cooking](cooking.md),
+[reading](books.md),
+software engineering,
 ...
 
 My wildest dream is to open a cafe called "Tou", it sells Man Tou (Chinese

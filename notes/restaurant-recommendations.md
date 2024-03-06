@@ -2,12 +2,14 @@
 
 ## London - UK
 
-- [My Old Place - 老地方](https://my-old-place.business.site/)
-    - authentic Chinese north-eastern food
+- [Papa Noodle 牛大大](https://papanoodle.co.uk/)
+    - authentic Chinese north-eastern Noodle
+- [House Of MoMo](https://houseofmomo.co.uk/)
+    - Handmade MoMos (Himalayan Dumplings) and Nepalese cuisine
+- [Roti King](https://www.rotiking.com/)
+    - Avoid the one in Euston, the queue is always too long
 - [Franco Manca](https://www.francomanca.co.uk/)
     - Pizza No.5
-- [Koya Udon](https://www.koya.co.uk/)
-    - best udon
 - [Ozone Coffee](https://ozonecoffee.co.uk/)
     - best filter coffee and brunch
 - [Allpress Cafe](https://www.allpressespresso.com/find/redchurch-espresso-bar/)

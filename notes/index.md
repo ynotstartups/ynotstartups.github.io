@@ -11,11 +11,12 @@ I am currently working as a python backend engineer at
 
 My biggest passions are
 boardgames, 
-coffee brewing,
+coffee roasting and brewing,
 [eating out](restaurant-recommendations.md),
 [home cooking](cooking.md),
 [reading](books.md),
 software engineering,
+handmade chinese noddle and bun,
 ...
 
 My wildest dream is to open a cafe called "Tou", it sells Man Tou (Chinese

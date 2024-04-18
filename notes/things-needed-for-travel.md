@@ -15,7 +15,7 @@ ber ber ber,
 Tepe toothbrush, waterfloss, make ups, camera, 35mm film, invisalign, invisalign
 cleaning capsule, contact lenses, M clothes, hair brush,
 face wash, usbc to usb converter, ricoh battery charger, 
-kindle, kindle charger, ipad, ipad charger, drawing pad,  
+kindle, kindle charger, ipad, ipad charger, drawing pad,
 
 ## For working remotely
 
@@ -32,3 +32,12 @@ additional socket converters, additional phone,
 HK to Guangzhou train ticket,
 E-sim, 
 
+## Bed Setup
+
+water, moisturising cream, tips & 4 plastic bands, book, cotton buds, tissue,
+lip balm, pen and paper (optional), camera (optional),
+
+## Bag Setup
+
+sunscreen, mask, additional long sleeve cloth, tissue, two phones, umbrella,
+chinese identity card, water, key (optional),

@@ -5,9 +5,9 @@
 - [Papa Noodle 牛大大](https://papanoodle.co.uk/)
     - authentic Chinese north-eastern Noodle
 - [House Of MoMo](https://houseofmomo.co.uk/)
-    - Handmade MoMos (Himalayan Dumplings) and Nepalese cuisine
-- [Roti King](https://www.rotiking.com/)
-    - Avoid the one in Euston, the queue is always too long
+    - Nepalese cuisine
+- [Roti King Battersea](https://www.rotiking.com/)
+- [Hoppers](https://www.hopperslondon.com/)
 - [Franco Manca](https://www.francomanca.co.uk/)
     - Pizza No.5
 - [Ozone Coffee](https://ozonecoffee.co.uk/)
@@ -21,15 +21,8 @@
 
 - [Pengenna Pasties](https://www.pengennapasties.co.uk/)
     - best cream tea
-- [TALAY Thai](https://www.talay.co.uk/)
-    - best tamarind duck
 - [Curve Coffee Roasters](https://www.curveroasters.co.uk/)
     - good filter coffee
-
-## Bournemouth - UK
-
-- [Kala Thai](https://www.kala-thai.com/)
-    - best tamarind duck
 
 ## Istanbul - Turkey
 

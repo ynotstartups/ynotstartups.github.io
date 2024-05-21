@@ -101,6 +101,21 @@ Ingredients
 - 马蹄粉, 100g
 - water, 140g
 
+## 绿豆沙
+
+- 绿豆, 150克
+- 片糖, 一块约100克
+- 陈皮, 一片约2克
+- 姜片, 一块约4克
+- 清水, 1.5升
+
+Steps
+
+1. 煮豆 10 minutes
+2. 闷豆 with lids on 15分钟
+3. simmer for 35 minutes
+4. add 片糖 for another 5 minutes
+
 ## 馒头
 
 Ingredients
@@ -118,3 +133,20 @@ Steps
 1. 6 minutes in Microwave
 1. add garlic sauce on top of Aubergine
 1. another 6 minutes in Microwave
+
+## 蒸水蛋
+
+- 50% water compared to weight of eggs
+
+## 伦教稿
+
+Ingredients
+
+- rice flour 100g
+- water 200g
+- sugar 55g 
+- yeast 2g
+- warm water to dissolve yeast 15g
+- oil 3g
+
+

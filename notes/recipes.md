@@ -17,6 +17,8 @@
 - milk, 23g
 - butter, 18g
 
+Steps
+
 1. dissolve yeast and sugar in water
 1. optionally wait for 20 - 60 minutes before kneading to let gluten develops automatically
 1. knead bread for 20 minutes, add butter at the 10 minutes mark
@@ -25,6 +27,8 @@
 
 ## European Soft Bread
 
+Ingredients
+
 - bread flour, 200g 
 - water, 140g 
 - yeast, 4.4g 
@@ -32,11 +36,15 @@
 - oil, 16g
 - sugar, 10g
 
+Steps
+
 1. first proof: 35 minutes in oven 40 degree
 1. second proof: 25 minutes in oven 40 degree
 1. bake for 25 minutes 180 degree
 
 ## 蒸鸡蛋糕
+
+Ingredients
 
 - egg, 4
 - all purpose flour, 100g
@@ -44,6 +52,8 @@
 - lemon juice, few drops
 
 ## 碱水面
+
+Ingredients
 
 - bread flour, 200g
 - water, 88g
@@ -54,21 +64,29 @@
 
 ## Pizza Dough
 
+Ingredients
+
 - all purpose flour, 250g
 - water, 175g
 - salt, 2g
 - olive oil, 12.5g
 - yeast, 1g
 
+Steps
+
 1. 5-6 minutes in oven with the highest temperature
 
 ## 馒头
+
+Ingredients
 
 - all purpose flour, 150g
 - water, 83g / 55%
 - yeast, 1.5g
 
 ## 广式绿豆糕
+
+Ingredients
 
 - green beans, 80g
 - water, 160g
@@ -85,6 +103,8 @@
 
 ## 馒头
 
+Ingredients
+
 - 面粉, 500g
 - 水, 250g
 - 酵母, 4g
@@ -93,6 +113,8 @@
 
 ## Microwave Aubergine
 
-- 6 minutes in Microwave
-- add garlic sauce on top of Aubergine
-- another 6 minutes in Microwave
+Steps
+
+1. 6 minutes in Microwave
+1. add garlic sauce on top of Aubergine
+1. another 6 minutes in Microwave

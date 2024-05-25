@@ -111,10 +111,9 @@ Ingredients
 
 Steps
 
-1. 煮豆 10 minutes
-2. 闷豆 with lids on 15分钟
-3. simmer for 35 minutes
-4. add 片糖 for another 5 minutes
+1. 闷豆 水开关火 with lids on 闷 10分钟
+1. simmer for 35 minutes
+1. add 片糖 for another 5 minutes
 
 ## 馒头
 

@@ -115,8 +115,8 @@ Ingredients
 
 Steps
 
-1. 闷豆 水开关火 with lids on 闷 10分钟
-1. simmer for 35 minutes
+1. 闷豆, 水开关火 with lids on 闷 10分钟
+1. add 陈皮, 姜片 simmer for 75 minutes
 1. add 片糖 for another 5 minutes
 
 ## 馒头

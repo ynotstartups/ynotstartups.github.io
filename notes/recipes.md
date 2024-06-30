@@ -4,6 +4,14 @@
 
 cast iron pan, 100g coffee, scale, temperature gun, wooden spatula, oven glove, metal pan, phone as timer, 
 
+## 鱼香酱
+
+葱, 姜, 蒜, 豆瓣酱, 泡椒酱, 料酒，酱油, 醋，白糖, 淀粉，清水
+
+## 萝卜炖牛肉
+
+https://www.youtube.com/watch?v=QERVE7VsjHw
+
 ## Japanese Soft Toast - 汤种面包
 
 汤种

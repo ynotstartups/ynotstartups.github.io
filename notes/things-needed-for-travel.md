@@ -2,7 +2,8 @@
 
 phone, wallet, keys,
 passport, BRP,
-clothes, bath clothes, hair band x 4, slipper, floss, toothbrush, toothpaste,
+clothes, bath clothes, elastic bands x 2, hand "tips", slipper,
+floss, toothbrush, toothpaste,
 cotton butts, tissue,
 hand cream, lip balm, umbrella, converse bag,
 water bottle,
@@ -10,6 +11,7 @@ book, pen, paper,
 earphone, universal socket adapter, phone charger,
 glove, cotton glove,
 belts,
+sun cream (optionally),
 ber ber ber,
 
 Tepe toothbrush, waterfloss, make ups, camera, 35mm film, invisalign, invisalign
@@ -19,7 +21,7 @@ kindle, kindle charger, ipad, ipad charger, drawing pad,
 
 ## For working remotely
 
-laptop, laptop charger, laptop keyboard, laptop touchpad, 
+laptop, laptop charger, laptop keyboard with new battery, laptop touchpad, 
 coffee equipments, coffee beans,
 standup notes, cheatsheets
 
@@ -34,8 +36,8 @@ E-sim,
 
 ## Bed Setup
 
-water, moisturising cream, tips & 4 plastic bands, book, cotton buds, tissue,
-lip balm, pen and paper (optional), camera (optional),
+water, moisturising cream, tips & 2 plastic bands, book, cotton buds, tissue,
+lip balm,
 
 ## Bag Setup
 

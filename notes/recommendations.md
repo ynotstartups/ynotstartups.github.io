@@ -16,6 +16,8 @@
     - good Espresso Based Coffee
 - [Rosslyn Cafe](https://ozonecoffee.co.uk/)
     - good Espresso Based Coffee
+- Omotesando Koffee
+    - good hand drip coffee 
 
 ## St Ives - UK
 
@@ -35,3 +37,13 @@
     - greek traditional homemade soup
 - AXiZaoDian 啊锡早点
     - best traditional Chinese noodle in Europe
+
+# Books Recommendations
+
+- Classic Shell Scripting
+    - get started with bash!
+- Operating Systems: Three Easy Pieces
+    - great overview of operating systems
+- A Philosophy of Software Design
+    - very convincing chapters about why we should write documentations
+

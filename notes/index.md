@@ -15,7 +15,7 @@ software engineering,
 boardgames, 
 coffee roasting and brewing,
 reading,
-[eating out](restaurant-recommendations.md),
+[eating out](recommendations.md),
 ...
 
 My dream is to open a cafe called "Tou", it sells Man Tou (Chinese steamed bun

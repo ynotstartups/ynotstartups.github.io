@@ -8,6 +8,11 @@ cast iron pan, 100g coffee, scale, temperature gun, wooden spatula, oven glove, 
 
 葱, 姜, 蒜, 豆瓣酱, 泡椒酱, 料酒，酱油, 醋，白糖, 淀粉，清水
 
+## 火锅蘸料
+
+海鲜: 酱油, 蚝油, 葱, 姜, 蒜, 香菜, 小米辣, 芝麻, 花生碎, 芝麻油, 香醋
+干碟: 辣椒面，花生碎，熟芝麻，盐，味精
+
 ## 萝卜炖牛肉
 
 https://www.youtube.com/watch?v=QERVE7VsjHw

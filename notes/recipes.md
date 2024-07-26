@@ -13,6 +13,10 @@ cast iron pan, 100g coffee, scale, temperature gun, wooden spatula, oven glove, 
 海鲜: 酱油, 蚝油, 葱, 姜, 蒜, 香菜, 小米辣, 芝麻, 花生碎, 芝麻油, 香醋
 干碟: 辣椒面，花生碎，熟芝麻，盐，味精
 
+## 鸡骨架料酒
+
+鸡架，老姜片，一大勺料酒
+
 ## 萝卜炖牛肉
 
 https://www.youtube.com/watch?v=QERVE7VsjHw

@@ -1,4 +1,11 @@
-# Things Needed For Travel
+# Things Needed
+
+## For Going To Office
+
+laptop, keyboard, earphones, office key, water bottle, pen, cheatsheets,
+standup sheets, optionally a book,
+
+## For Travel
 
 phone, wallet, keys,
 passport, BRP,

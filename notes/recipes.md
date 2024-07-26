@@ -21,6 +21,14 @@ cast iron pan, 100g coffee, scale, temperature gun, wooden spatula, oven glove, 
 
 https://www.youtube.com/watch?v=QERVE7VsjHw
 
+## 糖醋排骨
+
+https://m.xiachufang.com/recipe/104576709/
+
+## 水煮肉片
+
+https://m.xiachufang.com/recipe/104275022/
+
 ## Japanese Soft Toast - 汤种面包
 
 汤种

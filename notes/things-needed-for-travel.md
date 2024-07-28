@@ -9,7 +9,9 @@ standup sheets, optionally a book,
 
 phone, wallet, keys,
 passport, BRP,
-clothes, bath clothes, elastic bands x 2, hand "tips", slipper,
+3 sets of clothes, 
+2 sets of pyjamas, 4 hand tips, sleeping eyepatch cloth, sleeping back cloth,
+bath towel, slipper,
 floss, toothbrush, toothpaste,
 cotton butts, tissue,
 hand cream, lip balm, umbrella, converse bag,
@@ -43,8 +45,9 @@ E-sim,
 
 ## Bed Setup
 
-water, moisturising cream, tips & 2 plastic bands, book, cotton buds, tissue,
+water, hand cream, book, cotton buds, tissue,
 lip balm,
+2 sets of pyjamas, 4 hand tips, sleeping eyepatch cloth, sleeping back cloth,
 
 ## Bag Setup
 

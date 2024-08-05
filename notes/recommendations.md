@@ -38,6 +38,27 @@
 - AXiZaoDian 啊锡早点
     - best traditional Chinese noodle in Europe
 
+## Paris - France
+
+- Kiwa
+    - Best Korean
+- Bolo Bolo
+    - best honkoongness 茶餐厅
+- C' Est Comme À La Maison - CCALM
+    - best french
+- Sweet Ravioli 
+    - best jiaozi
+- Restaurant 7 Nouilles
+    - best fried chicken and good noodles
+- Best Tofu
+    - best 豆腐脑
+- Carré Pain de Mie
+    - best 面包
+- pho 14
+    - best pho
+
+- lots of authentic Chinese noodles
+
 # Books Recommendations
 
 - Classic Shell Scripting

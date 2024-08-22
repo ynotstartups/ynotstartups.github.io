@@ -4,6 +4,16 @@
 
 cast iron pan, 100g coffee, scale, temperature gun, wooden spatula, oven glove, metal pan, phone as timer, 
 
+## steam artichoke
+
+Steam for 30 minutes
+
+## 辣子鸡
+
+- 腌鸡
+- 炸鸡
+- 炒鸡, 葱姜蒜很多花椒小米辣椒
+
 ## 好喝茶
 
 桂花，枸杞，雪梨干，切片红枣，龙眼干，
@@ -20,6 +30,12 @@ cast iron pan, 100g coffee, scale, temperature gun, wooden spatula, oven glove, 
 ## 鸡骨架料酒
 
 鸡架，老姜片，一大勺料酒
+
+## pho
+
+- follow 下厨房, https://www.xiachufang.com/recipe/102834538/
+- bun boe hue, pho premix 汤料，beef shank，oxtail
+- 配菜：basil，herbs，lemon，芽菜, 小米辣，
 
 ## 萝卜炖牛肉
 

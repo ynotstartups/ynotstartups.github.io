@@ -2,7 +2,14 @@
 
 ## Coffee Roasting
 
-cast iron pan, 100g coffee, scale, temperature gun, wooden spatula, oven glove, metal pan, phone as timer, 
+cast iron pan, 100g coffee, scale, temperature gun, wooden spatula, oven
+glove, metal pan, phone as timer, 
+
+## Noodle With Pasta Machine
+
+- 35% water to flour
+- no need for kneading or waiting
+- fold and pass through pasta machine about 10 times until smooth
 
 ## steam artichoke
 

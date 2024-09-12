@@ -3,7 +3,7 @@
 ## For Going To Office
 
 laptop, keyboard, earphones, office key, water bottle, pen, cheatsheets,
-standup sheets, optionally a book,
+standup sheets, usbc to usbc cable, optionally a book,
 
 ## For Travel
 

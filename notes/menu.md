@@ -36,6 +36,7 @@
 
 ### 蔬菜类
 
+steamed aubergine stir fried,
 鱼香茄子,
 茶叶蛋,
 炸蛋,

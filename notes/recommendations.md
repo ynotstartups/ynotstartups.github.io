@@ -68,3 +68,9 @@
 - A Philosophy of Software Design
     - very convincing chapters about why we should write documentations
 
+# London Day Trip Recommendations
+
+- Wimbledon commons
+    - mushroom picking
+- Epping forest
+    - mushroom picking

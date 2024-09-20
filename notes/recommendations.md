@@ -18,6 +18,8 @@
     - good Espresso Based Coffee
 - Omotesando Koffee
     - good hand drip coffee 
+- [Notto](https://www.nottopastabars.com/)
+    - best pasta in London
 
 ## St Ives - UK
 

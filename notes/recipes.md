@@ -1,5 +1,9 @@
 # Recipes
 
+## Growing beansprout
+
+drain off water, water bean 5 times per day, 30 minutes soak with water then drain off water, 4-6 days, 9, 12, 15, 18, 21, 
+
 ## Coffee Roasting
 
 cast iron pan, 100g coffee, scale, temperature gun, wooden spatula, oven

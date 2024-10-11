@@ -39,6 +39,7 @@ with no filling), black filter coffee, latte using hand roasted coffee beans.
 ## Behavioral - Personal growth
 
 - Take it easy!
+- There is No Such Thing as Over Communication!
 - Look for opportunity for incremental improvement
 - Read documentation/manual/user’s guide before using a new tool/cli
     - this implies prefer using tool with good doc e.g. `fish` instead `bash`

@@ -3,7 +3,11 @@
 ## For Going To Office
 
 laptop, keyboard, earphones, office key, water bottle, pen, cheatsheets,
-standup sheets, usbc to usbc cable, 1 plastic bag, optionally a book,
+standup sheets, usbc to usbc cable, a plastic bag, optionally a book,
+
+## For DnD
+
+player's handbook, character sheet, dices, pen, paper,
 
 ## For Travel
 

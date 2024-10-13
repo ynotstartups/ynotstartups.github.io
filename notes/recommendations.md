@@ -20,6 +20,8 @@
     - good hand drip coffee 
 - [Notto](https://www.nottopastabars.com/)
     - best pasta in London
+- [Miga](https://www.instagram.com/miga.restaurant/?hl=en)
+    - best Korean
 
 ## St Ives - UK
 
@@ -42,8 +44,6 @@
 
 ## Paris - France
 
-- Kiwa
-    - Best Korean
 - Bolo Bolo
     - best honkoongness 茶餐厅
 - C' Est Comme À La Maison - CCALM

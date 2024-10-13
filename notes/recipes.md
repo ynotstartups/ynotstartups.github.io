@@ -27,26 +27,26 @@ Steam for 30 minutes
 
 ## 好喝茶
 
-桂花，枸杞，雪梨干，切片红枣，龙眼干，
+桂花,枸杞,雪梨干,切片红枣,龙眼干,
 
 ## 鱼香酱
 
-葱, 姜, 蒜, 豆瓣酱, 泡椒酱, 料酒，酱油, 醋，白糖, 淀粉，清水
+葱, 姜, 蒜, 豆瓣酱, 泡椒酱, 料酒,酱油, 醋,白糖, 淀粉,清水
 
 ## 火锅蘸料
 
 海鲜: 酱油, 蚝油, 葱, 姜, 蒜, 香菜, 小米辣, 芝麻, 花生碎, 芝麻油, 香醋
-干碟: 辣椒面，花生碎，熟芝麻，盐，味精
+干碟: 辣椒面,花生碎,熟芝麻,盐,味精
 
 ## 鸡骨架料酒
 
-鸡架，老姜片，一大勺料酒
+鸡架,老姜片,一大勺料酒
 
 ## pho
 
 - follow 下厨房, https://www.xiachufang.com/recipe/102834538/
-- bun boe hue, pho premix 汤料，beef shank，oxtail
-- 配菜：basil，herbs，lemon，芽菜, 小米辣，
+- bun boe hue, pho premix 汤料,beef shank,oxtail
+- 配菜：basil,herbs,lemon,芽菜, 小米辣,
 
 ## 萝卜炖牛肉
 

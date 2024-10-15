@@ -1,5 +1,10 @@
 # Recipes
 
+
+## 泰国打抛猪肉
+
+很多蒜末炒香，加小米辣，加肉末，生抽老抽鱼露汤盐，加罗勒，煎流心蛋
+
 ## Growing beansprout
 
 drain off water, water bean 5 times per day, 30 minutes soak with water then drain off water, 4-6 days, 9, 12, 15, 18, 21, 

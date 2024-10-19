@@ -2,6 +2,8 @@
 
 ## London - UK
 
+**Restaurant**
+
 - [Papa Noodle 牛大大](https://papanoodle.co.uk/)
     - authentic Chinese north-eastern Noodle
 - [House Of MoMo](https://houseofmomo.co.uk/)
@@ -10,18 +12,23 @@
 - [Hoppers](https://www.hopperslondon.com/)
 - [Franco Manca](https://www.francomanca.co.uk/)
     - Pizza No.5
+- [Notto](https://www.nottopastabars.com/)
+    - best pasta in London
+- [Miga](https://www.instagram.com/miga.restaurant/?hl=en)
+    - best Korean
+- Cafe East Pho
+    - best Vietnamese restaurant in London
+
+**Coffee** 
+
+- Omotesando Koffee
+    - good hand drip coffee 
 - [Ozone Coffee](https://ozonecoffee.co.uk/)
     - best filter coffee and brunch
 - [Allpress Cafe](https://www.allpressespresso.com/find/redchurch-espresso-bar/)
     - good Espresso Based Coffee
 - [Rosslyn Cafe](https://ozonecoffee.co.uk/)
     - good Espresso Based Coffee
-- Omotesando Koffee
-    - good hand drip coffee 
-- [Notto](https://www.nottopastabars.com/)
-    - best pasta in London
-- [Miga](https://www.instagram.com/miga.restaurant/?hl=en)
-    - best Korean
 
 ## St Ives - UK
 

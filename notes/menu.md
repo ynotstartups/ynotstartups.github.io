@@ -30,6 +30,8 @@
 小炒黄牛肉,
 Slow bake beef short rib,
 
+土豆片炒肉,
+
 
 ### 海鲜类
 

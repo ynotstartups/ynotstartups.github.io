@@ -4,39 +4,43 @@
 
 **Restaurant**
 
-- [Papa Noodle 牛大大](https://papanoodle.co.uk/)
+- Papa Noodle 牛大大
     - authentic Chinese north-eastern Noodle
-- [House Of MoMo](https://houseofmomo.co.uk/)
+- House Of MoMo
     - Nepalese cuisine
-- [Roti King Battersea](https://www.rotiking.com/)
-- [Hoppers](https://www.hopperslondon.com/)
-- [Franco Manca](https://www.francomanca.co.uk/)
+- Roti King Battersea
+    - best Roti
+- Hoppers
+    - best hopper and rosa
+- Franco Manca
     - Pizza No.5
-- [Notto](https://www.nottopastabars.com/)
-    - best pasta in London
-- [Miga](https://www.instagram.com/miga.restaurant/?hl=en)
+- Notto
+    - best pasta
+- Miga
     - best Korean
 - Cafe East Pho
-    - best Vietnamese restaurant in London
+    - best Vietnamese
 - Sanbubai Chuan Chuan
     - 冒菜
+- Dirty Bones
+    - best burger
 
 **Coffee** 
 
 - Omotesando Koffee
     - good hand drip coffee 
-- [Ozone Coffee](https://ozonecoffee.co.uk/)
+- Ozone Coffee
     - best filter coffee and brunch
-- [Allpress Cafe](https://www.allpressespresso.com/find/redchurch-espresso-bar/)
+- Allpress Cafe
     - good Espresso Based Coffee
-- [Rosslyn Cafe](https://ozonecoffee.co.uk/)
+- Rosslyn Cafe
     - good Espresso Based Coffee
 
 ## St Ives - UK
 
-- [Pengenna Pasties](https://www.pengennapasties.co.uk/)
+- Pengenna Pasties
     - best cream tea
-- [Curve Coffee Roasters](https://www.curveroasters.co.uk/)
+- Curve Coffee Roasters
     - good filter coffee
 
 ## Istanbul - Turkey

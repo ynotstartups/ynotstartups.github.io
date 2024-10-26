@@ -484,6 +484,50 @@ var a = [1, 2, 3]
 echomsg a
 > vim -S foo.vim
 ```
+# Cheatsheet Terraform
+
+## tf language Blocks
+
+- `terraform` - terraform settings and dependent providers
+- `provider` - configs for the specific provider
+- `resource` - defines components of the infrastructure, requires 2 strings
+  "resource type" and "resource name"
+- `variable` - defines variables
+- `output` - use to connect the terraform projects with other poarts of your
+  infrastructure or with other terraform projects
+
+## terraform cli commands
+
+- `init` - initializes a working directory containing Terraform configuration
+  files. It is safe to run this command multiple times.
+
+**Provisioning Infrastructure**
+
+- `plan` - presents a plan for making changes, dry-run of `apply`
+- `apply` - applies the planned changes to each resource using the relevant
+  infrastructure provider's API
+- `destroy` - destroys all of the resources being managed by the current
+  working directory and workspace
+
+**Inspecting Infrastructure**
+
+- `graph` - creates a visual representation of a configuration or a set of
+  planned changes.
+- `output` - can get the values for the top-level output values of a
+  configuration
+- `show` -  can generate human-readable versions of a state file or plan file,
+  or generate machine-readable versions that can be integrated with other
+  tools.
+
+**Developing**
+
+- `fmt` - format
+- `validate` - validates the configuration files in a directory, referring only
+  to the configuration and not accessing any remote services such as remote
+  state, provider APIs, etc.
+
+See Also: https://developer.hashicorp.com/terraform/cli
+
 
 # Book - Designing Data-Intensive Applications                      - 23/May/24
 
@@ -1740,3 +1784,49 @@ Most useful commands I find are
 - `s` - step, step inside a function
 - `sticky` - show whole function while you are debugging, make pdb very much
   like debugging with GUI
+
+# TIL - Event Driven v.s. Event Based Architecture                  - 18/Oct/24
+
+
+## Event Driven
+
+A key feature of true event-driven architectures is that the producers and
+consumers are completely decoupled -- a producer shouldn't know or care who is
+consuming its events and how the consumers use those events in their service..
+
+**Examples**
+
+- Kafka + Kubernetes
+- IoT + MQTT pub/sub
+
+## Event-based
+
+Two key characteristics of event-based compute
+
+1. the existence of a compute instance is intimately tied to the
+occurence of an event to be processed.
+2. the compute acts on a single event at a time.
+
+**Examples**
+
+- API Gateway + Lambda
+
+See also https://www.alexdebrie.com/posts/event-driven-vs-event-based/
+ 
+# TIL - using urllib instead of requests library for posting json   - 25/Oct/24
+
+```python
+json_as_bytes = json.dumps(payload).encode("utf-8")
+request_object = request.Request(self.api_url, data=json_as_bytes)
+request_object.add_header("Content-Type", "application/json")
+request_object.add_header("Authorization", f"Bearer {self.token}")
+try:
+    with request.urlopen(request_object) as response:
+        res_json = json.loads(response.read())
+except HTTPError as e:
+    _logger.exception(e.code)
+    _logger.exception(e.read())
+    raise e
+```
+
+See Also: https://docs.python.org/3.12/howto/urllib2.html

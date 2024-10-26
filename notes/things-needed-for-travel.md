@@ -7,7 +7,7 @@ standup sheets, usbc to usbc cable, a plastic bag, optionally a book,
 
 ## For DnD
 
-player's handbook, character sheet, dices, pen, paper,
+player's handbook, character sheet, dices, pen, paper, water bottle,
 
 ## For Travel
 

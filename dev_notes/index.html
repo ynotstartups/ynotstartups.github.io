@@ -999,6 +999,48 @@ var<span class="w"> </span><span class="nv">a</span><span class="w"> </span><spa
 echomsg<span class="w"> </span>a
 &gt;<span class="w"> </span>vim<span class="w"> </span>-S<span class="w"> </span>foo.vim
 </code></pre></div>
+<h1 id="cheatsheet-terraform">Cheatsheet Terraform</h1>
+<h2 id="tf-language-blocks">tf language Blocks</h2>
+<ul>
+<li><code>terraform</code> - terraform settings and dependent providers</li>
+<li><code>provider</code> - configs for the specific provider</li>
+<li><code>resource</code> - defines components of the infrastructure, requires 2 strings
+  "resource type" and "resource name"</li>
+<li><code>variable</code> - defines variables</li>
+<li><code>output</code> - use to connect the terraform projects with other poarts of your
+  infrastructure or with other terraform projects</li>
+</ul>
+<h2 id="terraform-cli-commands">terraform cli commands</h2>
+<ul>
+<li><code>init</code> - initializes a working directory containing Terraform configuration
+  files. It is safe to run this command multiple times.</li>
+</ul>
+<p><strong>Provisioning Infrastructure</strong></p>
+<ul>
+<li><code>plan</code> - presents a plan for making changes, dry-run of <code>apply</code></li>
+<li><code>apply</code> - applies the planned changes to each resource using the relevant
+  infrastructure provider's API</li>
+<li><code>destroy</code> - destroys all of the resources being managed by the current
+  working directory and workspace</li>
+</ul>
+<p><strong>Inspecting Infrastructure</strong></p>
+<ul>
+<li><code>graph</code> - creates a visual representation of a configuration or a set of
+  planned changes.</li>
+<li><code>output</code> - can get the values for the top-level output values of a
+  configuration</li>
+<li><code>show</code> -  can generate human-readable versions of a state file or plan file,
+  or generate machine-readable versions that can be integrated with other
+  tools.</li>
+</ul>
+<p><strong>Developing</strong></p>
+<ul>
+<li><code>fmt</code> - format</li>
+<li><code>validate</code> - validates the configuration files in a directory, referring only
+  to the configuration and not accessing any remote services such as remote
+  state, provider APIs, etc.</li>
+</ul>
+<p>See Also: https://developer.hashicorp.com/terraform/cli</p>
 <h1 id="book-designing-data-intensive-applications-23may24">Book - Designing Data-Intensive Applications                      - 23/May/24</h1>
 <h2 id="acid-atomicity-and-isolation-page-228">ACID, atomicity and isolation, page 228</h2>
 <p><strong>Atomicity</strong></p>
@@ -2120,6 +2162,42 @@ especially if you are doing this in uat or even prod environment.</p>
 <li><code>sticky</code> - show whole function while you are debugging, make pdb very much
   like debugging with GUI</li>
 </ul>
+<h1 id="til-event-driven-vs-event-based-architecture-18oct24">TIL - Event Driven v.s. Event Based Architecture                  - 18/Oct/24</h1>
+<h2 id="event-driven">Event Driven</h2>
+<p>A key feature of true event-driven architectures is that the producers and
+consumers are completely decoupled -- a producer shouldn't know or care who is
+consuming its events and how the consumers use those events in their service..</p>
+<p><strong>Examples</strong></p>
+<ul>
+<li>Kafka + Kubernetes</li>
+<li>IoT + MQTT pub/sub</li>
+</ul>
+<h2 id="event-based">Event-based</h2>
+<p>Two key characteristics of event-based compute</p>
+<ol>
+<li>the existence of a compute instance is intimately tied to the
+occurence of an event to be processed.</li>
+<li>the compute acts on a single event at a time.</li>
+</ol>
+<p><strong>Examples</strong></p>
+<ul>
+<li>API Gateway + Lambda</li>
+</ul>
+<p>See also https://www.alexdebrie.com/posts/event-driven-vs-event-based/</p>
+<h1 id="til-using-urllib-instead-of-requests-library-for-posting-json-25oct24">TIL - using urllib instead of requests library for posting json   - 25/Oct/24</h1>
+<div class="highlight"><pre><span></span><code><span class="n">json_as_bytes</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+<span class="n">request_object</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">api_url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">json_as_bytes</span><span class="p">)</span>
+<span class="n">request_object</span><span class="o">.</span><span class="n">add_header</span><span class="p">(</span><span class="s2">&quot;Content-Type&quot;</span><span class="p">,</span> <span class="s2">&quot;application/json&quot;</span><span class="p">)</span>
+<span class="n">request_object</span><span class="o">.</span><span class="n">add_header</span><span class="p">(</span><span class="s2">&quot;Authorization&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Bearer </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">request_object</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
+        <span class="n">res_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<span class="k">except</span> <span class="n">HTTPError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="n">_logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">code</span><span class="p">)</span>
+    <span class="n">_logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+    <span class="k">raise</span> <span class="n">e</span>
+</code></pre></div>
+<p>See Also: https://docs.python.org/3.12/howto/urllib2.html</p>
 
 
 
@@ -2172,6 +2250,8 @@ especially if you are doing this in uat or even prod environment.</p>
     
     
       <script src="../assets/javascripts/bundle.ad660dcc.min.js"></script>
+      
+        <script src="../javascripts/extra.js"></script>
       
     
   </body>

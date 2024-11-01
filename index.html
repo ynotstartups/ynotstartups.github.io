@@ -10,7 +10,7 @@
       
       
       
-        <link rel="next" href="cheat-sheet-interview/">
+        <link rel="next" href="dev_notes/">
       
       
       <link rel="icon" href="images/favicon.webp">
@@ -46,16 +46,6 @@
     <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
-  
-
-
-  
-  
-
-<script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-XZ41DZYYBH"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-XZ41DZYYBH",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-XZ41DZYYBH",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
-  
-    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
-  
 
     
     
@@ -210,6 +200,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Who am I?
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="." class="md-nav__link md-nav__link--active">
         
   
@@ -220,26 +221,34 @@
 
       </a>
       
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="cheat-sheet-interview/" class="md-nav__link">
         
-  
-  <span class="md-ellipsis">
-    Interview Cheatsheet
-  </span>
-  
 
-      </a>
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#meaning-of-life" class="md-nav__link">
+    <span class="md-ellipsis">
+      Meaning Of Life
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -315,7 +324,7 @@
         
   
   <span class="md-ellipsis">
-    Restaurant Recommendations
+    Recommendations
   </span>
   
 
@@ -364,6 +373,23 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#meaning-of-life" class="md-nav__link">
+    <span class="md-ellipsis">
+      Meaning Of Life
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -387,67 +413,12 @@
 software engineering,
 <a href="https://toucafe.uk">home cooking</a>,
 boardgames, 
-coffee roasting and brewing,
+coffee brewing,
 reading,
 <a href="recommendations/">eating out</a>,
 ...</p>
 <p>My dream is to open a cafe called "Tou", it sells Man Tou (Chinese steamed bun
 with no filling), black filter coffee, latte using hand roasted coffee beans.</p>
-<h1 id="cheatsheet-software-engineering">Cheatsheet Software Engineering</h1>
-<h2 id="give-consistent-code-review">Give Consistent Code Review</h2>
-<ul>
-<li>add <code>doc string</code> if there is anything unclear</li>
-<li>understand <strong>all</strong> code and tests added/modified</li>
-<li>handle network and other errors gracefully?</li>
-<li>read and test my comments carefully</li>
-<li>add ideas about incremental improvements</li>
-</ul>
-<h2 id="write-consistent-documentations-and-git-commit-message">Write Consistent Documentations and Git Commit Message</h2>
-<ul>
-<li>present tense</li>
-<li>one concise line </li>
-</ul>
-<h2 id="behavioral-personal-growth">Behavioral - Personal growth</h2>
-<ul>
-<li>Take it easy!</li>
-<li>There is No Such Thing as Over Communication!</li>
-<li>Look for opportunity for incremental improvement</li>
-<li>Read documentation/manual/user’s guide before using a new tool/cli<ul>
-<li>this implies prefer using tool with good doc e.g. <code>fish</code> instead <code>bash</code></li>
-</ul>
-</li>
-<li>Be more curious about how things work internally</li>
-<li>Be prepared because I am bad at ac-hoc talk and thinking<ul>
-<li>ask for agenda for meetings so that I can be prepared</li>
-</ul>
-</li>
-<li>Validate assumptions earlier</li>
-</ul>
-<h2 id="documentations-building-structures-with-natural-language">Documentations - Building structures with natural language</h2>
-<ul>
-<li>Write non-code How To, repeatable steps for public or personal, e.g.<ul>
-<li>How-To deploy UAT</li>
-<li>How-To add a graphql endpoint </li>
-</ul>
-</li>
-<li>Write code comments, documentations before implementation <ul>
-<li>remember the 4 types of documentation, Tutorial, How-To Step by Step Guides,
-  Explanation, Reference</li>
-<li>George Orwell's 12 points</li>
-</ul>
-</li>
-</ul>
-<h2 id="design-writing-good-code">Design - Writing good code</h2>
-<ul>
-<li>Design it twice<ul>
-<li>write down two designs, each with pros and cons, then perhaps there will
-  appear a third design with combined pros and less cons</li>
-</ul>
-</li>
-<li>Architect great design rather than just working codes, then writing comments
-  should be fun since that’s how you identify the best design</li>
-<li>reduce complexity by adding or removing abstraction</li>
-</ul>
 <h2 id="meaning-of-life">Meaning Of Life</h2>
 <p>I believe that the meaning of life is to be alive.</p>
 <p>I once thought the meaning of life is to enjoy every moment of life, but I don't think it is true any more because there were good days and bad days so it wasn't always possible to enjoy it.</p>
@@ -465,8 +436,6 @@ with no filling), black filter coffee, latte using hand roasted coffee beans.</p
 
 
 
-
-  
 
 
 
@@ -509,8 +478,6 @@ with no filling), black filter coffee, latte using hand roasted coffee beans.</p
     
     
       <script src="assets/javascripts/bundle.ad660dcc.min.js"></script>
-      
-        <script src="javascripts/extra.js"></script>
       
     
   </body>

@@ -23,21 +23,6 @@ things, so instead, I reduce stress to throwing things away.
 Because I don't have the urge to buy things, I have a large proportion of my
 salary leftover every month, then I learned about FIRE, see below.
 
-## On Finance
-
-Minimalism is also anti-consumerism, this enables me to start the journey of
-Financial Independence, Retire Early.
-
-> Financial Independence, Retire Early (FIRE) is a movement of people devoted
-> to a program of extreme savings and investment that aims to allow them to
-> retire far earlier than traditional budgets and retirement plans would
-> permit. -- investopedia
-
-Applications of minimalism in investing:
-
-- automatic investment using direct debit
-- minimalistic portfolio consists of two funds
-
 ## On household cleaning
 
 It makes cleaning easier because
@@ -45,26 +30,6 @@ It makes cleaning easier because
 1. My living room is almost empty so mopping the floor is easy
 1. When cleaning bathroom, I can first put away every things in the bathroom
 surfaces.
-
-## On how to live my life
-
-- Don't have social media
-
-## My Minimalism Ideals
-
-**Living Room**
-
-Just a sofa & a table
-
-**Bed Room**
-
-Just one bed and a wardrobe
-
-## Quotes from friends
-
-> Your flat looks like a sample flat.
-
-> Your bathroom feels like the one in hotels.
 
 ## See also
 

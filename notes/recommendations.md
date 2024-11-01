@@ -1,4 +1,4 @@
-# Restaurant Recommendations
+# Recommendations
 
 ## London - UK
 

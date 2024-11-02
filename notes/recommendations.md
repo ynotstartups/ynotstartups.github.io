@@ -1,6 +1,8 @@
-# Recommendations
+# Eat, Drink, Play, Happiness
 
-## London - UK
+## Restaurants
+
+### London - UK
 
 **Restaurant**
 
@@ -43,19 +45,19 @@
 - Curve Coffee Roasters
     - good filter coffee
 
-## Istanbul - Turkey
+### Istanbul - Turkey
 
 - Tarihi Sultanahmet Köftecisi Selim Usta
     - best Kofte
 
-## Athens - Greece
+### Athens - Greece
 
 - Oinomageireio Epirus (est. 1898)
     - greek traditional homemade soup
 - AXiZaoDian 啊锡早点
     - best traditional Chinese noodle in Europe
 
-## Paris - France
+### Paris - France
 
 - Bolo Bolo
     - best honkoongness 茶餐厅
@@ -72,9 +74,7 @@
 - pho 14
     - best pho
 
-- lots of authentic Chinese noodles
-
-# Books Recommendations
+## Books
 
 - Classic Shell Scripting
     - get started with bash!
@@ -83,9 +83,13 @@
 - A Philosophy of Software Design
     - very convincing chapters about why we should write documentations
 
-# London Day Trip Recommendations
+## London Day Trip Recommendations
 
 - Wimbledon commons
     - mushroom picking
 - Epping forest
     - mushroom picking
+
+## Coffee Beans
+
+- [Assembly](https://assemblycoffee.co.uk/)

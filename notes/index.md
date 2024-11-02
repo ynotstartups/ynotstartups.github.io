@@ -19,7 +19,7 @@ reading,
 ...
 
 My dream is to open a cafe called "Tou", it sells Man Tou (Chinese steamed bun
-with no filling), black filter coffee, latte using hand roasted coffee beans.
+with no filling), V60 coffee and Latte.
 
 ## Meaning Of Life
 

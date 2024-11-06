@@ -9,18 +9,22 @@
       
       
       
+        <link rel="prev" href="../vim_how_to___run_python_in_vim_terminal_/">
       
       
-      <link rel="icon" href="/images/favicon.webp">
+        <link rel="next" href="../writings_how_to___write_better_/">
+      
+      
+      <link rel="icon" href="../../images/favicon.webp">
       <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.27">
     
     
       
-        <title>Tiger's Notes</title>
+        <title>Regular Expression - Tiger's Notes</title>
       
     
     
-      <link rel="stylesheet" href="/assets/stylesheets/main.6543a935.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6543a935.min.css">
       
       
 
@@ -39,9 +43,9 @@
       
     
     
-      <link rel="stylesheet" href="/stylesheets/extra.css">
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("/",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -59,6 +63,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#regular-expression" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -71,7 +80,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/." title="Tiger&#39;s Notes" class="md-header__button md-logo" aria-label="Tiger's Notes" data-md-component="logo">
+    <a href="../.." title="Tiger&#39;s Notes" class="md-header__button md-logo" aria-label="Tiger's Notes" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -91,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              Regular Expression
             
           </span>
         </div>
@@ -166,7 +175,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/." title="Tiger&#39;s Notes" class="md-nav__button md-logo" aria-label="Tiger's Notes" data-md-component="logo">
+    <a href="../.." title="Tiger&#39;s Notes" class="md-nav__button md-logo" aria-label="Tiger's Notes" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -184,7 +193,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -204,7 +213,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/digital-garden/" class="md-nav__link">
+      <a href="../../digital-garden/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -224,7 +233,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/minimalism/" class="md-nav__link">
+      <a href="../../minimalism/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -244,7 +253,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/recommendations/" class="md-nav__link">
+      <a href="../../recommendations/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -264,7 +273,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/things-needed-for-travel/" class="md-nav__link">
+      <a href="../../things-needed-for-travel/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -281,17 +290,19 @@
       
   
   
+    
   
   
+  
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
         
           
           <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
@@ -305,7 +316,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             Engineering
@@ -319,7 +330,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/engineering/bash_how_to___use_command_lpr_to_print_hardcopies_/" class="md-nav__link">
+      <a href="../bash_how_to___use_command_lpr_to_print_hardcopies_/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -340,7 +351,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/engineering/engineering_how_to___Best_Practices_/" class="md-nav__link">
+      <a href="../engineering_how_to___Best_Practices_/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -361,7 +372,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/engineering/engineering_how_to___Give_consistent_good_PR_review_/" class="md-nav__link">
+      <a href="../engineering_how_to___Give_consistent_good_PR_review_/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -382,7 +393,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/engineering/python_how_to___use__pdb__for_debugging_/" class="md-nav__link">
+      <a href="../python_how_to___use__pdb__for_debugging_/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -403,7 +414,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/engineering/re_reference___Regular_Expression_Atoms_/" class="md-nav__link">
+      <a href="../re_reference___Regular_Expression_Atoms_/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -424,7 +435,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/engineering/vim_how_to___Extract_Manpage_Table_of_Content_/" class="md-nav__link">
+      <a href="../vim_how_to___Extract_Manpage_Table_of_Content_/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -445,7 +456,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/engineering/vim_how_to___Match_on_the_second_occurrence_/" class="md-nav__link">
+      <a href="../vim_how_to___Match_on_the_second_occurrence_/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -466,7 +477,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/engineering/vim_how_to___run_python_in_vim_terminal_/" class="md-nav__link">
+      <a href="../vim_how_to___run_python_in_vim_terminal_/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -484,10 +495,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="/engineering/vim_reference___Regular_Expression_/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Regular Expression
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -496,6 +527,44 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#reminders" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reminders
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definition-of-a-pattern-in-vim" class="md-nav__link">
+    <span class="md-ellipsis">
+      Definition of a pattern in vim
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -508,7 +577,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/engineering/writings_how_to___write_better_/" class="md-nav__link">
+      <a href="../writings_how_to___write_better_/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -546,6 +615,34 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#reminders" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reminders
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definition-of-a-pattern-in-vim" class="md-nav__link">
+    <span class="md-ellipsis">
+      Definition of a pattern in vim
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -557,8 +654,63 @@
             <div class="md-content" data-md-component="content">
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+<h1 id="regular-expression">Regular Expression</h1>
+<h3 id="reminders">Reminders</h3>
+<ul>
+<li><code>\zs</code>, <code>ze</code>, modify the start or end of regex match, can make replacing or
+  searching easier<ul>
+<li>e.g. <code>\zs</code> can replace positive look behind<code>@&lt;=</code></li>
+<li>e.g. <code>\ze</code> can replace positive look ahead <code>@=</code></li>
+</ul>
+</li>
+<li><code>\_.</code> matches all characters and <strong>end of line</strong>, useful for multiline matching<ul>
+<li><code>.</code> matches all characters but not end of line</li>
+</ul>
+</li>
+<li><code>\w</code> matches word characters, same as <code>[0-9A-Za-z_]</code></li>
+<li><code>\s</code> matches space or tab</li>
+<li><code>\{-}</code> non-greedy match, match as little as possible, this is a multi<ul>
+<li>basically the non-greedy version of <code>*</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>Intresting Examples</strong></p>
+<ul>
+<li><code>\(def\s\)\@&lt;!foo_function(\_.\{-})</code> matches function usage and params
+  single line or multi lines, but <strong>not</strong> the function definition </li>
+<li><code>def\s\w*(\zs\_.\{-}\ze)</code> matches only params in function definitions,
+  single line or multi lines</li>
+</ul>
+<h3 id="definition-of-a-pattern-in-vim">Definition of a pattern in vim</h3>
+<ul>
+<li><strong>atom</strong>: <code>a</code> an ordinary character, <code>\i</code> a character class, <code>\(foo\)</code>
+  putting <strong>pattern</strong> in parenthesis making it an atom</li>
+<li><strong>piece</strong>: <strong>atom</strong> + <strong>multi</strong>, <code>*</code>, <code>\{n,m}</code>, <code>{-}</code><ul>
+<li>special <strong>multi</strong>, look ahead <code>\@=</code>, <code>\@!</code>, look behind <code>\@&lt;=</code>,<code>\@&lt;!</code>, </li>
+</ul>
+</li>
+<li><strong>concat</strong>: <strong>piece</strong> + <strong>piece</strong>, <code>a*b*</code></li>
+<li><strong>branch</strong>: <strong>concat</strong> <code>\&amp;</code> <strong>concat</strong>, <code>\&amp;</code> means matching both regex
+  patterns, like <em>AND</em></li>
+<li><strong>pattern</strong>: <strong>branch</strong> <code>\|</code> <strong>branch</strong>, <code>\|</code> means either patterns, like
+  <em>OR</em></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -592,10 +744,10 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "/", "features": [], "search": "/assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="/assets/javascripts/bundle.ad660dcc.min.js"></script>
+      <script src="../../assets/javascripts/bundle.ad660dcc.min.js"></script>
       
     
   </body>

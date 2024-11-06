@@ -9,18 +9,22 @@
       
       
       
+        <link rel="prev" href="../engineering_how_to___Give_consistent_good_PR_review_/">
       
       
-      <link rel="icon" href="/images/favicon.webp">
+        <link rel="next" href="../re_reference___Regular_Expression_Atoms_/">
+      
+      
+      <link rel="icon" href="../../images/favicon.webp">
       <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.27">
     
     
       
-        <title>Tiger's Notes</title>
+        <title>use pdb for debugging - Tiger's Notes</title>
       
     
     
-      <link rel="stylesheet" href="/assets/stylesheets/main.6543a935.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6543a935.min.css">
       
       
 
@@ -39,9 +43,9 @@
       
     
     
-      <link rel="stylesheet" href="/stylesheets/extra.css">
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("/",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -59,6 +63,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#use-pdb-for-debugging" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -71,7 +80,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/." title="Tiger&#39;s Notes" class="md-header__button md-logo" aria-label="Tiger's Notes" data-md-component="logo">
+    <a href="../.." title="Tiger&#39;s Notes" class="md-header__button md-logo" aria-label="Tiger's Notes" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -91,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              use pdb for debugging
             
           </span>
         </div>
@@ -166,7 +175,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/." title="Tiger&#39;s Notes" class="md-nav__button md-logo" aria-label="Tiger's Notes" data-md-component="logo">
+    <a href="../.." title="Tiger&#39;s Notes" class="md-nav__button md-logo" aria-label="Tiger's Notes" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -184,7 +193,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -204,7 +213,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/digital-garden/" class="md-nav__link">
+      <a href="../../digital-garden/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -224,7 +233,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/minimalism/" class="md-nav__link">
+      <a href="../../minimalism/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -244,7 +253,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/recommendations/" class="md-nav__link">
+      <a href="../../recommendations/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -264,7 +273,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/things-needed-for-travel/" class="md-nav__link">
+      <a href="../../things-needed-for-travel/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -281,17 +290,19 @@
       
   
   
+    
   
   
+  
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
         
           
           <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
@@ -305,7 +316,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             Engineering
@@ -319,7 +330,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/engineering/bash_how_to___use_command_lpr_to_print_hardcopies_/" class="md-nav__link">
+      <a href="../bash_how_to___use_command_lpr_to_print_hardcopies_/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -340,7 +351,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/engineering/engineering_how_to___Best_Practices_/" class="md-nav__link">
+      <a href="../engineering_how_to___Best_Practices_/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -361,7 +372,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/engineering/engineering_how_to___Give_consistent_good_PR_review_/" class="md-nav__link">
+      <a href="../engineering_how_to___Give_consistent_good_PR_review_/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -379,10 +390,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="/engineering/python_how_to___use__pdb__for_debugging_/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -391,6 +411,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -403,7 +424,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/engineering/re_reference___Regular_Expression_Atoms_/" class="md-nav__link">
+      <a href="../re_reference___Regular_Expression_Atoms_/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -424,7 +445,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/engineering/vim_how_to___Extract_Manpage_Table_of_Content_/" class="md-nav__link">
+      <a href="../vim_how_to___Extract_Manpage_Table_of_Content_/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -445,7 +466,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/engineering/vim_how_to___Match_on_the_second_occurrence_/" class="md-nav__link">
+      <a href="../vim_how_to___Match_on_the_second_occurrence_/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -466,7 +487,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/engineering/vim_how_to___run_python_in_vim_terminal_/" class="md-nav__link">
+      <a href="../vim_how_to___run_python_in_vim_terminal_/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -487,7 +508,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/engineering/vim_reference___Regular_Expression_/" class="md-nav__link">
+      <a href="../vim_reference___Regular_Expression_/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -508,7 +529,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/engineering/writings_how_to___write_better_/" class="md-nav__link">
+      <a href="../writings_how_to___write_better_/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -546,6 +567,8 @@
   
   
   
+    
+  
   
 </nav>
                   </div>
@@ -557,8 +580,53 @@
             <div class="md-content" data-md-component="content">
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+<h1 id="use-pdb-for-debugging">use <code>pdb</code> for debugging</h1>
+<p><strong>Debugging after ssh into uat</strong></p>
+<p><strong>Prerequisite</strong></p>
+<p>Go into the ipython shell e.g. <code>sudo docker exec -it oneview-django poetry run python manage.py shell</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">oneview.graphql.api.charge</span> <span class="kn">import</span> <span class="n">one_fee_calculator</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">review_id</span> <span class="o">=</span> <span class="s2">&quot;73a07db5-7214-4ead-a9b8-4906e1727a8c&quot;</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">pdb</span>
+        <span class="n">pdb</span><span class="o">.</span><span class="n">runcall</span><span class="p">(</span><span class="n">one_fee_calculator</span><span class="p">,</span> <span class="n">review_id</span><span class="p">)</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">app</span><span class="o">/</span><span class="n">backend</span><span class="o">/</span><span class="n">oneview</span><span class="o">/</span><span class="n">graphql</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">charge</span><span class="o">.</span><span class="n">py</span><span class="p">(</span><span class="mi">248</span><span class="p">)</span><span class="n">one_fee_calculator</span><span class="p">()</span>
+<span class="o">-&gt;</span> <span class="n">review</span> <span class="o">=</span> <span class="n">Review</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">review_id</span><span class="p">)</span>
+</code></pre></div>
+<p>If you do the above, you will be dropped into the pdb debugging shell.</p>
+<p>Note: please be careful about possible side effects if the functions called
+especially if you are doing this in uat or even prod environment.</p>
+<p><strong>pdb</strong></p>
+<p>pdb is an interactive source code debugger for Python programs.</p>
+<p><a href="https://docs.python.org/3/library/pdb.html#module-pdb">pdb</a> is very powerful, though you need to get familiar with the commands</p>
+<p>You can find the pdb commands doc 
+<a href="https://docs.python.org/3/library/pdb.html#debugger-commands">here</a></p>
+<p>Most useful commands I find are</p>
+<ul>
+<li><code>ll</code> - print all source code for the current function or frame</li>
+<li><code>b</code> - breakpoint, you can set breakpoint like so <code>b oneview/graphql/api/charge.py:254</code></li>
+<li><code>c</code> - continue, continue until breakpoint</li>
+<li><code>n</code> - next, continue execution until the next line</li>
+<li><code>s</code> - step, step inside a function</li>
+<li><code>sticky</code> - show whole function while you are debugging, make pdb very much
+  like debugging with GUI</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -592,10 +660,10 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "/", "features": [], "search": "/assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="/assets/javascripts/bundle.ad660dcc.min.js"></script>
+      <script src="../../assets/javascripts/bundle.ad660dcc.min.js"></script>
       
     
   </body>

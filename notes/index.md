@@ -6,9 +6,9 @@ My name is Tiger Yuhao Huang.
 
 Welcome to my notes!
 
-Please also checkout my home menu/recipes https://toucafe.uk
+Please also checkout my home [menu/recipes](https://toucafe.uk) 
 
-I am currently working as a python backend engineer at Saltus!
+I am currently working as a python backend engineer!
 
 My biggest passions are
 software engineering,

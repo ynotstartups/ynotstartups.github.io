@@ -8,7 +8,7 @@ Welcome to my notes!
 
 Please also checkout my other websites
 
-- [home menu/recipes](https://toucafe.uk) 
+- [Home menu/recipes](https://toucafe.uk) 
 - [Software engineering notes](https://www.tigerhuangyuhao.uk/dev_notes/) 
 
 I am currently working as a python backend engineer!

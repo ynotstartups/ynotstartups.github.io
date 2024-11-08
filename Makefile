@@ -1,5 +1,5 @@
 # note that `make` uses bash instead of fish shell
-deploy-gh-pages:
+deploy:
 	docker run --rm -it \
 		-v ~/.ssh:/root/.ssh \
 		-v ${PWD}:/docs squidfunk/mkdocs-material \

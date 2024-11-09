@@ -16,14 +16,16 @@ I am currently working as a python backend engineer!
 My biggest passions are
 software engineering,
 home cooking,
-coffee brewing,
+coffee,
 reading,
 eating out,
-boardgames, 
-...
+boardgames.
 
-My dream is to open a cafe called "Tou", it sells Man Tou (Chinese steamed bun
-with no filling), V60 coffee and Latte.
+## Ways Of Living
+
+- progression through books and notes
+- minimalism
+- take it easy, be good enough, do what I like,
 
 ## Meaning Of Life
 

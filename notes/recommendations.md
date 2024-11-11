@@ -6,8 +6,8 @@
 
 **Restaurant**
 
-- Papa Noodle 牛大大
-    - authentic Chinese north-eastern Noodle
+- Kungfu Noodle 熬兰州牛肉拉面
+    - authentic Chinese north-western Noodle
 - House Of MoMo
     - Nepalese cuisine
 - Roti King Battersea

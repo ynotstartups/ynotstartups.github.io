@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Vim9script</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style type="text/css">body {
+font-family: system,-apple-system,".SFNSText-Regular","San Francisco",Roboto,"Segoe UI","Helvetica Neue","Lucida Grande",sans-serif;
+font-size: 16px;
+line-height: 1.5;
+padding: 1em;
+margin: auto;
+max-width: 42em;
+background: #fefefe;
+}
+
+nav {
+position: fixed;
+left: 0;
+top: 0;
+bottom: 0;
+height: 100%;
+max-width: 20em;
+}
+nav li {
+list-style-type: none;
+line-height: 2em;
+}
+a {
+color: #0969da;
+text-decoration: none;
+}
+a:hover {
+text-decoration: underline;
+}
+a:active {
+color: #faa700;
+}
+a:focus {
+outline: thin dotted;
+}
+*::-moz-selection {
+background: rgba(255, 255, 0, 0.3);
+color: #000;
+}
+*::selection {
+background: rgba(255, 255, 0, 0.3);
+color: #000;
+}
+a::-moz-selection {
+background: rgba(255, 255, 0, 0.3);
+color: #0645ad;
+}
+a::selection {
+background: rgba(255, 255, 0, 0.3);
+color: #0645ad;
+}
+p {
+margin: 1em 0;
+}
+img {
+max-width: 100%;
+}
+h1, h2, h3, h4, h5, h6 {
+font-weight: bold;
+}
+h1 {
+font-size: 2em;
+margin: 0;
+}
+h2 {
+font-size: 1.5em;
+}
+h3 {
+font-size: 1.2em;
+}
+h4 {
+font-size: 1em;
+}
+pre {
+padding: .2em .4em;
+margin: 0;
+font-size: 85%;
+white-space: break-spaces;
+background-color: rgba(175,184,193,.2);
+border-radius: 6px;
+word-wrap: break-word;
+}
+pre code {
+padding: 0;
+background-color: transparent;
+font-size: 100%;
+}
+code {
+padding: .2em .4em;
+margin: 0;
+font-size: 85%;
+white-space: break-spaces;
+background-color: rgba(175,184,193,.2);
+border-radius: 6px;
+}
+b, strong {
+font-weight: bold;
+}
+ul, ol {
+margin: 1em 0;
+padding: 0 0 0 2em;
+}
+li p {
+margin: 0.5em 0;
+}
+li p:last-child {
+margin-bottom: 0;
+}
+ul ul, ol ol {
+margin: .3em 0;
+}
+img {
+border: 0;
+-ms-interpolation-mode: bicubic;
+vertical-align: middle;
+}
+table {
+margin-bottom: 2em;
+border-bottom: 1px solid #ddd;
+border-right: 1px solid #ddd;
+border-spacing: 0;
+border-collapse: collapse;
+}
+table th {
+padding: .2em 1em;
+background-color: #eee;
+border-top: 1px solid #ddd;
+border-left: 1px solid #ddd;
+}
+table td {
+padding: .2em 1em;
+border-top: 1px solid #ddd;
+border-left: 1px solid #ddd;
+vertical-align: top;
+}
+
+@media screen and (max-width: 600px) {
+nav {
+display: none;
+}
+}
+
+@media print {
+* {
+color: #000;
+filter: none !important;
+-ms-filter: none !important;
+}
+nav {
+display: none;
+}
+code {
+color: rgb(59, 72,143);
+}
+body {
+max-width: 100%;
+}
+a, a:visited {
+text-decoration: underline;
+}
+a[href]:after {
+content: " (" attr(href) ")";
+}
+.ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after {
+content: "";
+}
+pre, blockquote {
+border: 1px solid #999;
+padding-right: 1em;
+page-break-inside: avoid;
+}
+tr, img {
+page-break-inside: avoid;
+}
+img {
+max-width: 100% !important;
+}
+@page :left {
+margin: 15mm 20mm 15mm 10mm;
+}
+@page :right {
+margin: 15mm 10mm 15mm 20mm;
+}
+p, h2, h3 {
+orphans: 3;
+widows: 3;
+}
+h2, h3 {
+page-break-after: avoid;
+}
+}
+</style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Vim9script</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#vim9script-examples" id="toc-vim9script-examples">vim9script examples</a>
+<ul>
+<li><a href="#vim-function-and-variable-var" id="toc-vim-function-and-variable-var">vim function and variable
+<code>var</code></a></li>
+<li><a href="#example-function-implementation" id="toc-example-function-implementation">Example function
+implementation</a></li>
+<li><a href="#using-python-in-vim" id="toc-using-python-in-vim">Using
+python in vim</a></li>
+<li><a href="#running-a-vimscript-file-foo.vim" id="toc-running-a-vimscript-file-foo.vim">running a vimscript file
+foo.vim</a></li>
+</ul></li>
+</ul>
+</nav>
+<h2 id="vim9script-examples">vim9script examples</h2>
+<h3 id="vim-function-and-variable-var">vim function and variable
+<code>var</code></h3>
+<pre class="vim"><code># vim9script reminder
+# use `var` to define variable, instead of `let`
+
+# boolean
+true
+false
+
+# option value &amp;foo 
+echo &amp;number
+# assigns value to option
+&amp;number = 1
+
+# contents of register `q`
+echo @q
+# remove or set contents of register `q`
+@q = &quot;&quot;
+# set register q in linewise mode
+setreg(&#39;q&#39;, &#39;&#39;, &#39;V&#39;)
+
+# string concatenation
+var foo = &quot;abc&quot; .. &quot;def&quot;
+# string interpolation
+var name = &quot;tiger&quot;
+echo $&quot;hello {name}!&quot;
+
+# setting variable name to register
+# @0 is last yanked text
+var name = @0
+
+# list
+var foo_list = [1, 2, 3]
+var first_item = foo_list[0]
+var first_two_items = foo_list[0 : 2]
+var last_two_items = foo_list[-2 : ]
+# list concatenation
+var foo_list_extended = foo_list + [4, 5] 
+# builtin list methods
+mylist-&gt;add(val1)-&gt;add(val2)
+mylist-&gt;copy()
+mylist-&gt;count(val)
+mylist-&gt;empty()
+mylist-&gt;extend(otherlist)
+mylist-&gt;filter(expr2)
+mylist-&gt;flatten()
+mylist-&gt;foreach(expr2)
+mylist-&gt;indexof(expr)
+mylist-&gt;insert(item)
+mylist-&gt;join()
+mylist-&gt;len()
+mylist-&gt;map(expr2)
+mylist-&gt;max()
+mylist-&gt;min()
+mylist-&gt;remove(idx)
+mylist-&gt;repeat(count)
+mylist-&gt;reverse()
+mylist-&gt;sort()
+mylist-&gt;string()
+mylist-&gt;type()
+mylist-&gt;uniq()
+
+# dictionary
+var foo = {&quot;a&quot;: 1, &quot;b&quot;: 2, &quot;c&quot;: 3}
+echomsg foo[&quot;a&quot;]
+for [key, value] in foo-&gt;items()
+    echomsg key value
+endfor
+# dictionary methods
+mydict-&gt;has_key(key)
+mydict-&gt;items()
+mydict-&gt;keys()
+mydict-&gt;values()
+
+# if
+var a = 1.5
+if a &gt; 2
+    echo &quot;a &gt; 2&quot; a
+elseif a &gt; 1
+    echo &quot;a &gt; 1&quot; a
+else
+    echo &quot;a &lt; 1&quot; a
+endif
+
+# for loop
+var foo = [1, 2, 3]
+for i in foo
+    echo i
+endfor
+
+# regex match, right hand side string is used as a pattern
+# echo true
+echo &quot;foo&quot; =~ &#39;^f.*&#39;
+# echo false
+echo &quot;foo&quot; =~ &#39;b.*&#39;
+
+# powerful commands
+
+# execute the string from the evaluation of {expr1} as an cli # command
+execute &quot;normal @q&quot;
+
+# calling vim builtin function, see `:help builtin.txt`
+# see help for builtin function `substitute` at `:help substitude()`
+var remove_prefix = substitute(posix_file_path, &#39;^saltus/&#39;, &#39;&#39;, &#39;g&#39;)
+
+# Types
+
+float, string, bool, number, float, string, blob, list&lt;type&gt;, dict&lt;type&gt;, job,
+channel, func</code></pre>
+<h3 id="example-function-implementation">Example function
+implementation</h3>
+<pre class="vim"><code>def GetWordAfterPrefix(prefix_string: string): string
+  # search for the line number and column number for the prefix_string
+  # e.g. the line and column of character &#39;f&#39; in `def \zsfoo` 
+  # flag `b` - search backward  
+  # flag `n` - do not move the cursor
+  # see also `:help search()`
+  var [match_line_number, match_col_number] = (prefix_string .. &#39;\zs&#39;)-&gt;searchpos(&#39;bn&#39;)
+  var line = getline(match_line_number)
+  # get the word with matching column position - 1, `-1` is needed to include
+  # the first character of the word, e.g. word would be `foo`
+  var word = line-&gt;matchstr(&#39;\w*&#39;, match_col_number - 1)
+  return word
+enddef
+
+def g:YankWordAfterPrefix(prefix_string: string)
+  var word = GetWordAfterPrefix(prefix_string)
+  echom &#39;yanked&#39; word
+  setreg(&#39;+&#39;, word)
+enddef
+
+nnoremap &lt;leader&gt;yf :call YankWordAfterPrefix(&quot;def &quot;)&lt;cr&gt;
+nnoremap &lt;leader&gt;yc :call YankWordAfterPrefix(&quot;class &quot;)&lt;cr&gt;
+
+def GetPythonFileImportPath(): string
+    var posix_file_path = expand(&quot;%&quot;)
+    var python_import_path = posix_file_path
+                                -&gt;substitute(&#39;^saltus/&#39;, &#39;&#39;, &#39;g&#39;)
+                                -&gt;substitute(&#39;.py$&#39;, &#39;&#39;, &#39;g&#39;)
+                                -&gt;substitute(&#39;/&#39;, &#39;.&#39;, &#39;g&#39;)
+    return python_import_path
+enddef</code></pre>
+<h3 id="using-python-in-vim">Using python in vim</h3>
+<pre class="vim"><code>def g:JumpToTestFile()
+py3 &lt;&lt; EOF
+from vim_python import get_or_create_alternative_file
+
+# vim.eval(&quot;@%&quot;) gets the filepath in current buffer
+test_filepath = get_or_create_alternative_file(filepath=vim.eval(&quot;@%&quot;))
+
+# open test_filepath in current window
+vim.command(f&quot;tabnew {test_filepath}&quot;)
+EOF
+enddef</code></pre>
+<h3 id="running-a-vimscript-file-foo.vim">running a vimscript file
+foo.vim</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> cat <span class="ex">foo.vim</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">vim9script</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">var</span> a = [1, 2, 3]</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">echomsg</span> a</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> vim <span class="ex">-S</span> foo.vim</span></code></pre></div>
+</body>
+</html>

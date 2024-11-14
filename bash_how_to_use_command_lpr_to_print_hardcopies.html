@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>use command lpr to print hardcopies</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+  <style type="text/css">body {
+font-family: system,-apple-system,".SFNSText-Regular","San Francisco",Roboto,"Segoe UI","Helvetica Neue","Lucida Grande",sans-serif;
+font-size: 16px;
+line-height: 1.5;
+padding: 1em;
+margin: auto;
+max-width: 42em;
+background: #fefefe;
+}
+
+nav {
+position: fixed;
+left: 0;
+top: 0;
+bottom: 0;
+height: 100%;
+max-width: 20em;
+}
+nav li {
+list-style-type: none;
+line-height: 2em;
+}
+a {
+color: #0969da;
+text-decoration: none;
+}
+a:hover {
+text-decoration: underline;
+}
+a:active {
+color: #faa700;
+}
+a:focus {
+outline: thin dotted;
+}
+*::-moz-selection {
+background: rgba(255, 255, 0, 0.3);
+color: #000;
+}
+*::selection {
+background: rgba(255, 255, 0, 0.3);
+color: #000;
+}
+a::-moz-selection {
+background: rgba(255, 255, 0, 0.3);
+color: #0645ad;
+}
+a::selection {
+background: rgba(255, 255, 0, 0.3);
+color: #0645ad;
+}
+p {
+margin: 1em 0;
+}
+img {
+max-width: 100%;
+}
+h1, h2, h3, h4, h5, h6 {
+font-weight: bold;
+}
+h1 {
+font-size: 2em;
+margin: 0;
+}
+h2 {
+font-size: 1.5em;
+}
+h3 {
+font-size: 1.2em;
+}
+h4 {
+font-size: 1em;
+}
+pre {
+padding: .2em .4em;
+margin: 0;
+font-size: 85%;
+white-space: break-spaces;
+background-color: rgba(175,184,193,.2);
+border-radius: 6px;
+word-wrap: break-word;
+}
+pre code {
+padding: 0;
+background-color: transparent;
+font-size: 100%;
+}
+code {
+padding: .2em .4em;
+margin: 0;
+font-size: 85%;
+white-space: break-spaces;
+background-color: rgba(175,184,193,.2);
+border-radius: 6px;
+}
+b, strong {
+font-weight: bold;
+}
+ul, ol {
+margin: 1em 0;
+padding: 0 0 0 2em;
+}
+li p {
+margin: 0.5em 0;
+}
+li p:last-child {
+margin-bottom: 0;
+}
+ul ul, ol ol {
+margin: .3em 0;
+}
+img {
+border: 0;
+-ms-interpolation-mode: bicubic;
+vertical-align: middle;
+}
+table {
+margin-bottom: 2em;
+border-bottom: 1px solid #ddd;
+border-right: 1px solid #ddd;
+border-spacing: 0;
+border-collapse: collapse;
+}
+table th {
+padding: .2em 1em;
+background-color: #eee;
+border-top: 1px solid #ddd;
+border-left: 1px solid #ddd;
+}
+table td {
+padding: .2em 1em;
+border-top: 1px solid #ddd;
+border-left: 1px solid #ddd;
+vertical-align: top;
+}
+
+@media screen and (max-width: 600px) {
+nav {
+display: none;
+}
+}
+
+@media print {
+* {
+color: #000;
+filter: none !important;
+-ms-filter: none !important;
+}
+nav {
+display: none;
+}
+code {
+color: rgb(59, 72,143);
+}
+body {
+max-width: 100%;
+}
+a, a:visited {
+text-decoration: underline;
+}
+a[href]:after {
+content: " (" attr(href) ")";
+}
+.ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after {
+content: "";
+}
+pre, blockquote {
+border: 1px solid #999;
+padding-right: 1em;
+page-break-inside: avoid;
+}
+tr, img {
+page-break-inside: avoid;
+}
+img {
+max-width: 100% !important;
+}
+@page :left {
+margin: 15mm 20mm 15mm 10mm;
+}
+@page :right {
+margin: 15mm 10mm 15mm 20mm;
+}
+p, h2, h3 {
+orphans: 3;
+widows: 3;
+}
+h2, h3 {
+page-break-after: avoid;
+}
+}
+</style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">use command lpr to print hardcopies</h1>
+</header>
+<p>TL;DR:
+<code>lpr -p -o EPIJ_Silt=1 -o Resolution=720x720dpi -o EPIJ_Qual=307 ./lpoptoins.pdf</code></p>
+<p>Use <code>lpoptions -l</code> to show custom options for printer,
+such as
+<code>EPIJ_Qual/Print Quality: 308 311 *303 309 304 305 306 307</code>.</p>
+<p>Note that only <code>EPIJ_Qual</code> is used in printing option
+e.g. <code>lpr -o EPIJ_Qual=308</code>, the text after <code>/</code> is
+an short description of the option.</p>
+<p>Example output of <code>lpoptions -l</code></p>
+<pre><code>$ lpoptions -l
+...
+EPIJ_Ink_/Grayscale: *1 0
+EPIJ_Qual/Print Quality: 308 311 *303 309 304 305 306 307
+ColorModel/ColorModel: *RGB Mono
+Resolution/Resolution: 180x180dpi *360x360dpi 720x720dpi
+PageSize/Media Size: *A4 EPKG EPKG.NMgn EPPhotoPaper2L A6 A5 B5 B6 EPPhotoPaperLRoll EPPhotoPaperLRoll.NMgn EPIndexCard5x8 EP8x10in EPHiVision102x180 EPHiVision102x180.NMgn EPPostcard100x148 EPPostcard100x148.NMgn Env10 EnvDL EnvC6 Letter EP216x330mm EPIndianLegal Legal EP16K195x270mm Custom.WIDTHxHEIGHT
+EPIJ_Silt/Quiet Mode: *0 1
+...</code></pre>
+<p>upzip
+<code>/Library/Printers/PPDs/Contents/Resources/EPSON\ ET-2810\ Series.gz</code>
+to <code>~/Documents/downloads/</code> read the mearning of options.</p>
+<p>Run the following command in the unzipped <code>downloads</code>
+folder</p>
+<pre><code>$ cat EPSON\ ET-2820\ Series | grep Qua
+...
+*EPIJ_Qual 308/Draft: &quot;&quot;
+*EPIJ_Qual 311/Draft-Vivid : &quot;&quot;
+*EPIJ_Qual 303/Normal: &quot;&quot;
+*EPIJ_Qual 309/Normal-Vivid: &quot;&quot;
+*EPIJ_Qual 304/Fine: &quot;&quot;
+*EPIJ_Qual 305/Quality: &quot;&quot;
+*EPIJ_Qual 306/High Quality: &quot;&quot;
+*EPIJ_Qual 307/Best Quality: &quot;&quot;
+...</code></pre>
+<p>Other Useful Links:</p>
+<ul>
+<li>local Cups link: http://localhost:631/
+<ul>
+<li>logins with laptops’s username and password</li>
+</ul></li>
+<li><code>/private/etc/cups/ppd</code>
+<ul>
+<li>printer ppd file - Postscript Printer Description file is a file
+that describes the font s, paper sizes, resolution , and other
+capabilities that are standard for a particular Postscript printer</li>
+</ul></li>
+</ul>
+</body>
+</html>

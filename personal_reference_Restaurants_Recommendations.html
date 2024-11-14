@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Restaurants Recommendations</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+  <style type="text/css">body {
+font-family: system,-apple-system,".SFNSText-Regular","San Francisco",Roboto,"Segoe UI","Helvetica Neue","Lucida Grande",sans-serif;
+font-size: 16px;
+line-height: 1.5;
+padding: 1em;
+margin: auto;
+max-width: 42em;
+background: #fefefe;
+}
+
+nav {
+position: fixed;
+left: 0;
+top: 0;
+bottom: 0;
+height: 100%;
+max-width: 20em;
+}
+nav li {
+list-style-type: none;
+line-height: 2em;
+}
+a {
+color: #0969da;
+text-decoration: none;
+}
+a:hover {
+text-decoration: underline;
+}
+a:active {
+color: #faa700;
+}
+a:focus {
+outline: thin dotted;
+}
+*::-moz-selection {
+background: rgba(255, 255, 0, 0.3);
+color: #000;
+}
+*::selection {
+background: rgba(255, 255, 0, 0.3);
+color: #000;
+}
+a::-moz-selection {
+background: rgba(255, 255, 0, 0.3);
+color: #0645ad;
+}
+a::selection {
+background: rgba(255, 255, 0, 0.3);
+color: #0645ad;
+}
+p {
+margin: 1em 0;
+}
+img {
+max-width: 100%;
+}
+h1, h2, h3, h4, h5, h6 {
+font-weight: bold;
+}
+h1 {
+font-size: 2em;
+margin: 0;
+}
+h2 {
+font-size: 1.5em;
+}
+h3 {
+font-size: 1.2em;
+}
+h4 {
+font-size: 1em;
+}
+pre {
+padding: .2em .4em;
+margin: 0;
+font-size: 85%;
+white-space: break-spaces;
+background-color: rgba(175,184,193,.2);
+border-radius: 6px;
+word-wrap: break-word;
+}
+pre code {
+padding: 0;
+background-color: transparent;
+font-size: 100%;
+}
+code {
+padding: .2em .4em;
+margin: 0;
+font-size: 85%;
+white-space: break-spaces;
+background-color: rgba(175,184,193,.2);
+border-radius: 6px;
+}
+b, strong {
+font-weight: bold;
+}
+ul, ol {
+margin: 1em 0;
+padding: 0 0 0 2em;
+}
+li p {
+margin: 0.5em 0;
+}
+li p:last-child {
+margin-bottom: 0;
+}
+ul ul, ol ol {
+margin: .3em 0;
+}
+img {
+border: 0;
+-ms-interpolation-mode: bicubic;
+vertical-align: middle;
+}
+table {
+margin-bottom: 2em;
+border-bottom: 1px solid #ddd;
+border-right: 1px solid #ddd;
+border-spacing: 0;
+border-collapse: collapse;
+}
+table th {
+padding: .2em 1em;
+background-color: #eee;
+border-top: 1px solid #ddd;
+border-left: 1px solid #ddd;
+}
+table td {
+padding: .2em 1em;
+border-top: 1px solid #ddd;
+border-left: 1px solid #ddd;
+vertical-align: top;
+}
+
+@media screen and (max-width: 600px) {
+nav {
+display: none;
+}
+}
+
+@media print {
+* {
+color: #000;
+filter: none !important;
+-ms-filter: none !important;
+}
+nav {
+display: none;
+}
+code {
+color: rgb(59, 72,143);
+}
+body {
+max-width: 100%;
+}
+a, a:visited {
+text-decoration: underline;
+}
+a[href]:after {
+content: " (" attr(href) ")";
+}
+.ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after {
+content: "";
+}
+pre, blockquote {
+border: 1px solid #999;
+padding-right: 1em;
+page-break-inside: avoid;
+}
+tr, img {
+page-break-inside: avoid;
+}
+img {
+max-width: 100% !important;
+}
+@page :left {
+margin: 15mm 20mm 15mm 10mm;
+}
+@page :right {
+margin: 15mm 10mm 15mm 20mm;
+}
+p, h2, h3 {
+orphans: 3;
+widows: 3;
+}
+h2, h3 {
+page-break-after: avoid;
+}
+}
+</style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Restaurants Recommendations</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#london---uk" id="toc-london---uk">London - UK</a></li>
+<li><a href="#st-ives---uk" id="toc-st-ives---uk">St Ives - UK</a></li>
+<li><a href="#istanbul---turkey" id="toc-istanbul---turkey">Istanbul -
+Turkey</a></li>
+<li><a href="#athens---greece" id="toc-athens---greece">Athens -
+Greece</a></li>
+<li><a href="#paris---france" id="toc-paris---france">Paris -
+France</a></li>
+</ul>
+</nav>
+<h2 id="london---uk">London - UK</h2>
+<p><strong>Restaurant</strong></p>
+<ul>
+<li>Kungfu Noodle 熬兰州牛肉拉面
+<ul>
+<li>authentic Chinese north-eastern Noodle</li>
+</ul></li>
+<li>House Of MoMo
+<ul>
+<li>Nepalese cuisine</li>
+</ul></li>
+<li>Roti King Battersea
+<ul>
+<li>best Roti</li>
+</ul></li>
+<li>Hoppers
+<ul>
+<li>best hopper and rosa</li>
+</ul></li>
+<li>Franco Manca
+<ul>
+<li>Pizza No.5</li>
+</ul></li>
+<li>Notto
+<ul>
+<li>best pasta</li>
+</ul></li>
+<li>Miga
+<ul>
+<li>best Korean</li>
+</ul></li>
+<li>Cafe East Pho
+<ul>
+<li>best Vietnamese</li>
+</ul></li>
+<li>Sanbubai Chuan Chuan
+<ul>
+<li>冒菜</li>
+</ul></li>
+<li>Dirty Bones
+<ul>
+<li>best burger</li>
+</ul></li>
+</ul>
+<p><strong>Coffee</strong></p>
+<ul>
+<li>Assembly
+<ul>
+<li>best coffee Beans</li>
+</ul></li>
+<li>Omotesando Koffee
+<ul>
+<li>good hand drip coffee</li>
+</ul></li>
+<li>Ozone Coffee
+<ul>
+<li>best filter coffee and brunch</li>
+</ul></li>
+<li>Allpress Cafe
+<ul>
+<li>good Espresso Based Coffee</li>
+</ul></li>
+<li>Rosslyn Cafe
+<ul>
+<li>good Espresso Based Coffee</li>
+</ul></li>
+</ul>
+<h2 id="st-ives---uk">St Ives - UK</h2>
+<ul>
+<li>Pengenna Pasties
+<ul>
+<li>best cream tea</li>
+</ul></li>
+<li>Curve Coffee Roasters
+<ul>
+<li>good filter coffee</li>
+</ul></li>
+</ul>
+<h2 id="istanbul---turkey">Istanbul - Turkey</h2>
+<ul>
+<li>Tarihi Sultanahmet Köftecisi Selim Usta
+<ul>
+<li>best Kofte</li>
+</ul></li>
+</ul>
+<h2 id="athens---greece">Athens - Greece</h2>
+<ul>
+<li>Oinomageireio Epirus (est. 1898)
+<ul>
+<li>greek traditional homemade soup</li>
+</ul></li>
+<li>AXiZaoDian 啊锡早点
+<ul>
+<li>best traditional Chinese noodle in Europe</li>
+</ul></li>
+</ul>
+<h2 id="paris---france">Paris - France</h2>
+<ul>
+<li>Bolo Bolo
+<ul>
+<li>best honkoongness 茶餐厅</li>
+</ul></li>
+<li>C’ Est Comme À La Maison - CCALM
+<ul>
+<li>best french</li>
+</ul></li>
+<li>Sweet Ravioli
+<ul>
+<li>best jiaozi</li>
+</ul></li>
+<li>Restaurant 7 Nouilles
+<ul>
+<li>best fried chicken and good noodles</li>
+</ul></li>
+<li>Best Tofu
+<ul>
+<li>best 豆腐脑</li>
+</ul></li>
+<li>Carré Pain de Mie
+<ul>
+<li>best 面包 only Carré</li>
+</ul></li>
+<li>pho 14
+<ul>
+<li>best pho</li>
+</ul></li>
+</ul>
+</body>
+</html>

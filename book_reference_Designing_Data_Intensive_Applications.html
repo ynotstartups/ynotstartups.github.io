@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Designing Data-Intensive Applications</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+  <style type="text/css">body {
+font-family: system,-apple-system,".SFNSText-Regular","San Francisco",Roboto,"Segoe UI","Helvetica Neue","Lucida Grande",sans-serif;
+font-size: 16px;
+line-height: 1.5;
+padding: 1em;
+margin: auto;
+max-width: 42em;
+background: #fefefe;
+}
+
+nav {
+position: fixed;
+left: 0;
+top: 0;
+bottom: 0;
+height: 100%;
+max-width: 20em;
+}
+nav li {
+list-style-type: none;
+line-height: 2em;
+}
+a {
+color: #0969da;
+text-decoration: none;
+}
+a:hover {
+text-decoration: underline;
+}
+a:active {
+color: #faa700;
+}
+a:focus {
+outline: thin dotted;
+}
+*::-moz-selection {
+background: rgba(255, 255, 0, 0.3);
+color: #000;
+}
+*::selection {
+background: rgba(255, 255, 0, 0.3);
+color: #000;
+}
+a::-moz-selection {
+background: rgba(255, 255, 0, 0.3);
+color: #0645ad;
+}
+a::selection {
+background: rgba(255, 255, 0, 0.3);
+color: #0645ad;
+}
+p {
+margin: 1em 0;
+}
+img {
+max-width: 100%;
+}
+h1, h2, h3, h4, h5, h6 {
+font-weight: bold;
+}
+h1 {
+font-size: 2em;
+margin: 0;
+}
+h2 {
+font-size: 1.5em;
+}
+h3 {
+font-size: 1.2em;
+}
+h4 {
+font-size: 1em;
+}
+pre {
+padding: .2em .4em;
+margin: 0;
+font-size: 85%;
+white-space: break-spaces;
+background-color: rgba(175,184,193,.2);
+border-radius: 6px;
+word-wrap: break-word;
+}
+pre code {
+padding: 0;
+background-color: transparent;
+font-size: 100%;
+}
+code {
+padding: .2em .4em;
+margin: 0;
+font-size: 85%;
+white-space: break-spaces;
+background-color: rgba(175,184,193,.2);
+border-radius: 6px;
+}
+b, strong {
+font-weight: bold;
+}
+ul, ol {
+margin: 1em 0;
+padding: 0 0 0 2em;
+}
+li p {
+margin: 0.5em 0;
+}
+li p:last-child {
+margin-bottom: 0;
+}
+ul ul, ol ol {
+margin: .3em 0;
+}
+img {
+border: 0;
+-ms-interpolation-mode: bicubic;
+vertical-align: middle;
+}
+table {
+margin-bottom: 2em;
+border-bottom: 1px solid #ddd;
+border-right: 1px solid #ddd;
+border-spacing: 0;
+border-collapse: collapse;
+}
+table th {
+padding: .2em 1em;
+background-color: #eee;
+border-top: 1px solid #ddd;
+border-left: 1px solid #ddd;
+}
+table td {
+padding: .2em 1em;
+border-top: 1px solid #ddd;
+border-left: 1px solid #ddd;
+vertical-align: top;
+}
+
+@media screen and (max-width: 600px) {
+nav {
+display: none;
+}
+}
+
+@media print {
+* {
+color: #000;
+filter: none !important;
+-ms-filter: none !important;
+}
+nav {
+display: none;
+}
+code {
+color: rgb(59, 72,143);
+}
+body {
+max-width: 100%;
+}
+a, a:visited {
+text-decoration: underline;
+}
+a[href]:after {
+content: " (" attr(href) ")";
+}
+.ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after {
+content: "";
+}
+pre, blockquote {
+border: 1px solid #999;
+padding-right: 1em;
+page-break-inside: avoid;
+}
+tr, img {
+page-break-inside: avoid;
+}
+img {
+max-width: 100% !important;
+}
+@page :left {
+margin: 15mm 20mm 15mm 10mm;
+}
+@page :right {
+margin: 15mm 10mm 15mm 20mm;
+}
+p, h2, h3 {
+orphans: 3;
+widows: 3;
+}
+h2, h3 {
+page-break-after: avoid;
+}
+}
+</style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Designing Data-Intensive Applications</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#acid-atomicity-and-isolation-page-228" id="toc-acid-atomicity-and-isolation-page-228">ACID, atomicity and
+isolation, page 228</a></li>
+<li><a href="#key-feature-of-transaction-page-231" id="toc-key-feature-of-transaction-page-231">Key feature of transaction,
+page 231</a></li>
+<li><a href="#faults-and-partial-failures-page-274" id="toc-faults-and-partial-failures-page-274">Faults and Partial
+Failures, page 274</a></li>
+<li><a href="#why-do-we-need-distributed-system-page-311" id="toc-why-do-we-need-distributed-system-page-311">Why do we need
+distributed system?, page 311</a></li>
+<li><a href="#system-models-page-307" id="toc-system-models-page-307">System Models, page 307</a></li>
+<li><a href="#system-models-regarding-timing-assumptions" id="toc-system-models-regarding-timing-assumptions">System Models
+regarding timing assumptions</a></li>
+<li><a href="#system-models-regarding-node-failures" id="toc-system-models-regarding-node-failures">System Models regarding
+node failures</a></li>
+<li><a href="#definition-of-stream" id="toc-definition-of-stream">Definition of Stream</a></li>
+</ul>
+</nav>
+<h2 id="acid-atomicity-and-isolation-page-228">ACID, atomicity and
+isolation, page 228</h2>
+<p><strong>Atomicity</strong></p>
+<p>If an error occurs halfway through a sequence of writes, the
+transaction should be aborted, and the writes made up to that point
+should be discarded. In other words, the database saves you from having
+to worry about partial failure, by giving an all-or-nothing
+guarantee.</p>
+<p><strong>Isolation</strong></p>
+<p>Concurrently running transactions shouldn’t interfere with each
+other. For example, if one transaction makes several writes, then
+another transaction should see either all or none of those writes, but
+not some subset.</p>
+<h2 id="key-feature-of-transaction-page-231">Key feature of transaction,
+page 231</h2>
+<p>A key feature of a transaction is that it can be aborted and safely
+retried if an error occurred. ACID databases are based on this
+philosophy: if the database is in danger of violating its guarantee of
+atomicity, isolation, or durability, it would rather abandon the
+transaction entirely than allow it to remain half-finished.</p>
+<h2 id="faults-and-partial-failures-page-274">Faults and Partial
+Failures, page 274</h2>
+<p>There is no fundamental reason why software on a single computer
+should be flaky: when the hardware is working correctly, the same
+operation always produces the same result (it is deterministic). If
+there is a hardware problem, the consequence is usually a total system
+failure.</p>
+<p>In a distributed systems, there may well be some parts of the system
+that are broken in some unpredictable way, even though other parts of
+the system are working fine. This is known as partial failure. The
+difficulty is that partial failures are non-deterministic: if you try to
+do anything involving multiple nodes and the network, it may sometimes
+work and sometimes unpredictably fail.</p>
+<p>This non-determinism and possibility of partial failures is that
+makes distributed systems hard to work with.</p>
+<h2 id="why-do-we-need-distributed-system-page-311">Why do we need
+distributed system?, page 311</h2>
+<p>Scalabilty is not the only reason for wanting to use a distributed
+system. Fault tolerance and low latency (by placing data geographically
+close to users) are equally important goals, and those things can not be
+achieved with a single node.</p>
+<h2 id="system-models-page-307">System Models, page 307</h2>
+<p>we somehow formalize the kinds of faults that we expect to happen in
+a system. We do this by defining a system model, which is an abstraction
+that describes what things an algorithm may assume.</p>
+<h2 id="system-models-regarding-timing-assumptions">System Models
+regarding timing assumptions</h2>
+<p><strong>Synchronous model</strong></p>
+<p>The synchronous model assumes bounded network delay, bounded process
+pauses, and bounded clock error. This does not imply exactly
+synchronized clocks or zero network delay; it just means you know that
+network delay, pauses, and clock drift will never exceed some fixed
+upper bound. The synchronous model is not a realistic model of most
+practical systems, because (as discussed in this chapter) unbounded
+delays and pauses do occur.</p>
+<p><strong>Partially synchronous model</strong> - Realistic
+Assumption</p>
+<p>Partial synchrony means that a system behaves like a synchronous
+system most of the time, but it sometimes exceeds the bounds for network
+delay, process pauses, and clock drift. This is a realistic model of
+many systems: most of the time, networks and processes are quite well
+behaved—otherwise we would never be able to get anything done—but we
+have to reckon with the fact that any timing assumptions may be
+shattered occasionally. When this happens, network delay, pauses, and
+clock error may become arbitrarily large.</p>
+<h2 id="system-models-regarding-node-failures">System Models regarding
+node failures</h2>
+<p><strong>Crash-stop faults</strong></p>
+<p>In the crash-stop model, an algorithm may assume that a node can fail
+in only one way, namely by crashing. This means that the node may
+suddenly stop responding at any moment, and thereafter that node is gone
+forever—it never comes back.</p>
+<p><strong>Crash-recovery faults</strong> - Realistic Assumption</p>
+<p>We assume that nodes may crash at any moment, and perhaps start
+responding again after some unknown time. In the crash-recovery model,
+nodes are assumed to have stable storage (i.e., nonvolatile disk
+storage) that is preserved across crashes, while the in-memory state is
+assumed to be lost.</p>
+<h2 id="definition-of-stream">Definition of Stream</h2>
+<p>In general, a “stream” refers to data that is incrementally made
+available over time.The concept appears in many places: in
+the<code>stdin</code> and <code>stdout</code> of Unix, programming
+languages (lazy lists), filesystem APIs (such as Java’s
+<code>FileInputStream</code>)</p>
+</body>
+</html>

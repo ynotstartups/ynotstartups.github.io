@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Shell builtin commands</title>
+  <title>`vim.eval` in vim python</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -91,16 +91,24 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">Shell builtin commands</h1>
+<h1 class="title">`vim.eval` in vim python</h1>
 </header>
-<p>Certain shell commands are builtin to <code>zsh</code>, others are
-exposed in PATH. <code>echo</code> is a shell built-in command
-<code>cat</code> is exposed in PATH.</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> which echo</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">echo:</span> shell built-in command</span>
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_import_path_given_word(vim: <span class="bu">object</span>) <span class="op">-&gt;</span> <span class="bu">str</span> <span class="op">|</span> <span class="va">None</span>:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    word <span class="op">=</span> vim.<span class="bu">eval</span>(<span class="st">&#39;expand(&quot;&lt;cword&gt;&quot;)&#39;</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> which cat</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">/bin/cat</span></span></code></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> package, words <span class="kw">in</span> package_and_word.items():</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> word <span class="kw">in</span> words:</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>            import_string <span class="op">=</span> <span class="ss">f&quot;from </span><span class="sc">{</span>package<span class="sc">}</span><span class="ss"> import </span><span class="sc">{</span>word<span class="sc">}</span><span class="ss">&quot;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(import_string)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> import_string</span></code></pre></div>
+<p>This function above is used in <code>vim_python.py</code> imported
+into vim.</p>
+<p>The <code>vim.eval</code> literally runs the string passed in as vim
+code and export the vim object into python object</p>
+<p>For example, the following two vim commands are equivalent.</p>
+<pre><code>:py3 print(vim.eval(&#39;expand(&quot;&lt;cword&gt;&quot;)&#39;))
+:echom expand(&quot;&lt;cword&gt;&quot;)</code></pre>
+<p>See also <code>:help if_pyth.txt</code></p>
 </body>
 </html>

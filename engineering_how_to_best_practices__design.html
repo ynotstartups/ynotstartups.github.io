@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Copy Rg result into pasteboard for PR description...</title>
+  <title>best practices: design</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -27,13 +27,19 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">Copy Rg result into pasteboard for PR
-description...</h1>
+<h1 class="title">best practices: design</h1>
 </header>
-<p><code>rg foo --heading --line-number | pbcopy</code></p>
-<p>Example output below</p>
-<pre><code>dev_notes.md
-65:## Usage Example Of curo_request_kwargs
-67:`_curo_request`</code></pre>
+<ul>
+<li>Design it twice
+<ul>
+<li>write down two designs, each with pros and cons, then perhaps there
+will appear a third design with combined pros and less cons</li>
+</ul></li>
+<li>Architect great design rather than just working codes, then writing
+comments should be fun since that’s how you identify the best
+design</li>
+<li>reduce complexity by adding or removing abstraction</li>
+<li>Design Goal: reliable, scalable, maintainable</li>
+</ul>
 </body>
 </html>

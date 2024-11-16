@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Software As A Service</title>
+  <title>copy `rg` result into pasteboard for PR description...</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -27,12 +27,13 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">Software As A Service</h1>
+<h1 class="title">copy `rg` result into pasteboard for PR
+description...</h1>
 </header>
-<p>SaaS is a business and software delivery model that gives
-organisations the ability to offer their solutions in a low-friction,
-service-centric model that maximises value for customers and providers.
-It relies on agility and operational efficiency as pillars of a business
-strategy that promotes growth, reach and innovations.</p>
+<p><code>rg foo --heading --line-number | pbcopy</code></p>
+<p>Example output below</p>
+<pre><code>dev_notes.md
+65:## Usage Example Of curo_request_kwargs
+67:`_curo_request`</code></pre>
 </body>
 </html>

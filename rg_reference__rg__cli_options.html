@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>regular expression atoms</title>
+  <title>`rg` cli options</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -27,73 +27,63 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">regular expression atoms</h1>
+<h1 class="title">`rg` cli options</h1>
 </header>
 <table>
-<thead>
-<tr>
-<th></th>
-<th>Rg</th>
-<th>Vim</th>
-</tr>
-</thead>
+<colgroup>
+<col style="width: 36%" />
+<col style="width: 64%" />
+</colgroup>
 <tbody>
 <tr>
-<td>zero or more</td>
-<td><code>?</code></td>
-<td><code>\?</code></td>
+<td><code>-F, --fixed-strings</code></td>
+<td>Fixed String Matches</td>
 </tr>
 <tr>
-<td>1 or more</td>
-<td><code>+</code></td>
-<td><code>\+</code></td>
+<td><code>-t py</code></td>
+<td>select only python files</td>
 </tr>
 <tr>
-<td>precise number of matches</td>
-<td><code>{n,m}</code></td>
-<td><code>\{n,m}</code></td>
+<td><code>-w, --word-regexp</code></td>
+<td>Word Regexp</td>
 </tr>
 <tr>
-<td>word boundary</td>
-<td><code>\b</code></td>
-<td><code>\&lt; \&gt;</code></td>
+<td><code>-f, --file PATTERNFILE</code></td>
+<td>search for all patterns, one pattern per line</td>
 </tr>
 <tr>
-<td>multiple patterns or</td>
-<td><code>|</code></td>
-<td><code>\|</code></td>
+<td><code>-s</code></td>
+<td>case sensitive</td>
 </tr>
 <tr>
-<td>non greedy</td>
-<td><code>.*?</code></td>
-<td><code>.\{-}</code></td>
+<td><code>-i</code></td>
+<td>case insensitive</td>
 </tr>
 <tr>
-<td>line starts with</td>
-<td><code>^</code></td>
-<td><code>^</code></td>
+<td><code>-S</code></td>
+<td>smart case</td>
 </tr>
 <tr>
-<td>line ends with</td>
-<td><code>$</code></td>
-<td><code>$</code></td>
+<td><code>-g "**/tests/**"</code></td>
+<td>search only tests files with glob</td>
 </tr>
 <tr>
-<td>group</td>
-<td><code>( )</code></td>
-<td><code>\( \)</code></td>
+<td><code>-g "!**/tests/**"</code></td>
+<td>don’t search test files with inverse glob <code>!</code></td>
 </tr>
 <tr>
-<td>back reference</td>
-<td>not supported</td>
-<td><code>\1 \2 \3</code></td>
+<td><code>--stats</code></td>
+<td>number of matches, number of line matches</td>
+</tr>
+<tr>
+<td><code>--sort created/modified</code></td>
+<td>sort results by file created/modified time</td>
+</tr>
+<tr>
+<td><code>-p, --pretty</code></td>
+<td><code>rg -p foo | less</code>, pipe color to other program</td>
 </tr>
 </tbody>
 </table>
-<p>Example: to match <code>company</code> and <code>companies</code></p>
-<ul>
-<li>vim: <code>compan\(y\|ies\)</code></li>
-<li>rg: <code>compan(y|ies)</code></li>
-</ul>
 </body>
 </html>

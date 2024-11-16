@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Find the size of current directory</title>
+  <title>`rebase` with fixing conflicts by always using a branch</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -27,13 +27,18 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">Find the size of current directory</h1>
+<h1 class="title">`rebase` with fixing conflicts by always using a
+branch</h1>
 </header>
-<p><code>du -d 1 -h | sort --human-numeric-sort --reverse | head</code></p>
-<p>worth noting that</p>
 <ul>
-<li>sort has this option <code>--human-numeric-sort</code> specifically
-for human output i.e. <code>du -h</code></li>
+<li><code>git rebase -X ours -i origin/development</code>
+<ul>
+<li>on merge conflicts, use origin/development</li>
+</ul></li>
+<li><code>git rebase -X theirs -i origin/development</code>
+<ul>
+<li>on merge conflicts, use my branch</li>
+</ul></li>
 </ul>
 </body>
 </html>

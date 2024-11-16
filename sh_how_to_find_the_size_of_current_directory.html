@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>standup</title>
+  <title>find the size of current directory</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -27,23 +27,13 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">standup</h1>
+<h1 class="title">find the size of current directory</h1>
 </header>
-<p><strong>Reminders</strong></p>
+<p><code>du -d 1 -h | sort --human-numeric-sort --reverse | head</code></p>
+<p>worth noting that</p>
 <ul>
-<li><label><input type="checkbox" />Read cheatsheets to start the
-day</label></li>
-<li><label><input type="checkbox" />Write documentations, Doc Of The
-Day: ___________</label></li>
-<li>Stand for Standup</li>
-<li>Better Sitting Posture</li>
-<li>Vim Marks Reminder</li>
-</ul>
-<p><strong>Projects</strong> - yesterday and today</p>
-<ul>
-<li><code>Document Upload</code></li>
-<li><code>Fee Calculator</code></li>
-<li><code>Report Pack</code></li>
+<li>sort has this option <code>--human-numeric-sort</code> specifically
+for human output i.e. <code>du -h</code></li>
 </ul>
 </body>
 </html>

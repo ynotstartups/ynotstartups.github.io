@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>don't use as pager or man page reader</title>
+  <title>use `GraphiQL` with django debug tool bar</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -27,13 +27,15 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">don't use as pager or man page reader</h1>
+<h1 class="title">use `GraphiQL` with django debug tool bar</h1>
 </header>
-<p>Vim doesn’t intepret ansi sequences good enough, see the following
-photo.</p>
-<figure>
-<img src="images/vim-man-page.png" alt="vim-man-page" />
-<figcaption aria-hidden="true">vim-man-page</figcaption>
-</figure>
+<ol type="1">
+<li>login to <code>http://localhost:8000/admin/</code></li>
+<li>go to <code>http://localhost:8000/graphql/</code></li>
+<li>copy paste both the graphql query and graphql variable from the
+graphql request plugin</li>
+<li>run the added query in graphiql</li>
+<li>look at the django debug toolbar</li>
+</ol>
 </body>
 </html>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>don't use as pager or man page reader</title>
+  <title>how `cognito` login works</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -27,13 +27,26 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">don't use as pager or man page reader</h1>
+<h1 class="title">how `cognito` login works</h1>
 </header>
-<p>Vim doesn’t intepret ansi sequences good enough, see the following
-photo.</p>
-<figure>
-<img src="images/vim-man-page.png" alt="vim-man-page" />
-<figcaption aria-hidden="true">vim-man-page</figcaption>
-</figure>
+<ol type="1">
+<li>User logins with with
+<code>Microsoft Active Directory Federation Services</code> Single Sign
+On (SSO), under the hood, the React FE uses aws Cognito Login UI in
+<code>AppAuth.jsx</code></li>
+<li>After the SSO success, the FE <code>cognito</code> knows that this
+is user logged in and <code>cognito</code> gives JWT Tokens to FE in
+<code>reactapp/src/App.jsx</code></li>
+<li>Then the Apollo JS Framework adds the JWT Token to the header in
+requests to the backend in <code>reactapp/src/apollo.js</code></li>
+<li>backend validates this token in
+<code>access_token_authentication.py</code></li>
+</ol>
+<p><strong>See also</strong></p>
+<ul>
+<li><a
+href="https://aws.amazon.com/blogs/security/simplify-web-app-authentication-a-guide-to-ad-fs-federation-with-amazon-cognito-user-pools/">Cognito
+With Federations</a></li>
+</ul>
 </body>
 </html>

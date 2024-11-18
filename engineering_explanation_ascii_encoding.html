@@ -93,6 +93,13 @@
 <header id="title-block-header">
 <h1 class="title">ascii encoding</h1>
 </header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#understanding-the-color-escape-code"
+id="toc-understanding-the-color-escape-code">Understanding the color
+escape code</a></li>
+</ul>
+</nav>
 <p><strong>hexadecimal dump of ascii charaters</strong></p>
 <p>from <code>man ascii</code></p>
 <p>The control characters in ASCII still in common use include:</p>
@@ -145,11 +152,14 @@ being output.</p></li>
           00  07  08  0a  0d  09  0b  20
           \0  \a  \b  \n  \r  \t  \v
 0000010</code></pre>
-<p><strong>Understanding the color escape code</strong></p>
-<p><code>\033</code> is actually ESC character in ascii octal format,
-<code>\e</code> is equivalent in zsh shell, however, don’t use
-<code>\e</code>, <code>\e</code> is not recognised in <code>awk</code>
-nor <code>python</code>.</p>
+<h2 id="understanding-the-color-escape-code">Understanding the color
+escape code</h2>
+<p>explanation, engineering,</p>
+<p><code>\033[XXXm</code> is Select Graphic Rendition subset of ANSI
+escape sequences, <code>\033</code> is actually ESC character in ascii
+octal format, <code>\e</code> is equivalent in zsh shell, however, don’t
+use <code>\e</code>, <code>\e</code> is not recognised in
+<code>awk</code> nor <code>python</code>.</p>
 <pre><code>&gt; echo &quot;\033[31mRed Text\033[0m&quot;
 Red Text
 &gt; echo &quot;\e[31mRed Text\e[0m&quot;
@@ -168,35 +178,35 @@ Red Text</code></pre>
 </thead>
 <tbody>
 <tr>
-<td><code>30</code></td>
+<td><code>30, 90</code></td>
 <td>fg black</td>
 </tr>
 <tr>
-<td><code>31</code></td>
+<td><code>31, 91</code></td>
 <td>fg red</td>
 </tr>
 <tr>
-<td><code>32</code></td>
+<td><code>32, 92</code></td>
 <td>fg green</td>
 </tr>
 <tr>
-<td><code>33</code></td>
+<td><code>33, 93</code></td>
 <td>fg brown</td>
 </tr>
 <tr>
-<td><code>34</code></td>
+<td><code>34, 94</code></td>
 <td>fg blue</td>
 </tr>
 <tr>
-<td><code>35</code></td>
+<td><code>35, 95</code></td>
 <td>fg purple</td>
 </tr>
 <tr>
-<td><code>36</code></td>
+<td><code>36, 96</code></td>
 <td>fg cyan</td>
 </tr>
 <tr>
-<td><code>37</code></td>
+<td><code>37, 96</code></td>
 <td>fg light grey</td>
 </tr>
 <tr>
@@ -258,5 +268,8 @@ class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="
 <img src="images/bash_color.png" alt="bash color" />
 <figcaption aria-hidden="true">bash color</figcaption>
 </figure>
+<p><strong>See also</strong>: <a
+href="https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences">a
+comprehensive explanation</a></p>
 </body>
 </html>

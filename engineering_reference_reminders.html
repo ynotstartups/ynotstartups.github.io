@@ -34,7 +34,6 @@
 <li><a href="#daily" id="toc-daily">Daily</a></li>
 <li><a href="#long-term-todo" id="toc-long-term-todo">Long Term
 TODO</a></li>
-<li><a href="#random-notes" id="toc-random-notes">Random Notes</a></li>
 </ul>
 </nav>
 <ul>
@@ -56,6 +55,19 @@ TODO</a></li>
 <ul>
 <li>use <code>nonnull</code> and <code>required=True</code></li>
 </ul></li>
+<li><strong>django</strong>
+<ul>
+<li>use foreign key constraints</li>
+<li>when adding constraints, also add DB data cleaning migrations</li>
+</ul></li>
+<li><strong>oneview</strong>
+<ul>
+<li>bash new alias <code>django-admin</code></li>
+<li>get reverse sql
+<code>sqlmigrate oneview 0274 --backwards</code></li>
+<li><code>inspectdb</code> to print out all models including from third
+party module</li>
+</ul></li>
 </ul>
 <h2 id="daily">Daily</h2>
 <ul class="task-list">
@@ -65,20 +77,20 @@ TODO</a></li>
 </ul>
 <h2 id="long-term-todo">Long Term TODO</h2>
 <ul class="task-list">
+<li><label><input type="checkbox" />add aws shell utils to improve dev
+experience in aws</label>
+<ul class="task-list">
+<li><label><input type="checkbox" />display latest invoke in DynamoDB
+stream?</label></li>
+<li><label><input type="checkbox" />print latest lambda
+logs?</label></li>
+<li><label><input type="checkbox" />check FE and BE deployment
+status</label></li>
+<li><label><input type="checkbox" />retrieve secrets from secret
+manager</label></li>
+</ul></li>
 <li><label><input type="checkbox" />learn golang, static typing, Builtin
 toolings</label></li>
-</ul>
-<h2 id="random-notes">Random Notes</h2>
-<ul>
-<li>cloud native at speed with confidence
-<ul>
-<li>DevOps Maturity: Teams have different tooling, practice and
-maturity</li>
-<li>Observability: distributed systems require monitoring, alerting and
-retrospective observability</li>
-<li>Platform approach: provide a platform that can be built on and
-extended with smart defaults</li>
-</ul></li>
 </ul>
 </body>
 </html>

@@ -29,10 +29,18 @@
 <header id="title-block-header">
 <h1 class="title">AWS cli commands</h1>
 </header>
-<ul>
-<li><code>aws sts get-caller-identity</code> - findout who am I?</li>
-<li><code>aws iam get-user</code> - also findout out who am I with more
-details</li>
-</ul>
+<pre><code># findout who am I?
+aws sts get-caller-identity
+
+# also findout out who am I with more details
+aws iam get-user
+
+# get secret
+aws secretsmanager get-secret-value --secret-id foo
+
+# change secret
+aws secretsmanager update-secret \
+    --secret-id foo \
+    --secret-string &quot;{\&quot;json\&quot;:\&quot;string\&quot;,\&quot;foo\&quot;:\&quot;bar\&quot;}&quot;</code></pre>
 </body>
 </html>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>errors in `Requests`</title>
+  <title>WAS IAM</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -91,106 +91,64 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">errors in `Requests`</h1>
+<h1 class="title">WAS IAM</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
-<li><a href="#catching-requests-errors"
-id="toc-catching-requests-errors">Catching requests errors</a></li>
-<li><a href="#error-classes-inheritance"
-id="toc-error-classes-inheritance">Error Classes Inheritance</a></li>
+<li><a href="#what-is-iam" id="toc-what-is-iam">What is IAM?</a></li>
 </ul>
 </nav>
-<table>
-<colgroup>
-<col style="width: 24%" />
-<col style="width: 13%" />
-<col style="width: 62%" />
-</colgroup>
-<thead>
-<tr>
-<th>error type</th>
-<th>safe to retry</th>
-<th>examples of when error occurs</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>HTTPError - 4xx</td>
-<td>No</td>
-<td>client error, e.g., calling the api incorrectly</td>
-</tr>
-<tr>
-<td>HTTPError - 5xx</td>
-<td>No</td>
-<td>server error, e.g. bugs in server code</td>
-</tr>
-<tr>
-<td>Connection Error</td>
-<td>Maybe</td>
-<td>incorrect configurations or unavailble network</td>
-</tr>
-<tr>
-<td>Connection Timeout</td>
-<td>Yes</td>
-<td>network congestion, server too busy to responds, server being
-offline</td>
-</tr>
-<tr>
-<td>Request Timeout</td>
-<td>Maybe</td>
-<td>The server did not send any data in the allotted amount of time</td>
-</tr>
-<tr>
-<td>Requests library Exception</td>
-<td>No</td>
-<td>data passed in cannot be converted to json</td>
-</tr>
-<tr>
-<td>Other Python Exception</td>
-<td>No</td>
-<td>any python errors</td>
-</tr>
-</tbody>
-</table>
-<p>https://requests.readthedocs.io/en/latest/api/#requests.ReadTimeout</p>
-<p><strong>See also</strong>: <a
-href="https://requests.readthedocs.io/en/latest/api/#exceptions">requests
-doc</a></p>
-<h2 id="catching-requests-errors">Catching requests errors</h2>
+<h2 id="what-is-iam">What is IAM?</h2>
+<p>IAM is authentication + authorisation for resources</p>
+<p><strong>Feature</strong>: Add users to AWS account, set groups and
+permissions for these users, enable user to call AWS services APIs</p>
+<p><strong>IAM Principal</strong>: An identity in the IAM System</p>
+<p><strong>IAM Roles</strong>: IAM Principals that authenticate with
+temporary credentials</p>
+<p>Use Cases For IAM Roles</p>
+<ul>
+<li>AWS compute environments (EC2 instances, lambda functions, etc
+…)</li>
+<li>credentials for federated identities (e.g. users in a
+directory)</li>
+</ul>
+<p><strong>IAM Users (less used)</strong>: IAM Principle with long term
+credentials</p>
+<p><strong>STS</strong>: AWS Security Token Service: produce short term
+credentials for use by an IAM Role</p>
+<p><strong>AWS Accounts</strong>:</p>
+<ul>
+<li>not means customers or humans, more like a box of resouces that goes
+together in a workload.</li>
+<li>IAM is local to AWS Account.</li>
+<li>Any IAM Principal can assume IAM role across AWS accounts as long as
+policies allowed.</li>
+</ul>
+<p><strong>IAM Policy</strong></p>
+<p>There are two types of policies, one for principal, one for
+resources.</p>
+<p>Example: Reading an object from an S3 bucket in another account.</p>
+<p><strong>Principal IAM policy for AWS Account 123456</strong></p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> requests <span class="im">import</span> Timeout, HTTPError</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.post(url, headers<span class="op">=</span>headers, data<span class="op">=</span>data)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    response.raise_for_status()</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> HTTPError, Timeout <span class="im">as</span> error:</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span><span class="al">TODO</span></span></code></pre></div>
-<blockquote>
-<p>In the event of a network problem (e.g. DNS failure, refused
-connection, etc), Requests will raise a ConnectionError exception.
-Response.raise_for_status() will raise an HTTPError if the HTTP request
-returned an unsuccessful status code. If a request times out, a Timeout
-exception is raised. If a request exceeds the configured number of
-maximum redirections, a TooManyRedirects exception is raised. All
-exceptions that Requests explicitly raises inherit from
-requests.exceptions.RequestException.</p>
-</blockquote>
-<ul>
-<li>https://requests.readthedocs.io/en/latest/user/quickstart/#errors-and-exceptions</li>
-</ul>
-<p>I argue that we should not catch connection error in user facing code
-as when the code deployed to prod, the code should not have connection
-errors that happens due to incorrect network configs?</p>
-<h2 id="error-classes-inheritance">Error Classes Inheritance</h2>
-<pre><code>RequestException(IOError)
----&gt; HTTPError(RequestException)
----&gt; ConnectionError(RequestException)
----&gt; Timeout(RequestException)
--------&gt; ConnectTimeout(ConnectionError, Timeout)
--------&gt; ReadTimeout(Timeout)</code></pre>
-<ul>
-<li>https://requests.readthedocs.io/en/latest/_modules/requests/exceptions/#RequestException</li>
-</ul>
+class="sourceCode json"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;Effect&quot;</span><span class="fu">:</span> <span class="st">&quot;Allow&quot;</span><span class="fu">,</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;Action&quot;</span><span class="fu">:</span> <span class="st">&quot;S3: GetObject&quot;</span><span class="fu">,</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;Resource&quot;</span><span class="fu">:</span> <span class="st">&quot;arn:aws:s3:::example-bucket/*&quot;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p><strong>Resource-based IAM policy</strong></p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;Effect&quot;</span><span class="fu">:</span> <span class="st">&quot;Allow&quot;</span><span class="fu">,</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;Principal&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;AWS&quot;</span><span class="fu">:</span> <span class="st">&quot;123456&quot;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Action&quot;</span><span class="er">:</span> <span class="st">&quot;S3: GetObject&quot;</span><span class="fu">,</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;Resource&quot;</span><span class="fu">:</span> <span class="st">&quot;arn:aws:s3:::example-bucket/*&quot;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p><strong>Integration between Lambda and AWS IAM</strong> enables
+developers and administrators to explicit control the data and service
+accessible to an application by assigning it a security code. This
+approach ensures that credentials can be constrainted to the minimum
+necessary and that they posses limited lifespans.</p>
 </body>
 </html>

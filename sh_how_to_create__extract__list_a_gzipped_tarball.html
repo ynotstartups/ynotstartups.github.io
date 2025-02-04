@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>create, extract, list a gzipped tarball</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="dev_notes.css" />
+  <link rel="icon" href="https://d392viioakuayd.cloudfront.net/public/favicon.webp">
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">create, extract, list a gzipped tarball</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#create-a-gzipped-tarball-from-a-directory"
+id="toc-create-a-gzipped-tarball-from-a-directory">create a gzipped
+tarball from a directory</a></li>
+<li><a href="#extract-a-gzipped-tarball-into-a-directory"
+id="toc-extract-a-gzipped-tarball-into-a-directory">extract a gzipped
+tarball into a directory</a></li>
+<li><a href="#list-the-content-of-gzipped-tarball-without-extraction"
+id="toc-list-the-content-of-gzipped-tarball-without-extraction">list the
+content of gzipped tarball without extraction</a></li>
+</ul>
+</nav>
+<h2 id="create-a-gzipped-tarball-from-a-directory">create a gzipped
+tarball from a directory</h2>
+<pre><code># -c    Create a new archive
+# -v    Verbose output
+# -f file.tar.gz    Use archive file
+# -z    Filter the archive through gzip i.e. compress or decompress archive
+tar -c -z -v -f yuhao_huang.tar.gz foo/</code></pre>
+<h2 id="extract-a-gzipped-tarball-into-a-directory">extract a gzipped
+tarball into a directory</h2>
+<pre><code># -x    Extract files from an arc
+# -x    Extract files from an archive
+# -z    Filter the archive through gzip i.e. compress or decompress archive
+# -v    Verbose output
+# -f file.tar.gz    Use archive file
+tar -x -z -v -f yuhao_huang.tar.gz -C ~/Downloads/bar/</code></pre>
+<h2 id="list-the-content-of-gzipped-tarball-without-extraction">list the
+content of gzipped tarball without extraction</h2>
+<pre><code># -z    Filter the archive through gzip i.e. compress or decompress archive
+# -v    Verbose output
+# -f file.tar.gz    Use archive file
+# -t    List the contents of an archive
+tar -z -t -v -f yuhao_huang.tar.gz</code></pre>
+</body>
+</html>

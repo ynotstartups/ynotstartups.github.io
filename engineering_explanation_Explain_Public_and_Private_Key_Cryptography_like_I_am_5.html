@@ -35,6 +35,10 @@
 <li>Public Key is used to encrypt messages.</li>
 <li>Private Key is used to decrypt messages.</li>
 </ul>
+<p>Importantly, if some text is encrypted with private key, only public
+key can decrypted it.</p>
+<p>If some text is encrypted with public key, only private key can
+decrypted it.</p>
 <p>For example, HTTPS handshake is basically, I get the Public Key of a
 website, generate a random password, encrypt it with Public Key and then
 send it to the website server and then website server uses Private Key
@@ -42,7 +46,7 @@ to decrypt the password, so this password is shared. And further
 communication is encrypted using that shared password.</p>
 <p>But really, public key isn’t just for encryption nor private for
 decryption, the otherway around works too, private key can be used for
-decryption and public key for encryption</p>
+encryption and public key for decryption.</p>
 <p>One example that uses private key for encryption is digital
 signature, take some text/file, create a digest of test/file, encrypt
 the digest with private key and send the encrypted digest together with

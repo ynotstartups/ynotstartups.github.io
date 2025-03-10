@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Use logging module</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="dev_notes.css" />
+  <link rel="icon" href="https://d392viioakuayd.cloudfront.net/public/favicon.webp">
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Use logging module</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#usage" id="toc-usage">Usage</a></li>
+<li><a href="#log-level-explain" id="toc-log-level-explain">Log Level
+Explain</a></li>
+<li><a href="#loggers-handlers-filters-and-formatters"
+id="toc-loggers-handlers-filters-and-formatters">Loggers, Handlers,
+Filters and Formatters</a></li>
+<li><a href="#more-on-loggers" id="toc-more-on-loggers">More on
+Loggers</a></li>
+<li><a href="#if-no-configuration-is-used"
+id="toc-if-no-configuration-is-used">If no configuration is
+used</a></li>
+<li><a href="#see-also" id="toc-see-also">See also</a></li>
+</ul>
+</nav>
+<h2 id="usage">Usage</h2>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> logging</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>logging.basicConfig(</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># filename=&quot;foo.log&quot;,</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    encoding<span class="op">=</span><span class="st">&quot;utf-8&quot;</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    level<span class="op">=</span>logging.DEBUG,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">format</span><span class="op">=</span><span class="st">&#39;</span><span class="sc">%(levelname)s</span><span class="st"> </span><span class="sc">%(asctime)s</span><span class="st"> </span><span class="sc">%(module)s</span><span class="st"> </span><span class="sc">%(message)s</span><span class="st">&#39;</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>logger <span class="op">=</span> logging.getLogger(<span class="va">__name__</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>logger.debug(<span class="st">&quot;foo bar baz&quot;</span>)</span></code></pre></div>
+<h2 id="log-level-explain">Log Level Explain</h2>
+<table>
+<colgroup>
+<col style="width: 5%" />
+<col style="width: 94%" />
+</colgroup>
+<thead>
+<tr>
+<th>Level</th>
+<th>When it’s used</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DEBUG</td>
+<td>Detailed information, typically of interest only when diagnosing
+problems.</td>
+</tr>
+<tr>
+<td>INFO</td>
+<td>Confirmation that things are working as expected.</td>
+</tr>
+<tr>
+<td>WARNING</td>
+<td>An indication that something unexpected happened, or indicative of
+some problem in the near future (e.g. ‘disk space low’). The software is
+still working as expected.</td>
+</tr>
+<tr>
+<td>ERROR</td>
+<td>Due to a more serious problem, the software has not been able to
+perform some function.</td>
+</tr>
+<tr>
+<td>CRITICAL</td>
+<td>A serious error, indicating that the program itself may be unable to
+continue running.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="loggers-handlers-filters-and-formatters">Loggers, Handlers,
+Filters and Formatters</h2>
+<p>The logging library takes a modular approach and offers several
+categories of components: loggers, handlers, filters, and
+formatters.</p>
+<table>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 86%" />
+</colgroup>
+<thead>
+<tr>
+<th>Module</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Loggers</td>
+<td>expose the interface that application code directly uses.</td>
+</tr>
+<tr>
+<td>Handlers</td>
+<td>send the log records (created by loggers) to the appropriate
+destination.</td>
+</tr>
+<tr>
+<td>Filters</td>
+<td>provide a finer grained facility for determining which log records
+to output.</td>
+</tr>
+<tr>
+<td>Formatters</td>
+<td>specify the layout of log records in the final output.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="more-on-loggers">More on Loggers</h2>
+<p><code>getLogger()</code> returns a reference to a logger instance
+with the specified name if it is provided, or root if not. The names are
+period-separated hierarchical structures. Multiple calls to
+<code>getLogger()</code> with the same name will return a reference to
+the same logger object. Loggers that are further down in the
+hierarchical list are children of loggers higher up in the list. For
+example, given a logger with a name of <code>foo</code>, loggers with
+names of <code>foo.bar</code>, <code>foo.bar.baz</code>, and
+<code>foo.bam</code> are all descendants of <code>foo</code>.</p>
+<p>Loggers have a concept of effective level. If a level is not
+explicitly set on a logger, the level of its parent is used instead as
+its effective level. If the parent has no explicit level set, its parent
+is examined, and so on - all ancestors are searched until an explicitly
+set level is found. The root logger always has an explicit level set
+(<code>WARNING</code> by default). When deciding whether to process an
+event, the effective level of the logger is used to determine whether
+the event is passed to the logger’s handlers.</p>
+<p>Child loggers propagate messages up to the handlers associated with
+their ancestor loggers. Because of this, it is unnecessary to define and
+configure handlers for all the loggers an application uses. It is
+sufficient to configure handlers for a top-level logger and create child
+loggers as needed. (You can, however, turn off propagation by setting
+the propagate attribute of a logger to <code>False</code>.)</p>
+<h2 id="if-no-configuration-is-used">If no configuration is used</h2>
+<p>If no logging configuration is used, a special handler
+<code>lastResort</code> is used, which writes log to <code>stderr</code>
+with level <code>WARNING</code> with formatting like
+<code>level:module:message</code>.</p>
+<pre><code>import logging
+
+logging.debug(&quot;abc&quot;)
+logging.info(&quot;abc&quot;)
+logging.warning(&quot;abc&quot;)
+logging.error(&quot;abc&quot;)
+
+# Output
+# WARNING:root:abc
+# ERROR:root:abc
+
+logger = logging.getLogger(__name__)
+logger.debug(&quot;abc&quot;)
+logger.info(&quot;abc&quot;)
+logger.warning(&quot;abc&quot;)
+logger.error(&quot;abc&quot;)
+
+# Output
+# WARNING:__main__:abc
+# ERROR:__main__:abc</code></pre>
+<h2 id="see-also">See also</h2>
+<ul>
+<li><a
+href="https://docs.python.org/3/howto/logging.html#logging-basic-tutorial">Logging
+How-To</a></li>
+<li><a
+href="https://docs.djangoproject.com/en/5.1/topics/logging/">Django
+Logging</a></li>
+</ul>
+</body>
+</html>

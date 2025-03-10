@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Architectures</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="dev_notes.css" />
+  <link rel="icon" href="https://d392viioakuayd.cloudfront.net/public/favicon.webp">
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Architectures</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#major-architectures" id="toc-major-architectures">Major
+Architectures</a></li>
+<li><a href="#event-driven-v.s.-event-based-architecture"
+id="toc-event-driven-v.s.-event-based-architecture">event driven v.s.
+event based architecture</a>
+<ul>
+<li><a href="#event-driven" id="toc-event-driven">Event Driven</a></li>
+<li><a href="#event-based" id="toc-event-based">Event-based</a></li>
+</ul></li>
+</ul>
+</nav>
+<h2 id="major-architectures">Major Architectures</h2>
+<ul>
+<li>Monolith
+<ul>
+<li><a href="https://shopify.engineering/shopify-monolith#">Shopify is a
+Monolith, but a modular Monolith</a></li>
+<li><a
+href="https://signalvnoise.com/svn3/the-majestic-monolith/">Creator of
+Ruby on Rails On The Majestic Monolith</a></li>
+</ul></li>
+<li>Microservice
+<ul>
+<li><a
+href="https://martinfowler.com/articles/microservices.html">Martin
+Fowler Microservice</a></li>
+</ul></li>
+<li>Event-Driven Architectures</li>
+<li>Event-Based Architectures</li>
+</ul>
+<h2 id="event-driven-v.s.-event-based-architecture">event driven v.s.
+event based architecture</h2>
+<h3 id="event-driven">Event Driven</h3>
+<p>A key feature of true event-driven architectures is that the
+producers and consumers are completely decoupled – a producer shouldn’t
+know or care who is consuming its events and how the consumers use those
+events in their service..</p>
+<p><strong>Examples</strong></p>
+<ul>
+<li>Kafka + Kubernetes</li>
+<li>IoT + MQTT pub/sub</li>
+</ul>
+<h3 id="event-based">Event-based</h3>
+<p>Two key characteristics of event-based compute</p>
+<ol type="1">
+<li>the existence of a compute instance is intimately tied to the
+occurence of an event to be processed.</li>
+<li>the compute acts on a single event at a time.</li>
+</ol>
+<p><strong>Examples</strong></p>
+<ul>
+<li>API Gateway + Lambda</li>
+</ul>
+<p>See also <a
+href="https://www.alexdebrie.com/posts/event-driven-vs-event-based/">origin
+of this idea</a></p>
+</body>
+</html>

@@ -30,12 +30,19 @@
 <h1 class="title">best practices: design</h1>
 </header>
 <ul>
-<li>Design Goal
+<li><strong>First Thing to Consider</strong>
+<ul>
+<li>does it bring <strong>value</strong> to business? don’t just use
+technology because it’s cool!</li>
+</ul></li>
+<li>Having a goal! ask why we are doing it?</li>
+<li>Design Goals
 <ul>
 <li>meets requirements</li>
 <li>reliable</li>
+<li>maintainable and operable (sustainable delivery of valuable, working
+software)</li>
 <li>scalable</li>
-<li>operable (sustainable delivery of valuable, working software)</li>
 </ul></li>
 <li>Design it twice
 <ul>
@@ -45,7 +52,28 @@ will appear a third design with combined pros and less cons</li>
 <li>Architect great design rather than just working codes, then writing
 comments should be fun since that’s how you identify the best
 design</li>
-<li>reduce complexity by adding or removing abstraction</li>
+<li>Reduce complexity by adding or removing abstraction</li>
+<li>Start with writing documentation, ask for feedbacks as early as
+possible</li>
+<li>Designing new process that is easy to sell to the Team!
+<ul>
+<li>familiar technology</li>
+<li>easy to pick up</li>
+<li>improves dev experience, should improve the overall developer
+experience rather than damaging developer experience</li>
+</ul></li>
+<li><label><input type="checkbox" />TODO: learn about DDD!</label>
+<ul>
+<li>Ubiquitous language - same langaguge in code and business</li>
+<li>Aggregate - one code object to represent one real world concept with
+lifecycle</li>
+<li>bounded context - grouping of aggregates to hide implementation
+details, hide information. Present a clear boundary to the wider system
+while hiding internal complexity that is able to change without
+impacting other parts of the system.</li>
+<li>The critical complexity of many software projects is in
+understanding the domain itself.</li>
+</ul></li>
 </ul>
 </body>
 </html>

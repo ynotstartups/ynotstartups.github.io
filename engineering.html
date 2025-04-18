@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Engineering</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="dev_notes.css" />
+  <link rel="icon" href="https://d392viioakuayd.cloudfront.net/public/favicon.webp">
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Engineering</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#engineering---reference"
+id="toc-engineering---reference">Engineering - Reference</a></li>
+<li><a href="#readme" id="toc-readme">README</a></li>
+<li><a href="#engineering---how-to"
+id="toc-engineering---how-to">Engineering - How To</a></li>
+<li><a href="#write" id="toc-write">write</a></li>
+<li><a href="#give-consistent-good-pr-review"
+id="toc-give-consistent-good-pr-review">give consistent good PR
+review</a></li>
+<li><a href="#best-practices-behavioural"
+id="toc-best-practices-behavioural">best practices: behavioural</a></li>
+<li><a href="#best-practices-documentations"
+id="toc-best-practices-documentations">best practices:
+documentations</a></li>
+<li><a href="#best-practices-design" id="toc-best-practices-design">best
+practices: design</a></li>
+<li><a href="#engineering---explanation"
+id="toc-engineering---explanation">Engineering - Explanation</a></li>
+<li><a href="#ascii-encoding" id="toc-ascii-encoding">ascii encoding</a>
+<ul>
+<li><a href="#understanding-the-color-escape-code"
+id="toc-understanding-the-color-escape-code">Understanding the color
+escape code</a></li>
+</ul></li>
+<li><a href="#authentication-vs-authorization"
+id="toc-authentication-vs-authorization">Authentication vs
+Authorization</a></li>
+<li><a href="#architectures" id="toc-architectures">Architectures</a>
+<ul>
+<li><a href="#major-architectures" id="toc-major-architectures">Major
+Architectures</a></li>
+<li><a href="#event-driven-v.s.-event-based-architecture"
+id="toc-event-driven-v.s.-event-based-architecture">event driven v.s.
+event based architecture</a>
+<ul>
+<li><a href="#event-driven" id="toc-event-driven">Event Driven</a></li>
+<li><a href="#event-based" id="toc-event-based">Event-based</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#saas-business-model" id="toc-saas-business-model">SaaS
+business model</a></li>
+<li><a href="#explain-public-and-private-key-cryptography-like-i-am-5"
+id="toc-explain-public-and-private-key-cryptography-like-i-am-5">Explain
+Public and Private Key Cryptography like I am 5</a></li>
+</ul>
+</nav>
+<h1 id="engineering---reference">Engineering - Reference</h1>
+<h1 id="readme">README</h1>
+<ul>
+<li><strong>Keep Learning Everyday</strong></li>
+<li><strong>Reading</strong> - AWS In Action</li>
+<li><strong>Cheatsheet</strong> - hand written, keep it in one page</li>
+<li><strong>vim</strong>
+<ul>
+<li><code>gsf</code> - change to fake style, e.g. foo = ‘fake_foo’</li>
+<li><code>gsp</code> - change to param style</li>
+</ul></li>
+<li><strong>graphene</strong> - use <code>nonnull</code> and
+<code>required=True</code></li>
+<li><strong>django</strong>
+<ul>
+<li>use foreign key constraints</li>
+<li>when adding constraints, also add DB data cleaning migrations</li>
+</ul></li>
+<li><strong>oneview</strong>
+<ul>
+<li>bash new alias <code>django-admin</code></li>
+<li>get reverse sql
+<code>sqlmigrate oneview 0274 --backwards</code></li>
+<li>API Design, 3 options -&gt; consider using <code>Enum</code></li>
+<li>REST API Design, follow github rest</li>
+<li>consider using celery - for slow running task and doesn’t need
+result right now</li>
+</ul></li>
+</ul>
+<h1 id="engineering---how-to">Engineering - How To</h1>
+<h1 id="write">write</h1>
+<p><strong>Scrupulous writers, in every sentence that they write, will
+ask themselves at least four questions:</strong></p>
+<ol type="1">
+<li>What am I trying to say?</li>
+<li>What words will express it?</li>
+<li>What image or idiom will make it clearer?</li>
+<li>Is this image fresh enough to have an effect?</li>
+</ol>
+<p><strong>Two more that they may ask are:</strong></p>
+<ol type="1">
+<li>Could I put it more shortly?</li>
+<li>Have I said anything that is avoidably ugly?</li>
+</ol>
+<p><strong>Consequently there are ways to write well. The following
+rules will cover most cases:</strong></p>
+<ol type="1">
+<li>Never use a metaphor, simile or other figure of speech which you are
+used to seeing in print.</li>
+<li>Never use a long word where a short one will do.</li>
+<li>If it is possible to cut a word out, always cut it out.</li>
+<li>Never use the passive where you can use the active.</li>
+<li>Never use a foreign phrase, a scientific word or a jargon word if
+you can think of an everyday English equivalent.</li>
+<li>Break any of these rules sooner than say anything outright
+barbarous.</li>
+</ol>
+<h1 id="give-consistent-good-pr-review">give consistent good PR
+review</h1>
+<ul>
+<li>add <code>doc string</code> if there is anything unclear</li>
+<li>understand <strong>all</strong> code and tests added/modified</li>
+<li>handle network and other errors gracefully?</li>
+<li>read and test my comments carefully</li>
+<li>add ideas about incremental improvements</li>
+</ul>
+<h1 id="best-practices-behavioural">best practices: behavioural</h1>
+<ul>
+<li>There is No Such Thing as Over Communication!</li>
+<li>Look for opportunity for continuous improvement
+<ul>
+<li>code base</li>
+<li>toolings and personal toolings (vim, shell alias etc..)</li>
+</ul></li>
+<li>Read documentation/manual/user’s guide before using a new tool/cli,
+technology
+<ul>
+<li>this implies prefer using tool with good doc e.g. <code>fish</code>
+instead <code>bash</code></li>
+<li>for new technology, it’s important to understand how to use them
+before we use them</li>
+</ul></li>
+<li>Be more curious about how things work internally</li>
+<li>Be prepared because I am bad at ac-hoc talk and thinking
+<ul>
+<li>ask for agenda for meetings so that I can be prepared</li>
+</ul></li>
+<li>Validate assumptions earlier</li>
+<li>For meetings,
+<ul>
+<li>gather questions before meeting</li>
+<li>set out the purpose of the meetings</li>
+<li>write meeting minutes and action points</li>
+</ul></li>
+</ul>
+<h1 id="best-practices-documentations">best practices:
+documentations</h1>
+<ul>
+<li>write present tense with full sentence</li>
+<li>Write code comments, documentations before implementation
+<ul>
+<li>Tutorial e.g. get started with working code</li>
+<li>How-To e.g. Step by Step Guides like Recipes</li>
+<li>Explanation e.g. experts deep dive</li>
+<li>Reference e.g. api docs or python official documentations</li>
+</ul></li>
+</ul>
+<h1 id="best-practices-design">best practices: design</h1>
+<ul>
+<li><strong>First Thing to Consider</strong>
+<ul>
+<li>does it bring <strong>value</strong> to business? don’t just use
+technology because it’s cool!</li>
+</ul></li>
+<li>Having a goal! ask why we are doing it?</li>
+<li>Design Goals
+<ul>
+<li>meets requirements</li>
+<li>reliable</li>
+<li>maintainable and operable (sustainable delivery of valuable, working
+software)</li>
+<li>scalable</li>
+</ul></li>
+<li>Design it twice
+<ul>
+<li>write down two designs, each with pros and cons, then perhaps there
+will appear a third design with combined pros and less cons</li>
+</ul></li>
+<li>Architect great design rather than just working codes, then writing
+comments should be fun since that’s how you identify the best
+design</li>
+<li>Reduce complexity by adding or removing abstraction</li>
+<li>Start with writing documentation, ask for feedbacks as early as
+possible</li>
+<li>Designing new process that is easy to sell to the Team!
+<ul>
+<li>familiar technology</li>
+<li>easy to pick up</li>
+<li>improves dev experience, should improve the overall developer
+experience rather than damaging developer experience</li>
+</ul></li>
+<li><label><input type="checkbox" />TODO: learn about DDD!</label>
+<ul>
+<li>Ubiquitous language - same langaguge in code and business</li>
+<li>Aggregate - one code object to represent one real world concept with
+lifecycle</li>
+<li>bounded context - grouping of aggregates to hide implementation
+details, hide information. Present a clear boundary to the wider system
+while hiding internal complexity that is able to change without
+impacting other parts of the system.</li>
+<li>The critical complexity of many software projects is in
+understanding the domain itself.</li>
+</ul></li>
+</ul>
+<h1 id="engineering---explanation">Engineering - Explanation</h1>
+<h1 id="ascii-encoding">ascii encoding</h1>
+<p><strong>hexadecimal dump of ascii charaters</strong></p>
+<p>from <code>man ascii</code></p>
+<p>The control characters in ASCII still in common use include:</p>
+<ul>
+<li><p><code>0x00 (null, NUL, \0, ^@)</code>, originally intended to be
+an ignored character, but now used by many programming languages
+including C to mark the end of a string.</p></li>
+<li><p><code>0x07 (bell, BEL, \a, ^G)</code>, which may cause the device
+to emit a warning such as a bell or beep sound or the screen
+flashing.</p></li>
+<li><p><code>0x08 (backspace, BS, \b, ^H)</code>, may overprint the
+previous character.</p></li>
+<li><p><code>0x09 (horizontal tab, HT, \t, ^I)</code>, moves the
+printing position right to the next tab stop.</p></li>
+<li><p><code>0x0A (line feed, LF, \n, ^J)</code>, moves the print head
+down one line, or to the left edge and down. Used as the end of line
+marker in most UNIX systems and variants.</p></li>
+<li><p><code>0x0B (vertical tab, VT, \v, ^K)</code>, vertical
+tabulation.</p></li>
+<li><p><code>0x0C (form feed, FF, \f, ^L)</code>, to cause a printer to
+eject paper to the top of the next page, or a video terminal to clear
+the screen.</p></li>
+<li><p><code>0x0D (carriage return, CR, \r, ^M)</code>, moves the
+printing position to the start of the line, allowing overprinting. Used
+as the end of line marker in Classic Mac OS, OS-9, FLEX (and variants).
+A CR+LF pair is used by CP/M-80 and its derivatives including DOS and
+Windows, and by Application Layer protocols such as FTP, SMTP, and
+HTTP.</p></li>
+<li><p><code>0x1A (Control-Z, SUB, ^Z)</code>, Acts as an end-of-file
+for the Windows text-mode file i/o.</p></li>
+<li><p><code>0x1B (escape, ESC, \e (GCC only), ^[)</code>. Introduces an
+escape sequence.</p></li>
+<li><p>Control characters may be described as doing something when the
+user inputs them, such as code 3 (End-of-Text character, ETX, ^C) to
+interrupt the running process, or code 4 (End-of-Transmission character,
+EOT, ^D), used to end text input on Unix or to exit a Unix shell. These
+uses usually have little to do with their use when they are in text
+being output.</p></li>
+</ul>
+<p><strong>to see the hex value for characters</strong></p>
+<p><code>od -t a -t x1 -t c</code></p>
+<ul>
+<li><code>-t a</code> - prints in ascii format</li>
+<li><code>-t x1</code> - prints in hex format</li>
+<li><code>-t c</code> - prints in c escape format</li>
+</ul>
+<p>e.g.</p>
+<pre><code>&gt; printf &#39;\0\a\b\n\r\t\v &#39; | od -t a -t x1 -t c
+0000000  nul bel  bs  nl  cr  ht  vt  sp
+          00  07  08  0a  0d  09  0b  20
+          \0  \a  \b  \n  \r  \t  \v
+0000010</code></pre>
+<h2 id="understanding-the-color-escape-code">Understanding the color
+escape code</h2>
+<p>explanation, engineering,</p>
+<p><code>\033[XXXm</code> is Select Graphic Rendition subset of ANSI
+escape sequences, <code>\033</code> is actually ESC character in ascii
+octal format, <code>\e</code> is equivalent in zsh shell, however, don’t
+use <code>\e</code>, <code>\e</code> is not recognised in
+<code>awk</code> nor <code>python</code>.</p>
+<pre><code>&gt; echo &quot;\033[31mRed Text\033[0m&quot;
+Red Text
+&gt; echo &quot;\e[31mRed Text\e[0m&quot;
+Red Text</code></pre>
+<ul>
+<li><code>\033[</code> - Begin the color modifications</li>
+<li><code>CODEm</code> - CODE + <code>m</code> at the end</li>
+<li><code>\e[0m</code> - End the color modifications</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>code</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>30, 90</code></td>
+<td>fg black</td>
+</tr>
+<tr>
+<td><code>31, 91</code></td>
+<td>fg red</td>
+</tr>
+<tr>
+<td><code>32, 92</code></td>
+<td>fg green</td>
+</tr>
+<tr>
+<td><code>33, 93</code></td>
+<td>fg brown</td>
+</tr>
+<tr>
+<td><code>34, 94</code></td>
+<td>fg blue</td>
+</tr>
+<tr>
+<td><code>35, 95</code></td>
+<td>fg purple</td>
+</tr>
+<tr>
+<td><code>36, 96</code></td>
+<td>fg cyan</td>
+</tr>
+<tr>
+<td><code>37, 96</code></td>
+<td>fg light grey</td>
+</tr>
+<tr>
+<td><code>40</code></td>
+<td>bg black</td>
+</tr>
+<tr>
+<td><code>41</code></td>
+<td>bg red</td>
+</tr>
+<tr>
+<td><code>42</code></td>
+<td>bg green</td>
+</tr>
+<tr>
+<td><code>43</code></td>
+<td>bg brown</td>
+</tr>
+<tr>
+<td><code>44</code></td>
+<td>bg blue</td>
+</tr>
+<tr>
+<td><code>45</code></td>
+<td>bg purple</td>
+</tr>
+<tr>
+<td><code>46</code></td>
+<td>bg cyan</td>
+</tr>
+<tr>
+<td><code>47</code></td>
+<td>bg light grey</td>
+</tr>
+<tr>
+<td><code>0</code></td>
+<td>reset / normal</td>
+</tr>
+<tr>
+<td><code>1</code></td>
+<td>bold</td>
+</tr>
+<tr>
+<td><code>3</code></td>
+<td>italic</td>
+</tr>
+<tr>
+<td><code>4</code></td>
+<td>underline</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> for <span class="ex">i</span> in <span class="dt">{</span><span class="dv">1</span><span class="dt">..</span><span class="dv">111</span><span class="dt">}</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">do</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&#39;\\e[&#39;</span><span class="va">$i</span><span class="st">&#39;m&#39;</span> <span class="st">&quot;\e[</span><span class="va">${i}</span><span class="st">mtext\e[0m&quot;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span> <span class="kw">|</span> <span class="ex">column</span></span></code></pre></div>
+<figure>
+<img src="images/bash_color.png" alt="bash color" />
+<figcaption aria-hidden="true">bash color</figcaption>
+</figure>
+<p><strong>See also</strong>: <a
+href="https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences">a
+comprehensive explanation</a></p>
+<h1 id="authentication-vs-authorization">Authentication vs
+Authorization</h1>
+<p>Authentication is the process of verifying that “you are who you say
+you are”</p>
+<p>Authorization is the process of verifying that “you are permitted to
+do what you are trying to do”</p>
+<h1 id="architectures">Architectures</h1>
+<h2 id="major-architectures">Major Architectures</h2>
+<ul>
+<li>Monolith
+<ul>
+<li><a href="https://shopify.engineering/shopify-monolith#">Shopify is a
+Monolith, but a modular Monolith</a></li>
+<li><a
+href="https://signalvnoise.com/svn3/the-majestic-monolith/">Creator of
+Ruby on Rails On The Majestic Monolith</a></li>
+</ul></li>
+<li>Microservice
+<ul>
+<li><a
+href="https://martinfowler.com/articles/microservices.html">Martin
+Fowler Microservice</a></li>
+</ul></li>
+<li>Event-Driven Architectures</li>
+<li>Event-Based Architectures</li>
+</ul>
+<h2 id="event-driven-v.s.-event-based-architecture">event driven v.s.
+event based architecture</h2>
+<h3 id="event-driven">Event Driven</h3>
+<p>A key feature of true event-driven architectures is that the
+producers and consumers are completely decoupled – a producer shouldn’t
+know or care who is consuming its events and how the consumers use those
+events in their service..</p>
+<p><strong>Examples</strong></p>
+<ul>
+<li>Kafka + Kubernetes</li>
+<li>IoT + MQTT pub/sub</li>
+</ul>
+<h3 id="event-based">Event-based</h3>
+<p>Two key characteristics of event-based compute</p>
+<ol type="1">
+<li>the existence of a compute instance is intimately tied to the
+occurence of an event to be processed.</li>
+<li>the compute acts on a single event at a time.</li>
+</ol>
+<p><strong>Examples</strong></p>
+<ul>
+<li>API Gateway + Lambda</li>
+</ul>
+<p>See also <a
+href="https://www.alexdebrie.com/posts/event-driven-vs-event-based/">origin
+of this idea</a> # full development cycle - backlog refinement meeting
+and estimations - planning meeting - business requirements epic and
+tickets (Happy Path, Unhappy Path) - FE &amp; BE contract, API Specs -
+Infrastructure As Code Setup, feature flags, - code logics
+implementation - clarify requirements in ticket - code documentations -
+lints - unittests - code reviews - developer manual e2e tests - QA /
+functional testings (deploy to test env, setup test accounts) -
+deployment and rollbacks - monitoring - engineering: errors,
+retrospective debugging logs, checking database - dev ops: CPU, Memory,
+number of invokes, latency, throughputs - add or change features -
+software support</p>
+<h1 id="saas-business-model">SaaS business model</h1>
+<p>SaaS is a business and software delivery model that gives
+organisations the ability to offer their solutions in a low-friction,
+service-centric model that maximises value for customers and providers.
+It relies on agility and operational efficiency as pillars of a business
+strategy that promotes growth, reach and innovations.</p>
+<h1 id="explain-public-and-private-key-cryptography-like-i-am-5">Explain
+Public and Private Key Cryptography like I am 5</h1>
+<p>Typically,</p>
+<ul>
+<li>Public Key is used to encrypt messages.</li>
+<li>Private Key is used to decrypt messages.</li>
+</ul>
+<p>Importantly, if some text is encrypted with private key, only public
+key can decrypted it.</p>
+<p>If some text is encrypted with public key, only private key can
+decrypted it.</p>
+<p>For example, HTTPS handshake is basically, I get the Public Key of a
+website, generate a random password, encrypt it with Public Key and then
+send it to the website server and then website server uses Private Key
+to decrypt the password, so this password is shared. And further
+communication is encrypted using that shared password.</p>
+<p>But really, public key isn’t just for encryption nor private for
+decryption, the otherway around works too, private key can be used for
+encryption and public key for decryption.</p>
+<p>One example that uses private key for encryption is digital
+signature, take some text/file, create a digest of test/file, encrypt
+the digest with private key and send the encrypted digest together with
+the text/file. Then if the public key successfully decrypt the encrypted
+digest and the digest matches then we know the test/file is the
+original, because the only key that can encrypt something that can be
+decrypt with public key is the private key.</p>
+<p>The only reason public and private keys are not interchangeable is
+because you can recreate the public key from private key.</p>
+</body>
+</html>

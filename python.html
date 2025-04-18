@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Python</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="dev_notes.css" />
+  <link rel="icon" href="https://d392viioakuayd.cloudfront.net/public/favicon.webp">
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Python</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#python---reference" id="toc-python---reference">Python -
+Reference</a></li>
+<li><a href="#errors-in-requests" id="toc-errors-in-requests">errors in
+<code>Requests</code></a>
+<ul>
+<li><a href="#catching-requests-errors"
+id="toc-catching-requests-errors">Catching requests errors</a></li>
+<li><a href="#error-classes-inheritance"
+id="toc-error-classes-inheritance">Error Classes Inheritance</a></li>
+</ul></li>
+<li><a href="#python---how-to" id="toc-python---how-to">Python - How
+To</a></li>
+<li><a href="#debug-in-ssh" id="toc-debug-in-ssh">debug in ssh</a></li>
+<li><a href="#get-file-path-to-python-source-codes-in-ipython-with"
+id="toc-get-file-path-to-python-source-codes-in-ipython-with">get file
+path to python source codes in iPython with <code>??</code></a></li>
+<li><a href="#get-celery-ran-tasks" id="toc-get-celery-ran-tasks">get
+<code>celery</code> ran tasks</a></li>
+<li><a href="#find-the-dependencies-of-python-package"
+id="toc-find-the-dependencies-of-python-package">find the dependencies
+of python package</a></li>
+<li><a href="#profile-performance-in-ipython"
+id="toc-profile-performance-in-ipython">profile performance in
+iPython</a></li>
+<li><a href="#run-black-or-flake8-on-python-code-in-markdown"
+id="toc-run-black-or-flake8-on-python-code-in-markdown">run black or
+flake8 on python code in markdown</a></li>
+<li><a href="#use-pdb-for-debugging" id="toc-use-pdb-for-debugging">use
+<code>pdb</code> for debugging</a></li>
+<li><a href="#set-timeout-in-requests"
+id="toc-set-timeout-in-requests">set timeout in
+<code>Requests</code></a></li>
+<li><a href="#use-urllib-instead-requests"
+id="toc-use-urllib-instead-requests">use urllib instead
+<code>Requests</code></a></li>
+<li><a href="#use-a-decorator-to-print-function-calls"
+id="toc-use-a-decorator-to-print-function-calls">use a decorator to
+print function calls</a></li>
+<li><a href="#enable-ipython-autoload"
+id="toc-enable-ipython-autoload">enable iPython autoload</a></li>
+<li><a href="#use-logging-module" id="toc-use-logging-module">Use
+logging module</a>
+<ul>
+<li><a href="#usage" id="toc-usage">Usage</a></li>
+<li><a href="#log-level-explain" id="toc-log-level-explain">Log Level
+Explain</a></li>
+<li><a href="#loggers-handlers-filters-and-formatters"
+id="toc-loggers-handlers-filters-and-formatters">Loggers, Handlers,
+Filters and Formatters</a></li>
+<li><a href="#more-on-loggers" id="toc-more-on-loggers">More on
+Loggers</a></li>
+<li><a href="#if-no-configuration-is-used"
+id="toc-if-no-configuration-is-used">If no configuration is
+used</a></li>
+<li><a href="#see-also" id="toc-see-also">See also</a></li>
+</ul></li>
+<li><a href="#what-is-python-wheel" id="toc-what-is-python-wheel">what
+is python wheel?</a></li>
+<li><a href="#fileobj-vs-string-vs-byte-string"
+id="toc-fileobj-vs-string-vs-byte-string">fileobj vs string vs byte
+string</a></li>
+</ul>
+</nav>
+<h1 id="python---reference">Python - Reference</h1>
+<h1 id="errors-in-requests">errors in <code>Requests</code></h1>
+<table>
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 13%" />
+<col style="width: 62%" />
+</colgroup>
+<thead>
+<tr>
+<th>error type</th>
+<th>safe to retry</th>
+<th>examples of when error occurs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HTTPError - 4xx</td>
+<td>No</td>
+<td>client error, e.g., calling the api incorrectly</td>
+</tr>
+<tr>
+<td>HTTPError - 5xx</td>
+<td>No</td>
+<td>server error, e.g. bugs in server code</td>
+</tr>
+<tr>
+<td>Connection Error</td>
+<td>Maybe</td>
+<td>incorrect configurations or unavailble network</td>
+</tr>
+<tr>
+<td>Connection Timeout</td>
+<td>Yes</td>
+<td>network congestion, server too busy to responds, server being
+offline</td>
+</tr>
+<tr>
+<td>Request Timeout</td>
+<td>Maybe</td>
+<td>The server did not send any data in the allotted amount of time</td>
+</tr>
+<tr>
+<td>Requests library Exception</td>
+<td>No</td>
+<td>data passed in cannot be converted to json</td>
+</tr>
+<tr>
+<td>Other Python Exception</td>
+<td>No</td>
+<td>any python errors</td>
+</tr>
+</tbody>
+</table>
+<p>https://requests.readthedocs.io/en/latest/api/#requests.ReadTimeout</p>
+<p><strong>See also</strong>: <a
+href="https://requests.readthedocs.io/en/latest/api/#exceptions">requests
+doc</a></p>
+<h2 id="catching-requests-errors">Catching requests errors</h2>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> requests <span class="im">import</span> Timeout, HTTPError</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.post(url, headers<span class="op">=</span>headers, data<span class="op">=</span>data)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    response.raise_for_status()</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> HTTPError, Timeout <span class="im">as</span> error:</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span><span class="al">TODO</span></span></code></pre></div>
+<blockquote>
+<p>In the event of a network problem (e.g. DNS failure, refused
+connection, etc), Requests will raise a ConnectionError exception.
+Response.raise_for_status() will raise an HTTPError if the HTTP request
+returned an unsuccessful status code. If a request times out, a Timeout
+exception is raised. If a request exceeds the configured number of
+maximum redirections, a TooManyRedirects exception is raised. All
+exceptions that Requests explicitly raises inherit from
+requests.exceptions.RequestException.</p>
+</blockquote>
+<ul>
+<li>https://requests.readthedocs.io/en/latest/user/quickstart/#errors-and-exceptions</li>
+</ul>
+<p>I argue that we should not catch connection error in user facing code
+as when the code deployed to prod, the code should not have connection
+errors that happens due to incorrect network configs?</p>
+<h2 id="error-classes-inheritance">Error Classes Inheritance</h2>
+<pre><code>RequestException(IOError)
+---&gt; HTTPError(RequestException)
+---&gt; ConnectionError(RequestException)
+---&gt; Timeout(RequestException)
+-------&gt; ConnectTimeout(ConnectionError, Timeout)
+-------&gt; ReadTimeout(Timeout)</code></pre>
+<ul>
+<li>https://requests.readthedocs.io/en/latest/_modules/requests/exceptions/#RequestException</li>
+</ul>
+<h1 id="python---how-to">Python - How To</h1>
+<h1 id="debug-in-ssh">debug in ssh</h1>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># first shell</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># somehow this is needed for `ipdb` to run correctly</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> <span class="op">%</span>pdb</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># first shell</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> <span class="im">import</span> pdb</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> pdb.runcall(function_foo, ...<span class="bu">any</span> args <span class="kw">and</span> kwargs)</span></code></pre></div>
+<h1 id="get-file-path-to-python-source-codes-in-ipython-with">get file
+path to python source codes in iPython with <code>??</code></h1>
+<p>in iPython</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> requests</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> requests??</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> this</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> this??</span></code></pre></div>
+<h1 id="get-celery-ran-tasks">get <code>celery</code> ran tasks</h1>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> django_celery_results.models <span class="im">import</span> TaskResult</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pprint <span class="im">import</span> pprint</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># get tasks by recency</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>task_result <span class="op">=</span> TaskResult.objects.order_by(<span class="st">&#39;-date_created&#39;</span>)[:<span class="dv">5</span>]</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> task_result:</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    pprint(<span class="bu">vars</span>(i))</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># get failed tasks</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>task_result <span class="op">=</span> TaskResult.objects.<span class="bu">filter</span>(status<span class="op">=</span><span class="st">&#39;FAILURE&#39;</span>).order_by(<span class="st">&#39;date_done&#39;</span>)[:<span class="dv">10</span>]</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> task_result:</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    pprint(<span class="bu">vars</span>(i))</span></code></pre></div>
+<h1 id="find-the-dependencies-of-python-package">find the dependencies
+of python package</h1>
+<p>Two ways</p>
+<ol type="1">
+<li>Go into a shell with the dependencies installed</li>
+</ol>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">1</span>]:  <span class="im">from</span> importlib.metadata <span class="im">import</span> requires</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">2</span>]: requires(<span class="st">&#39;Django&#39;</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">2</span>]:</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>[<span class="st">&#39;asgiref (&lt;4,&gt;=3.3.2)&#39;</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a> <span class="st">&#39;pytz&#39;</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a> <span class="st">&#39;sqlparse (&gt;=0.2.2)&#39;</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a> <span class="st">&quot;argon2-cffi (&gt;=19.1.0) ; extra == &#39;argon2&#39;&quot;</span>,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a> <span class="st">&quot;bcrypt ; extra == &#39;bcrypt&#39;&quot;</span>]</span></code></pre></div>
+<ol start="2" type="1">
+<li>Read the poetry.lock file</li>
+</ol>
+<pre><code>[[package]]
+name = &quot;django&quot;
+version = &quot;3.2.20&quot;
+description = &quot;A high-level Python Web framework that encourages rapid development and clean, pragmatic design.&quot;
+optional = false
+python-versions = &quot;&gt;=3.6&quot;
+files = [
+    {file = &quot;Django-3.2.20-py3-none-any.whl&quot;, hash = &quot;sha256:a477ab326ae7d8807dc25c186b951ab8c7648a3a23f9497763c37307a2b5ef87&quot;},
+    {file = &quot;Django-3.2.20.tar.gz&quot;, hash = &quot;sha256:dec2a116787b8e14962014bf78e120bba454135108e1af9e9b91ade7b2964c40&quot;},
+]
+
+[package.dependencies]
+asgiref = &quot;&gt;=3.3.2,&lt;4&quot;
+pytz = &quot;*&quot;
+sqlparse = &quot;&gt;=0.2.2&quot;
+
+[package.extras]
+argon2 = [&quot;argon2-cffi (&gt;=19.1.0)&quot;]
+bcrypt = [&quot;bcrypt&quot;]</code></pre>
+<h1 id="profile-performance-in-ipython">profile performance in
+iPython</h1>
+<p><strong>`<code>%%prun -r</code> returns profiling object</strong></p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>prun <span class="op">-</span>D stats</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> oneview.models.helpers.imports <span class="im">import</span> pull_accounts_no_threaded</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>pull_accounts_no_threaded()</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pstats</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pstats <span class="im">import</span> SortKey</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>stats <span class="op">=</span> pstats.Stats(<span class="st">&#39;stats&#39;</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># `tottime` for the total time spent in the given function (and excluding time</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># made in calls to sub-functions)</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>stats.sort_stats(<span class="st">&#39;tottime&#39;</span>).print_stats(<span class="dv">50</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>stats.sort_stats(<span class="st">&#39;cumtime&#39;</span>).print_stats(<span class="dv">50</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>stats.sort_stats(<span class="st">&#39;filename&#39;</span>).print_stats(<span class="dv">50</span>)</span></code></pre></div>
+<p><strong>Alternatively, Just timeit once</strong></p>
+<pre><code>%%timeit -n 1 -r 1
+
+from oneview.models.helpers.imports import pull_accounts, pull_accounts_no_threaded
+pull_accounts()</code></pre>
+<p>See also - <a
+href="https://docs.python.org/3/library/profile.html#pstats.Stats.sort_stats">pstat
+sort keys</a> - <a
+href="https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-prun">%prun
+documentation</a> - <a
+href="https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-timeit">%timeit
+documentation</a></p>
+<h1 id="run-black-or-flake8-on-python-code-in-markdown">run black or
+flake8 on python code in markdown</h1>
+<p>generalised to any files</p>
+<ol type="1">
+<li><code>vic</code> visual select lines of python codes in markdown
+code block</li>
+<li><code>:'&lt;,'&gt;!black -q -</code> to replace the visually
+selected lines with the formatted standard output of the external
+<code>black</code> command (see <code>:help filter</code>)</li>
+<li><code>:'&lt;,'&gt;w !flake8 -</code> to use <code>w</code> to echo
+flake8’s output instead of replacing visually selected lines (see
+<code>:help :w_c</code>)</li>
+</ol>
+<p><strong>Alternatively, I can open the output in a split</strong></p>
+<ol type="1">
+<li><code>:'&lt;,'&gt;w !flake8 - &gt; quickfix.vim</code> to pipe the
+output into <code>quickfix.vim</code></li>
+<li><code>&lt;leader&gt;el</code></li>
+</ol>
+<h1 id="use-pdb-for-debugging">use <code>pdb</code> for debugging</h1>
+<p><strong>Debugging after ssh into uat</strong></p>
+<p><strong>Prerequisite</strong></p>
+<p>Go into the ipython shell
+e.g. <code>sudo docker exec -it oneview-django poetry run python manage.py shell</code></p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">1</span>]: <span class="im">from</span> oneview.graphql.api.charge <span class="im">import</span> one_fee_calculator</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">2</span>]: review_id <span class="op">=</span> <span class="st">&quot;73a07db5-7214-4ead-a9b8-4906e1727a8c&quot;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">3</span>]: <span class="im">import</span> pdb</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>        pdb.runcall(one_fee_calculator, review_id)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="op">&gt;</span> <span class="op">/</span>app<span class="op">/</span>backend<span class="op">/</span>oneview<span class="op">/</span>graphql<span class="op">/</span>api<span class="op">/</span>charge.py(<span class="dv">248</span>)one_fee_calculator()</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="op">-&gt;</span> review <span class="op">=</span> Review.objects.get(<span class="bu">id</span><span class="op">=</span>review_id)</span></code></pre></div>
+<p>If you do the above, you will be dropped into the pdb debugging
+shell.</p>
+<p>Note: please be careful about possible side effects if the functions
+called especially if you are doing this in uat or even prod
+environment.</p>
+<p><strong>pdb</strong></p>
+<p>pdb is an interactive source code debugger for Python programs.</p>
+<p><a
+href="https://docs.python.org/3/library/pdb.html#module-pdb">pdb</a> is
+very powerful, though you need to get familiar with the commands</p>
+<p>You can find the pdb commands doc <a
+href="https://docs.python.org/3/library/pdb.html#debugger-commands">here</a></p>
+<p>Most useful commands I find are</p>
+<ul>
+<li><code>ll</code> - print all source code for the current function or
+frame</li>
+<li><code>b</code> - breakpoint, you can set breakpoint like so
+<code>b oneview/graphql/api/charge.py:254</code></li>
+<li><code>c</code> - continue, continue until breakpoint</li>
+<li><code>n</code> - next, continue execution until the next line</li>
+<li><code>s</code> - step, step inside a function</li>
+<li><code>sticky</code> - show whole function while you are debugging,
+make pdb very much like debugging with GUI</li>
+</ul>
+<h1 id="set-timeout-in-requests">set timeout in
+<code>Requests</code></h1>
+<pre class="python3"><code># timeout = (connect timeout, read timeout)
+requests.get(&#39;https://github.com&#39;, timeout=(3, 27))</code></pre>
+<blockquote>
+<p>By default, requests do not time out unless a timeout value is set
+explicitly. Without a timeout, your code may hang for minutes or more.
+It’s a good practice to set connect timeouts to slightly larger than a
+multiple of 3, which is the default TCP packet retransmission window.
+Doc from requests</p>
+</blockquote>
+<h1 id="use-urllib-instead-requests">use urllib instead
+<code>Requests</code></h1>
+<p>POST with json data</p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>json_as_bytes <span class="op">=</span> json.dumps(payload).encode(<span class="st">&quot;utf-8&quot;</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>request_object <span class="op">=</span> request.Request(<span class="va">self</span>.api_url, data<span class="op">=</span>json_as_bytes)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>request_object.add_header(<span class="st">&quot;Content-Type&quot;</span>, <span class="st">&quot;application/json&quot;</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>request_object.add_header(<span class="st">&quot;Authorization&quot;</span>, <span class="ss">f&quot;Bearer </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>token<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> request.urlopen(request_object) <span class="im">as</span> response:</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>        res_json <span class="op">=</span> json.loads(response.read())</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> HTTPError <span class="im">as</span> e:</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    _logger.exception(e.code)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    _logger.exception(e.read())</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> e</span></code></pre></div>
+<p>See Also: <a
+href="https://docs.python.org/3.12/howto/urllib2.html">urllib2
+doc</a></p>
+<h1 id="use-a-decorator-to-print-function-calls">use a decorator to
+print function calls</h1>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> print_function_name(func):</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _print_function_name(<span class="op">*</span>args, <span class="op">**</span>kwargs):</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;--&gt; begin:  </span><span class="sc">{</span>func<span class="sc">.</span><span class="va">__name__</span><span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> func(<span class="op">*</span>args, <span class="op">**</span>kwargs)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;--&gt; return: </span><span class="sc">{</span>func<span class="sc">.</span><span class="va">__name__</span><span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> result</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> _print_function_name</span></code></pre></div>
+<h1 id="enable-ipython-autoload">enable iPython autoload</h1>
+<p>reload modules when user executes code, so that I don’t need to exit
+ipython shell to reload edited code.</p>
+<pre><code>%load_ext autoreload
+%autoreload 2</code></pre>
+<h1 id="use-logging-module">Use logging module</h1>
+<h2 id="usage">Usage</h2>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> logging</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>logging.basicConfig(</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># filename=&quot;foo.log&quot;,</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    encoding<span class="op">=</span><span class="st">&quot;utf-8&quot;</span>,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    level<span class="op">=</span>logging.DEBUG,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">format</span><span class="op">=</span><span class="st">&#39;</span><span class="sc">%(levelname)s</span><span class="st"> </span><span class="sc">%(asctime)s</span><span class="st"> </span><span class="sc">%(module)s</span><span class="st"> </span><span class="sc">%(message)s</span><span class="st">&#39;</span>,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>logger <span class="op">=</span> logging.getLogger(<span class="va">__name__</span>)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>logger.debug(<span class="st">&quot;foo bar baz&quot;</span>)</span></code></pre></div>
+<h2 id="log-level-explain">Log Level Explain</h2>
+<table>
+<colgroup>
+<col style="width: 5%" />
+<col style="width: 94%" />
+</colgroup>
+<thead>
+<tr>
+<th>Level</th>
+<th>When it’s used</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DEBUG</td>
+<td>Detailed information, typically of interest only when diagnosing
+problems.</td>
+</tr>
+<tr>
+<td>INFO</td>
+<td>Confirmation that things are working as expected.</td>
+</tr>
+<tr>
+<td>WARNING</td>
+<td>An indication that something unexpected happened, or indicative of
+some problem in the near future (e.g. ‘disk space low’). The software is
+still working as expected.</td>
+</tr>
+<tr>
+<td>ERROR</td>
+<td>Due to a more serious problem, the software has not been able to
+perform some function.</td>
+</tr>
+<tr>
+<td>CRITICAL</td>
+<td>A serious error, indicating that the program itself may be unable to
+continue running.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="loggers-handlers-filters-and-formatters">Loggers, Handlers,
+Filters and Formatters</h2>
+<p>The logging library takes a modular approach and offers several
+categories of components: loggers, handlers, filters, and
+formatters.</p>
+<table>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 86%" />
+</colgroup>
+<thead>
+<tr>
+<th>Module</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Loggers</td>
+<td>expose the interface that application code directly uses.</td>
+</tr>
+<tr>
+<td>Handlers</td>
+<td>send the log records (created by loggers) to the appropriate
+destination.</td>
+</tr>
+<tr>
+<td>Filters</td>
+<td>provide a finer grained facility for determining which log records
+to output.</td>
+</tr>
+<tr>
+<td>Formatters</td>
+<td>specify the layout of log records in the final output.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="more-on-loggers">More on Loggers</h2>
+<p><code>getLogger()</code> returns a reference to a logger instance
+with the specified name if it is provided, or root if not. The names are
+period-separated hierarchical structures. Multiple calls to
+<code>getLogger()</code> with the same name will return a reference to
+the same logger object. Loggers that are further down in the
+hierarchical list are children of loggers higher up in the list. For
+example, given a logger with a name of <code>foo</code>, loggers with
+names of <code>foo.bar</code>, <code>foo.bar.baz</code>, and
+<code>foo.bam</code> are all descendants of <code>foo</code>.</p>
+<p>Loggers have a concept of effective level. If a level is not
+explicitly set on a logger, the level of its parent is used instead as
+its effective level. If the parent has no explicit level set, its parent
+is examined, and so on - all ancestors are searched until an explicitly
+set level is found. The root logger always has an explicit level set
+(<code>WARNING</code> by default). When deciding whether to process an
+event, the effective level of the logger is used to determine whether
+the event is passed to the logger’s handlers.</p>
+<p>Child loggers propagate messages up to the handlers associated with
+their ancestor loggers. Because of this, it is unnecessary to define and
+configure handlers for all the loggers an application uses. It is
+sufficient to configure handlers for a top-level logger and create child
+loggers as needed. (You can, however, turn off propagation by setting
+the propagate attribute of a logger to <code>False</code>.)</p>
+<h2 id="if-no-configuration-is-used">If no configuration is used</h2>
+<p>If no logging configuration is used, a special handler
+<code>lastResort</code> is used, which writes log to <code>stderr</code>
+with level <code>WARNING</code> with formatting like
+<code>level:module:message</code>.</p>
+<pre><code>import logging
+
+logging.debug(&quot;abc&quot;)
+logging.info(&quot;abc&quot;)
+logging.warning(&quot;abc&quot;)
+logging.error(&quot;abc&quot;)
+
+# Output
+# WARNING:root:abc
+# ERROR:root:abc
+
+logger = logging.getLogger(__name__)
+logger.debug(&quot;abc&quot;)
+logger.info(&quot;abc&quot;)
+logger.warning(&quot;abc&quot;)
+logger.error(&quot;abc&quot;)
+
+# Output
+# WARNING:__main__:abc
+# ERROR:__main__:abc</code></pre>
+<h2 id="see-also">See also</h2>
+<ul>
+<li><a
+href="https://docs.python.org/3/howto/logging.html#logging-basic-tutorial">Logging
+How-To</a></li>
+<li><a
+href="https://docs.djangoproject.com/en/5.1/topics/logging/">Django
+Logging</a> # Python - Explanation</li>
+</ul>
+<h1 id="what-is-python-wheel">what is python wheel?</h1>
+<p><strong>output for installing source distribution (not
+wheel)</strong></p>
+<p>downloading tar.gz and building wheel</p>
+<pre><code>&gt; python -m pip install &#39;uwsgi==2.0.*&#39;
+
+Collecting uwsgi==2.0.*
+  Downloading uwsgi-2.0.22.tar.gz (809 kB)
+     ---------------------------------------- 809.7/809.7 kB 13.4 MB/s eta 0:00:00
+  Preparing metadata (setup.py) ... done
+Building wheels for collected packages: uwsgi
+  Building wheel for uwsgi (setup.py) ... done
+  Created wheel for uwsgi: filename=uWSGI-2.0.22-cp311-cp311-macosx_13_0_arm64.whl size=400536 sha256=a79b882b505a3093feed13f859dfa01e1ce04651abd125d418509505bc861d94
+  Stored in directory: /Users/yuhao.huang/Library/Caches/pip/wheels/93/59/2d/d21852a9f9607e9494b5d3c96d11f348d11039f7c47223c9ce
+Successfully built uwsgi
+Installing collected packages: uwsgi
+Successfully installed uwsgi-2.0.22</code></pre>
+<p><strong>output for installing wheel</strong></p>
+<p>there’s no build stage when pip finds a compatible wheel on PyPI.</p>
+<pre><code>&gt; python -m pip install &#39;chardet==3.*&#39;
+Collecting chardet==3.*
+  Downloading chardet-3.0.4-py2.py3-none-any.whl (133 kB)
+     ---------------------------------------- 133.4/133.4 kB 4.8 MB/s eta 0:00:00
+Installing collected packages: chardet
+Successfully installed chardet-3.0.4
+</code></pre>
+<p>A Python .whl file is essentially a ZIP (.zip) archive with a
+specially crafted filename that tells installers what Python versions
+and platforms the wheel will support.</p>
+<p><code>{dist}-{version}(-{build})?-{python}-{abi}-{platform}.whl</code></p>
+<p><code>cryptography-2.9.2-cp35-abi3-macosx_10_9_x86_64.whl</code></p>
+<h1 id="fileobj-vs-string-vs-byte-string">fileobj vs string vs byte
+string</h1>
+<ul>
+<li>string - ‘abc’ - a sequence of Unicode characters</li>
+<li>byte string - b’abc’ - a sequence of octets (integers between 0 and
+255)</li>
+<li>fileobj - BytesIO(‘abc’) or BytesIO(b’abc’) - an file like object
+that implements <code>.read()</code></li>
+</ul>
+</body>
+</html>

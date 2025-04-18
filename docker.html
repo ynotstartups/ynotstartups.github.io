@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Docker</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="dev_notes.css" />
+  <link rel="icon" href="https://d392viioakuayd.cloudfront.net/public/favicon.webp">
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Docker</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#docker---explanation" id="toc-docker---explanation">Docker
+- Explanation</a></li>
+<li><a href="#how-does-docker-use-cache"
+id="toc-how-does-docker-use-cache">how does docker use cache?</a></li>
+<li><a href="#why-is-the-137-exit-code"
+id="toc-why-is-the-137-exit-code">why is the 137 exit code?</a></li>
+</ul>
+</nav>
+<h1 id="docker---explanation">Docker - Explanation</h1>
+<h1 id="how-does-docker-use-cache">how does docker use cache?</h1>
+<p><strong>Docker uses cache when the following two rules are
+met.</strong></p>
+<ol type="1">
+<li>when the docker command is not <code>ADD</code> or
+<code>COPY</code>, e.g. <code>RUN</code>
+<ol type="a">
+<li>given parent image in cache</li>
+<li>look at next instruction</li>
+<li>if there is any child image (derived from parents) with the
+<em>exact same instruction use</em> it as cache</li>
+</ol></li>
+<li>For <code>ADD</code> and <code>COPY</code> command, compare checksum
+of each file with exsiting images, if checksum is different then cache
+is invalidated</li>
+</ol>
+<h1 id="why-is-the-137-exit-code">why is the 137 exit code?</h1>
+<p>TLDR: Exit code 137 is caused by <code>oneview-django-1</code>
+container exited</p>
+<ol type="1">
+<li>mostly likely caused by migration file in the PR conflicting with
+migration files in master branch.</li>
+<li>if there is no migration, it could be some other error causing
+<code>oneview-django-1</code> exits, such as
+<code>TypeError: check_permissions() got an  unexpected keyword argument 'groups'</code></li>
+</ol>
+<p><img width="388" alt="Screenshot 2023-08-16 at 18 26 41" src="https://github.com/Saltus-Partners/oneview/assets/13963732/7e36c2b5-5782-4eb8-9ee2-c147c489cb61"></p>
+<p><strong>First of all, Exit code 137 doesn’t necessarily mean out of
+memory issue.</strong></p>
+<p>Based on <a
+href="https://tldp.org/LDP/abs/html/exitcodes.html">Advanced
+Bash-Scripting Guide Exit Code</a>, in the example of 128 + n , 137 exit
+code means a process receives Fatal Error Signal 9,
+i.e. <code>kill -9</code>, from <code>man kill</code>, kill with signal
+9 is <code>KILL (non-catchable, non-ignorable kill)</code>.</p>
+<p><strong>The actual reason of exit code 137</strong></p>
+<p>This PR, contains the minimal changes to demonstrate/reproduce the
+exit code 137, the changes are 1. added migration file 2. in github
+action, use <code>sleep 999</code> to replace other actions such as
+install dev dependencies, lint, tests …</p>
+<p>In the github action, we use <a
+href="https://github.com/actions/checkout">actions/checkout@v3</a>,
+which under the hood, checkout a <strong>merge</strong> PR with
+<code>origin/master</code> branch.</p>
+<p>In this PR, we have a migration file
+<code>0185_task_retain_regarding.py</code>, and in master branch we have
+additional migration files <code>0185_auto_20230814_1357.py</code> and
+<code>0186_providercontact_status.py</code>, because github action
+checkout creates the merge PR, then in the github action running
+environment, we have all three of these migration files.</p>
+<p>Because of these conflicting migrations files, the
+<code>oneview-django-1</code> container constantly exits with error
+<code>CommandError: Conflicting migrations detected; multiple leaf nodes in the migration graph: (0185_task_retain_regarding, 0186_providercontact_status in oneview).</code></p>
+<p><img width="1530" alt="Screenshot 2023-08-16 at 18 20 21" src="https://github.com/Saltus-Partners/oneview/assets/13963732/3e448c9e-dfe0-4cfe-8fb9-6129fce8d859"></p>
+<p>Then in the bash sleep step
+<code>docker compose --file docker-compose-dev.yml exec django sleep 999</code>,
+the <code>/bin/sleep</code> is running within the container, but the
+container gets killed, then this sleep process exited with 137.</p>
+<p>To confirm the above finding is correct, I managed to reproduce the
+exit code 137 locally. To reproduce, you can run
+<code>make run-be</code> in the first terminal window, and run
+<code>make bash</code> in the second terminal window, then you quick
+input 3 <ctrl-c> in the first terminal to force kill the
+oneview-django-1 container, the container will get a
+<code>SIGKILL</code> i.e. <code>kill -9</code> that’s why the process
+exited with exit code 137.</p>
+<p><img width="733" alt="Screenshot 2023-08-16 at 18 14 50" src="https://github.com/Saltus-Partners/oneview/assets/13963732/edf8bb12-3814-4066-bbb5-d1dc8b84561c"></p>
+<p><strong>Bonus Issues While investigating</strong></p>
+<p>the celery container is constantly exiting too… something we might
+need to fix in the future, though our tests don’t rely on celery</p>
+<p><img width="819" alt="Screenshot 2023-08-16 at 18 20 46" src="https://github.com/Saltus-Partners/oneview/assets/13963732/50dec62f-5b5d-469d-a532-c5676f627f03"></p>
+</body>
+</html>

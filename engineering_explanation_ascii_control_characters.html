@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>ascii control characters</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="https://d392viioakuayd.cloudfront.net/public/favicon.webp">
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">ascii control characters</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#use-od-to-see-the-hex-value-for-characters"
+id="toc-use-od-to-see-the-hex-value-for-characters">use <code>od</code>
+to see the hex value for characters</a></li>
+<li><a href="#a-web-tool-to-find-unusual-characters-quickly"
+id="toc-a-web-tool-to-find-unusual-characters-quickly">A web tool to
+find unusual characters quickly</a></li>
+</ul>
+</nav>
+<p><strong>hexadecimal dump of ascii charaters</strong></p>
+<p>Control characters may be described as doing something when the user
+inputs them, such as code 3 (End-of-Text character, ETX, ^C) to
+interrupt the running process, or code 4 (End-of-Transmission character,
+EOT, ^D), used to end text input on Unix or to exit a Unix shell. These
+uses usually have little to do with their use when they are in text
+being output.</p>
+<p>The control characters in ASCII still in common use include:</p>
+<ul>
+<li><code>hex: 00 (decimal: 00, null, NUL, \0, ^@)</code>, originally
+intended to be an ignored character, but now used by many programming
+languages including C to mark the end of a string.</li>
+<li><code>hex: 07 (decimal: 07, bell, BEL, \a, ^G)</code>, which may
+cause the device to emit a warning such as a bell or beep sound or the
+screen flashing.</li>
+<li><code>hex: 08 (decimal: 08, backspace, BS, \b, ^H)</code>, may
+overprint the previous character.</li>
+<li><code>hex: 09 (decimal: 09, horizontal tab, HT, \t, ^I)</code>,
+moves the printing position right to the next tab stop.</li>
+<li><code>hex: 0A (decimal: 10, line feed, LF, \n, ^J)</code>, moves the
+print head down one line, or to the left edge and down. Used as the end
+of line marker in most UNIX systems and variants.</li>
+<li><code>hex: 0B (decimal: 11, vertical tab, VT, \v, ^K)</code>,
+vertical tabulation.</li>
+<li><code>hex: 0C (decimal: 12 form feed, FF, \f, ^L)</code>, to cause a
+printer to eject paper to the top of the next page, or a video terminal
+to clear the screen.</li>
+<li><code>hex: 0D (decimal: 13, carriage return, CR, \r, ^M)</code>,
+moves the printing position to the start of the line, allowing
+overprinting. Used as the end of line marker in Classic Mac OS, OS-9,
+FLEX (and variants). A CR+LF pair is used by CP/M-80 and its derivatives
+including DOS and Windows, and by Application Layer protocols such as
+FTP, SMTP, and HTTP.</li>
+<li><code>hex: 1A (decimal: 26, Control-Z, SUB, ^Z)</code>, Acts as an
+end-of-file for the Windows text-mode file i/o.</li>
+<li><code>hex: 1B (decimal: 27, escape, ESC, \e (GCC only), ^[)</code>.
+Introduces an escape sequence.</li>
+</ul>
+<p>from <code>man ascii</code></p>
+<h2 id="use-od-to-see-the-hex-value-for-characters">use <code>od</code>
+to see the hex value for characters</h2>
+<p><code>od -t a -t x1 -t c</code></p>
+<ul>
+<li><code>-t a</code> - prints in ascii format</li>
+<li><code>-t x1</code> - prints in hex format</li>
+<li><code>-t c</code> - prints in c escape format</li>
+</ul>
+<p>e.g.</p>
+<pre><code>&gt; printf &#39;\0\a\b\n\r\t\v &#39; | od -t a -t x1 -t c
+0000000  nul bel  bs  nl  cr  ht  vt  sp
+          00  07  08  0a  0d  09  0b  20
+          \0  \a  \b  \n  \r  \t  \v
+0000010</code></pre>
+<h2 id="a-web-tool-to-find-unusual-characters-quickly">A web tool to
+find unusual characters quickly</h2>
+<p>https://www.soscisurvey.de/tools/view-chars.php</p>
+</body>
+</html>

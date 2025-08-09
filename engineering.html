@@ -98,6 +98,31 @@
 <li><a href="#engineering---reference"
 id="toc-engineering---reference">Engineering - Reference</a></li>
 <li><a href="#readme" id="toc-readme">README</a></li>
+<li><a href="#error-handling" id="toc-error-handling">Error Handling</a>
+<ul>
+<li><a href="#reminder" id="toc-reminder">Reminder</a></li>
+<li><a href="#principles" id="toc-principles">Principles</a></li>
+<li><a href="#example-curo" id="toc-example-curo">Example: Curo</a></li>
+<li><a href="#example-third-party-api-call"
+id="toc-example-third-party-api-call">Example: Third Party API
+Call</a></li>
+<li><a href="#regarding-argument-just-put-it-in-a-queue"
+id="toc-regarding-argument-just-put-it-in-a-queue">Regarding argument
+just put it in a queue?</a></li>
+</ul></li>
+<li><a href="#github-rest-api-for-gists"
+id="toc-github-rest-api-for-gists">Github REST API for Gists</a>
+<ul>
+<li><a href="#create-a-gist" id="toc-create-a-gist">Create a
+Gist</a></li>
+<li><a href="#read-a-gist" id="toc-read-a-gist">Read a Gist</a></li>
+<li><a href="#update-a-gist" id="toc-update-a-gist">Update a
+Gist</a></li>
+<li><a href="#delete-a-gist" id="toc-delete-a-gist">Delete a
+Gist</a></li>
+<li><a href="#see-reference" id="toc-see-reference">See
+reference</a></li>
+</ul></li>
 <li><a href="#engineering---how-to"
 id="toc-engineering---how-to">Engineering - How To</a></li>
 <li><a href="#write" id="toc-write">write</a></li>
@@ -151,7 +176,8 @@ Public and Private Key Cryptography like I am 5</a></li>
 <h1 id="engineering---reference">Engineering - Reference</h1>
 <h1 id="readme">README</h1>
 <ul>
-<li><strong>Keep Learning Everyday</strong></li>
+<li><strong>Keep Learning Everyday</strong> - learn fundamentals and use
+tools with long shelf-life</li>
 <li><strong>Developing</strong> - Error Handling In Oneview</li>
 <li><strong>Graphene</strong> - use <code>nonnull</code> and
 <code>required=True</code></li>
@@ -164,10 +190,161 @@ Public and Private Key Cryptography like I am 5</a></li>
 <ul>
 <li>GraphQL API Design, 3 options -&gt; consider using
 <code>Enum</code></li>
-<li>REST API Design, follow github rest</li>
-<li>consider using <strong>Celery</strong> - for slow running task and
-doesn’t need result right now</li>
+<li>REST API Design, see my own
+<code>Github REST API for Gists</code></li>
+<li>use <strong>Celery</strong></li>
 </ul></li>
+<li><strong>Work</strong> - track tickets raised in Product &amp; Dev
+Chat</li>
+</ul>
+<h1 id="error-handling">Error Handling</h1>
+<h2 id="reminder">Reminder</h2>
+<ul>
+<li>use <code>with transcation.atomic()</code>
+<ul>
+<li>put multiple DB table changes in one
+<code>with transcation.atomic()</code></li>
+<li>put a single DB update/save with Curo call using
+<code>submit_entity_unhandled</code></li>
+<li>don’t use decorator <code>@transaction.atomic</code> to avoid future
+changes that introduces errors in error handling logics</li>
+</ul></li>
+<li>validate first, client facing logics last (e.g. sending emails)</li>
+<li>in Submission, avoid duplicate oneview and curo entities by using
+<code>get_or_create</code>?</li>
+</ul>
+<h2 id="principles">Principles</h2>
+<ul>
+<li><code>Error Handling</code> means what is the correct business
+logics if error happened?</li>
+<li>consider curo as extension of oneview DB, so wrap curo call and DB
+changes in one transaction</li>
+<li>in general, one cannot revert a third party API call, because of
+possible side effects of the API call</li>
+</ul>
+<h2 id="example-curo">Example: Curo</h2>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> transaction.atomic():</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    task <span class="op">=</span> Task.objects.create(...) <span class="co"># or update some properties then task.save()</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    submit_entity_unhandled()</span></code></pre></div>
+<h2 id="example-third-party-api-call">Example: Third Party API Call</h2>
+<pre><code># if response data is needed
+foo_id = third party POST or PATCH
+save `foo_id` to local DB</code></pre>
+<pre><code># if response data is not needed
+with transaction.atomic():
+    local db changes()
+    third party POST or PATCH</code></pre>
+<ul>
+<li>if third party call failed, not bad state, because there will be no
+local db changes.</li>
+<li>if save to local DB failed, bad state happened, maybe the solution
+is to verify first to avoid saving to local DB failed? because of the
+stable network or retry mechanism, unless this is DB constraint, save to
+local DB shouldn’t failed, so maybe verify can avoid the failure to
+local DB.</li>
+</ul>
+<h2 id="regarding-argument-just-put-it-in-a-queue">Regarding argument
+just put it in a queue?</h2>
+<p>Answer:</p>
+<ul>
+<li>Putting some logics in a queue doesn’t solve the real problem of
+what should happen if this logics failed?</li>
+<li>and being async introduces complexity such as how to inform the user
+if this failed?</li>
+<li>if errors happen, which errors can we retry? which errors cannot be
+retried?</li>
+</ul>
+<h1 id="github-rest-api-for-gists">Github REST API for Gists</h1>
+<h2 id="create-a-gist">Create a Gist</h2>
+<p><strong>Method</strong>: <code>POST</code></p>
+<p><strong>PATH</strong>: <code>/gists</code></p>
+<p><strong>JSON Data</strong>:
+<code>{"description":"Example of a gist","public":false,"files":{"sample.md":{"content":"Hello World"}}}</code></p>
+<p><strong>Response Status Code On Success</strong>: 201</p>
+<p><strong>Example Response</strong>:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://api.github.com/gists/2decf6c462d9b4418f2&quot;</span><span class="fu">,</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;forks_url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://api.github.com/gists/2decf6c462d9b4418f2/forks&quot;</span><span class="fu">,</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;commits_url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://api.github.com/gists/2decf6c462d9b4418f2/commits&quot;</span><span class="fu">,</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;2decf6c462d9b4418f2&quot;</span><span class="fu">,</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="er">...</span></span></code></pre></div>
+<p><strong>Curl</strong></p>
+<pre><code>curl -L \
+  -X POST \
+  -H &quot;Accept: application/vnd.github+json&quot; \
+  -H &quot;Authorization: Bearer &lt;YOUR-TOKEN&gt;&quot; \
+  -H &quot;X-GitHub-Api-Version: 2022-11-28&quot; \
+  https://api.github.com/gists \
+  -d &#39;{&quot;description&quot;:&quot;Example of a gist&quot;,&quot;public&quot;:false,&quot;files&quot;:{&quot;sample.md&quot;:{&quot;content&quot;:&quot;Hello World&quot;}}}&#39;</code></pre>
+<h2 id="read-a-gist">Read a Gist</h2>
+<p><strong>Method</strong>: <code>GET</code></p>
+<p><strong>PATH</strong>: <code>/gists/{gist_id}</code></p>
+<p><strong>Response Status Code On Success</strong>: 200</p>
+<p><strong>Example Response</strong>:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://api.github.com/gists/2decf6c462d9b4418f2&quot;</span><span class="fu">,</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;forks_url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://api.github.com/gists/2decf6c462d9b4418f2/forks&quot;</span><span class="fu">,</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;commits_url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://api.github.com/gists/2decf6c462d9b4418f2/commits&quot;</span><span class="fu">,</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;2decf6c462d9b4418f2&quot;</span><span class="fu">,</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="er">...</span></span></code></pre></div>
+<p><strong>Response Status Code On Resouce Not Found</strong>: 404</p>
+<p><strong>Curl</strong></p>
+<pre><code>curl -L \
+  -H &quot;Accept: application/vnd.github+json&quot; \
+  -H &quot;X-GitHub-Api-Version: 2022-11-28&quot; \
+  https://api.github.com/gists/GIST_ID</code></pre>
+<h2 id="update-a-gist">Update a Gist</h2>
+<p><strong>Method</strong>: <code>PATCH</code></p>
+<p><strong>PATH</strong>: <code>/gists/{gist_id}</code></p>
+<p><strong>Response Status Code On Success</strong>: 200</p>
+<p><strong>Example Response</strong>:</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://api.github.com/gists/2decf6c462d9b4418f2&quot;</span><span class="fu">,</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;forks_url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://api.github.com/gists/2decf6c462d9b4418f2/forks&quot;</span><span class="fu">,</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;commits_url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://api.github.com/gists/2decf6c462d9b4418f2/commits&quot;</span><span class="fu">,</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;2decf6c462d9b4418f2&quot;</span><span class="fu">,</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="er">...</span></span></code></pre></div>
+<p><strong>Response Status Code On Resouce Not Found</strong>: 404</p>
+<p><strong>Curl</strong></p>
+<pre><code>curl -L \
+  -X PATCH \
+  -H &quot;Accept: application/vnd.github+json&quot; \
+  -H &quot;Authorization: Bearer &lt;YOUR-TOKEN&gt;&quot; \
+  -H &quot;X-GitHub-Api-Version: 2022-11-28&quot; \
+  https://api.github.com/gists/GIST_ID \
+  -d &#39;{&quot;description&quot;:&quot;An updated gist description&quot;,&quot;files&quot;:{&quot;sample.md&quot;:{&quot;content&quot;:&quot;Hello World from GitHub&quot;}}}&#39;</code></pre>
+<h2 id="delete-a-gist">Delete a Gist</h2>
+<p><strong>Method</strong>: <code>DELETE</code></p>
+<p><strong>PATH</strong>: <code>/gists/{gist_id}</code></p>
+<p><strong>Response Status Code On Success</strong>: 200</p>
+<p><strong>Example Response</strong>: No return Data</p>
+<p><strong>Response Status Code On Resouce Not Found</strong>: 404</p>
+<p><strong>Curl</strong></p>
+<pre><code>curl -L \
+  -X DELETE \
+  -H &quot;Accept: application/vnd.github+json&quot; \
+  -H &quot;Authorization: Bearer &lt;YOUR-TOKEN&gt;&quot; \
+  -H &quot;X-GitHub-Api-Version: 2022-11-28&quot; \
+  https://api.github.com/gists/GIST_ID</code></pre>
+<h2 id="see-reference">See reference</h2>
+<ul>
+<li><a href="https://jsonapi.org/format/#crud">JSON API CRUD</a></li>
+<li><a
+href="https://docs.github.com/en/rest/gists/gists?apiVersion=2022-11-28#create-a-gist">create
+a gist</a></li>
+<li><a
+href="https://docs.github.com/en/rest/gists/gists?apiVersion=2022-11-28#get-a-gist">get
+a gist</a></li>
+<li><a
+href="https://docs.github.com/en/rest/gists/gists?apiVersion=2022-11-28#update-a-gist">update
+a gist</a></li>
+<li><a
+href="https://docs.github.com/en/rest/gists/gists?apiVersion=2022-11-28#delete-a-gist">delete
+a gist</a></li>
 </ul>
 <h1 id="engineering---how-to">Engineering - How To</h1>
 <h1 id="write">write</h1>
@@ -458,11 +635,11 @@ Red Text</code></pre>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> for <span class="ex">i</span> in <span class="dt">{</span><span class="dv">1</span><span class="dt">..</span><span class="dv">111</span><span class="dt">}</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">do</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&#39;\\e[&#39;</span><span class="va">$i</span><span class="st">&#39;m&#39;</span> <span class="st">&quot;\e[</span><span class="va">${i}</span><span class="st">mtext\e[0m&quot;</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span> <span class="kw">|</span> <span class="ex">column</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> for <span class="ex">i</span> in <span class="dt">{</span><span class="dv">1</span><span class="dt">..</span><span class="dv">111</span><span class="dt">}</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="cf">do</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&#39;\\e[&#39;</span><span class="va">$i</span><span class="st">&#39;m&#39;</span> <span class="st">&quot;\e[</span><span class="va">${i}</span><span class="st">mtext\e[0m&quot;</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span> <span class="kw">|</span> <span class="ex">column</span></span></code></pre></div>
 <figure>
 <img src="images/bash_color.png" alt="bash color" />
 <figcaption aria-hidden="true">bash color</figcaption>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>README</title>
+  <title>count distinct values in django orm</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -27,29 +27,10 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">README</h1>
+<h1 class="title">count distinct values in django orm</h1>
 </header>
-<ul>
-<li><strong>Keep Learning Everyday</strong> - learn fundamentals and use
-tools with long shelf-life</li>
-<li><strong>Developing</strong> - Error Handling In Oneview</li>
-<li><strong>Graphene</strong> - use <code>nonnull</code> and
-<code>required=True</code></li>
-<li><strong>Django</strong>
-<ul>
-<li>use foreign key constraints</li>
-<li>when adding constraints, also add DB data cleaning migrations</li>
-</ul></li>
-<li><strong>Oneview</strong>
-<ul>
-<li>GraphQL API Design, 3 options -&gt; consider using
-<code>Enum</code></li>
-<li>REST API Design, see my own
-<code>Github REST API for Gists</code></li>
-<li>use <strong>Celery</strong></li>
-</ul></li>
-<li><strong>Work</strong> - track tickets raised in Product &amp; Dev
-Chat</li>
-</ul>
+<pre><code>from django.db.models import Count
+
+Contact.objects.all().values(&#39;ff_status&#39;).annotate(Count(&#39;ff_status&#39;))</code></pre>
 </body>
 </html>

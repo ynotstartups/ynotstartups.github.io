@@ -109,6 +109,9 @@ django</a></li>
 <li><a href="#use-graphiql-with-django-debug-tool-bar"
 id="toc-use-graphiql-with-django-debug-tool-bar">use
 <code>GraphiQL</code> with django debug tool bar</a></li>
+<li><a href="#count-distinct-values-in-django-orm"
+id="toc-count-distinct-values-in-django-orm">count distinct values in
+django orm</a></li>
 <li><a href="#django---explanation" id="toc-django---explanation">Django
 - Explanation</a></li>
 <li><a href="#codebase-uses-lot-of-inheritances"
@@ -166,6 +169,11 @@ graphql request plugin</li>
 <li>run the added query in graphiql</li>
 <li>look at the django debug toolbar</li>
 </ol>
+<h1 id="count-distinct-values-in-django-orm">count distinct values in
+django orm</h1>
+<pre><code>from django.db.models import Count
+
+Contact.objects.all().values(&#39;ff_status&#39;).annotate(Count(&#39;ff_status&#39;))</code></pre>
 <h1 id="django---explanation">Django - Explanation</h1>
 <h1 id="codebase-uses-lot-of-inheritances">codebase uses lot of
 inheritances</h1>

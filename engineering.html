@@ -106,9 +106,9 @@ id="toc-engineering---reference">Engineering - Reference</a></li>
 <li><a href="#example-third-party-api-call"
 id="toc-example-third-party-api-call">Example: Third Party API
 Call</a></li>
-<li><a href="#regarding-argument-just-put-it-in-a-queue"
-id="toc-regarding-argument-just-put-it-in-a-queue">Regarding argument
-just put it in a queue?</a></li>
+<li><a href="#regarding-argument-just-put-it-in-a-queue-and-retry"
+id="toc-regarding-argument-just-put-it-in-a-queue-and-retry">Regarding
+argument just put it in a queue and retry?</a></li>
 </ul></li>
 <li><a href="#github-rest-api-for-gists"
 id="toc-github-rest-api-for-gists">Github REST API for Gists</a>
@@ -138,6 +138,14 @@ documentations</a></li>
 practices: design</a></li>
 <li><a href="#engineering---explanation"
 id="toc-engineering---explanation">Engineering - Explanation</a></li>
+<li><a href="#process-v.s.-threads"
+id="toc-process-v.s.-threads">Process v.s. Threads</a>
+<ul>
+<li><a href="#main-difference" id="toc-main-difference">Main
+Difference</a></li>
+<li><a href="#why-use-threads" id="toc-why-use-threads">Why use
+threads?</a></li>
+</ul></li>
 <li><a href="#ascii-control-characters"
 id="toc-ascii-control-characters">ascii control characters</a>
 <ul>
@@ -166,6 +174,8 @@ event based architecture</a>
 <li><a href="#event-based" id="toc-event-based">Event-based</a></li>
 </ul></li>
 </ul></li>
+<li><a href="#full-development-cycle"
+id="toc-full-development-cycle">full development cycle</a></li>
 <li><a href="#saas-business-model" id="toc-saas-business-model">SaaS
 business model</a></li>
 <li><a href="#explain-public-and-private-key-cryptography-like-i-am-5"
@@ -179,23 +189,54 @@ Public and Private Key Cryptography like I am 5</a></li>
 <li><strong>Keep Learning Everyday</strong> - learn fundamentals and use
 tools with long shelf-life</li>
 <li><strong>Developing</strong> - Error Handling In Oneview</li>
-<li><strong>Graphene</strong> - use <code>nonnull</code> and
-<code>required=True</code></li>
-<li><strong>Django</strong>
+<li><strong>Documentation</strong>
 <ul>
-<li>use foreign key constraints</li>
-<li>when adding constraints, also add DB data cleaning migrations</li>
+<li>add <strong>order of operation</strong> (inspired by Network
+Protocol)</li>
+<li>order is not obvious to derive from reading a bunch of
+functions/methods</li>
 </ul></li>
-<li><strong>Oneview</strong>
+<li><strong>API Design</strong>
 <ul>
 <li>GraphQL API Design, 3 options -&gt; consider using
 <code>Enum</code></li>
 <li>REST API Design, see my own
 <code>Github REST API for Gists</code></li>
-<li>use <strong>Celery</strong></li>
 </ul></li>
-<li><strong>Work</strong> - track tickets raised in Product &amp; Dev
-Chat</li>
+<li><strong>Graphene</strong>
+<ul>
+<li>use <code>nonnull</code> and <code>required=True</code></li>
+</ul></li>
+<li><strong>Django</strong>
+<ul>
+<li>use foreign key when I use <code>xxx_id</code> and <code>xxx</code>
+is an existing model</li>
+<li>when adding constraints, also add DB data cleaning migrations</li>
+<li>use <code>select_related</code> at first resolver to speed up
+further model property access based on GraphQL query to reduce total
+amount of sql call and thus improve performance</li>
+<li>use <strong>Celery</strong> when a job makes sense to be done in the
+background</li>
+</ul></li>
+<li><strong>Curo/Oneview Gotcha</strong>
+<ul>
+<li>inactive curo entities aren’t synced to oneview by default, because
+<code>validate_state_code=True</code> by default</li>
+<li>inactive curo entites / soft deleted oneview model entities aren’t
+return from oneview ORM by default, need to use <code>xx_deleted</code>
+instead</li>
+</ul></li>
+<li><strong>Work</strong>
+<ul>
+<li>track tickets raised in Product &amp; Dev Chat in confluence</li>
+</ul></li>
+<li><strong>Production deployment checklist</strong>
+<ul>
+<li>see if secrets and associate aws IAM policies, service are setup in
+prod</li>
+<li>read each migration files to understand the risk of this
+deployment</li>
+</ul></li>
 </ul>
 <h1 id="error-handling">Error Handling</h1>
 <h2 id="reminder">Reminder</h2>
@@ -215,8 +256,8 @@ changes that introduces errors in error handling logics</li>
 </ul>
 <h2 id="principles">Principles</h2>
 <ul>
-<li><code>Error Handling</code> means what is the correct business
-logics if error happened?</li>
+<li><code>Error Handling</code> means what are the correct business
+logics when errors happen</li>
 <li>consider curo as extension of oneview DB, so wrap curo call and DB
 changes in one transaction</li>
 <li>in general, one cannot revert a third party API call, because of
@@ -244,16 +285,16 @@ stable network or retry mechanism, unless this is DB constraint, save to
 local DB shouldn’t failed, so maybe verify can avoid the failure to
 local DB.</li>
 </ul>
-<h2 id="regarding-argument-just-put-it-in-a-queue">Regarding argument
-just put it in a queue?</h2>
+<h2 id="regarding-argument-just-put-it-in-a-queue-and-retry">Regarding
+argument just put it in a queue and retry?</h2>
 <p>Answer:</p>
 <ul>
 <li>Putting some logics in a queue doesn’t solve the real problem of
 what should happen if this logics failed?</li>
 <li>and being async introduces complexity such as how to inform the user
-if this failed?</li>
-<li>if errors happen, which errors can we retry? which errors cannot be
-retried?</li>
+if this logics failed?</li>
+<li>when errors happen, which errors can be retried? which errors cannot
+be retried?</li>
 </ul>
 <h1 id="github-rest-api-for-gists">Github REST API for Gists</h1>
 <h2 id="create-a-gist">Create a Gist</h2>
@@ -400,6 +441,7 @@ instead <code>bash</code></li>
 before we use them</li>
 </ul></li>
 <li>Be more curious about how things work internally</li>
+<li>Be more courageous to try new things</li>
 <li>Be prepared because I am bad at ac-hoc talk and thinking
 <ul>
 <li>ask for agenda for meetings so that I can be prepared</li>
@@ -415,23 +457,36 @@ before we use them</li>
 <h1 id="best-practices-documentations">best practices:
 documentations</h1>
 <ul>
+<li>the overall idea for documentation is to capture information that
+was in the mind of the designer but couldn’t be represented in the
+code</li>
+<li>add order of operations (function calls/rest api calls) to
+documentation
+<ul>
+<li>inspiration: a network protocol defines the format and the order of
+messages exchanged between two or more communicating entities, as well
+as the actions taken on the transmission and/or receipt of a message or
+other event.</li>
+</ul></li>
 <li>write present tense with full sentence</li>
-<li>Write code comments, documentations before implementation
+<li>write code comments, documentations before implementation</li>
+<li>four types of documentation
 <ul>
 <li>Tutorial e.g. get started with working code</li>
 <li>How-To e.g. Step by Step Guides like Recipes</li>
 <li>Explanation e.g. experts deep dive</li>
-<li>Reference e.g. api docs or python official documentations</li>
+<li>Reference e.g. function docstring or python official
+documentations</li>
 </ul></li>
 </ul>
 <h1 id="best-practices-design">best practices: design</h1>
 <ul>
 <li><strong>First Thing to Consider</strong>
 <ul>
-<li>does it bring <strong>value</strong> to business? don’t just use
-technology because it’s cool!</li>
+<li>what is the goal? ask why we are doing it?</li>
+<li>does it bring value to business?</li>
+<li>don’t just use technology because it’s cool!</li>
 </ul></li>
-<li>Having a goal! ask why we are doing it?</li>
 <li>Design Goals
 <ul>
 <li>meets requirements</li>
@@ -458,20 +513,32 @@ possible</li>
 <li>improves dev experience, should improve the overall developer
 experience rather than damaging developer experience</li>
 </ul></li>
-<li><label><input type="checkbox" />TODO: learn about DDD!</label>
-<ul>
-<li>Ubiquitous language - same langaguge in code and business</li>
-<li>Aggregate - one code object to represent one real world concept with
-lifecycle</li>
-<li>bounded context - grouping of aggregates to hide implementation
-details, hide information. Present a clear boundary to the wider system
-while hiding internal complexity that is able to change without
-impacting other parts of the system.</li>
-<li>The critical complexity of many software projects is in
-understanding the domain itself.</li>
-</ul></li>
 </ul>
 <h1 id="engineering---explanation">Engineering - Explanation</h1>
+<h1 id="process-v.s.-threads">Process v.s. Threads</h1>
+<h2 id="main-difference">Main Difference</h2>
+<ul>
+<li>processes don’t share memory (process has its own virtual CPU and
+virtual memory)</li>
+<li>threads share memory (share the same address space, and thus can
+access the same data)</li>
+</ul>
+<h2 id="why-use-threads">Why use threads?</h2>
+<p><strong>Parallelism</strong></p>
+<p>single-threaded program can only use one CPU core where a
+multi-threaded program can use multiple CPU Cores.</p>
+<p><strong>Avoid blocking slow I/O</strong></p>
+<p>Some threads waits for slow blocking I/O, while other threads can
+perform useful computation.</p>
+<p>Threading enables overlap of I/O with other activities within a
+single program, much like multiprogramming did for processes across
+programs.</p>
+<p>Many morden server-based application such as web servers, database
+management systems, make use of threads in their implementations</p>
+<p>One could still use multi-process instead of multi-thread, but
+threads share memory (an address space) thus make it easy to share data.
+multi-processes are better choice for logically separate tasks where
+little shareing of data structures in memory is needed.</p>
 <h1 id="ascii-control-characters">ascii control characters</h1>
 <p><strong>hexadecimal dump of ascii charaters</strong></p>
 <p>Control characters may be described as doing something when the user
@@ -698,17 +765,34 @@ occurence of an event to be processed.</li>
 </ul>
 <p>See also <a
 href="https://www.alexdebrie.com/posts/event-driven-vs-event-based/">origin
-of this idea</a> # full development cycle - backlog refinement meeting
-and estimations - planning meeting - business requirements epic and
-tickets (Happy Path, Unhappy Path) - FE &amp; BE contract, API Specs -
-Infrastructure As Code Setup, feature flags, - code logics
-implementation - clarify requirements in ticket - code documentations -
-lints - unittests - code reviews - developer manual e2e tests - QA /
-functional testings (deploy to test env, setup test accounts) -
-deployment and rollbacks - monitoring - engineering: errors,
-retrospective debugging logs, checking database - dev ops: CPU, Memory,
-number of invokes, latency, throughputs - add or change features -
-software support</p>
+of this idea</a></p>
+<h1 id="full-development-cycle">full development cycle</h1>
+<ul>
+<li>backlog refinement meeting and estimations</li>
+<li>planning meeting</li>
+<li>business requirements epic and tickets (Happy Path, Unhappy
+Path)</li>
+<li>FE &amp; BE contract: REST API Specs, GraphQL Schema</li>
+<li>Infrastructure As Code Setup, feature flags,</li>
+<li>code logics implementation</li>
+<li>clarify requirements in ticket</li>
+<li>code documentations</li>
+<li>lints</li>
+<li>unittests</li>
+<li>code reviews</li>
+<li>developer manual e2e tests</li>
+<li>QA / functional testings (deploy to test env, setup test
+accounts)</li>
+<li>deployment and rollbacks</li>
+<li>monitoring
+<ul>
+<li>engineering: errors, performance, retrospective debugging logs,</li>
+<li>operation: CPU, Memory, number of invokes, latency,
+throughputs,</li>
+</ul></li>
+<li>iteration on released feature</li>
+<li>software support</li>
+</ul>
 <h1 id="saas-business-model">SaaS business model</h1>
 <p>SaaS is a business and software delivery model that gives
 organisations the ability to offer their solutions in a low-friction,

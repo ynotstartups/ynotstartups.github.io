@@ -101,9 +101,9 @@
 <li><a href="#example-third-party-api-call"
 id="toc-example-third-party-api-call">Example: Third Party API
 Call</a></li>
-<li><a href="#regarding-argument-just-put-it-in-a-queue"
-id="toc-regarding-argument-just-put-it-in-a-queue">Regarding argument
-just put it in a queue?</a></li>
+<li><a href="#regarding-argument-just-put-it-in-a-queue-and-retry"
+id="toc-regarding-argument-just-put-it-in-a-queue-and-retry">Regarding
+argument just put it in a queue and retry?</a></li>
 </ul>
 </nav>
 <h2 id="reminder">Reminder</h2>
@@ -123,8 +123,8 @@ changes that introduces errors in error handling logics</li>
 </ul>
 <h2 id="principles">Principles</h2>
 <ul>
-<li><code>Error Handling</code> means what is the correct business
-logics if error happened?</li>
+<li><code>Error Handling</code> means what are the correct business
+logics when errors happen</li>
 <li>consider curo as extension of oneview DB, so wrap curo call and DB
 changes in one transaction</li>
 <li>in general, one cannot revert a third party API call, because of
@@ -152,16 +152,16 @@ stable network or retry mechanism, unless this is DB constraint, save to
 local DB shouldn’t failed, so maybe verify can avoid the failure to
 local DB.</li>
 </ul>
-<h2 id="regarding-argument-just-put-it-in-a-queue">Regarding argument
-just put it in a queue?</h2>
+<h2 id="regarding-argument-just-put-it-in-a-queue-and-retry">Regarding
+argument just put it in a queue and retry?</h2>
 <p>Answer:</p>
 <ul>
 <li>Putting some logics in a queue doesn’t solve the real problem of
 what should happen if this logics failed?</li>
 <li>and being async introduces complexity such as how to inform the user
-if this failed?</li>
-<li>if errors happen, which errors can we retry? which errors cannot be
-retried?</li>
+if this logics failed?</li>
+<li>when errors happen, which errors can be retried? which errors cannot
+be retried?</li>
 </ul>
 </body>
 </html>

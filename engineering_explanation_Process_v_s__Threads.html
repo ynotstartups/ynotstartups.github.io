@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Process v.s. Threads</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="https://d392viioakuayd.cloudfront.net/public/favicon.webp">
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Process v.s. Threads</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#main-difference" id="toc-main-difference">Main
+Difference</a></li>
+<li><a href="#why-use-threads" id="toc-why-use-threads">Why use
+threads?</a></li>
+</ul>
+</nav>
+<h2 id="main-difference">Main Difference</h2>
+<ul>
+<li>processes don’t share memory (process has its own virtual CPU and
+virtual memory)</li>
+<li>threads share memory (share the same address space, and thus can
+access the same data)</li>
+</ul>
+<h2 id="why-use-threads">Why use threads?</h2>
+<p><strong>Parallelism</strong></p>
+<p>single-threaded program can only use one CPU core where a
+multi-threaded program can use multiple CPU Cores.</p>
+<p><strong>Avoid blocking slow I/O</strong></p>
+<p>Some threads waits for slow blocking I/O, while other threads can
+perform useful computation.</p>
+<p>Threading enables overlap of I/O with other activities within a
+single program, much like multiprogramming did for processes across
+programs.</p>
+<p>Many morden server-based application such as web servers, database
+management systems, make use of threads in their implementations</p>
+<p>One could still use multi-process instead of multi-thread, but
+threads share memory (an address space) thus make it easy to share data.
+multi-processes are better choice for logically separate tasks where
+little shareing of data structures in memory is needed.</p>
+</body>
+</html>

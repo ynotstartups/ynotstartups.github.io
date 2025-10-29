@@ -29,58 +29,40 @@
 <header id="title-block-header">
 <h1 class="title">README</h1>
 </header>
+<nav id="TOC" role="doc-toc">
 <ul>
-<li><strong>Keep Learning Everyday</strong> - learn fundamentals and use
-tools with long shelf-life</li>
-<li><strong>Developing</strong> - Error Handling In Oneview</li>
-<li><strong>Documentation</strong>
+<li><a href="#keep-learning-everyday"
+id="toc-keep-learning-everyday">Keep Learning Everyday</a></li>
+<li><a href="#error-handling" id="toc-error-handling">Error
+Handling</a></li>
+<li><a href="#documentation"
+id="toc-documentation">Documentation</a></li>
+<li><a href="#performance" id="toc-performance">Performance</a></li>
+</ul>
+</nav>
+<h2 id="keep-learning-everyday">Keep Learning Everyday</h2>
+<ul>
+<li>learn fundamentals and use tools with long shelf-life</li>
+</ul>
+<h2 id="error-handling">Error Handling</h2>
+<ul>
+<li>think about error handling on every HTTP Requests</li>
+</ul>
+<h2 id="documentation">Documentation</h2>
 <ul>
 <li>add <strong>order of operation</strong> (inspired by Network
 Protocol)</li>
 <li>order is not obvious to derive from reading a bunch of
 functions/methods</li>
-</ul></li>
-<li><strong>API Design</strong>
+</ul>
+<h2 id="performance">Performance</h2>
 <ul>
-<li>GraphQL API Design, 3 options -&gt; consider using
-<code>Enum</code></li>
-<li>REST API Design, see my own
-<code>Github REST API for Gists</code></li>
-</ul></li>
-<li><strong>Graphene</strong>
-<ul>
-<li>use <code>nonnull</code> and <code>required=True</code></li>
-</ul></li>
-<li><strong>Django</strong>
-<ul>
-<li>use foreign key when I use <code>xxx_id</code> and <code>xxx</code>
-is an existing model</li>
-<li>when adding constraints, also add DB data cleaning migrations</li>
-<li>use <code>select_related</code> at first resolver to speed up
-further model property access based on GraphQL query to reduce total
-amount of sql call and thus improve performance</li>
-<li>use <strong>Celery</strong> when a job makes sense to be done in the
-background</li>
-</ul></li>
-<li><strong>Curo/Oneview Gotcha</strong>
-<ul>
-<li>inactive curo entities aren’t synced to oneview by default, because
-<code>validate_state_code=True</code> by default</li>
-<li>inactive curo entites / soft deleted oneview model entities aren’t
-return from oneview ORM by default, need to use <code>xx_deleted</code>
-instead</li>
-</ul></li>
-<li><strong>Work</strong>
-<ul>
-<li>track tickets raised in Product &amp; Dev Chat in confluence</li>
-</ul></li>
-<li><strong>Production deployment checklist</strong>
-<ul>
-<li>see if secrets and associate aws IAM policies, service are setup in
-prod</li>
-<li>read each migration files to understand the risk of this
-deployment</li>
-</ul></li>
+<li>care about DB Performance!</li>
+<li>use <code>self.assertNumQueries</code></li>
+<li><code>print(queryset.query)</code></li>
+<li>silk profiling</li>
+<li>set <code>django.db.backend</code> config to debug to print the sql
+queries</li>
 </ul>
 </body>
 </html>

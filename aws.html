@@ -124,6 +124,10 @@ Explanation</a></li>
 <li><a href="#how-cognito-login-works"
 id="toc-how-cognito-login-works">how <code>cognito</code> login
 works</a></li>
+<li><a
+href="#elastic-beanstalk-how-does-a-http-request-from-the-internect-get-response"
+id="toc-elastic-beanstalk-how-does-a-http-request-from-the-internect-get-response"><code>Elastic Beanstalk</code>:
+how does a http request from the Internect get response?</a></li>
 </ul>
 </nav>
 <h1 id="aws---reference">Aws - Reference</h1>
@@ -278,5 +282,18 @@ requests to the backend in <code>reactapp/src/apollo.js</code></li>
 href="https://aws.amazon.com/blogs/security/simplify-web-app-authentication-a-guide-to-ad-fs-federation-with-amazon-cognito-user-pools/">Cognito
 With Federations</a></li>
 </ul>
+<h1
+id="elastic-beanstalk-how-does-a-http-request-from-the-internect-get-response"><code>Elastic Beanstalk</code>:
+how does a http request from the Internect get response?</h1>
+<ol type="1">
+<li>Browser resolves the ip using <code>Route53</code></li>
+<li>Browser TCP+TLS request reaches <code>Elastic Load Balancer</code>,
+<code>ELB</code> then forwards the request to <code>EC2s</code></li>
+</ol>
+<p><strong>HTTPS</strong> - <code>Elastic Load Balancer</code> decrypts
+incoming HTTPS (SSL/TLS) traffic then forward plain HTTP to EC2
+services.</p>
+<p><strong>High Availably of EC2</strong> - managed by
+<code>AWS Auto Scaling Group</code> with HealthCheck</p>
 </body>
 </html>

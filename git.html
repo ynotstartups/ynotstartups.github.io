@@ -96,6 +96,11 @@
 <nav id="TOC" role="doc-toc">
 <ul>
 <li><a href="#git---how-to" id="toc-git---how-to">Git - How To</a></li>
+<li><a href="#gh-cli" id="toc-gh-cli">gh cli</a>
+<ul>
+<li><a href="#github-actions" id="toc-github-actions">Github
+actions</a></li>
+</ul></li>
 <li><a href="#use-reset-soft-mixed-hard"
 id="toc-use-reset-soft-mixed-hard">use <code>reset</code> soft mixed
 hard</a></li>
@@ -132,6 +137,21 @@ id="toc-explanation-for-git-log">Explanation for
 </ul>
 </nav>
 <h1 id="git---how-to">Git - How To</h1>
+<h1 id="gh-cli">gh cli</h1>
+<h2 id="github-actions">Github actions</h2>
+<ul>
+<li><code>gh run view [run id]</code> - view a specific run</li>
+<li><code>gh run view --job [job id]</code> - view a specific job
+<ul>
+<li>add <code>--log</code> to see detailed log</li>
+</ul></li>
+</ul>
+<p>You can find run id with</p>
+<ul>
+<li><code>gh pr checks</code> view github actions of this PR</li>
+<li><code>gh run list</code> view all the github actions of this
+repo</li>
+</ul>
 <h1 id="use-reset-soft-mixed-hard">use <code>reset</code> soft mixed
 hard</h1>
 <blockquote>

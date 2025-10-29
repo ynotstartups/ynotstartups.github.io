@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>full development cycle</title>
+  <title>drop column `alter table TABLE_NAME drop column COLUMN_NAME;`</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -27,34 +27,9 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">full development cycle</h1>
+<h1 class="title">drop column `alter table TABLE_NAME drop column
+COLUMN_NAME;`</h1>
 </header>
-<ul>
-<li>backlog refinement meeting and estimations</li>
-<li>planning meeting</li>
-<li>business requirements epic and tickets (Happy Path, Unhappy
-Path)</li>
-<li>FE &amp; BE contract: REST API Specs, GraphQL Schema</li>
-<li>Infrastructure As Code Setup</li>
-<li>feature flags</li>
-<li>code logics implementation</li>
-<li>clarify requirements in ticket</li>
-<li>code documentations</li>
-<li>lints</li>
-<li>unittests</li>
-<li>code reviews</li>
-<li>developer manual e2e tests</li>
-<li>QA / functional testings (deploy to test env, setup test
-accounts)</li>
-<li>deployment and rollbacks</li>
-<li>monitoring
-<ul>
-<li>engineering: errors, performance, retrospective debugging logs,</li>
-<li>operation: CPU, Memory, number of invokes, latency,
-throughputs,</li>
-</ul></li>
-<li>iteration on released feature</li>
-<li>software support</li>
-</ul>
+<pre><code>ALTER TABLE oneview_frozencharge DROP COLUMN product_fee_charge_is_user_input_required;</code></pre>
 </body>
 </html>

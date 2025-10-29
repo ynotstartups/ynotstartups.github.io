@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Error Handling</title>
+  <title>profile performance</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -91,78 +91,52 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">Error Handling</h1>
+<h1 class="title">profile performance</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
-<li><a href="#reminder" id="toc-reminder">Reminder</a></li>
-<li><a href="#principles" id="toc-principles">Principles</a></li>
-<li><a href="#example-curo" id="toc-example-curo">Example: Curo</a></li>
-<li><a href="#example-third-party-api-call"
-id="toc-example-third-party-api-call">Example: Third Party API
-Call</a></li>
-<li><a href="#regarding-argument-just-put-it-in-a-queue-and-retry"
-id="toc-regarding-argument-just-put-it-in-a-queue-and-retry">Regarding
-argument just put it in a queue and retry?</a></li>
+<li><a href="#in-python-cli" id="toc-in-python-cli">In python
+cli</a></li>
+<li><a href="#in-ipython" id="toc-in-ipython">In iPython</a></li>
+<li><a href="#read-output-from-profiler"
+id="toc-read-output-from-profiler">Read Output from profiler</a></li>
 </ul>
 </nav>
-<h2 id="reminder">Reminder</h2>
-<ul>
-<li>assume each third party integration failed</li>
-<li>confirmed with BA, on what should the error message be?</li>
-<li>use <code>with transcation.atomic()</code>
-<ul>
-<li>put multiple DB table changes in one
-<code>with transcation.atomic()</code></li>
-<li>put a single DB update/save with Curo call using
-<code>submit_entity_unhandled</code></li>
-<li>don’t use decorator <code>@transaction.atomic</code> to avoid future
-changes that introduces errors in error handling logics</li>
-</ul></li>
-<li>validate first, client facing logics last (e.g. sending emails)</li>
-<li>in Submission, avoid duplicate oneview and curo entities by using
-<code>get_or_create</code>?</li>
-<li>submission code / function must be idempotent to allow safe user
-retry or even auto retry</li>
-</ul>
-<h2 id="principles">Principles</h2>
-<ul>
-<li><code>Error Handling</code> means what are the correct business
-logics when errors happen</li>
-<li>consider curo as extension of oneview DB, so wrap curo call and DB
-changes in one transaction</li>
-<li>in general, one cannot revert a third party API call, because of
-possible side effects of the API call</li>
-</ul>
-<h2 id="example-curo">Example: Curo</h2>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> transaction.atomic():</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    task <span class="op">=</span> Task.objects.create(...) <span class="co"># or update some properties then task.save()</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    submit_entity_unhandled()</span></code></pre></div>
-<h2 id="example-third-party-api-call">Example: Third Party API Call</h2>
-<pre><code># if response data is needed
-foo_id = third party POST or PATCH
-raise_for_status()
-save `foo_id` to local DB</code></pre>
-<ul>
-<li>if third party call failed, not bad state, because there will be no
-local db changes.</li>
-<li>if save to local DB failed, bad state happened, maybe the solution
-is to verify first to avoid saving to local DB failed? because of the
-stable network or retry mechanism, unless this is DB constraint, save to
-local DB shouldn’t failed, so maybe verify can avoid the failure to
-local DB.</li>
-</ul>
-<h2 id="regarding-argument-just-put-it-in-a-queue-and-retry">Regarding
-argument just put it in a queue and retry?</h2>
-<p>Answer:</p>
-<ul>
-<li>Putting some logics in a queue doesn’t solve the real problem of
-what should happen if this logics failed?</li>
-<li>and being async introduces complexity such as how to inform the user
-if this logics failed?</li>
-<li>when errors happen, which errors can be retried? which errors cannot
-be retried?</li>
-</ul>
+<h2 id="in-python-cli">In python cli</h2>
+<pre><code>... python -m cProfile -o stats ...</code></pre>
+<h2 id="in-ipython">In iPython</h2>
+<p><strong><code>%%prun -r</code> returns profiling object</strong></p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>prun <span class="op">-</span>D stats</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> oneview.models.helpers.imports <span class="im">import</span> pull_accounts_no_threaded</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>pull_accounts_no_threaded()</span></code></pre></div>
+<h2 id="read-output-from-profiler">Read Output from profiler</h2>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pstats</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># read profile output from a file called `stats`</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>stats <span class="op">=</span> pstats.Stats(<span class="st">&#39;stats&#39;</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># starts with Cumulative time to get a sense of the time taken,</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># try to spot unexpected time spent and large number of function calls</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>stats.sort_stats(<span class="st">&#39;cumtime&#39;</span>).print_stats(<span class="dv">100</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># `tottime` for the total time spent in the given function (and excluding time</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># made in calls to sub-functions)</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>stats.sort_stats(<span class="st">&#39;tottime&#39;</span>).print_stats(<span class="dv">100</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>stats.sort_stats(<span class="st">&#39;filename&#39;</span>).print_stats(<span class="dv">100</span>)</span></code></pre></div>
+<p><strong>Alternatively, Just timeit once</strong></p>
+<pre><code>%%timeit -n 1 -r 1
+
+from oneview.models.helpers.imports import pull_accounts, pull_accounts_no_threaded
+pull_accounts()</code></pre>
+<p>See also - <a
+href="https://docs.python.org/3/library/profile.html#pstats.Stats.sort_stats">pstat
+sort keys</a> - <a
+href="https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-prun">%prun
+documentation</a> - <a
+href="https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-timeit">%timeit
+documentation</a></p>
 </body>
 </html>

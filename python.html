@@ -119,9 +119,15 @@ path to python source codes in iPython with <code>??</code></a></li>
 <li><a href="#find-the-dependencies-of-python-package"
 id="toc-find-the-dependencies-of-python-package">find the dependencies
 of python package</a></li>
-<li><a href="#profile-performance-in-ipython"
-id="toc-profile-performance-in-ipython">profile performance in
-iPython</a></li>
+<li><a href="#profile-performance" id="toc-profile-performance">profile
+performance</a>
+<ul>
+<li><a href="#in-python-cli" id="toc-in-python-cli">In python
+cli</a></li>
+<li><a href="#in-ipython" id="toc-in-ipython">In iPython</a></li>
+<li><a href="#read-output-from-profiler"
+id="toc-read-output-from-profiler">Read Output from profiler</a></li>
+</ul></li>
 <li><a href="#run-black-or-flake8-on-python-code-in-markdown"
 id="toc-run-black-or-flake8-on-python-code-in-markdown">run black or
 flake8 on python code in markdown</a></li>
@@ -154,6 +160,8 @@ id="toc-if-no-configuration-is-used">If no configuration is
 used</a></li>
 <li><a href="#see-also" id="toc-see-also">See also</a></li>
 </ul></li>
+<li><a href="#python---explanation" id="toc-python---explanation">Python
+- Explanation</a></li>
 <li><a href="#what-is-python-wheel" id="toc-what-is-python-wheel">what
 is python wheel?</a></li>
 <li><a href="#fileobj-vs-string-vs-byte-string"
@@ -329,25 +337,31 @@ sqlparse = &quot;&gt;=0.2.2&quot;
 [package.extras]
 argon2 = [&quot;argon2-cffi (&gt;=19.1.0)&quot;]
 bcrypt = [&quot;bcrypt&quot;]</code></pre>
-<h1 id="profile-performance-in-ipython">profile performance in
-iPython</h1>
-<p><strong>`<code>%%prun -r</code> returns profiling object</strong></p>
-<div class="sourceCode" id="cb9"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>prun <span class="op">-</span>D stats</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> oneview.models.helpers.imports <span class="im">import</span> pull_accounts_no_threaded</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>pull_accounts_no_threaded()</span></code></pre></div>
+<h1 id="profile-performance">profile performance</h1>
+<h2 id="in-python-cli">In python cli</h2>
+<pre><code>... python -m cProfile -o stats ...</code></pre>
+<h2 id="in-ipython">In iPython</h2>
+<p><strong><code>%%prun -r</code> returns profiling object</strong></p>
 <div class="sourceCode" id="cb10"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pstats</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pstats <span class="im">import</span> SortKey</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>stats <span class="op">=</span> pstats.Stats(<span class="st">&#39;stats&#39;</span>)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># `tottime` for the total time spent in the given function (and excluding time</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># made in calls to sub-functions)</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>stats.sort_stats(<span class="st">&#39;tottime&#39;</span>).print_stats(<span class="dv">50</span>)</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>stats.sort_stats(<span class="st">&#39;cumtime&#39;</span>).print_stats(<span class="dv">50</span>)</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>stats.sort_stats(<span class="st">&#39;filename&#39;</span>).print_stats(<span class="dv">50</span>)</span></code></pre></div>
+class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>prun <span class="op">-</span>D stats</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> oneview.models.helpers.imports <span class="im">import</span> pull_accounts_no_threaded</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>pull_accounts_no_threaded()</span></code></pre></div>
+<h2 id="read-output-from-profiler">Read Output from profiler</h2>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pstats</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># read profile output from a file called `stats`</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>stats <span class="op">=</span> pstats.Stats(<span class="st">&#39;stats&#39;</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># starts with Cumulative time to get a sense of the time taken,</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># try to spot unexpected time spent and large number of function calls</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>stats.sort_stats(<span class="st">&#39;cumtime&#39;</span>).print_stats(<span class="dv">100</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># `tottime` for the total time spent in the given function (and excluding time</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co"># made in calls to sub-functions)</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>stats.sort_stats(<span class="st">&#39;tottime&#39;</span>).print_stats(<span class="dv">100</span>)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>stats.sort_stats(<span class="st">&#39;filename&#39;</span>).print_stats(<span class="dv">100</span>)</span></code></pre></div>
 <p><strong>Alternatively, Just timeit once</strong></p>
 <pre><code>%%timeit -n 1 -r 1
 
@@ -384,15 +398,15 @@ output into <code>quickfix.vim</code></li>
 <p><strong>Prerequisite</strong></p>
 <p>Go into the ipython shell
 e.g. <code>sudo docker exec -it oneview-django poetry run python manage.py shell</code></p>
-<div class="sourceCode" id="cb12"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">1</span>]: <span class="im">from</span> oneview.graphql.api.charge <span class="im">import</span> one_fee_calculator</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">2</span>]: review_id <span class="op">=</span> <span class="st">&quot;73a07db5-7214-4ead-a9b8-4906e1727a8c&quot;</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">3</span>]: <span class="im">import</span> pdb</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>        pdb.runcall(one_fee_calculator, review_id)</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="op">&gt;</span> <span class="op">/</span>app<span class="op">/</span>backend<span class="op">/</span>oneview<span class="op">/</span>graphql<span class="op">/</span>api<span class="op">/</span>charge.py(<span class="dv">248</span>)one_fee_calculator()</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="op">-&gt;</span> review <span class="op">=</span> Review.objects.get(<span class="bu">id</span><span class="op">=</span>review_id)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">1</span>]: <span class="im">from</span> oneview.graphql.api.charge <span class="im">import</span> one_fee_calculator</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">2</span>]: review_id <span class="op">=</span> <span class="st">&quot;73a07db5-7214-4ead-a9b8-4906e1727a8c&quot;</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">3</span>]: <span class="im">import</span> pdb</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>        pdb.runcall(one_fee_calculator, review_id)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="op">&gt;</span> <span class="op">/</span>app<span class="op">/</span>backend<span class="op">/</span>oneview<span class="op">/</span>graphql<span class="op">/</span>api<span class="op">/</span>charge.py(<span class="dv">248</span>)one_fee_calculator()</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="op">-&gt;</span> review <span class="op">=</span> Review.objects.get(<span class="bu">id</span><span class="op">=</span>review_id)</span></code></pre></div>
 <p>If you do the above, you will be dropped into the pdb debugging
 shell.</p>
 <p>Note: please be careful about possible side effects if the functions
@@ -431,31 +445,31 @@ Doc from requests</p>
 <h1 id="use-urllib-instead-requests">use urllib instead
 <code>Requests</code></h1>
 <p>POST with json data</p>
-<div class="sourceCode" id="cb14"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>json_as_bytes <span class="op">=</span> json.dumps(payload).encode(<span class="st">&quot;utf-8&quot;</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>request_object <span class="op">=</span> request.Request(<span class="va">self</span>.api_url, data<span class="op">=</span>json_as_bytes)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>request_object.add_header(<span class="st">&quot;Content-Type&quot;</span>, <span class="st">&quot;application/json&quot;</span>)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>request_object.add_header(<span class="st">&quot;Authorization&quot;</span>, <span class="ss">f&quot;Bearer </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>token<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> request.urlopen(request_object) <span class="im">as</span> response:</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>        res_json <span class="op">=</span> json.loads(response.read())</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> HTTPError <span class="im">as</span> e:</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    _logger.exception(e.code)</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    _logger.exception(e.read())</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> e</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>json_as_bytes <span class="op">=</span> json.dumps(payload).encode(<span class="st">&quot;utf-8&quot;</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>request_object <span class="op">=</span> request.Request(<span class="va">self</span>.api_url, data<span class="op">=</span>json_as_bytes)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>request_object.add_header(<span class="st">&quot;Content-Type&quot;</span>, <span class="st">&quot;application/json&quot;</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>request_object.add_header(<span class="st">&quot;Authorization&quot;</span>, <span class="ss">f&quot;Bearer </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>token<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> request.urlopen(request_object) <span class="im">as</span> response:</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        res_json <span class="op">=</span> json.loads(response.read())</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> HTTPError <span class="im">as</span> e:</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    _logger.exception(e.code)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    _logger.exception(e.read())</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> e</span></code></pre></div>
 <p>See Also: <a
 href="https://docs.python.org/3.12/howto/urllib2.html">urllib2
 doc</a></p>
 <h1 id="use-a-decorator-to-print-function-calls">use a decorator to
 print function calls</h1>
-<div class="sourceCode" id="cb15"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> print_function_name(func):</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _print_function_name(<span class="op">*</span>args, <span class="op">**</span>kwargs):</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;--&gt; begin:  </span><span class="sc">{</span>func<span class="sc">.</span><span class="va">__name__</span><span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> func(<span class="op">*</span>args, <span class="op">**</span>kwargs)</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;--&gt; return: </span><span class="sc">{</span>func<span class="sc">.</span><span class="va">__name__</span><span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> result</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> _print_function_name</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> print_function_name(func):</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _print_function_name(<span class="op">*</span>args, <span class="op">**</span>kwargs):</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;--&gt; begin:  </span><span class="sc">{</span>func<span class="sc">.</span><span class="va">__name__</span><span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> func(<span class="op">*</span>args, <span class="op">**</span>kwargs)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;--&gt; return: </span><span class="sc">{</span>func<span class="sc">.</span><span class="va">__name__</span><span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> result</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> _print_function_name</span></code></pre></div>
 <h1 id="enable-ipython-autoload">enable iPython autoload</h1>
 <p>reload modules when user executes code, so that I don’t need to exit
 ipython shell to reload edited code.</p>
@@ -463,18 +477,18 @@ ipython shell to reload edited code.</p>
 %autoreload 2</code></pre>
 <h1 id="use-logging-module">Use logging module</h1>
 <h2 id="usage">Usage</h2>
-<div class="sourceCode" id="cb17"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> logging</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>logging.basicConfig(</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># filename=&quot;foo.log&quot;,</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    encoding<span class="op">=</span><span class="st">&quot;utf-8&quot;</span>,</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    level<span class="op">=</span>logging.DEBUG,</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">format</span><span class="op">=</span><span class="st">&#39;</span><span class="sc">%(levelname)s</span><span class="st"> </span><span class="sc">%(asctime)s</span><span class="st"> </span><span class="sc">%(module)s</span><span class="st"> </span><span class="sc">%(message)s</span><span class="st">&#39;</span>,</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>logger <span class="op">=</span> logging.getLogger(<span class="va">__name__</span>)</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>logger.debug(<span class="st">&quot;foo bar baz&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> logging</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>logging.basicConfig(</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># filename=&quot;foo.log&quot;,</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    encoding<span class="op">=</span><span class="st">&quot;utf-8&quot;</span>,</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    level<span class="op">=</span>logging.DEBUG,</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">format</span><span class="op">=</span><span class="st">&#39;</span><span class="sc">%(levelname)s</span><span class="st"> </span><span class="sc">%(asctime)s</span><span class="st"> </span><span class="sc">%(module)s</span><span class="st"> </span><span class="sc">%(message)s</span><span class="st">&#39;</span>,</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>logger <span class="op">=</span> logging.getLogger(<span class="va">__name__</span>)</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>logger.debug(<span class="st">&quot;foo bar baz&quot;</span>)</span></code></pre></div>
 <h2 id="log-level-explain">Log Level Explain</h2>
 <table>
 <colgroup>
@@ -608,8 +622,9 @@ href="https://docs.python.org/3/howto/logging.html#logging-basic-tutorial">Loggi
 How-To</a></li>
 <li><a
 href="https://docs.djangoproject.com/en/5.1/topics/logging/">Django
-Logging</a> # Python - Explanation</li>
+Logging</a></li>
 </ul>
+<h1 id="python---explanation">Python - Explanation</h1>
 <h1 id="what-is-python-wheel">what is python wheel?</h1>
 <p><strong>output for installing source distribution (not
 wheel)</strong></p>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>full development cycle</title>
+  <title>`Elastic Beanstalk`: how does a http request from the Internect get response?</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -27,34 +27,18 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">full development cycle</h1>
+<h1 class="title">`Elastic Beanstalk`: how does a http request from the
+Internect get response?</h1>
 </header>
-<ul>
-<li>backlog refinement meeting and estimations</li>
-<li>planning meeting</li>
-<li>business requirements epic and tickets (Happy Path, Unhappy
-Path)</li>
-<li>FE &amp; BE contract: REST API Specs, GraphQL Schema</li>
-<li>Infrastructure As Code Setup</li>
-<li>feature flags</li>
-<li>code logics implementation</li>
-<li>clarify requirements in ticket</li>
-<li>code documentations</li>
-<li>lints</li>
-<li>unittests</li>
-<li>code reviews</li>
-<li>developer manual e2e tests</li>
-<li>QA / functional testings (deploy to test env, setup test
-accounts)</li>
-<li>deployment and rollbacks</li>
-<li>monitoring
-<ul>
-<li>engineering: errors, performance, retrospective debugging logs,</li>
-<li>operation: CPU, Memory, number of invokes, latency,
-throughputs,</li>
-</ul></li>
-<li>iteration on released feature</li>
-<li>software support</li>
-</ul>
+<ol type="1">
+<li>Browser resolves the ip using <code>Route53</code></li>
+<li>Browser TCP+TLS request reaches <code>Elastic Load Balancer</code>,
+<code>ELB</code> then forwards the request to <code>EC2s</code></li>
+</ol>
+<p><strong>HTTPS</strong> - <code>Elastic Load Balancer</code> decrypts
+incoming HTTPS (SSL/TLS) traffic then forward plain HTTP to EC2
+services.</p>
+<p><strong>High Availably of EC2</strong> - managed by
+<code>AWS Auto Scaling Group</code> with HealthCheck</p>
 </body>
 </html>

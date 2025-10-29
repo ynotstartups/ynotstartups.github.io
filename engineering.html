@@ -97,8 +97,18 @@
 <ul>
 <li><a href="#engineering---reference"
 id="toc-engineering---reference">Engineering - Reference</a></li>
-<li><a href="#readme" id="toc-readme">README</a></li>
-<li><a href="#error-handling" id="toc-error-handling">Error Handling</a>
+<li><a href="#readme" id="toc-readme">README</a>
+<ul>
+<li><a href="#keep-learning-everyday"
+id="toc-keep-learning-everyday">Keep Learning Everyday</a></li>
+<li><a href="#error-handling" id="toc-error-handling">Error
+Handling</a></li>
+<li><a href="#documentation"
+id="toc-documentation">Documentation</a></li>
+<li><a href="#performance" id="toc-performance">Performance</a></li>
+</ul></li>
+<li><a href="#error-handling-1" id="toc-error-handling-1">Error
+Handling</a>
 <ul>
 <li><a href="#reminder" id="toc-reminder">Reminder</a></li>
 <li><a href="#principles" id="toc-principles">Principles</a></li>
@@ -123,6 +133,9 @@ Gist</a></li>
 <li><a href="#see-reference" id="toc-see-reference">See
 reference</a></li>
 </ul></li>
+<li><a href="#inspiring-software-architecture"
+id="toc-inspiring-software-architecture">Inspiring Software
+Architecture</a></li>
 <li><a href="#engineering---how-to"
 id="toc-engineering---how-to">Engineering - How To</a></li>
 <li><a href="#write" id="toc-write">write</a></li>
@@ -185,62 +198,35 @@ Public and Private Key Cryptography like I am 5</a></li>
 </nav>
 <h1 id="engineering---reference">Engineering - Reference</h1>
 <h1 id="readme">README</h1>
+<h2 id="keep-learning-everyday">Keep Learning Everyday</h2>
 <ul>
-<li><strong>Keep Learning Everyday</strong> - learn fundamentals and use
-tools with long shelf-life</li>
-<li><strong>Developing</strong> - Error Handling In Oneview</li>
-<li><strong>Documentation</strong>
+<li>learn fundamentals and use tools with long shelf-life</li>
+</ul>
+<h2 id="error-handling">Error Handling</h2>
+<ul>
+<li>think about error handling on every HTTP Requests</li>
+</ul>
+<h2 id="documentation">Documentation</h2>
 <ul>
 <li>add <strong>order of operation</strong> (inspired by Network
 Protocol)</li>
 <li>order is not obvious to derive from reading a bunch of
 functions/methods</li>
-</ul></li>
-<li><strong>API Design</strong>
-<ul>
-<li>GraphQL API Design, 3 options -&gt; consider using
-<code>Enum</code></li>
-<li>REST API Design, see my own
-<code>Github REST API for Gists</code></li>
-</ul></li>
-<li><strong>Graphene</strong>
-<ul>
-<li>use <code>nonnull</code> and <code>required=True</code></li>
-</ul></li>
-<li><strong>Django</strong>
-<ul>
-<li>use foreign key when I use <code>xxx_id</code> and <code>xxx</code>
-is an existing model</li>
-<li>when adding constraints, also add DB data cleaning migrations</li>
-<li>use <code>select_related</code> at first resolver to speed up
-further model property access based on GraphQL query to reduce total
-amount of sql call and thus improve performance</li>
-<li>use <strong>Celery</strong> when a job makes sense to be done in the
-background</li>
-</ul></li>
-<li><strong>Curo/Oneview Gotcha</strong>
-<ul>
-<li>inactive curo entities aren’t synced to oneview by default, because
-<code>validate_state_code=True</code> by default</li>
-<li>inactive curo entites / soft deleted oneview model entities aren’t
-return from oneview ORM by default, need to use <code>xx_deleted</code>
-instead</li>
-</ul></li>
-<li><strong>Work</strong>
-<ul>
-<li>track tickets raised in Product &amp; Dev Chat in confluence</li>
-</ul></li>
-<li><strong>Production deployment checklist</strong>
-<ul>
-<li>see if secrets and associate aws IAM policies, service are setup in
-prod</li>
-<li>read each migration files to understand the risk of this
-deployment</li>
-</ul></li>
 </ul>
-<h1 id="error-handling">Error Handling</h1>
+<h2 id="performance">Performance</h2>
+<ul>
+<li>care about DB Performance!</li>
+<li>use <code>self.assertNumQueries</code></li>
+<li><code>print(queryset.query)</code></li>
+<li>silk profiling</li>
+<li>set <code>django.db.backend</code> config to debug to print the sql
+queries</li>
+</ul>
+<h1 id="error-handling-1">Error Handling</h1>
 <h2 id="reminder">Reminder</h2>
 <ul>
+<li>assume each third party integration failed</li>
+<li>confirmed with BA, on what should the error message be?</li>
 <li>use <code>with transcation.atomic()</code>
 <ul>
 <li>put multiple DB table changes in one
@@ -253,6 +239,8 @@ changes that introduces errors in error handling logics</li>
 <li>validate first, client facing logics last (e.g. sending emails)</li>
 <li>in Submission, avoid duplicate oneview and curo entities by using
 <code>get_or_create</code>?</li>
+<li>submission code / function must be idempotent to allow safe user
+retry or even auto retry</li>
 </ul>
 <h2 id="principles">Principles</h2>
 <ul>
@@ -271,11 +259,8 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a hr
 <h2 id="example-third-party-api-call">Example: Third Party API Call</h2>
 <pre><code># if response data is needed
 foo_id = third party POST or PATCH
+raise_for_status()
 save `foo_id` to local DB</code></pre>
-<pre><code># if response data is not needed
-with transaction.atomic():
-    local db changes()
-    third party POST or PATCH</code></pre>
 <ul>
 <li>if third party call failed, not bad state, because there will be no
 local db changes.</li>
@@ -304,13 +289,13 @@ be retried?</li>
 <code>{"description":"Example of a gist","public":false,"files":{"sample.md":{"content":"Hello World"}}}</code></p>
 <p><strong>Response Status Code On Success</strong>: 201</p>
 <p><strong>Example Response</strong>:</p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode json"><code class="sourceCode json"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://api.github.com/gists/2decf6c462d9b4418f2&quot;</span><span class="fu">,</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;forks_url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://api.github.com/gists/2decf6c462d9b4418f2/forks&quot;</span><span class="fu">,</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;commits_url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://api.github.com/gists/2decf6c462d9b4418f2/commits&quot;</span><span class="fu">,</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;2decf6c462d9b4418f2&quot;</span><span class="fu">,</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="er">...</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://api.github.com/gists/2decf6c462d9b4418f2&quot;</span><span class="fu">,</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;forks_url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://api.github.com/gists/2decf6c462d9b4418f2/forks&quot;</span><span class="fu">,</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;commits_url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://api.github.com/gists/2decf6c462d9b4418f2/commits&quot;</span><span class="fu">,</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;2decf6c462d9b4418f2&quot;</span><span class="fu">,</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="er">...</span></span></code></pre></div>
 <p><strong>Curl</strong></p>
 <pre><code>curl -L \
   -X POST \
@@ -324,13 +309,13 @@ class="sourceCode json"><code class="sourceCode json"><span id="cb4-1"><a href="
 <p><strong>PATH</strong>: <code>/gists/{gist_id}</code></p>
 <p><strong>Response Status Code On Success</strong>: 200</p>
 <p><strong>Example Response</strong>:</p>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode json"><code class="sourceCode json"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://api.github.com/gists/2decf6c462d9b4418f2&quot;</span><span class="fu">,</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;forks_url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://api.github.com/gists/2decf6c462d9b4418f2/forks&quot;</span><span class="fu">,</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;commits_url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://api.github.com/gists/2decf6c462d9b4418f2/commits&quot;</span><span class="fu">,</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;2decf6c462d9b4418f2&quot;</span><span class="fu">,</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="er">...</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://api.github.com/gists/2decf6c462d9b4418f2&quot;</span><span class="fu">,</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;forks_url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://api.github.com/gists/2decf6c462d9b4418f2/forks&quot;</span><span class="fu">,</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;commits_url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://api.github.com/gists/2decf6c462d9b4418f2/commits&quot;</span><span class="fu">,</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;2decf6c462d9b4418f2&quot;</span><span class="fu">,</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="er">...</span></span></code></pre></div>
 <p><strong>Response Status Code On Resouce Not Found</strong>: 404</p>
 <p><strong>Curl</strong></p>
 <pre><code>curl -L \
@@ -342,13 +327,13 @@ class="sourceCode json"><code class="sourceCode json"><span id="cb6-1"><a href="
 <p><strong>PATH</strong>: <code>/gists/{gist_id}</code></p>
 <p><strong>Response Status Code On Success</strong>: 200</p>
 <p><strong>Example Response</strong>:</p>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode json"><code class="sourceCode json"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://api.github.com/gists/2decf6c462d9b4418f2&quot;</span><span class="fu">,</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;forks_url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://api.github.com/gists/2decf6c462d9b4418f2/forks&quot;</span><span class="fu">,</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;commits_url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://api.github.com/gists/2decf6c462d9b4418f2/commits&quot;</span><span class="fu">,</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;2decf6c462d9b4418f2&quot;</span><span class="fu">,</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="er">...</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://api.github.com/gists/2decf6c462d9b4418f2&quot;</span><span class="fu">,</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;forks_url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://api.github.com/gists/2decf6c462d9b4418f2/forks&quot;</span><span class="fu">,</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;commits_url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://api.github.com/gists/2decf6c462d9b4418f2/commits&quot;</span><span class="fu">,</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;2decf6c462d9b4418f2&quot;</span><span class="fu">,</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="er">...</span></span></code></pre></div>
 <p><strong>Response Status Code On Resouce Not Found</strong>: 404</p>
 <p><strong>Curl</strong></p>
 <pre><code>curl -L \
@@ -386,6 +371,19 @@ a gist</a></li>
 <li><a
 href="https://docs.github.com/en/rest/gists/gists?apiVersion=2022-11-28#delete-a-gist">delete
 a gist</a></li>
+</ul>
+<h1 id="inspiring-software-architecture">Inspiring Software
+Architecture</h1>
+<ul>
+<li><a
+href="https://blog.nginx.org/blog/inside-nginx-how-we-designed-for-performance-scale">Inside
+NGINX: How We Designed for Performance &amp; Scale</a></li>
+<li><a
+href="https://github.com/hyperknot/openfreemap?tab=readme-ov-file#what-is-the-tech-stack">OpenFreeMap</a>
+<ul>
+<li>Btrfs partition images with 300 million hard-linked files using
+Nginx</li>
+</ul></li>
 </ul>
 <h1 id="engineering---how-to">Engineering - How To</h1>
 <h1 id="write">write</h1>
@@ -453,6 +451,7 @@ before we use them</li>
 <li>set out the purpose of the meetings</li>
 <li>write meeting minutes and action points</li>
 </ul></li>
+<li>Progression through reading books</li>
 </ul>
 <h1 id="best-practices-documentations">best practices:
 documentations</h1>
@@ -469,7 +468,11 @@ as the actions taken on the transmission and/or receipt of a message or
 other event.</li>
 </ul></li>
 <li>write present tense with full sentence</li>
-<li>write code comments, documentations before implementation</li>
+<li>write code comments, documentations before implementation
+<ul>
+<li>always write input and output from and to third party API system
+calls</li>
+</ul></li>
 <li>four types of documentation
 <ul>
 <li>Tutorial e.g. get started with working code</li>
@@ -485,7 +488,7 @@ documentations</li>
 <ul>
 <li>what is the goal? ask why we are doing it?</li>
 <li>does it bring value to business?</li>
-<li>don’t just use technology because it’s cool!</li>
+<li>use ‘boring’ technology and architecture!</li>
 </ul></li>
 <li>Design Goals
 <ul>
@@ -493,7 +496,7 @@ documentations</li>
 <li>reliable</li>
 <li>maintainable and operable (sustainable delivery of valuable, working
 software)</li>
-<li>scalable</li>
+<li>scalable, performance</li>
 </ul></li>
 <li>Design it twice
 <ul>
@@ -702,11 +705,11 @@ Red Text</code></pre>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb13"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> for <span class="ex">i</span> in <span class="dt">{</span><span class="dv">1</span><span class="dt">..</span><span class="dv">111</span><span class="dt">}</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="cf">do</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&#39;\\e[&#39;</span><span class="va">$i</span><span class="st">&#39;m&#39;</span> <span class="st">&quot;\e[</span><span class="va">${i}</span><span class="st">mtext\e[0m&quot;</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span> <span class="kw">|</span> <span class="ex">column</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> for <span class="ex">i</span> in <span class="dt">{</span><span class="dv">1</span><span class="dt">..</span><span class="dv">111</span><span class="dt">}</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="cf">do</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&#39;\\e[&#39;</span><span class="va">$i</span><span class="st">&#39;m&#39;</span> <span class="st">&quot;\e[</span><span class="va">${i}</span><span class="st">mtext\e[0m&quot;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span> <span class="kw">|</span> <span class="ex">column</span></span></code></pre></div>
 <figure>
 <img src="images/bash_color.png" alt="bash color" />
 <figcaption aria-hidden="true">bash color</figcaption>
@@ -773,7 +776,8 @@ of this idea</a></p>
 <li>business requirements epic and tickets (Happy Path, Unhappy
 Path)</li>
 <li>FE &amp; BE contract: REST API Specs, GraphQL Schema</li>
-<li>Infrastructure As Code Setup, feature flags,</li>
+<li>Infrastructure As Code Setup</li>
+<li>feature flags</li>
 <li>code logics implementation</li>
 <li>clarify requirements in ticket</li>
 <li>code documentations</li>

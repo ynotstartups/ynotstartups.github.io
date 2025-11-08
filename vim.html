@@ -105,8 +105,15 @@ expression</a>
 id="toc-definition-of-a-pattern-in-vim">Definition of a pattern in
 vim</a></li>
 </ul></li>
-<li><a href="#regular-expression-atoms"
-id="toc-regular-expression-atoms">regular expression atoms</a></li>
+<li><a href="#regular-expression-character-classes-and-atoms"
+id="toc-regular-expression-character-classes-and-atoms">regular
+expression character classes and atoms</a>
+<ul>
+<li><a href="#character-classes" id="toc-character-classes">Character
+Classes</a></li>
+<li><a href="#atoms-special-characters"
+id="toc-atoms-special-characters">Atoms / Special Characters</a></li>
+</ul></li>
 <li><a href="#vim9script" id="toc-vim9script">vim9script</a>
 <ul>
 <li><a href="#vim9script-examples"
@@ -218,11 +225,51 @@ patterns, like <em>AND</em></li>
 <strong>branch</strong>, <code>\|</code> means either patterns, like
 <em>OR</em></li>
 </ul>
-<h1 id="regular-expression-atoms">regular expression atoms</h1>
+<h1 id="regular-expression-character-classes-and-atoms">regular
+expression character classes and atoms</h1>
+<h2 id="character-classes">Character Classes</h2>
+<table>
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 26%" />
+<col style="width: 30%" />
+<col style="width: 17%" />
+</colgroup>
+<thead>
+<tr>
+<th>Character classes</th>
+<th>Python</th>
+<th>Rg</th>
+<th>Vim</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Word char</td>
+<td><code>\w</code></td>
+<td>same</td>
+<td><code>\w</code></td>
+</tr>
+<tr>
+<td>Space</td>
+<td><code>\s</code></td>
+<td>same</td>
+<td><code>\s</code></td>
+</tr>
+<tr>
+<td>Multiline</td>
+<td><code>re.DOTALL</code> / <code>(?s)</code></td>
+<td><code>--multiline</code> or <code>(?s)</code></td>
+<td><code>\_.</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="atoms-special-characters">Atoms / Special Characters</h2>
 <table>
 <thead>
 <tr>
-<th></th>
+<th>Atoms</th>
+<th>Python</th>
 <th>Rg</th>
 <th>Vim</th>
 </tr>
@@ -231,52 +278,74 @@ patterns, like <em>AND</em></li>
 <tr>
 <td>zero or more</td>
 <td><code>?</code></td>
+<td>same</td>
 <td><code>\?</code></td>
 </tr>
 <tr>
 <td>1 or more</td>
 <td><code>+</code></td>
+<td>same</td>
 <td><code>\+</code></td>
 </tr>
 <tr>
 <td>precise number of matches</td>
 <td><code>{n,m}</code></td>
+<td>same</td>
 <td><code>\{n,m}</code></td>
 </tr>
 <tr>
 <td>word boundary</td>
 <td><code>\b</code></td>
+<td>same</td>
 <td><code>\&lt; \&gt;</code></td>
 </tr>
 <tr>
 <td>multiple patterns or</td>
 <td><code>|</code></td>
+<td>same</td>
 <td><code>\|</code></td>
 </tr>
 <tr>
 <td>non greedy</td>
 <td><code>.*?</code></td>
+<td>same</td>
 <td><code>.\{-}</code></td>
 </tr>
 <tr>
 <td>line starts with</td>
 <td><code>^</code></td>
+<td>same</td>
 <td><code>^</code></td>
 </tr>
 <tr>
 <td>line ends with</td>
 <td><code>$</code></td>
+<td>same</td>
 <td><code>$</code></td>
 </tr>
 <tr>
 <td>group</td>
 <td><code>( )</code></td>
+<td>same</td>
 <td><code>\( \)</code></td>
 </tr>
 <tr>
 <td>back reference</td>
-<td>not supported</td>
 <td><code>\1 \2 \3</code></td>
+<td></td>
+<td><code>\1 \2 \3</code></td>
+</tr>
+<tr>
+<td>set start of match</td>
+<td></td>
+<td></td>
+<td><code>\zs</code></td>
+</tr>
+<tr>
+<td>set end of match</td>
+<td></td>
+<td></td>
+<td><code>\ze</code></td>
 </tr>
 </tbody>
 </table>

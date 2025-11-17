@@ -177,9 +177,13 @@ used</a></li>
 - Explanation</a></li>
 <li><a href="#what-is-python-wheel" id="toc-what-is-python-wheel">what
 is python wheel?</a></li>
-<li><a href="#fileobj-vs-string-vs-byte-string"
-id="toc-fileobj-vs-string-vs-byte-string">fileobj vs string vs byte
-string</a></li>
+<li><a href="#fileobj-vs-string-vs-bytes"
+id="toc-fileobj-vs-string-vs-bytes">fileobj vs string vs bytes</a>
+<ul>
+<li><a href="#a-computer-can-only-store-bytes"
+id="toc-a-computer-can-only-store-bytes">A computer can only store
+bytes</a></li>
+</ul></li>
 </ul>
 </nav>
 <h1 id="python---reference">Python - Reference</h1>
@@ -237,37 +241,37 @@ expression character classes and atoms</h1>
 <td>zero or more</td>
 <td><code>?</code></td>
 <td>same</td>
-<td><code>\?</code></td>
+<td><code>?</code></td>
 </tr>
 <tr>
 <td>1 or more</td>
 <td><code>+</code></td>
 <td>same</td>
-<td><code>\+</code></td>
+<td><code>+</code></td>
 </tr>
 <tr>
 <td>precise number of matches</td>
 <td><code>{n,m}</code></td>
 <td>same</td>
-<td><code>\{n,m}</code></td>
+<td><code>{n,m}</code></td>
 </tr>
 <tr>
 <td>word boundary</td>
 <td><code>\b</code></td>
 <td>same</td>
-<td><code>\&lt; \&gt;</code></td>
+<td><code>&lt; &gt;</code></td>
 </tr>
 <tr>
 <td>multiple patterns or</td>
 <td><code>|</code></td>
 <td>same</td>
-<td><code>\|</code></td>
+<td><code>|</code></td>
 </tr>
 <tr>
 <td>non greedy</td>
 <td><code>.*?</code></td>
 <td>same</td>
-<td><code>.\{-}</code></td>
+<td><code>.{-}</code></td>
 </tr>
 <tr>
 <td>line starts with</td>
@@ -285,7 +289,7 @@ expression character classes and atoms</h1>
 <td>group</td>
 <td><code>( )</code></td>
 <td>same</td>
-<td><code>\( \)</code></td>
+<td><code>( )</code></td>
 </tr>
 <tr>
 <td>back reference</td>
@@ -814,14 +818,29 @@ specially crafted filename that tells installers what Python versions
 and platforms the wheel will support.</p>
 <p><code>{dist}-{version}(-{build})?-{python}-{abi}-{platform}.whl</code></p>
 <p><code>cryptography-2.9.2-cp35-abi3-macosx_10_9_x86_64.whl</code></p>
-<h1 id="fileobj-vs-string-vs-byte-string">fileobj vs string vs byte
-string</h1>
+<h1 id="fileobj-vs-string-vs-bytes">fileobj vs string vs bytes</h1>
 <ul>
-<li>string - ‘abc’ - a sequence of Unicode characters</li>
-<li>byte string - b’abc’ - a sequence of octets (integers between 0 and
-255)</li>
-<li>fileobj - BytesIO(‘abc’) or BytesIO(b’abc’) - an file like object
-that implements <code>.read()</code></li>
+<li>string/character string
+<ul>
+<li>‘abc’</li>
+<li>a sequence of Unicode code points that represent textual characters
+from human languages</li>
+</ul></li>
+<li>bytes
+<ul>
+<li>b’abc’</li>
+<li>a sequence of 8 bits unsigned values</li>
+<li>literal binary data</li>
+</ul></li>
+<li>fileobj
+<ul>
+<li>BytesIO(‘abc’) or BytesIO(b’abc’)</li>
+<li>an file like object that implements <code>.read()</code></li>
+</ul></li>
 </ul>
+<h2 id="a-computer-can-only-store-bytes">A computer can only store
+bytes</h2>
+<p>See this <a href="https://stackoverflow.com/a/31322359">stackoverflow
+answer</a></p>
 </body>
 </html>

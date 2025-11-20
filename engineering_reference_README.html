@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>README</title>
   <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -33,20 +36,42 @@
 <ul>
 <li><a href="#keep-learning-everyday"
 id="toc-keep-learning-everyday">Keep Learning Everyday</a></li>
-<li><a href="#error-handling" id="toc-error-handling">Error
+<li><a href="#exception-handling" id="toc-exception-handling">Exception
 Handling</a></li>
 <li><a href="#documentation"
 id="toc-documentation">Documentation</a></li>
-<li><a href="#performance" id="toc-performance">Performance</a></li>
+<li><a href="#performance-consideration"
+id="toc-performance-consideration">Performance Consideration</a></li>
 </ul>
 </nav>
 <h2 id="keep-learning-everyday">Keep Learning Everyday</h2>
 <ul>
-<li>learn fundamentals and use tools with long shelf-life</li>
-</ul>
-<h2 id="error-handling">Error Handling</h2>
+<li>Keep Learning Everyday
 <ul>
-<li>think about error handling on every HTTP Requests</li>
+<li>learn fundamentals and use tools with long shelf-life</li>
+</ul></li>
+<li>Tips for clear writing: write individual characters and each
+characters take up full square</li>
+<li>write shell, vimscript in python</li>
+</ul>
+<h2 id="exception-handling">Exception Handling</h2>
+<ul>
+<li>How To Handle Exception (thanks to Sentry Django Project)
+<ul>
+<li>only catch specific exceptions when you have a meaningful way to
+handle them</li>
+<li>Let exceptions bubble up unless you need to:
+<ul>
+<li>add context to the error</li>
+<li>perform cleanup operations</li>
+<li>covert one exception type to another with additional
+information</li>
+<li>recover from expected error conditions</li>
+</ul></li>
+</ul></li>
+<li>think about exception handling on every HTTP Requests</li>
+<li>test end to end in production is very important to catch prod
+specific configuration problems</li>
 </ul>
 <h2 id="documentation">Documentation</h2>
 <ul>
@@ -55,14 +80,19 @@ Protocol)</li>
 <li>order is not obvious to derive from reading a bunch of
 functions/methods</li>
 </ul>
-<h2 id="performance">Performance</h2>
+<h2 id="performance-consideration">Performance Consideration</h2>
 <ul>
-<li>care about DB Performance!</li>
+<li>silk profiling</li>
+<li>care about DB Performance!
+<ul>
+<li>use database indexing with <code>db_index=True</code></li>
 <li>use <code>self.assertNumQueries</code></li>
 <li><code>print(queryset.query)</code></li>
-<li>silk profiling</li>
 <li>set <code>django.db.backend</code> config to debug to print the sql
 queries</li>
+<li>optimize queries with <code>select_related</code> and
+<code>prefetch_related</code></li>
+</ul></li>
 </ul>
 </body>
 </html>

@@ -105,14 +105,15 @@ id="toc-engineering---reference">Engineering - Reference</a></li>
 <ul>
 <li><a href="#keep-learning-everyday"
 id="toc-keep-learning-everyday">Keep Learning Everyday</a></li>
-<li><a href="#error-handling" id="toc-error-handling">Error
+<li><a href="#exception-handling" id="toc-exception-handling">Exception
 Handling</a></li>
 <li><a href="#documentation"
 id="toc-documentation">Documentation</a></li>
-<li><a href="#performance" id="toc-performance">Performance</a></li>
+<li><a href="#performance-consideration"
+id="toc-performance-consideration">Performance Consideration</a></li>
 </ul></li>
-<li><a href="#error-handling-1" id="toc-error-handling-1">Error
-Handling</a>
+<li><a href="#exception-handling-1"
+id="toc-exception-handling-1">Exception Handling</a>
 <ul>
 <li><a href="#reminder" id="toc-reminder">Reminder</a></li>
 <li><a href="#principles" id="toc-principles">Principles</a></li>
@@ -204,11 +205,32 @@ Public and Private Key Cryptography like I am 5</a></li>
 <h1 id="readme">README</h1>
 <h2 id="keep-learning-everyday">Keep Learning Everyday</h2>
 <ul>
-<li>learn fundamentals and use tools with long shelf-life</li>
-</ul>
-<h2 id="error-handling">Error Handling</h2>
+<li>Keep Learning Everyday
 <ul>
-<li>think about error handling on every HTTP Requests</li>
+<li>learn fundamentals and use tools with long shelf-life</li>
+</ul></li>
+<li>Tips for clear writing: write individual characters and each
+characters take up full square</li>
+<li>write shell, vimscript in python</li>
+</ul>
+<h2 id="exception-handling">Exception Handling</h2>
+<ul>
+<li>How To Handle Exception (thanks to Sentry Django Project)
+<ul>
+<li>only catch specific exceptions when you have a meaningful way to
+handle them</li>
+<li>Let exceptions bubble up unless you need to:
+<ul>
+<li>add context to the error</li>
+<li>perform cleanup operations</li>
+<li>covert one exception type to another with additional
+information</li>
+<li>recover from expected error conditions</li>
+</ul></li>
+</ul></li>
+<li>think about exception handling on every HTTP Requests</li>
+<li>test end to end in production is very important to catch prod
+specific configuration problems</li>
 </ul>
 <h2 id="documentation">Documentation</h2>
 <ul>
@@ -217,19 +239,29 @@ Protocol)</li>
 <li>order is not obvious to derive from reading a bunch of
 functions/methods</li>
 </ul>
-<h2 id="performance">Performance</h2>
+<h2 id="performance-consideration">Performance Consideration</h2>
 <ul>
-<li>care about DB Performance!</li>
+<li>silk profiling</li>
+<li>care about DB Performance!
+<ul>
+<li>use database indexing with <code>db_index=True</code></li>
 <li>use <code>self.assertNumQueries</code></li>
 <li><code>print(queryset.query)</code></li>
-<li>silk profiling</li>
 <li>set <code>django.db.backend</code> config to debug to print the sql
 queries</li>
+<li>optimize queries with <code>select_related</code> and
+<code>prefetch_related</code></li>
+</ul></li>
 </ul>
-<h1 id="error-handling-1">Error Handling</h1>
+<h1 id="exception-handling-1">Exception Handling</h1>
 <h2 id="reminder">Reminder</h2>
 <ul>
+<li>prefer the name <code>Exception</code> instead of
+<code>Error</code>, <code>Exception</code> is bounded in the exceptions
+raised by python code, <code>Error</code> can mean human errors and have
+much larger implication, makes it harder to think.</li>
 <li>assume each third party integration failed</li>
+<li>it’s a business / BA decision when there is no perfect solution</li>
 <li>confirmed with BA, on what should the error message be?</li>
 <li>use <code>with transcation.atomic()</code>
 <ul>

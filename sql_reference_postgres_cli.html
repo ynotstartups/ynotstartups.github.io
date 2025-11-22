@@ -32,6 +32,22 @@
 <header id="title-block-header">
 <h1 class="title">postgres cli</h1>
 </header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#drop-table-drop-table-table_name"
+id="toc-drop-table-drop-table-table_name">drop table
+<code>drop table TABLE_NAME;</code></a></li>
+<li><a
+href="#drop-column-alter-table-table_name-drop-column-column_name"
+id="toc-drop-column-alter-table-table_name-drop-column-column_name">drop
+column
+<code>alter table TABLE_NAME drop column COLUMN_NAME;</code></a></li>
+<li><a href="#rename-table" id="toc-rename-table">rename table</a></li>
+<li><a href="#save-query-result-to-a-file"
+id="toc-save-query-result-to-a-file">save query result to a
+file</a></li>
+</ul>
+</nav>
 <table>
 <tbody>
 <tr>
@@ -63,5 +79,26 @@
 <p>You can do <code>\l</code> to list all the databases, use
 <code>\c</code> to connect to one database, use <code>\d</code> to list
 tables in this database</p>
+<h1 id="drop-table-drop-table-table_name">drop table
+<code>drop table TABLE_NAME;</code></h1>
+<p>how_to, sql,</p>
+<h1 id="drop-column-alter-table-table_name-drop-column-column_name">drop
+column <code>alter table TABLE_NAME drop column COLUMN_NAME;</code></h1>
+<p>how_to, sql,</p>
+<pre><code>ALTER TABLE oneview_frozencharge DROP COLUMN product_fee_charge_is_user_input_required;</code></pre>
+<h1 id="rename-table">rename table</h1>
+<p>how_to, sql,</p>
+<pre><code>ALTER TABLE oneview_incomeprofile RENAME COLUMN business_unit_id TO adviser_business_unit_id;
+ALTER TABLE oneview_incomeprofile RENAME COLUMN adviser_business_unit_id TO business_unit_id;</code></pre>
+<h1 id="save-query-result-to-a-file">save query result to a file</h1>
+<p>how_to, sql,</p>
+<pre><code># start
+\o data.txt
+
+# ...run the psql commands...e.g. \dt
+
+# ended
+\o</code></pre>
+<pre><code>docker-compose --file docker-compose-dev.yml exec postgres cat data.txt</code></pre>
 </body>
 </html>

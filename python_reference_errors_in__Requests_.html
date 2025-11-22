@@ -103,6 +103,13 @@
 id="toc-catching-requests-errors">Catching requests errors</a></li>
 <li><a href="#error-classes-inheritance"
 id="toc-error-classes-inheritance">Error Classes Inheritance</a></li>
+<li><a href="#mocking-requests-response-with-no-library"
+id="toc-mocking-requests-response-with-no-library">mocking
+<code>Requests</code> response with no library</a>
+<ul>
+<li><a href="#success" id="toc-success">Success</a></li>
+<li><a href="#httperror" id="toc-httperror">HTTPError</a></li>
+</ul></li>
 </ul>
 </nav>
 <table>
@@ -196,5 +203,27 @@ errors that happens due to incorrect network configs?</p>
 <ul>
 <li>https://requests.readthedocs.io/en/latest/_modules/requests/exceptions/#RequestException</li>
 </ul>
+<h1 id="mocking-requests-response-with-no-library">mocking
+<code>Requests</code> response with no library</h1>
+<p>how_to, work,</p>
+<h2 id="success">Success</h2>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>json_response <span class="op">=</span> json.dumps(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;url&quot;</span>: <span class="st">&quot;https://fake_bucket_name.aws.com/fake_file_key&quot;</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;id&quot;</span>: expected_document_client_portal_id,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>mock_response <span class="op">=</span> Response()</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>mock_response.status_code <span class="op">=</span> <span class="dv">200</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>mock_response._content <span class="op">=</span> <span class="bu">bytes</span>(json_response, encoding<span class="op">=</span><span class="st">&quot;utf-8&quot;</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>mock_requests.post.return_value <span class="op">=</span> mock_response</span></code></pre></div>
+<h2 id="httperror">HTTPError</h2>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mock_response <span class="op">=</span> mock.Mock()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>mock_response.raise_for_status.side_effect <span class="op">=</span> HTTPError(<span class="st">&quot;Bad Request&quot;</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>mock_requests.post.return_value <span class="op">=</span> mock_response</span></code></pre></div>
 </body>
 </html>

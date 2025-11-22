@@ -103,6 +103,12 @@
 Reference</a></li>
 <li><a href="#best-practices" id="toc-best-practices">best
 practices</a></li>
+<li><a href="#django-simple-history"
+id="toc-django-simple-history">django simple history</a>
+<ul>
+<li><a href="#print-history-delta" id="toc-print-history-delta">print
+history delta</a></li>
+</ul></li>
 <li><a href="#django---how-to" id="toc-django---how-to">Django - How
 To</a></li>
 <li><a href="#debuggingpdb-for-dockerised-django"
@@ -154,6 +160,14 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a hr
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> DocumentUploadConfigQuery(graphene.ObjectType):</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    document_uploader_form_configs <span class="op">=</span> graphene.List(graphene.NonNull(DocumentUploaderFormConfig)), required<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
+<h1 id="django-simple-history">django simple history</h1>
+<h2 id="print-history-delta">print history delta</h2>
+<pre><code>In [45]: for new_record, old_record in zip(all_history, all_history[1:]):
+     ...:     delta = new_record.diff_against(old_record)
+     ...:     for change in delta.changes:
+     ...:         print(f&quot;&#39;{change.field}&#39; changed from &#39;{change.old}&#39; to &#39;{change.new}&#39;&quot;)
+     ...:     print(new_record.date_updated)
+     ...:     print(&#39;---&#39;)</code></pre>
 <h1 id="django---how-to">Django - How To</h1>
 <h1 id="debuggingpdb-for-dockerised-django">debugging/pdb for dockerised
 django</h1>
@@ -161,9 +175,9 @@ django</h1>
 <li>add <code>breakpoint()</code> in code</li>
 <li>run the following bash command</li>
 </ol>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> container ls</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> attach ID <span class="co"># ID is the container id for oneview-django image</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> container ls</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> attach ID <span class="co"># ID is the container id for oneview-django image</span></span></code></pre></div>
 <h1 id="use-q-f">use <code>Q</code> &amp; <code>F</code></h1>
 <ul>
 <li><code>Q()</code> - represents an SQL condition that can be used in
@@ -193,12 +207,12 @@ in django unittest</h1>
 <li>set <code>DEBUG</code> on logger
 <code>django.db.backends</code></li>
 </ol>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;django.db.backends&quot;</span>: {</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;handlers&quot;</span>: [<span class="st">&quot;console&quot;</span>],</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;level&quot;</span>: <span class="st">&quot;DEBUG&quot;</span>,</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;propagate&quot;</span>: <span class="va">False</span>,</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>},</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;django.db.backends&quot;</span>: {</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;handlers&quot;</span>: [<span class="st">&quot;console&quot;</span>],</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;level&quot;</span>: <span class="st">&quot;DEBUG&quot;</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;propagate&quot;</span>: <span class="va">False</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>},</span></code></pre></div>
 <ol start="2" type="1">
 <li>put <code>@override_settings(DEBUG=True)</code> on an interested
 unittest case, because unittest has <code>DEBUG=False</code> by

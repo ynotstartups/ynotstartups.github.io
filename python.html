@@ -118,8 +118,53 @@ id="toc-catching-requests-errors">Catching requests errors</a></li>
 <li><a href="#error-classes-inheritance"
 id="toc-error-classes-inheritance">Error Classes Inheritance</a></li>
 </ul></li>
-<li><a href="#python---how-to" id="toc-python---how-to">Python - How
-To</a></li>
+<li><a href="#mocking-requests-response-with-no-library"
+id="toc-mocking-requests-response-with-no-library">mocking
+<code>Requests</code> response with no library</a>
+<ul>
+<li><a href="#success" id="toc-success">Success</a></li>
+<li><a href="#httperror" id="toc-httperror">HTTPError</a></li>
+</ul></li>
+<li><a href="#python-reminders-function-documentation"
+id="toc-python-reminders-function-documentation">Python Reminders#
+Function Documentation</a></li>
+<li><a href="#script" id="toc-script">script</a></li>
+<li><a href="#add-logger" id="toc-add-logger">add logger</a></li>
+<li><a href="#test-graphql-endpoint" id="toc-test-graphql-endpoint">test
+GraphQL endpoint</a></li>
+<li><a href="#django-test-class" id="toc-django-test-class">django test
+class</a></li>
+<li><a href="#unittest-subtest" id="toc-unittest-subtest">unittest
+subtest</a></li>
+<li><a href="#test-setuptestdata" id="toc-test-setuptestdata">test
+setUpTestData</a></li>
+<li><a href="#test-logger" id="toc-test-logger">test logger</a></li>
+<li><a href="#test-error-raised" id="toc-test-error-raised">test error
+raised</a></li>
+<li><a href="#test-freeze-time" id="toc-test-freeze-time">test freeze
+time</a></li>
+<li><a href="#test-with-override_settings"
+id="toc-test-with-override_settings">test with
+override_settings</a></li>
+<li><a href="#mock-response-success" id="toc-mock-response-success">mock
+response success</a></li>
+<li><a href="#mock-response-raised-error"
+id="toc-mock-response-raised-error">mock response raised error</a></li>
+<li><a href="#test-multiple-calls" id="toc-test-multiple-calls">test
+multiple calls</a></li>
+<li><a href="#test-failure-curocode-doesnt-exists"
+id="toc-test-failure-curocode-doesnt-exists">test failure CuroCode
+doesn’t exists</a></li>
+<li><a href="#handle-raise-for-status"
+id="toc-handle-raise-for-status">handle raise for status</a></li>
+<li><a href="#catch-all-possible-errors"
+id="toc-catch-all-possible-errors">catch all possible errors</a></li>
+<li><a href="#graphene---set-required-for-a-list-of-objects"
+id="toc-graphene---set-required-for-a-list-of-objects">Graphene - set
+required for a list of objects</a></li>
+<li><a href="#graphene---set-required-for-a-field"
+id="toc-graphene---set-required-for-a-field">Graphene - set required for
+a field</a></li>
 <li><a href="#use-poetry-lock---no-update"
 id="toc-use-poetry-lock---no-update">use
 <code>poetry lock --no-update</code></a></li>
@@ -127,6 +172,10 @@ id="toc-use-poetry-lock---no-update">use
 id="toc-use-python-simple-history">use
 <code>python-simple-history</code></a></li>
 <li><a href="#debug-in-ssh" id="toc-debug-in-ssh">debug in ssh</a></li>
+<li><a
+href="#fix-expected-a-value-of-type-globalpermissionenum-but-received"
+id="toc-fix-expected-a-value-of-type-globalpermissionenum-but-received">fix
+expected a value of type “GlobalPermissionEnum” but received …</a></li>
 <li><a href="#get-file-path-to-python-source-codes-in-ipython-with"
 id="toc-get-file-path-to-python-source-codes-in-ipython-with">get file
 path to python source codes in iPython with <code>??</code></a></li>
@@ -160,22 +209,6 @@ id="toc-use-a-decorator-to-print-function-calls">use a decorator to
 print function calls</a></li>
 <li><a href="#enable-ipython-autoload"
 id="toc-enable-ipython-autoload">enable iPython autoload</a></li>
-<li><a href="#use-logging-module" id="toc-use-logging-module">Use
-logging module</a>
-<ul>
-<li><a href="#usage" id="toc-usage">Usage</a></li>
-<li><a href="#log-level-explain" id="toc-log-level-explain">Log Level
-Explain</a></li>
-<li><a href="#loggers-handlers-filters-and-formatters"
-id="toc-loggers-handlers-filters-and-formatters">Loggers, Handlers,
-Filters and Formatters</a></li>
-<li><a href="#more-on-loggers" id="toc-more-on-loggers">More on
-Loggers</a></li>
-<li><a href="#if-no-configuration-is-used"
-id="toc-if-no-configuration-is-used">If no configuration is
-used</a></li>
-<li><a href="#see-also" id="toc-see-also">See also</a></li>
-</ul></li>
 <li><a href="#python---explanation" id="toc-python---explanation">Python
 - Explanation</a></li>
 <li><a href="#what-is-python-wheel" id="toc-what-is-python-wheel">what
@@ -411,7 +444,232 @@ errors that happens due to incorrect network configs?</p>
 <ul>
 <li>https://requests.readthedocs.io/en/latest/_modules/requests/exceptions/#RequestException</li>
 </ul>
-<h1 id="python---how-to">Python - How To</h1>
+<h1 id="mocking-requests-response-with-no-library">mocking
+<code>Requests</code> response with no library</h1>
+<p>how_to, work,</p>
+<h2 id="success">Success</h2>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>json_response <span class="op">=</span> json.dumps(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;url&quot;</span>: <span class="st">&quot;https://fake_bucket_name.aws.com/fake_file_key&quot;</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;id&quot;</span>: expected_document_client_portal_id,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>mock_response <span class="op">=</span> Response()</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>mock_response.status_code <span class="op">=</span> <span class="dv">200</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>mock_response._content <span class="op">=</span> <span class="bu">bytes</span>(json_response, encoding<span class="op">=</span><span class="st">&quot;utf-8&quot;</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>mock_requests.post.return_value <span class="op">=</span> mock_response</span></code></pre></div>
+<h2 id="httperror">HTTPError</h2>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mock_response <span class="op">=</span> mock.Mock()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>mock_response.raise_for_status.side_effect <span class="op">=</span> HTTPError(<span class="st">&quot;Bad Request&quot;</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>mock_requests.post.return_value <span class="op">=</span> mock_response</span></code></pre></div>
+<h1 id="python-reminders-function-documentation">Python Reminders#
+Function Documentation</h1>
+<pre><code>    Args:
+        review (int): The first number.
+        b (int): The second number.
+
+    Returns:
+        int: The sum of the two numbers.
+
+    Raises:
+        HTTPError: when call to Calendar API failed</code></pre>
+<h1 id="script">script</h1>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env python3</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> logging</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>logging.basicConfig(</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    level<span class="op">=</span>logging.DEBUG,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    filename<span class="op">=</span><span class="st">&#39;foo.log&#39;</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">format</span><span class="op">=</span><span class="st">&#39;</span><span class="sc">%(asctime)s</span><span class="st">:</span><span class="sc">%(levelname)s</span><span class="st">:</span><span class="sc">%(module)s</span><span class="st">:</span><span class="sc">%(message)s</span><span class="st">&#39;</span>,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main():</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">&quot;__main__&quot;</span>:</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    main()</span></code></pre></div>
+<h1 id="add-logger">add logger</h1>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> logging</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>_logger <span class="op">=</span> logging.getLogger(<span class="va">__name__</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>_logger.error(<span class="st">&quot;foo&quot;</span>, exc_info<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>_logger.exception(<span class="st">&quot;foo&quot;</span>, exc_info<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
+<h1 id="test-graphql-endpoint">test GraphQL endpoint</h1>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> oneview.tests.graphql <span class="im">import</span> AdminUserMixin, GraphqlTestCase</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> oneview.tests.model_mocks <span class="im">import</span> TodoFactory</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TestFoo(AdminUserMixin, GraphqlTestCase):</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> test_bar(<span class="va">self</span>):</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        query <span class="op">=</span> <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="st">            mutation query(</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="st">                $todoTodo: ID!,</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="st">            ) {</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="st">                todoTodo(</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="st">                    todoTodo: $todoTodo,</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="st">                    todoTodo: $todoTodo,</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="st">                ) {</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="st">                    ok</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="st">                    errors</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="st">                }</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="st">            }</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="st">        &quot;&quot;&quot;</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>        variables <span class="op">=</span> {</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;todoTodo&quot;</span>: <span class="st">&quot;todo&quot;</span>,</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>        response <span class="op">=</span> <span class="va">self</span>.schema.execute(</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>            query,</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>            variables<span class="op">=</span>variables,</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>            context_value<span class="op">=</span><span class="va">self</span>.admin_context,</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.assertIsNone(response.errors)</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.assertTrue(response.data[<span class="st">&quot;fooBar&quot;</span>][<span class="st">&quot;ok&quot;</span>])</span></code></pre></div>
+<h1 id="django-test-class">django test class</h1>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> django.test <span class="im">import</span> TestCase</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TestFoo(TestCase):</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> test_foo(<span class="va">self</span>):</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">pass</span></span></code></pre></div>
+<h1 id="unittest-subtest">unittest subtest</h1>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> a, b <span class="kw">in</span> ((<span class="st">&quot;foo&quot;</span>, <span class="st">&quot;bar&quot;</span>), (<span class="st">&quot;baz&quot;</span>, <span class="st">&quot;bazz&quot;</span>)):</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="va">self</span>.subTest(a<span class="op">=</span>a, b<span class="op">=</span>b):</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.assertEqual(...)</span></code></pre></div>
+<h1 id="test-setuptestdata">test setUpTestData</h1>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>    <span class="at">@classmethod</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> setUpTestData(cls):</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">pass</span></span></code></pre></div>
+<h1 id="test-logger">test logger</h1>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="va">self</span>.assertLogs(<span class="st">&quot;foo.foo.foo&quot;</span>, level<span class="op">=</span><span class="st">&quot;INFO&quot;</span>) <span class="im">as</span> logger_context_manager:</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span><span class="al">TODO</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="va">self</span>.assertEqual(</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    logger_context_manager.output,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;INFO:foo.foo.foo:logger message&quot;</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co"># if using _logger.error(&#39;foo&#39;, exc_info=True)</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co"># test like this</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="va">self</span>.assertIn(</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;ERROR:foo.foo.foo.foo:Foo&quot;</span>,</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    logger_context_manager.output[<span class="dv">0</span>],</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<h1 id="test-error-raised">test error raised</h1>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="va">self</span>.assertRaisesMessage(<span class="pp">ValueError</span>, <span class="st">&quot;invalid literal for int()&quot;</span>):</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="va">self</span>.assertRaises(<span class="pp">ValueError</span>):</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span></code></pre></div>
+<h1 id="test-freeze-time">test freeze time</h1>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> freezegun <span class="im">import</span> freeze_time</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pytz</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> freeze_time(<span class="st">&quot;2000-01-01T00:00:00&quot;</span>, tz_offset<span class="op">=</span><span class="dv">0</span>):</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span><span class="al">TODO</span><span class="co">: call some function</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="va">self</span>.assertEqual(foo, datetime(<span class="dv">2000</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, tzinfo<span class="op">=</span>pytz.UTC))</span></code></pre></div>
+<h1 id="test-with-override_settings">test with override_settings</h1>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> django.test <span class="im">import</span> override_settings</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="at">@override_settings</span>(ENABLE_TRUSTS<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_foo(<span class="va">self</span>):</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span></code></pre></div>
+<h1 id="mock-response-success">mock response success</h1>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>json_response <span class="op">=</span> json.dumps(</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;url&quot;</span>: <span class="st">&quot;https://fake_bucket_name.aws.com/fake_file_key&quot;</span>,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;id&quot;</span>: expected_document_client_portal_id,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>mock_response <span class="op">=</span> Response()</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>mock_response.status_code <span class="op">=</span> <span class="dv">200</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>mock_response._content <span class="op">=</span> <span class="bu">bytes</span>(json_response, encoding<span class="op">=</span><span class="st">&quot;utf-8&quot;</span>)</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>mock_requests.post.return_value <span class="op">=</span> mock_response</span></code></pre></div>
+<h1 id="mock-response-raised-error">mock response raised error</h1>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>mock_response <span class="op">=</span> mock.Mock()</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>mock_response.raise_for_status.side_effect <span class="op">=</span> HTTPError(<span class="st">&quot;Foo&quot;</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>mock_requests.post.return_value <span class="op">=</span> mock_response</span></code></pre></div>
+<h1 id="test-multiple-calls">test multiple calls</h1>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="va">self</span>.assertEqual(</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    mock_submit_entity.call_args_list,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>        call(entity<span class="op">=</span>pot, data<span class="op">=</span>pot.to_curo(), info<span class="op">=</span>mock.ANY),</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>        call(entity<span class="op">=</span>task, data<span class="op">=</span>task.to_curo(), info<span class="op">=</span>mock.ANY),</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<h1 id="test-failure-curocode-doesnt-exists">test failure CuroCode
+doesn’t exists</h1>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>oneview.errors.OneViewCuroCodeDoesNotExistError: Curo code does <span class="kw">not</span> exist. CuroCode.get <span class="kw">is</span> called <span class="cf">with</span> args: (), kwargs: {<span class="st">&#39;entity&#39;</span>: <span class="st">&#39;t4a_review&#39;</span>, <span class="st">&#39;field&#39;</span>: <span class="st">&#39;review_reason&#39;</span>, <span class="st">&#39;value&#39;</span>: <span class="st">&#39;Initial client meeting&#39;</span>}</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>CuroCode.objects.create(</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    entity<span class="op">=</span><span class="st">&#39;t4a_review&#39;</span>,</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    field<span class="op">=</span><span class="st">&#39;review_reason&#39;</span>,</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    value<span class="op">=</span><span class="st">&#39;Initial client meeting&#39;</span>,</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<h1 id="handle-raise-for-status">handle raise for status</h1>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> requests.post(url, headers<span class="op">=</span>headers, data<span class="op">=</span>json.dumps(data))</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    response.raise_for_status()</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> HTTPError <span class="im">as</span> error:</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    _logger.exception(error)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> FooBar(</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>        errors<span class="op">=</span>[<span class="ss">f&quot;foo bar&quot;</span>],</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>        ok<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
+<h1 id="catch-all-possible-errors">catch all possible errors</h1>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> requests <span class="im">import</span> RequestException</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> requests.get(url,timeout<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    r.raise_for_status()</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> RequestException <span class="im">as</span> error:</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    _logger.exception(error)</span></code></pre></div>
+<h1 id="graphene---set-required-for-a-list-of-objects">Graphene - set
+required for a list of objects</h1>
+<p><code>required=True</code> and <code>NonNull</code></p>
+<ul>
+<li><code>required=True</code> means that the itself must not be
+null.</li>
+</ul>
+<p><code>risk_profiles = graphene.List(graphene.NonNull(lambda: RiskProfileType), required=True)</code></p>
+<ul>
+<li><code>graphene.NonNull</code> means that each risk profile cannot be
+null.</li>
+<li><code>required=True</code> means that the list itself must not be
+null.</li>
+</ul>
+<p>Translate to graphql schema
+<code>riskProfiles: [RiskProfileType!]!</code></p>
+<h1 id="graphene---set-required-for-a-field">Graphene - set required for
+a field</h1>
+<p><code>review = graphene.Field(ReviewType, required=True)</code> #
+Python - How To</p>
 <h1 id="use-poetry-lock---no-update">use
 <code>poetry lock --no-update</code></h1>
 <p>after you manually edited <code>pyproject.toml</code>, run
@@ -419,72 +677,78 @@ errors that happens due to incorrect network configs?</p>
 updating dependencies.</p>
 <h1 id="use-python-simple-history">use
 <code>python-simple-history</code></h1>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> review.history.<span class="bu">all</span>():</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(i.history_change_reason, i.date_updated)</span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> print_history_changes(obj):</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    history <span class="op">=</span> obj.history.order_by(<span class="st">&#39;history_date&#39;</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    fields <span class="op">=</span> [f.name <span class="cf">for</span> f <span class="kw">in</span> obj._meta.fields]</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(history)):</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        old <span class="op">=</span> history[i<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        new <span class="op">=</span> history[i]</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;</span><span class="ch">\n</span><span class="ss">--- Change at: </span><span class="sc">{</span>new<span class="sc">.</span>history_date<span class="sc">}</span><span class="ss"> by </span><span class="sc">{</span>new<span class="sc">.</span>history_user<span class="sc">}</span><span class="ss"> ---&quot;</span>)</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> field <span class="kw">in</span> fields:</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>            old_val <span class="op">=</span> <span class="bu">getattr</span>(old, field)</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>            new_val <span class="op">=</span> <span class="bu">getattr</span>(new, field)</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> old_val <span class="op">!=</span> new_val:</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(<span class="ss">f&quot;</span><span class="sc">{</span>field<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>old_val<span class="sc">!r}</span><span class="ss"> → </span><span class="sc">{</span>new_val<span class="sc">!r}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<p>how_to, python,</p>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> review.history.<span class="bu">all</span>():</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(i.history_change_reason, i.date_updated)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> print_history_changes(obj):</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    history <span class="op">=</span> obj.history.order_by(<span class="st">&#39;history_date&#39;</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    fields <span class="op">=</span> [f.name <span class="cf">for</span> f <span class="kw">in</span> obj._meta.fields]</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(history)):</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>        old <span class="op">=</span> history[i<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>        new <span class="op">=</span> history[i]</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;</span><span class="ch">\n</span><span class="ss">--- Change at: </span><span class="sc">{</span>new<span class="sc">.</span>history_date<span class="sc">}</span><span class="ss"> by </span><span class="sc">{</span>new<span class="sc">.</span>history_user<span class="sc">}</span><span class="ss"> ---&quot;</span>)</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> field <span class="kw">in</span> fields:</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>            old_val <span class="op">=</span> <span class="bu">getattr</span>(old, field)</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>            new_val <span class="op">=</span> <span class="bu">getattr</span>(new, field)</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> old_val <span class="op">!=</span> new_val:</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(<span class="ss">f&quot;</span><span class="sc">{</span>field<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>old_val<span class="sc">!r}</span><span class="ss"> → </span><span class="sc">{</span>new_val<span class="sc">!r}</span><span class="ss">&quot;</span>)</span></code></pre></div>
 <h1 id="debug-in-ssh">debug in ssh</h1>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># first shell</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># somehow this is needed for `ipdb` to run correctly</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> <span class="op">%</span>pdb</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># first shell</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> <span class="im">import</span> pdb</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> pdb.runcall(function_foo, ...<span class="bu">any</span> args <span class="kw">and</span> kwargs)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># first shell</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co"># somehow this is needed for `ipdb` to run correctly</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> <span class="op">%</span>pdb</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co"># first shell</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> <span class="im">import</span> pdb</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> pdb.runcall(function_foo, ...<span class="bu">any</span> args <span class="kw">and</span> kwargs)</span></code></pre></div>
+<h1
+id="fix-expected-a-value-of-type-globalpermissionenum-but-received">fix
+expected a value of type “GlobalPermissionEnum” but received …</h1>
+<p>how_to, work,</p>
+<pre><code>docker exec --env -t oneview-django-1 poetry run python manage.py refresh_all_permissions</code></pre>
 <h1 id="get-file-path-to-python-source-codes-in-ipython-with">get file
 path to python source codes in iPython with <code>??</code></h1>
 <p>in iPython</p>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> requests</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> requests??</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> this</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> this??</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> requests</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> requests??</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> this</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> this??</span></code></pre></div>
 <h1 id="get-celery-ran-tasks">get <code>celery</code> ran tasks</h1>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> django_celery_results.models <span class="im">import</span> TaskResult</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pprint <span class="im">import</span> pprint</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># get tasks by recency</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>task_result <span class="op">=</span> TaskResult.objects.order_by(<span class="st">&#39;-date_created&#39;</span>)[:<span class="dv">5</span>]</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> task_result:</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    pprint(<span class="bu">vars</span>(i))</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># get failed tasks</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>task_result <span class="op">=</span> TaskResult.objects.<span class="bu">filter</span>(status<span class="op">=</span><span class="st">&#39;FAILURE&#39;</span>).order_by(<span class="st">&#39;date_done&#39;</span>)[:<span class="dv">10</span>]</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> task_result:</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    pprint(<span class="bu">vars</span>(i))</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> django_celery_results.models <span class="im">import</span> TaskResult</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pprint <span class="im">import</span> pprint</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># get tasks by recency</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>task_result <span class="op">=</span> TaskResult.objects.order_by(<span class="st">&#39;-date_created&#39;</span>)[:<span class="dv">5</span>]</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> task_result:</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    pprint(<span class="bu">vars</span>(i))</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="co"># get failed tasks</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>task_result <span class="op">=</span> TaskResult.objects.<span class="bu">filter</span>(status<span class="op">=</span><span class="st">&#39;FAILURE&#39;</span>).order_by(<span class="st">&#39;date_done&#39;</span>)[:<span class="dv">10</span>]</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> task_result:</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>    pprint(<span class="bu">vars</span>(i))</span></code></pre></div>
 <h1 id="find-the-dependencies-of-python-package">find the dependencies
 of python package</h1>
 <p>Two ways</p>
 <ol type="1">
 <li>Go into a shell with the dependencies installed</li>
 </ol>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">1</span>]:  <span class="im">from</span> importlib.metadata <span class="im">import</span> requires</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">2</span>]: requires(<span class="st">&#39;Django&#39;</span>)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">2</span>]:</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>[<span class="st">&#39;asgiref (&lt;4,&gt;=3.3.2)&#39;</span>,</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a> <span class="st">&#39;pytz&#39;</span>,</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a> <span class="st">&#39;sqlparse (&gt;=0.2.2)&#39;</span>,</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a> <span class="st">&quot;argon2-cffi (&gt;=19.1.0) ; extra == &#39;argon2&#39;&quot;</span>,</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a> <span class="st">&quot;bcrypt ; extra == &#39;bcrypt&#39;&quot;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">1</span>]:  <span class="im">from</span> importlib.metadata <span class="im">import</span> requires</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">2</span>]: requires(<span class="st">&#39;Django&#39;</span>)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>Out[<span class="dv">2</span>]:</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>[<span class="st">&#39;asgiref (&lt;4,&gt;=3.3.2)&#39;</span>,</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a> <span class="st">&#39;pytz&#39;</span>,</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a> <span class="st">&#39;sqlparse (&gt;=0.2.2)&#39;</span>,</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a> <span class="st">&quot;argon2-cffi (&gt;=19.1.0) ; extra == &#39;argon2&#39;&quot;</span>,</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a> <span class="st">&quot;bcrypt ; extra == &#39;bcrypt&#39;&quot;</span>]</span></code></pre></div>
 <ol start="2" type="1">
 <li>Read the poetry.lock file</li>
 </ol>
@@ -512,26 +776,26 @@ bcrypt = [&quot;bcrypt&quot;]</code></pre>
 <pre><code>... python -m cProfile -o stats ...</code></pre>
 <h2 id="in-ipython">In iPython</h2>
 <p><strong><code>%%prun -r</code> returns profiling object</strong></p>
-<div class="sourceCode" id="cb11"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>prun <span class="op">-</span>D stats</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> oneview.models.helpers.imports <span class="im">import</span> pull_accounts_no_threaded</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>pull_accounts_no_threaded()</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>prun <span class="op">-</span>D stats</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> oneview.models.helpers.imports <span class="im">import</span> pull_accounts_no_threaded</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>pull_accounts_no_threaded()</span></code></pre></div>
 <h2 id="read-output-from-profiler">Read Output from profiler</h2>
-<div class="sourceCode" id="cb12"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pstats</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># read profile output from a file called `stats`</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>stats <span class="op">=</span> pstats.Stats(<span class="st">&#39;stats&#39;</span>)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># starts with Cumulative time to get a sense of the time taken,</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># try to spot unexpected time spent and large number of function calls</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>stats.sort_stats(<span class="st">&#39;cumtime&#39;</span>).print_stats(<span class="dv">100</span>)</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co"># `tottime` for the total time spent in the given function (and excluding time</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co"># made in calls to sub-functions)</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>stats.sort_stats(<span class="st">&#39;tottime&#39;</span>).print_stats(<span class="dv">100</span>)</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>stats.sort_stats(<span class="st">&#39;filename&#39;</span>).print_stats(<span class="dv">100</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pstats</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co"># read profile output from a file called `stats`</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>stats <span class="op">=</span> pstats.Stats(<span class="st">&#39;stats&#39;</span>)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="co"># starts with Cumulative time to get a sense of the time taken,</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="co"># try to spot unexpected time spent and large number of function calls</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>stats.sort_stats(<span class="st">&#39;cumtime&#39;</span>).print_stats(<span class="dv">100</span>)</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="co"># `tottime` for the total time spent in the given function (and excluding time</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="co"># made in calls to sub-functions)</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>stats.sort_stats(<span class="st">&#39;tottime&#39;</span>).print_stats(<span class="dv">100</span>)</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>stats.sort_stats(<span class="st">&#39;filename&#39;</span>).print_stats(<span class="dv">100</span>)</span></code></pre></div>
 <p><strong>Alternatively, Just timeit once</strong></p>
 <pre><code>%%timeit -n 1 -r 1
 
@@ -568,15 +832,15 @@ output into <code>quickfix.vim</code></li>
 <p><strong>Prerequisite</strong></p>
 <p>Go into the ipython shell
 e.g. <code>sudo docker exec -it oneview-django poetry run python manage.py shell</code></p>
-<div class="sourceCode" id="cb14"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">1</span>]: <span class="im">from</span> oneview.graphql.api.charge <span class="im">import</span> one_fee_calculator</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">2</span>]: review_id <span class="op">=</span> <span class="st">&quot;73a07db5-7214-4ead-a9b8-4906e1727a8c&quot;</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">3</span>]: <span class="im">import</span> pdb</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>        pdb.runcall(one_fee_calculator, review_id)</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="op">&gt;</span> <span class="op">/</span>app<span class="op">/</span>backend<span class="op">/</span>oneview<span class="op">/</span>graphql<span class="op">/</span>api<span class="op">/</span>charge.py(<span class="dv">248</span>)one_fee_calculator()</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="op">-&gt;</span> review <span class="op">=</span> Review.objects.get(<span class="bu">id</span><span class="op">=</span>review_id)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">1</span>]: <span class="im">from</span> oneview.graphql.api.charge <span class="im">import</span> one_fee_calculator</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">2</span>]: review_id <span class="op">=</span> <span class="st">&quot;73a07db5-7214-4ead-a9b8-4906e1727a8c&quot;</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>In [<span class="dv">3</span>]: <span class="im">import</span> pdb</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>        pdb.runcall(one_fee_calculator, review_id)</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="op">&gt;</span> <span class="op">/</span>app<span class="op">/</span>backend<span class="op">/</span>oneview<span class="op">/</span>graphql<span class="op">/</span>api<span class="op">/</span>charge.py(<span class="dv">248</span>)one_fee_calculator()</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="op">-&gt;</span> review <span class="op">=</span> Review.objects.get(<span class="bu">id</span><span class="op">=</span>review_id)</span></code></pre></div>
 <p>If you do the above, you will be dropped into the pdb debugging
 shell.</p>
 <p>Note: please be careful about possible side effects if the functions
@@ -615,185 +879,36 @@ Doc from requests</p>
 <h1 id="use-urllib-instead-requests">use urllib instead
 <code>Requests</code></h1>
 <p>POST with json data</p>
-<div class="sourceCode" id="cb16"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>json_as_bytes <span class="op">=</span> json.dumps(payload).encode(<span class="st">&quot;utf-8&quot;</span>)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>request_object <span class="op">=</span> request.Request(<span class="va">self</span>.api_url, data<span class="op">=</span>json_as_bytes)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>request_object.add_header(<span class="st">&quot;Content-Type&quot;</span>, <span class="st">&quot;application/json&quot;</span>)</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>request_object.add_header(<span class="st">&quot;Authorization&quot;</span>, <span class="ss">f&quot;Bearer </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>token<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> request.urlopen(request_object) <span class="im">as</span> response:</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>        res_json <span class="op">=</span> json.loads(response.read())</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> HTTPError <span class="im">as</span> e:</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    _logger.exception(e.code)</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    _logger.exception(e.read())</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> e</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>json_as_bytes <span class="op">=</span> json.dumps(payload).encode(<span class="st">&quot;utf-8&quot;</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>request_object <span class="op">=</span> request.Request(<span class="va">self</span>.api_url, data<span class="op">=</span>json_as_bytes)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>request_object.add_header(<span class="st">&quot;Content-Type&quot;</span>, <span class="st">&quot;application/json&quot;</span>)</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>request_object.add_header(<span class="st">&quot;Authorization&quot;</span>, <span class="ss">f&quot;Bearer </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>token<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> request.urlopen(request_object) <span class="im">as</span> response:</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>        res_json <span class="op">=</span> json.loads(response.read())</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> HTTPError <span class="im">as</span> e:</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>    _logger.exception(e.code)</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>    _logger.exception(e.read())</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> e</span></code></pre></div>
 <p>See Also: <a
 href="https://docs.python.org/3.12/howto/urllib2.html">urllib2
 doc</a></p>
 <h1 id="use-a-decorator-to-print-function-calls">use a decorator to
 print function calls</h1>
-<div class="sourceCode" id="cb17"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> print_function_name(func):</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _print_function_name(<span class="op">*</span>args, <span class="op">**</span>kwargs):</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;--&gt; begin:  </span><span class="sc">{</span>func<span class="sc">.</span><span class="va">__name__</span><span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> func(<span class="op">*</span>args, <span class="op">**</span>kwargs)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;--&gt; return: </span><span class="sc">{</span>func<span class="sc">.</span><span class="va">__name__</span><span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> result</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> _print_function_name</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> print_function_name(func):</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _print_function_name(<span class="op">*</span>args, <span class="op">**</span>kwargs):</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;--&gt; begin:  </span><span class="sc">{</span>func<span class="sc">.</span><span class="va">__name__</span><span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> func(<span class="op">*</span>args, <span class="op">**</span>kwargs)</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;--&gt; return: </span><span class="sc">{</span>func<span class="sc">.</span><span class="va">__name__</span><span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> result</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> _print_function_name</span></code></pre></div>
 <h1 id="enable-ipython-autoload">enable iPython autoload</h1>
 <p>reload modules when user executes code, so that I don’t need to exit
 ipython shell to reload edited code.</p>
 <pre><code>%load_ext autoreload
 %autoreload 2</code></pre>
-<h1 id="use-logging-module">Use logging module</h1>
-<h2 id="usage">Usage</h2>
-<div class="sourceCode" id="cb19"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> logging</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>logging.basicConfig(</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># filename=&quot;foo.log&quot;,</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    encoding<span class="op">=</span><span class="st">&quot;utf-8&quot;</span>,</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    level<span class="op">=</span>logging.DEBUG,</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">format</span><span class="op">=</span><span class="st">&#39;</span><span class="sc">%(levelname)s</span><span class="st"> </span><span class="sc">%(asctime)s</span><span class="st"> </span><span class="sc">%(module)s</span><span class="st"> </span><span class="sc">%(message)s</span><span class="st">&#39;</span>,</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>logger <span class="op">=</span> logging.getLogger(<span class="va">__name__</span>)</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>logger.debug(<span class="st">&quot;foo bar baz&quot;</span>)</span></code></pre></div>
-<h2 id="log-level-explain">Log Level Explain</h2>
-<table>
-<colgroup>
-<col style="width: 5%" />
-<col style="width: 94%" />
-</colgroup>
-<thead>
-<tr>
-<th>Level</th>
-<th>When it’s used</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>DEBUG</td>
-<td>Detailed information, typically of interest only when diagnosing
-problems.</td>
-</tr>
-<tr>
-<td>INFO</td>
-<td>Confirmation that things are working as expected.</td>
-</tr>
-<tr>
-<td>WARNING</td>
-<td>An indication that something unexpected happened, or indicative of
-some problem in the near future (e.g. ‘disk space low’). The software is
-still working as expected.</td>
-</tr>
-<tr>
-<td>ERROR</td>
-<td>Due to a more serious problem, the software has not been able to
-perform some function.</td>
-</tr>
-<tr>
-<td>CRITICAL</td>
-<td>A serious error, indicating that the program itself may be unable to
-continue running.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="loggers-handlers-filters-and-formatters">Loggers, Handlers,
-Filters and Formatters</h2>
-<p>The logging library takes a modular approach and offers several
-categories of components: loggers, handlers, filters, and
-formatters.</p>
-<table>
-<colgroup>
-<col style="width: 13%" />
-<col style="width: 86%" />
-</colgroup>
-<thead>
-<tr>
-<th>Module</th>
-<th>Function</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Loggers</td>
-<td>expose the interface that application code directly uses.</td>
-</tr>
-<tr>
-<td>Handlers</td>
-<td>send the log records (created by loggers) to the appropriate
-destination.</td>
-</tr>
-<tr>
-<td>Filters</td>
-<td>provide a finer grained facility for determining which log records
-to output.</td>
-</tr>
-<tr>
-<td>Formatters</td>
-<td>specify the layout of log records in the final output.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="more-on-loggers">More on Loggers</h2>
-<p><code>getLogger()</code> returns a reference to a logger instance
-with the specified name if it is provided, or root if not. The names are
-period-separated hierarchical structures. Multiple calls to
-<code>getLogger()</code> with the same name will return a reference to
-the same logger object. Loggers that are further down in the
-hierarchical list are children of loggers higher up in the list. For
-example, given a logger with a name of <code>foo</code>, loggers with
-names of <code>foo.bar</code>, <code>foo.bar.baz</code>, and
-<code>foo.bam</code> are all descendants of <code>foo</code>.</p>
-<p>Loggers have a concept of effective level. If a level is not
-explicitly set on a logger, the level of its parent is used instead as
-its effective level. If the parent has no explicit level set, its parent
-is examined, and so on - all ancestors are searched until an explicitly
-set level is found. The root logger always has an explicit level set
-(<code>WARNING</code> by default). When deciding whether to process an
-event, the effective level of the logger is used to determine whether
-the event is passed to the logger’s handlers.</p>
-<p>Child loggers propagate messages up to the handlers associated with
-their ancestor loggers. Because of this, it is unnecessary to define and
-configure handlers for all the loggers an application uses. It is
-sufficient to configure handlers for a top-level logger and create child
-loggers as needed. (You can, however, turn off propagation by setting
-the propagate attribute of a logger to <code>False</code>.)</p>
-<h2 id="if-no-configuration-is-used">If no configuration is used</h2>
-<p>If no logging configuration is used, a special handler
-<code>lastResort</code> is used, which writes log to <code>stderr</code>
-with level <code>WARNING</code> with formatting like
-<code>level:module:message</code>.</p>
-<pre><code>import logging
-
-logging.debug(&quot;abc&quot;)
-logging.info(&quot;abc&quot;)
-logging.warning(&quot;abc&quot;)
-logging.error(&quot;abc&quot;)
-
-# Output
-# WARNING:root:abc
-# ERROR:root:abc
-
-logger = logging.getLogger(__name__)
-logger.debug(&quot;abc&quot;)
-logger.info(&quot;abc&quot;)
-logger.warning(&quot;abc&quot;)
-logger.error(&quot;abc&quot;)
-
-# Output
-# WARNING:__main__:abc
-# ERROR:__main__:abc</code></pre>
-<h2 id="see-also">See also</h2>
-<ul>
-<li><a
-href="https://docs.python.org/3/howto/logging.html#logging-basic-tutorial">Logging
-How-To</a></li>
-<li><a
-href="https://docs.djangoproject.com/en/5.1/topics/logging/">Django
-Logging</a></li>
-</ul>
 <h1 id="python---explanation">Python - Explanation</h1>
 <h1 id="what-is-python-wheel">what is python wheel?</h1>
 <p><strong>output for installing source distribution (not

@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>use `poetry lock --no-update`</title>
+  <title>rename table</title>
   <style>
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -30,10 +30,9 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">use `poetry lock --no-update`</h1>
+<h1 class="title">rename table</h1>
 </header>
-<p>after you manually edited <code>pyproject.toml</code>, run
-<code>poetry lock --no-update</code> to only update lock file without
-updating dependencies.</p>
+<pre><code>ALTER TABLE oneview_incomeprofile RENAME COLUMN business_unit_id TO adviser_business_unit_id;
+ALTER TABLE oneview_incomeprofile RENAME COLUMN adviser_business_unit_id TO business_unit_id;</code></pre>
 </body>
 </html>

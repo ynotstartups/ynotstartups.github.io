@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>use `poetry lock --no-update`</title>
+  <title>save query result to a file</title>
   <style>
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -30,10 +30,15 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">use `poetry lock --no-update`</h1>
+<h1 class="title">save query result to a file</h1>
 </header>
-<p>after you manually edited <code>pyproject.toml</code>, run
-<code>poetry lock --no-update</code> to only update lock file without
-updating dependencies.</p>
+<pre><code># start
+\o data.txt
+
+# ...run the psql commands...e.g. \dt
+
+# ended
+\o</code></pre>
+<pre><code>docker-compose --file docker-compose-dev.yml exec postgres cat data.txt</code></pre>
 </body>
 </html>

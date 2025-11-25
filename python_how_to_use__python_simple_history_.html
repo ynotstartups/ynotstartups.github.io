@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>errors in `Requests`</title>
+  <title>use `python-simple-history`</title>
   <style>
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -95,106 +95,26 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">errors in `Requests`</h1>
+<h1 class="title">use `python-simple-history`</h1>
 </header>
-<nav id="TOC" role="doc-toc">
-<ul>
-<li><a href="#catching-requests-errors"
-id="toc-catching-requests-errors">Catching requests errors</a></li>
-<li><a href="#error-classes-inheritance"
-id="toc-error-classes-inheritance">Error Classes Inheritance</a></li>
-</ul>
-</nav>
-<table>
-<colgroup>
-<col style="width: 24%" />
-<col style="width: 13%" />
-<col style="width: 62%" />
-</colgroup>
-<thead>
-<tr>
-<th>error type</th>
-<th>safe to retry</th>
-<th>examples of when error occurs</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>HTTPError - 4xx</td>
-<td>No</td>
-<td>client error, e.g., calling the api incorrectly</td>
-</tr>
-<tr>
-<td>HTTPError - 5xx</td>
-<td>No</td>
-<td>server error, e.g. bugs in server code</td>
-</tr>
-<tr>
-<td>Connection Error</td>
-<td>Maybe</td>
-<td>incorrect configurations or unavailble network</td>
-</tr>
-<tr>
-<td>Connection Timeout</td>
-<td>Yes</td>
-<td>network congestion, server too busy to responds, server being
-offline</td>
-</tr>
-<tr>
-<td>Request Timeout</td>
-<td>Maybe</td>
-<td>The server did not send any data in the allotted amount of time</td>
-</tr>
-<tr>
-<td>Requests library Exception</td>
-<td>No</td>
-<td>data passed in cannot be converted to json</td>
-</tr>
-<tr>
-<td>Other Python Exception</td>
-<td>No</td>
-<td>any python errors</td>
-</tr>
-</tbody>
-</table>
-<p>https://requests.readthedocs.io/en/latest/api/#requests.ReadTimeout</p>
-<p><strong>See also</strong>: <a
-href="https://requests.readthedocs.io/en/latest/api/#exceptions">requests
-doc</a></p>
-<h2 id="catching-requests-errors">Catching requests errors</h2>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> requests <span class="im">import</span> Timeout, HTTPError</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.post(url, headers<span class="op">=</span>headers, data<span class="op">=</span>data)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    response.raise_for_status()</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> HTTPError, Timeout <span class="im">as</span> error:</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span><span class="al">TODO</span></span></code></pre></div>
-<blockquote>
-<p>In the event of a network problem (e.g. DNS failure, refused
-connection, etc), Requests will raise a ConnectionError exception.
-Response.raise_for_status() will raise an HTTPError if the HTTP request
-returned an unsuccessful status code. If a request times out, a Timeout
-exception is raised. If a request exceeds the configured number of
-maximum redirections, a TooManyRedirects exception is raised. All
-exceptions that Requests explicitly raises inherit from
-requests.exceptions.RequestException.</p>
-</blockquote>
-<ul>
-<li>https://requests.readthedocs.io/en/latest/user/quickstart/#errors-and-exceptions</li>
-</ul>
-<p>I argue that we should not catch connection error in user facing code
-as when the code deployed to prod, the code should not have connection
-errors that happens due to incorrect network configs?</p>
-<h2 id="error-classes-inheritance">Error Classes Inheritance</h2>
-<pre><code>RequestException(IOError)
----&gt; HTTPError(RequestException)
----&gt; ConnectionError(RequestException)
----&gt; Timeout(RequestException)
--------&gt; ConnectTimeout(ConnectionError, Timeout)
--------&gt; ReadTimeout(Timeout)</code></pre>
-<ul>
-<li>https://requests.readthedocs.io/en/latest/_modules/requests/exceptions/#RequestException</li>
-</ul>
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> review.history.<span class="bu">all</span>():</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(i.history_change_reason, i.date_updated)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> print_history_changes(obj):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    history <span class="op">=</span> obj.history.order_by(<span class="st">&#39;history_date&#39;</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    fields <span class="op">=</span> [f.name <span class="cf">for</span> f <span class="kw">in</span> obj._meta.fields]</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(history)):</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        old <span class="op">=</span> history[i<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        new <span class="op">=</span> history[i]</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;</span><span class="ch">\n</span><span class="ss">--- Change at: </span><span class="sc">{</span>new<span class="sc">.</span>history_date<span class="sc">}</span><span class="ss"> by </span><span class="sc">{</span>new<span class="sc">.</span>history_user<span class="sc">}</span><span class="ss"> ---&quot;</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> field <span class="kw">in</span> fields:</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>            old_val <span class="op">=</span> <span class="bu">getattr</span>(old, field)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>            new_val <span class="op">=</span> <span class="bu">getattr</span>(new, field)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> old_val <span class="op">!=</span> new_val:</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(<span class="ss">f&quot;</span><span class="sc">{</span>field<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>old_val<span class="sc">!r}</span><span class="ss"> → </span><span class="sc">{</span>new_val<span class="sc">!r}</span><span class="ss">&quot;</span>)</span></code></pre></div>
 </body>
 </html>

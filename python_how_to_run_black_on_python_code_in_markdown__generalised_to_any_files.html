@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>run black or flake8 on python code in markdown</title>
+  <title>run black on python code in markdown, generalised to any files</title>
   <style>
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -30,24 +30,27 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">run black or flake8 on python code in markdown</h1>
+<h1 class="title">run black on python code in markdown, generalised to
+any files</h1>
 </header>
-<p>generalised to any files</p>
 <ol type="1">
 <li><code>vic</code> visual select lines of python codes in markdown
 code block</li>
 <li><code>:'&lt;,'&gt;!black -q -</code> to replace the visually
 selected lines with the formatted standard output of the external
 <code>black</code> command (see <code>:help filter</code>)</li>
+</ol>
+<p><strong>:help filter</strong></p>
+<pre><code>4.1 Filter commands                 *filter*
+A filter is a program that accepts text at standard input, changes it in some
+way, and sends it to standard output.  You can use the commands below to send
+some text through a filter, so that it is replaced by the filter output.</code></pre>
+<p><strong>See also</strong></p>
+<p>using flake8 on python in markdown</p>
+<ul>
 <li><code>:'&lt;,'&gt;w !flake8 -</code> to use <code>w</code> to echo
 flake8’s output instead of replacing visually selected lines (see
 <code>:help :w_c</code>)</li>
-</ol>
-<p><strong>Alternatively, I can open the output in a split</strong></p>
-<ol type="1">
-<li><code>:'&lt;,'&gt;w !flake8 - &gt; quickfix.vim</code> to pipe the
-output into <code>quickfix.vim</code></li>
-<li><code>&lt;leader&gt;el</code></li>
-</ol>
+</ul>
 </body>
 </html>

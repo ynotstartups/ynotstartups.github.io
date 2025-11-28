@@ -97,14 +97,6 @@
 <header id="title-block-header">
 <h1 class="title">debug in ssh</h1>
 </header>
-<nav id="TOC" role="doc-toc">
-<ul>
-<li><a
-href="#fix-expected-a-value-of-type-globalpermissionenum-but-received"
-id="toc-fix-expected-a-value-of-type-globalpermissionenum-but-received">fix
-expected a value of type “GlobalPermissionEnum” but received …</a></li>
-</ul>
-</nav>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># first shell</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># somehow this is needed for `ipdb` to run correctly</span></span>
@@ -113,10 +105,5 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a hr
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># first shell</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> <span class="im">import</span> pdb</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> pdb.runcall(function_foo, ...<span class="bu">any</span> args <span class="kw">and</span> kwargs)</span></code></pre></div>
-<h1
-id="fix-expected-a-value-of-type-globalpermissionenum-but-received">fix
-expected a value of type “GlobalPermissionEnum” but received …</h1>
-<p>how_to, work,</p>
-<pre><code>docker exec --env -t oneview-django-1 poetry run python manage.py refresh_all_permissions</code></pre>
 </body>
 </html>

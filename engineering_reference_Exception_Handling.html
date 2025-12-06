@@ -105,9 +105,6 @@
 <li><a href="#example-third-party-api-call"
 id="toc-example-third-party-api-call">Example: Third Party API
 Call</a></li>
-<li><a href="#regarding-argument-just-put-it-in-a-queue-and-retry"
-id="toc-regarding-argument-just-put-it-in-a-queue-and-retry">Regarding
-argument just put it in a queue and retry?</a></li>
 </ul>
 </nav>
 <h2 id="reminder">Reminder</h2>
@@ -117,12 +114,12 @@ argument just put it in a queue and retry?</a></li>
 raised by python code, <code>Error</code> can mean human errors and have
 much larger implication, makes it harder to think.</li>
 <li>assume each third party integration failed</li>
-<li>it’s a business / BA decision when there is no perfect solution</li>
+<li>it’s a business / BA decision when there is no perfect solution
+<ul>
 <li>confirmed with BA, on what should the error message be?</li>
+</ul></li>
 <li>use <code>with transcation.atomic()</code>
 <ul>
-<li>put multiple DB table changes in one
-<code>with transcation.atomic()</code></li>
 <li>put a single DB update/save with Curo call using
 <code>submit_entity_unhandled</code></li>
 <li>don’t use decorator <code>@transaction.atomic</code> to avoid future
@@ -136,7 +133,7 @@ retry or even auto retry</li>
 </ul>
 <h2 id="principles">Principles</h2>
 <ul>
-<li><code>Error Handling</code> means what are the correct business
+<li><code>Exception Handling</code> means what are the correct business
 logics when errors happen</li>
 <li>consider curo as extension of oneview DB, so wrap curo call and DB
 changes in one transaction</li>
@@ -161,17 +158,6 @@ is to verify first to avoid saving to local DB failed? because of the
 stable network or retry mechanism, unless this is DB constraint, save to
 local DB shouldn’t failed, so maybe verify can avoid the failure to
 local DB.</li>
-</ul>
-<h2 id="regarding-argument-just-put-it-in-a-queue-and-retry">Regarding
-argument just put it in a queue and retry?</h2>
-<p>Answer:</p>
-<ul>
-<li>Putting some logics in a queue doesn’t solve the real problem of
-what should happen if this logics failed?</li>
-<li>and being async introduces complexity such as how to inform the user
-if this logics failed?</li>
-<li>when errors happen, which errors can be retried? which errors cannot
-be retried?</li>
 </ul>
 </body>
 </html>

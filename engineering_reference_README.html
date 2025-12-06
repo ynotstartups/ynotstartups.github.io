@@ -36,23 +36,52 @@
 <ul>
 <li><a href="#keep-learning-everyday"
 id="toc-keep-learning-everyday">Keep Learning Everyday</a></li>
+<li><a href="#postgres-performance-and-concurrency"
+id="toc-postgres-performance-and-concurrency">Postgres Performance and
+Concurrency</a></li>
 <li><a href="#exception-handling" id="toc-exception-handling">Exception
 Handling</a></li>
 <li><a href="#documentation"
 id="toc-documentation">Documentation</a></li>
-<li><a href="#performance-consideration"
-id="toc-performance-consideration">Performance Consideration</a></li>
 </ul>
 </nav>
 <h2 id="keep-learning-everyday">Keep Learning Everyday</h2>
 <ul>
-<li>Keep Learning Everyday
+<li>Keep Learning Everyday, learning relational database management
+system at the moment
 <ul>
 <li>learn fundamentals and use tools with long shelf-life</li>
 </ul></li>
 <li>Tips for clear writing: write individual characters and each
 characters take up full square</li>
 <li>write shell, vimscript in python</li>
+<li>Daily
+<ul>
+<li>stand for stand up</li>
+<li>run FP fee fixing and missing atr fixing script</li>
+</ul></li>
+<li>reminder: <code>=</code> to format python, <code>d</code> for
+documentation</li>
+</ul>
+<h2 id="postgres-performance-and-concurrency">Postgres Performance and
+Concurrency</h2>
+<ul>
+<li>consider transaction
+<ul>
+<li>mutiple save</li>
+<li>select + save, would it introduce concurrent overwritten issue?
+consider <code>select_for_update</code>?</li>
+</ul></li>
+<li>care about DB Performance!
+<ul>
+<li>use database indexing with <code>db_index=True</code></li>
+<li>use <code>self.assertNumQueries</code></li>
+<li><code>print(queryset.query)</code></li>
+<li>set <code>django.db.backend</code> config to debug to print the sql
+queries</li>
+<li>optimize queries with <code>select_related</code> and
+<code>prefetch_related</code></li>
+</ul></li>
 </ul>
 <h2 id="exception-handling">Exception Handling</h2>
 <ul>
@@ -70,31 +99,12 @@ information</li>
 </ul></li>
 </ul></li>
 <li>think about exception handling on every HTTP Requests</li>
-<li>test end to end in production is very important to catch prod
-specific configuration problems</li>
 </ul>
 <h2 id="documentation">Documentation</h2>
 <ul>
 <li>add <strong>order of operation</strong> (inspired by Network
-Protocol)
-<ul>
-<li>order is not obvious to derive from reading a bunch of
+Protocol), order is not obvious to derive from reading a bunch of
 functions/methods</li>
-</ul></li>
-</ul>
-<h2 id="performance-consideration">Performance Consideration</h2>
-<ul>
-<li>silk profiling</li>
-<li>care about DB Performance!
-<ul>
-<li>use database indexing with <code>db_index=True</code></li>
-<li>use <code>self.assertNumQueries</code></li>
-<li><code>print(queryset.query)</code></li>
-<li>set <code>django.db.backend</code> config to debug to print the sql
-queries</li>
-<li>optimize queries with <code>select_related</code> and
-<code>prefetch_related</code></li>
-</ul></li>
 </ul>
 </body>
 </html>

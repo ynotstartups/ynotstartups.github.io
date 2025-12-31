@@ -111,43 +111,44 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a hr
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    pp(ctx.captured_queries)</span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>[{<span class="st">&#39;sql&#39;</span>: <span class="st">&#39;BEGIN&#39;</span>, <span class="st">&#39;time&#39;</span>: <span class="st">&#39;0.000&#39;</span>},</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a> {<span class="st">&#39;sql&#39;</span>: <span class="st">&#39;SELECT &quot;oneview_curogenericmodel&quot;.&quot;id&quot;, &#39;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;oneview_curogenericmodel&quot;.&quot;is_deleted&quot;, &#39;</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;oneview_curogenericmodel&quot;.&quot;is_dummy&quot;, &#39;</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;oneview_curogenericmodel&quot;.&quot;date_deleted&quot;, &#39;</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;oneview_curogenericmodel&quot;.&quot;date_created&quot;, &#39;</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;oneview_curogenericmodel&quot;.&quot;date_updated&quot;, &#39;</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;oneview_curogenericmodel&quot;.&quot;created_by_system&quot;, &#39;</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;oneview_curogenericmodel&quot;.&quot;curo_id&quot;, &#39;</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;oneview_curogenericmodel&quot;.&quot;name&quot;, &#39;</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;oneview_curogenericmodel&quot;.&quot;curo_entity&quot;, &#39;</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;oneview_curogenericmodel&quot;.&quot;additional_data&quot; FROM &#39;</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;oneview_curogenericmodel&quot; WHERE &#39;</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;oneview_curogenericmodel&quot;.&quot;curo_id&quot; = &#39;</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;&#39;__some_uuid__&#39;::uuid LIMIT 21 FOR UPDATE&quot;</span>,</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;time&#39;</span>: <span class="st">&#39;0.003&#39;</span>},</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a> {<span class="st">&#39;sql&#39;</span>: <span class="st">&#39;UPDATE &quot;oneview_curogenericmodel&quot; SET &quot;date_deleted&quot; = NULL, &#39;</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;date_created&quot; = </span><span class="ch">\&#39;</span><span class="st">2025-12-03T10:50:31.970014+00:00</span><span class="ch">\&#39;</span><span class="st">::timestamptz, &#39;</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;date_updated&quot; = </span><span class="ch">\&#39;</span><span class="st">2025-12-08T12:08:01.113885+00:00</span><span class="ch">\&#39;</span><span class="st">::timestamptz, &#39;</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;name&quot; = </span><span class="ch">\&#39;</span><span class="st">1 (Evalue)</span><span class="ch">\&#39;</span><span class="st">, &quot;curo_entity&quot; = </span><span class="ch">\&#39;</span><span class="st">t4a_riskprofile</span><span class="ch">\&#39;</span><span class="st"> WHERE &#39;</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;oneview_curogenericmodel&quot;.&quot;id&quot; = &#39;</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;&#39;__some_uuid__&#39;::uuid&quot;</span>,</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;time&#39;</span>: <span class="st">&#39;0.012&#39;</span>},</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a> {<span class="st">&#39;sql&#39;</span>: <span class="st">&#39;INSERT INTO &quot;oneview_historicalcurogenericmodel&quot; (&quot;id&quot;, &#39;</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;is_deleted&quot;, &quot;is_dummy&quot;, &quot;date_deleted&quot;, &quot;date_created&quot;, &#39;</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;date_updated&quot;, &quot;created_by_system&quot;, &quot;curo_id&quot;, &quot;name&quot;, &#39;</span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;curo_entity&quot;, &quot;additional_data&quot;, &quot;history_date&quot;, &#39;</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;history_change_reason&quot;, &quot;history_type&quot;, &quot;history_user_id&quot;) VALUES &#39;</span></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;(&#39;68f0ef89-4fef-4885-8651-a98e2c6f9e75&#39;::uuid, false, false, NULL, &quot;</span></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;&#39;2025-12-03T10:50:31.970014+00:00&#39;::timestamptz, &quot;</span></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;&#39;2025-12-08T12:08:01.113885+00:00&#39;::timestamptz, &#39;oneview&#39;, &quot;</span></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;&#39;4ffc3ee1-b948-ed11-a85b-000d3a7ef302&#39;::uuid, &#39;1 (Evalue)&#39;, &quot;</span></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;&#39;t4a_riskprofile&#39;, NULL, &quot;</span></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;&#39;2025-12-08T12:08:01.125829+00:00&#39;::timestamptz, NULL, &#39;~&#39;, NULL) &quot;</span></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;RETURNING &quot;oneview_historicalcurogenericmodel&quot;.&quot;history_id&quot;&#39;</span>,</span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;time&#39;</span>: <span class="st">&#39;0.010&#39;</span>},</span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a> {<span class="st">&#39;sql&#39;</span>: <span class="st">&#39;COMMIT&#39;</span>, <span class="st">&#39;time&#39;</span>: <span class="st">&#39;0.002&#39;</span>}]</span></code></pre></div>
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>[{<span class="st">&#39;sql&#39;</span>: <span class="st">&#39;BEGIN&#39;</span>, <span class="st">&#39;time&#39;</span>: <span class="st">&#39;0.000&#39;</span>},</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a> {<span class="st">&#39;sql&#39;</span>: <span class="st">&#39;SELECT &quot;oneview_curogenericmodel&quot;.&quot;id&quot;, &#39;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;oneview_curogenericmodel&quot;.&quot;is_deleted&quot;, &#39;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;oneview_curogenericmodel&quot;.&quot;is_dummy&quot;, &#39;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;oneview_curogenericmodel&quot;.&quot;date_deleted&quot;, &#39;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;oneview_curogenericmodel&quot;.&quot;date_created&quot;, &#39;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;oneview_curogenericmodel&quot;.&quot;date_updated&quot;, &#39;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;oneview_curogenericmodel&quot;.&quot;created_by_system&quot;, &#39;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;oneview_curogenericmodel&quot;.&quot;curo_id&quot;, &#39;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;oneview_curogenericmodel&quot;.&quot;name&quot;, &#39;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;oneview_curogenericmodel&quot;.&quot;curo_entity&quot;, &#39;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;oneview_curogenericmodel&quot;.&quot;additional_data&quot; FROM &#39;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;oneview_curogenericmodel&quot; WHERE &#39;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;oneview_curogenericmodel&quot;.&quot;curo_id&quot; = &#39;</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;&#39;__some_uuid__&#39;::uuid LIMIT 21 FOR UPDATE&quot;</span>,</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;time&#39;</span>: <span class="st">&#39;0.003&#39;</span>},</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a> {<span class="st">&#39;sql&#39;</span>: <span class="st">&#39;UPDATE &quot;oneview_curogenericmodel&quot; SET &quot;date_deleted&quot; = NULL, &#39;</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;date_created&quot; = </span><span class="ch">\&#39;</span><span class="st">2025-12-03T10:50:31.970014+00:00</span><span class="ch">\&#39;</span><span class="st">::timestamptz, &#39;</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;date_updated&quot; = </span><span class="ch">\&#39;</span><span class="st">2025-12-08T12:08:01.113885+00:00</span><span class="ch">\&#39;</span><span class="st">::timestamptz, &#39;</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;name&quot; = </span><span class="ch">\&#39;</span><span class="st">1 (Evalue)</span><span class="ch">\&#39;</span><span class="st">, &quot;curo_entity&quot; = </span><span class="ch">\&#39;</span><span class="st">t4a_riskprofile</span><span class="ch">\&#39;</span><span class="st"> WHERE &#39;</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;oneview_curogenericmodel&quot;.&quot;id&quot; = &#39;</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;&#39;__some_uuid__&#39;::uuid&quot;</span>,</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;time&#39;</span>: <span class="st">&#39;0.012&#39;</span>},</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a> {<span class="st">&#39;sql&#39;</span>: <span class="st">&#39;INSERT INTO &quot;oneview_historicalcurogenericmodel&quot; (&quot;id&quot;, &#39;</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;is_deleted&quot;, &quot;is_dummy&quot;, &quot;date_deleted&quot;, &quot;date_created&quot;, &#39;</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;date_updated&quot;, &quot;created_by_system&quot;, &quot;curo_id&quot;, &quot;name&quot;, &#39;</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;curo_entity&quot;, &quot;additional_data&quot;, &quot;history_date&quot;, &#39;</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;&quot;history_change_reason&quot;, &quot;history_type&quot;, &quot;history_user_id&quot;) VALUES &#39;</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;(&#39;68f0ef89-4fef-4885-8651-a98e2c6f9e75&#39;::uuid, false, false, NULL, &quot;</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;&#39;2025-12-03T10:50:31.970014+00:00&#39;::timestamptz, &quot;</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;&#39;2025-12-08T12:08:01.113885+00:00&#39;::timestamptz, &#39;oneview&#39;, &quot;</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;&#39;4ffc3ee1-b948-ed11-a85b-000d3a7ef302&#39;::uuid, &#39;1 (Evalue)&#39;, &quot;</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;&#39;t4a_riskprofile&#39;, NULL, &quot;</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;&#39;2025-12-08T12:08:01.125829+00:00&#39;::timestamptz, NULL, &#39;~&#39;, NULL) &quot;</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;RETURNING &quot;oneview_historicalcurogenericmodel&quot;.&quot;history_id&quot;&#39;</span>,</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;time&#39;</span>: <span class="st">&#39;0.010&#39;</span>},</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a> {<span class="st">&#39;sql&#39;</span>: <span class="st">&#39;COMMIT&#39;</span>, <span class="st">&#39;time&#39;</span>: <span class="st">&#39;0.002&#39;</span>}]</span></code></pre></div>
 <p>See also <a
 href="https://b0uh.github.io/django-show-me-the-sql.html">this useful
 websites on other ways to see sql queries</a></p>

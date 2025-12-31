@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Who am I?</title>
+  <title>steps to use `poetry` to update dependencies</title>
   <style>
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -30,37 +30,21 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">Who am I?</h1>
+<h1 class="title">steps to use `poetry` to update dependencies</h1>
 </header>
-<nav id="TOC" role="doc-toc">
 <ul>
-<li><a href="#hobbies" id="toc-hobbies">Hobbies</a></li>
-<li><a href="#ways-of-living" id="toc-ways-of-living">Ways of
-Living</a></li>
-</ul>
-</nav>
-<p>My name is Tiger Yuhao Huang.</p>
-<figure>
-<img src="images/me.webp" width="350" alt="me" />
-<figcaption aria-hidden="true">me</figcaption>
-</figure>
-<p>Welcome to my notes!</p>
-<p>I am currently working as a python backend engineer!</p>
-<p>Lifelong Goal: become an effective engineer, and having fun along the
-way.</p>
-<h2 id="hobbies">Hobbies</h2>
+<li><p><code>poetry show --outdated</code> - shows outdated
+dependencies</p></li>
+<li><p><code>poetry update --dry-run</code> - dry run update
+dependencies</p></li>
+<li><p><code>poetry update</code> - run update dependencies</p></li>
+<li><p>alternatively if you manually edited
+<code>pyproject.lock</code>,</p>
 <ul>
-<li>software engineering</li>
-<li>cooking, coffee brewing</li>
-<li>eating out</li>
-<li>reading</li>
-<li>household clearning and organizing</li>
-</ul>
-<h2 id="ways-of-living">Ways of Living</h2>
-<ul>
-<li>progression through books and write notes</li>
-<li>minimalism</li>
-<li>take it easy, be good enough, do what I like,</li>
+<li>use <code>poetry lock</code> (for poetry v2) to update lock file
+only</li>
+<li><code>poetry lock --no-update</code> (for poetry v1)</li>
+</ul></li>
 </ul>
 </body>
 </html>

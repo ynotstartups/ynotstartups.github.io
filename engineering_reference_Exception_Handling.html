@@ -99,52 +99,73 @@
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
+<li><a href="#what-is-exception-handling"
+id="toc-what-is-exception-handling">What is Exception handling</a></li>
+<li><a href="#when-to-handle-exception"
+id="toc-when-to-handle-exception">When to Handle Exception</a></li>
+<li><a href="#how-to-handle-exception"
+id="toc-how-to-handle-exception">How To Handle Exception</a></li>
 <li><a href="#reminder" id="toc-reminder">Reminder</a></li>
-<li><a href="#principles" id="toc-principles">Principles</a></li>
 <li><a href="#example-curo" id="toc-example-curo">Example: Curo</a></li>
 <li><a href="#example-third-party-api-call"
 id="toc-example-third-party-api-call">Example: Third Party API
 Call</a></li>
 </ul>
 </nav>
+<h2 id="what-is-exception-handling">What is Exception handling</h2>
+<ul>
+<li><code>Exception Handling</code> means apply the correct business
+logics when errors happen!</li>
+</ul>
+<h2 id="when-to-handle-exception">When to Handle Exception</h2>
+<ul>
+<li>every HTTP Requests i.e. third party integration</li>
+</ul>
+<h2 id="how-to-handle-exception">How To Handle Exception</h2>
+<ul>
+<li>How To Handle Exception (thanks to Sentry Django Project)
+<ul>
+<li>only catch specific exceptions when you have a meaningful way to
+handle them</li>
+<li>Let exceptions bubble up unless you need to:
+<ul>
+<li>add context to the error</li>
+<li>perform cleanup operations</li>
+<li>covert one exception type to another with additional
+information</li>
+<li>recover from expected error conditions</li>
+</ul></li>
+</ul></li>
+</ul>
 <h2 id="reminder">Reminder</h2>
 <ul>
+<li>in general, one cannot revert a third party API call, because of
+possible side effects of the API call</li>
 <li>prefer the name <code>Exception</code> instead of
 <code>Error</code>, <code>Exception</code> is bounded in the exceptions
 raised by python code, <code>Error</code> can mean human errors and have
 much larger implication, makes it harder to think.</li>
-<li>assume each third party integration failed</li>
 <li>it’s a business / BA decision when there is no perfect solution
 <ul>
 <li>confirmed with BA, on what should the error message be?</li>
 </ul></li>
 <li>use <code>with transcation.atomic()</code>
 <ul>
-<li>put a single DB update/save with Curo call using
-<code>submit_entity_unhandled</code></li>
 <li>don’t use decorator <code>@transaction.atomic</code> to avoid future
 changes that introduces errors in error handling logics</li>
 </ul></li>
 <li>validate first, client facing logics last (e.g. sending emails)</li>
+<li>submission code / function must be idempotent to allow safe user
+retry or even auto retry
+<ul>
 <li>in Submission, avoid duplicate oneview and curo entities by using
 <code>get_or_create</code>?</li>
-<li>submission code / function must be idempotent to allow safe user
-retry or even auto retry</li>
-</ul>
-<h2 id="principles">Principles</h2>
-<ul>
-<li><code>Exception Handling</code> means what are the correct business
-logics when errors happen</li>
-<li>consider curo as extension of oneview DB, so wrap curo call and DB
-changes in one transaction</li>
-<li>in general, one cannot revert a third party API call, because of
-possible side effects of the API call</li>
+</ul></li>
 </ul>
 <h2 id="example-curo">Example: Curo</h2>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> transaction.atomic():</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    task <span class="op">=</span> Task.objects.create(...) <span class="co"># or update some properties then task.save()</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    submit_entity_unhandled()</span></code></pre></div>
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>task <span class="op">=</span> Task.objects.create(...) <span class="co"># or update some properties then task.save()</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>submit_entity_unhandled() <span class="co"># or submit_entity if errors doesn&#39;t matter?</span></span></code></pre></div>
 <h2 id="example-third-party-api-call">Example: Third Party API Call</h2>
 <pre><code># if response data is needed
 foo_id = third party POST or PATCH

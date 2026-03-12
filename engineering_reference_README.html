@@ -36,68 +36,25 @@
 <ul>
 <li><a href="#keep-learning-everyday"
 id="toc-keep-learning-everyday">Keep Learning Everyday</a></li>
-<li><a href="#postgres-performance-and-concurrency"
-id="toc-postgres-performance-and-concurrency">Postgres Performance and
-Concurrency</a></li>
-<li><a href="#exception-handling" id="toc-exception-handling">Exception
-Handling</a></li>
 <li><a href="#documentation"
 id="toc-documentation">Documentation</a></li>
 </ul>
 </nav>
 <h2 id="keep-learning-everyday">Keep Learning Everyday</h2>
 <ul>
-<li>Keep Learning Everyday, reading postgres documentation at the moment
+<li>Daily
 <ul>
-<li>learn fundamentals and use tools with long shelf-life</li>
+<li>Study of the day: … , doc of the day: …</li>
+<li>stand for stand up</li>
 </ul></li>
+<li>Keep Learning Everyday, reading networking book</li>
 <li>Tips for clear writing: write individual characters and each
 characters take up full square</li>
 <li>write shell, vimscript in python</li>
-<li>Daily
+<li>Reminder:
 <ul>
-<li>stand for stand up</li>
-<li>run FP fee fixing and missing atr fixing script</li>
+<li>code review: recommend adding strict types</li>
 </ul></li>
-<li>reminder: <code>=</code> to format python, <code>d</code> for
-documentation</li>
-</ul>
-<h2 id="postgres-performance-and-concurrency">Postgres Performance and
-Concurrency</h2>
-<ul>
-<li>consider transaction
-<ul>
-<li>mutiple save</li>
-<li>select + save, would it introduce concurrent overwritten issue?
-consider <code>select_for_update</code>?</li>
-</ul></li>
-<li>care about DB Performance!
-<ul>
-<li>use database indexing with <code>db_index=True</code></li>
-<li>use <code>self.assertNumQueries</code></li>
-<li><code>print(queryset.query)</code></li>
-<li>set <code>django.db.backend</code> config to debug to print the sql
-queries</li>
-<li>optimize queries with <code>select_related</code> and
-<code>prefetch_related</code></li>
-</ul></li>
-</ul>
-<h2 id="exception-handling">Exception Handling</h2>
-<ul>
-<li>How To Handle Exception (thanks to Sentry Django Project)
-<ul>
-<li>only catch specific exceptions when you have a meaningful way to
-handle them</li>
-<li>Let exceptions bubble up unless you need to:
-<ul>
-<li>add context to the error</li>
-<li>perform cleanup operations</li>
-<li>covert one exception type to another with additional
-information</li>
-<li>recover from expected error conditions</li>
-</ul></li>
-</ul></li>
-<li>think about exception handling on every HTTP Requests</li>
 </ul>
 <h2 id="documentation">Documentation</h2>
 <ul>

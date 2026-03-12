@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>烤箱烧烤羊排</title>
+  <title>group by and count using `sort | uniq -c | sort -h -r`</title>
   <style>
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -30,14 +30,14 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">烤箱烧烤羊排</h1>
+<h1 class="title">group by and count using `sort | uniq -c | sort -h
+-r`</h1>
 </header>
-<ul>
-<li>小丑娃半包腌4个羊排 (每块羊排大概4g腌肉粉),腌越久越好</li>
-<li>如果没有小丑娃可使用:
-孜然,孜然粉,白芝麻,味精,盐,糖,花椒粉,胡椒粉</li>
-<li>热锅每边煎三分钟至金黄</li>
-<li>烤箱风扇180度烤10分钟</li>
-</ul>
+<ol type="1">
+<li><code>sort</code> - sorts each line</li>
+<li><code>uniq --count</code> - outputs count and each line</li>
+<li><code>sort --human-numeric-sort --reverse</code> - sort by integer
+and put largest number at the top</li>
+</ol>
 </body>
 </html>

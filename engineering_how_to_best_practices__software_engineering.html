@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>烤箱烧烤羊排</title>
+  <title>best practices: software engineering</title>
   <style>
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -30,14 +30,43 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">烤箱烧烤羊排</h1>
+<h1 class="title">best practices: software engineering</h1>
 </header>
+<nav id="TOC" role="doc-toc">
 <ul>
-<li>小丑娃半包腌4个羊排 (每块羊排大概4g腌肉粉),腌越久越好</li>
-<li>如果没有小丑娃可使用:
-孜然,孜然粉,白芝麻,味精,盐,糖,花椒粉,胡椒粉</li>
-<li>热锅每边煎三分钟至金黄</li>
-<li>烤箱风扇180度烤10分钟</li>
+<li><a href="#regular-todos" id="toc-regular-todos">Regular
+todos</a></li>
+<li><a href="#database-performance-and-concurrency"
+id="toc-database-performance-and-concurrency">Database Performance and
+Concurrency</a></li>
+</ul>
+</nav>
+<h2 id="regular-todos">Regular todos</h2>
+<ul>
+<li>security patches</li>
+<li>dependency Upgrades
+<ul>
+<li>docker base linux image, python, postgres, rabbitmq, django +
+dependencies</li>
+</ul></li>
+</ul>
+<h2 id="database-performance-and-concurrency">Database Performance and
+Concurrency</h2>
+<ul>
+<li>consider transaction
+<ul>
+<li>mutiple save</li>
+<li>select + save, would it introduce concurrent overwritten issue?
+consider <code>select_for_update</code>?</li>
+</ul></li>
+<li>care about DB Performance!
+<ul>
+<li>use <code>self.assertNumQueries</code></li>
+<li><code>print(queryset.query)</code> or
+<code>CaptureQueriesContext</code></li>
+<li>optimize queries with <code>select_related</code> and
+<code>prefetch_related</code></li>
+</ul></li>
 </ul>
 </body>
 </html>

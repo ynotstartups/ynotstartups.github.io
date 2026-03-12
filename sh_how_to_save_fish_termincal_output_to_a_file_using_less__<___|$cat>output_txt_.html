@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>烤箱烧烤羊排</title>
+  <title>save fish termincal output to a file using less `&lt;` `|$cat&gt;output.txt`</title>
   <style>
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -30,14 +30,18 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">烤箱烧烤羊排</h1>
+<h1 class="title">save fish termincal output to a file using less `&lt;`
+`|$cat&gt;output.txt`</h1>
 </header>
-<ul>
-<li>小丑娃半包腌4个羊排 (每块羊排大概4g腌肉粉),腌越久越好</li>
-<li>如果没有小丑娃可使用:
-孜然,孜然粉,白芝麻,味精,盐,糖,花椒粉,胡椒粉</li>
-<li>热锅每边煎三分钟至金黄</li>
-<li>烤箱风扇180度烤10分钟</li>
-</ul>
+<ol type="1">
+<li>starts with command-f to open less in fish shell</li>
+<li><code>&lt;</code> - less command to jump to line 1</li>
+<li><code>|$</code> - <code>$</code> indicate end of file, pipe whole
+file (from <code>&lt;</code> to <code>$</code>) to a shell command</li>
+<li><code>cat&gt;output.txt</code> is a shell command to pipe to file
+output.txt</li>
+</ol>
+<p>see more <code>man less</code> section
+<code>| &lt;m&gt; shell-command</code></p>
 </body>
 </html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Use `\x auto` to show better view in postgres shell</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="https://d392viioakuayd.cloudfront.net/public/favicon.webp">
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Use `\x auto` to show better view in postgres
+shell</h1>
+</header>
+<p>Toggle Expanded Output</p>
+<p>This psql meta-command flips query results from displaying columns
+across the screen to displaying a block for each row with columns
+vertically laid out.</p>
+<p><strong>Example</strong></p>
+<pre class="psql"><code>tsdb=&gt; \x
+-- Expanded display is on.
+tsdb=&gt; select * from power limit 1;
+-[ RECORD 1 ]------------------------
+ts     | 2024-04-11 03:53:05.76672+00
+stream | 1
+v01    | 8043.284272117919
+v02    | 6896.529731366893
+v03    | 460.279921892548
+v04    | 2576.166718397068
+v05    | 2377.9182116360053
+v06    | 6837.721851388159
+v07    | 6029.75078613321
+v08    | 4487.823025710251
+v09    | 9859.069998493544
+v10    | 9022.558524259352</code></pre>
+<p>When you’re getting data back from a wide table or a table with a
+long column (maybe geospatial data, JSON, or text), this is
+invaluable.</p>
+<p>Copied from this <a
+href="https://www.tigerdata.com/blog/10-psql-commands-that-will-make-your-life-easier">link</a></p>
+<p>P.S. <code>\timing</code> Toggle Command Timing, When timing mode is
+enabled, each query will be followed by the amount of time it took to
+run.</p>
+</body>
+</html>

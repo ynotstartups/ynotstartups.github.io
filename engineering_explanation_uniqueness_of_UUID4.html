@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>uniqueness of UUID4</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="https://d392viioakuayd.cloudfront.net/public/favicon.webp">
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">uniqueness of UUID4</h1>
+</header>
+<blockquote>
+<p>I wrote the UUID generator/parser for Ruby, so I consider myself to
+be reasonably well-informed on the subject. There are four major UUID
+versions:</p>
+<p>Version 4 UUIDs are essentially just 16 bytes of randomness pulled
+from a cryptographically secure random number generator, with some
+bit-twiddling to identify the UUID version and variant. These are
+extremely unlikely to collide, but it could happen if a PRNG is used or
+if you just happen to have really, really, really, really, really bad
+luck.</p>
+<p>Version 5 and Version 3 UUIDs use the SHA1 and MD5 hash functions
+respectively, to combine a namespace with a piece of already unique data
+to generate a UUID. This will, for example, allow you to produce a UUID
+from a URL. Collisions here are only possible if the underlying hash
+function also has a collision.</p>
+<p>Version 1 UUIDs use the network card’s MAC address (which unless
+spoofed, should be unique), plus a timestamp, plus the usual
+bit-twiddling to generate the UUID. In the case of a machine that
+doesn’t have a MAC address, the 6 node bytes are generated with a
+cryptographically secure random number generator. If two UUIDs are
+generated in sequence fast enough that the timestamp matches the
+previous UUID, the timestamp is incremented by 1. Collisions should not
+occur unless one of the following happens: The MAC address is spoofed;
+One machine running two different UUID generating applications produces
+UUIDs at the exact same moment; Two machines without a network card or
+without user level access to the MAC address are given the same random
+node sequence, and generate UUIDs at the exact same moment; We run out
+of bytes to represent the timestamp and rollover back to zero.</p>
+<p>Realistically, none of these events occur by accident within a single
+application’s ID space. Unless you’re accepting IDs on, say, an
+Internet-wide scale, or with an untrusted environment where malicious
+individuals might be able to do something bad in the case of an ID
+collision, it’s just not something you should worry about. It’s critical
+to understand that if you happen to generate the same version 4 UUID as
+I do, in most cases, it doesn’t matter. I’ve generated the ID in a
+completely different ID space from yours. My application will never know
+about the collision so the collision doesn’t matter. Frankly, in a
+single application space without malicious actors, the extinction of all
+life on earth will occur long before you have a collision, even on a
+version 4 UUID, even if you’re generating quite a few UUIDs per
+second.</p>
+<p>Also, 2^64 * 16 is 256 exabytes. As in, you would need to store 256
+exabytes worth of IDs before you had a 50% chance of an ID collision in
+a single application space.</p>
+</blockquote>
+<p>https://stackoverflow.com/questions/703035/when-are-you-truly-forced-to-use-uuid-as-part-of-the-design/786541#786541</p>
+</body>
+</html>

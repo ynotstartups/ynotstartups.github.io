@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>How To: Create new GraphQL Enum in backend / Change An Existing Model Charfield/Textfield To Enum</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="https://d392viioakuayd.cloudfront.net/public/favicon.webp">
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">How To: Create new GraphQL Enum in backend / Change An
+Existing Model Charfield/Textfield To Enum</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#create-textchoices-from-django"
+id="toc-create-textchoices-from-django">Create TextChoices from
+django</a></li>
+<li><a href="#create-a-schema-in-saltusoneviewgraphqlmodel_types.py"
+id="toc-create-a-schema-in-saltusoneviewgraphqlmodel_types.py">Create a
+schema in saltus/oneview/graphql/model_types.py</a></li>
+<li><a href="#use-this-schema-in-corresponding-mutation"
+id="toc-use-this-schema-in-corresponding-mutation">Use this schema in
+corresponding Mutation</a></li>
+</ul>
+</nav>
+<h2 id="create-textchoices-from-django">Create TextChoices from
+django</h2>
+<pre><code>class OVRecommendActionEnum(TextChoices):
+    SET_UP_NEW = &quot;Apply for a new plan&quot;
+    WITHDRAW = &quot;Withdraw funds from a plan&quot;
+    CONTRIBUTE = &quot;Increment an existing plan&quot;
+    TRANSFER = &quot;Transfer to new plan&quot;
+    MODIFY = &quot;Modify an existing plan&quot;
+    AD_HOC_FEE = &quot;Charge an ad-hoc fee&quot;</code></pre>
+<p>Set choices field in corresponding CharField or TextField</p>
+<pre><code>    action = models.CharField(
+        max_length=255,
+        blank=True,
+        null=True,
+        choices=OVRecommendActionEnum,
+    )</code></pre>
+<h2 id="create-a-schema-in-saltusoneviewgraphqlmodel_types.py">Create a
+schema in saltus/oneview/graphql/model_types.py</h2>
+<pre><code>OVRecommendActionSchema = graphene.Enum.from_enum(OVRecommendActionEnum)</code></pre>
+<p>based on graphene documentation on enum</p>
+<p>Use this schema in corresponding model type in
+saltus/oneview/graphql/model_types.py This is required for graphql query
+to have Enum type OVRecommendActionEnum</p>
+<pre><code>class OVRecommendType(FilteredDjangoObjectType):
+    class Meta:
+        model = OVRecommend
+    ...
+    action = graphene.Field(OVRecommendActionSchema)
+    ...
+    def resolve_action(self, info):
+        return self.action</code></pre>
+<p>Without manually using OVRecommendActionSchema, make schema will
+automatically create an enum based on the value of text choice, see this
+example and this documentation !</p>
+<blockquote>
+<p>By default Graphene-Django will convert any Django fields that have
+choices defined into a GraphQL enum type.
+https://docs.graphene-python.org/projects/django/en/latest/queries/</p>
+</blockquote>
+<h2 id="use-this-schema-in-corresponding-mutation">Use this schema in
+corresponding Mutation</h2>
+<p>This is required for graphql mutation to accept Enum type
+OVRecommendActionEnum</p>
+<pre><code>class UpsertOVRecommend(graphene.Mutation):
+    class Arguments:
+        ...
+        action = OVRecommendActionSchema(required=True)
+        ...</code></pre>
+<p>Graphene passes the argument as Enum so remember to use the value
+when setting the model!</p>
+<p>e.g.</p>
+<pre><code>            # action has type OVRecommendActionEnum
+            kwargs[&quot;action&quot;] = kwargs[&quot;action&quot;].value
+            for key, value in kwargs.items():
+                setattr(ovrecommend, key, value)
+ </code></pre>
+</body>
+</html>

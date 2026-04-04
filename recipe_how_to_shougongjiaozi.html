@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>How To: speed up by using arm docker images</title>
+  <title>手工饺子</title>
   <style>
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -30,50 +30,10 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">How To: speed up by using arm docker images</h1>
+<h1 class="title">手工饺子</h1>
 </header>
-<nav id="TOC" role="doc-toc">
 <ul>
-<li><a href="#timing-comparison-by-2-runs-locally"
-id="toc-timing-comparison-by-2-runs-locally">Timing comparison by 2 runs
-locally</a></li>
+<li>饺子馅: 虾,木耳,香菇,鸡蛋</li>
 </ul>
-</nav>
-<p>by removing <code>platform: linux/x86_64</code> for postgres and
-rabbitmq containers</p>
-<p>chatgpt said</p>
-<pre><code>Postgres under QEMU:
-
-Query parsing      → instruction translation
-Query execution    → instruction + memory penalties
-Disk I/O           → syscall translation
-Locks/shared mem   → memory ordering penalties</code></pre>
-<p>but in fact Rosetta is used for x86_64/amd64 emulation on Apple
-Silicon, though I guess the principle should be the same?</p>
-<h2 id="timing-comparison-by-2-runs-locally">Timing comparison by 2 runs
-locally</h2>
-<table>
-<thead>
-<tr>
-<th>timing</th>
-<th>before</th>
-<th>after</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>db setup</td>
-<td>110s</td>
-<td>110s</td>
-</tr>
-<tr>
-<td>unittests</td>
-<td>115s</td>
-<td>95s</td>
-</tr>
-</tbody>
-</table>
-<p>about 300 unittests run parallel with 10 cores using macbook pro 2021
-with chip apple m1 pro</p>
 </body>
 </html>

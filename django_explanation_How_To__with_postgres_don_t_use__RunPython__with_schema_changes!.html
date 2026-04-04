@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>How To: with postgres don't use `RunPython` with schema changes!</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="https://d392viioakuayd.cloudfront.net/public/favicon.webp">
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">How To: with postgres don't use `RunPython` with
+schema changes!</h1>
+</header>
+<p>https://docs.djangoproject.com/en/6.0/ref/migration-operations/#runpython</p>
+<blockquote>
+<p>On databases that do support DDL transactions (SQLite and
+PostgreSQL), RunPython operations do not have any transactions
+automatically added besides the transactions created for each migration.
+Thus, on PostgreSQL, for example, you should avoid combining schema
+changes and RunPython operations in the same migration or you may hit
+errors like OperationalError: cannot ALTER TABLE “mytable” because it
+has pending trigger events.</p>
+</blockquote>
+<blockquote>
+<p>The DDL is used for creating and modifying the structure of the
+objects/entities in the database using some commands and statements.
+These objects can include aliases, tables, sequences, tables, etc. These
+statements include CREATE, ALTER, DROP, and TRUNCATE.</p>
+</blockquote>
+<p>https://www.commandprompt.com/education/postgresql-data-definition-language-ddl/#:~:text=The%20DDL%20is%20used%20for,ALTER%2C%20DROP%2C%20and%20TRUNCATE.</p>
+<p>DDL transactions means CREATE, ALTER, DROP, TRUNCATE in a
+transaction.</p>
+<p>See also -
+https://wiki.postgresql.org/wiki/Transactional_DDL_in_PostgreSQL:_A_Competitive_Analysis
+- https://news.ycombinator.com/item?id=28077797</p>
+</body>
+</html>

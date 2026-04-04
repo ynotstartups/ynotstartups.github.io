@@ -211,9 +211,9 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a hr
 <span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>            context_value<span class="op">=</span><span class="va">self</span>.admin_context,</span>
 <span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>        )</span>
 <span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.assertIsNone(response.errors)</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.assertEqual(response.errors, <span class="va">None</span>)</span>
 <span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.assertEqual(response.data[<span class="st">&quot;fooBar&quot;</span>][<span class="st">&quot;errors&quot;</span>], <span class="va">None</span>) <span class="co"># None might be []</span></span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.assertTrue(response.data[<span class="st">&quot;fooBar&quot;</span>][<span class="st">&quot;ok&quot;</span>])</span></code></pre></div>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.assertEqual(response.data[<span class="st">&quot;fooBar&quot;</span>][<span class="st">&quot;ok&quot;</span>], <span class="va">True</span>)</span></code></pre></div>
 <p>Note: assertEqual <code>errors</code> first to see the possible error
 string.</p>
 <p>Note: to see the real python error when <code>response.errors</code>

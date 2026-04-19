@@ -32,17 +32,49 @@
 <header id="title-block-header">
 <h1 class="title">best practices: design</h1>
 </header>
+<nav id="TOC" role="doc-toc">
 <ul>
-<li><strong>First Thing to Consider</strong>
+<li><a href="#first-thing-to-consider"
+id="toc-first-thing-to-consider">First Thing to Consider</a></li>
+<li><a href="#design-considerations"
+id="toc-design-considerations">Design Considerations:</a></li>
+<li><a href="#design-step-by-step" id="toc-design-step-by-step">Design
+Step by step:</a></li>
+</ul>
+</nav>
+<h2 id="first-thing-to-consider">First Thing to Consider</h2>
 <ul>
-<li>what is the goal? ask why we are doing it? what is the problem
+<li>What is the goal? ask why we are doing it? what is the problem
 statement?</li>
-<li>does it bring value to business? what’s the priority for the
+<li>Does it bring value to business? what’s the priority for the
 business?</li>
-<li>use ‘boring’ technology and architecture!</li>
+</ul>
+<h2 id="design-considerations">Design Considerations:</h2>
+<ul>
+<li>Design it three times
+<ul>
+<li>write down three designs, each with pros and cons, then there will
+appear more designs with combined pros and less cons</li>
 </ul></li>
-<li>System Design Step by step:
+<li>Architect great design rather than just working codes, then writing
+documentations and code should be fun since that’s how you identify the
+best design</li>
+<li>Choosing the proper boundaries between functions is perhaps the
+primary activity of the computer system designer</li>
+<li>Reduce complexity by adding or removing abstraction</li>
+<li>Designing new process that is easy to sell to the Team!
+<ul>
+<li>use boring/familiar technology. easy to pick up. improves overall
+dev experience, should improve the overall developer experience rather
+than damaging developer experience.</li>
+</ul></li>
+<li>To significantly improve/speed up the entire system, one must
+improve/speed up a large fraction of the overall system. (Amdahls’ Law,
+CS:APP P58)</li>
+</ul>
+<h2 id="design-step-by-step">Design Step by step:</h2>
 <ol type="1">
+<li>write design documentation</li>
 <li>functional/business requirements</li>
 <li>non-functional/technical requirements
 <ul>
@@ -56,30 +88,7 @@ software)</li>
 <li>design both mutation and resolver i.e. can FE reproduces Input from
 query?</li>
 </ul></li>
-<li>implementations</li>
-</ol></li>
-<li>Choosing the proper boundaries between functions is perhaps the
-primary activity of the computer system designer</li>
-<li>Design it three times
-<ul>
-<li>write down three designs, each with pros and cons, then perhaps
-there will appear more designs with combined pros and less cons</li>
-</ul></li>
-<li>Architect great design rather than just working codes, then writing
-comments should be fun since that’s how you identify the best
-design</li>
-<li>Reduce complexity by adding or removing abstraction</li>
-<li>Start with writing documentation, ask for feedbacks as early as
-possible</li>
-<li>Designing new process that is easy to sell to the Team!
-<ul>
-<li>familiar technology</li>
-<li>easy to pick up</li>
-<li>improves dev experience, should improve the overall developer
-experience rather than damaging developer experience</li>
-</ul></li>
-<li>Justifications on diverging from main monolith, such as adding a
-service!</li>
-</ul>
+<li>ask for feedbacks as early as possible</li>
+</ol>
 </body>
 </html>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>best practices: software engineering</title>
+  <title>terminal-notifier cli</title>
   <style>
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -30,47 +30,33 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">best practices: software engineering</h1>
+<h1 class="title">terminal-notifier cli</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
-<li><a href="#regular-todos" id="toc-regular-todos">Regular
-todos</a></li>
-<li><a href="#database-performance-and-concurrency"
-id="toc-database-performance-and-concurrency">Database Performance and
-Concurrency</a></li>
+<li><a href="#sound---ls-systemlibrarysounds"
+id="toc-sound---ls-systemlibrarysounds">Sound - ls
+/System/Library/Sounds</a></li>
 </ul>
 </nav>
-<h2 id="regular-todos">Regular todos</h2>
+<p><strong>Required field</strong></p>
 <ul>
-<li>maintain documentation + index for documentation</li>
-<li>security patches</li>
-<li>dependency Upgrades
-<ul>
-<li>docker base linux image, python, postgres, rabbitmq, python
-dependencies</li>
-<li>check aws alerts</li>
-</ul></li>
+<li><code>-message</code></li>
+<li><code>-list</code></li>
 </ul>
-<h2 id="database-performance-and-concurrency">Database Performance and
-Concurrency</h2>
+<p><strong>Useful field</strong></p>
 <ul>
-<li>consider transaction
-<ul>
-<li>mutiple save</li>
-<li>select + save, submit endpoint to avoid introducing concurrent
-overwritten issue? consider <code>select_for_update</code>!</li>
-</ul></li>
-<li>care about DB Performance!
-<ul>
-<li>use <code>self.assertNumQueries</code></li>
-<li><code>print(queryset.query)</code> or
-<code>CaptureQueriesContext</code></li>
-<li>optimize queries with <code>select_related</code> and
-<code>prefetch_related</code></li>
-</ul></li>
-<li>express relative performance gain or decrease by Time old/Time new
-or Time before/Time after (CS:APP P.59)</li>
+<li><code>-title</code></li>
+<li><code>-sound NAME</code> (see below)</li>
+<li><code>-appIcon PATH</code> - Specify an image PATH to display
+instead of the application icon.</li>
+<li><code>-execute COMMAND</code> - Run the shell command COMMAND when
+the user clicks the notification.</li>
 </ul>
+<h2 id="sound---ls-systemlibrarysounds">Sound - ls
+/System/Library/Sounds</h2>
+<p>Basso.aiff Bottle.aiff Funk.aiff Hero.aiff Ping.aiff Purr.aiff
+Submarine.aiff Blow.aiff Frog.aiff Glass.aiff Morse.aiff Pop.aiff
+Sosumi.aiff Tink.aiff</p>
 </body>
 </html>

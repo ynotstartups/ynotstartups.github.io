@@ -32,6 +32,15 @@
 <header id="title-block-header">
 <h1 class="title">`rg` cli options</h1>
 </header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#multi-lines-matching" id="toc-multi-lines-matching">multi
+lines matching</a></li>
+<li><a href="#search-for-different-casing"
+id="toc-search-for-different-casing">search for different
+casing</a></li>
+</ul>
+</nav>
 <table>
 <colgroup>
 <col style="width: 36%" />
@@ -100,5 +109,22 @@
 </tr>
 </tbody>
 </table>
+<h2 id="multi-lines-matching">multi lines matching</h2>
+<p><strong>Find Python Function Definitions and Usages</strong></p>
+<pre><code># this prints Definitions too because I don&#39;t know how to ignore lines
+# starts with `def`
+# 
+# [^,] for removing imports
+
+rg --multiline --multiline-dotall &#39;foo_function_name\(.*?\)[^,]&#39; -g &quot;!**/tests**&quot;</code></pre>
+<h2 id="search-for-different-casing">search for different casing</h2>
+<p><code>foo_?bar</code> searches for <code>foo_bar</code>,
+<code>FOO_BAR</code>, <code>FOOBAR</code>, <code>fooBar</code></p>
+<p>it works because</p>
+<ol type="1">
+<li><code>_?</code> means <code>_</code> is optional, i.e. the searched
+words can contain 0 or 1 <code>_</code></li>
+<li>The search is case insensitive by default</li>
+</ol>
 </body>
 </html>

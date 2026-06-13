@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>AWS cli commands</title>
+  <title>`date` to convert time format</title>
   <style>
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -30,30 +30,21 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">AWS cli commands</h1>
+<h1 class="title">`date` to convert time format</h1>
 </header>
-<nav id="TOC" role="doc-toc">
+<p>TLDR - <code>date -j -f '%d/%b/%y' $INPUT_DATE +%Y-%m-%d</code></p>
 <ul>
-<li><a href="#findout-who-am-i" id="toc-findout-who-am-i">findout who am
-I?</a></li>
-<li><a href="#also-findout-out-who-am-i-with-more-details"
-id="toc-also-findout-out-who-am-i-with-more-details">also findout out
-who am I with more details</a></li>
-<li><a href="#get-secret" id="toc-get-secret">get secret</a></li>
-<li><a href="#change-secret" id="toc-change-secret">change
-secret</a></li>
+<li><code>-f</code> takes <code>strftime</code> format string,
+<code>man strftime</code>
+<ul>
+<li>turns out python <code>datetime.strftime</code> also uses the exact
+same format string, because python internally uses standard c library’s
+<code>strftime</code></li>
+</ul></li>
+<li><code>+%Y-%m-%d</code> is the output format</li>
+<li><code>-j</code> do not try to set the date, this allows the usage of
+<code>-f</code> and <code>+</code> to convert one date format to
+another</li>
 </ul>
-</nav>
-<h2 id="findout-who-am-i">findout who am I?</h2>
-<p>aws sts get-caller-identity</p>
-<h2 id="also-findout-out-who-am-i-with-more-details">also findout out
-who am I with more details</h2>
-<p>aws iam get-user</p>
-<h2 id="get-secret">get secret</h2>
-<p>aws secretsmanager get-secret-value –secret-id foo</p>
-<h2 id="change-secret">change secret</h2>
-<p>aws secretsmanager update-secret<br />
-–secret-id foo<br />
-–secret-string “{"json":"string","foo":"bar"}”</p>
 </body>
 </html>

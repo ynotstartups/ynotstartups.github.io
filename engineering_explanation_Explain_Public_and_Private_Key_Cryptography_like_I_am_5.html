@@ -33,6 +33,15 @@
 <h1 class="title">Explain Public and Private Key Cryptography like I am
 5</h1>
 </header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#implementation-of-shell-command-cat-in-c"
+id="toc-implementation-of-shell-command-cat-in-c">Implementation of
+shell command <code>cat</code> in <code>C</code></a></li>
+<li><a href="#play-with-busybox" id="toc-play-with-busybox">Play with
+busybox</a></li>
+</ul>
+</nav>
 <p>Typically,</p>
 <ul>
 <li>Public Key is used to encrypt messages.</li>
@@ -59,5 +68,14 @@ original, because the only key that can encrypt something that can be
 decrypt with public key is the private key.</p>
 <p>The only reason public and private keys are not interchangeable is
 because you can recreate the public key from private key.</p>
+<h2 id="implementation-of-shell-command-cat-in-c">Implementation of
+shell command <code>cat</code> in <code>C</code></h2>
+<p>https://github.com/mirror/busybox/blob/master/coreutils/cat.c</p>
+<h2 id="play-with-busybox">Play with busybox</h2>
+<p><code>docker run -it --rm busybox</code></p>
+<pre><code>/bin # ls -l | wc -l
+406</code></pre>
+<p>There are 406 utilities in busybox /bin, whereas MacOS has 980 in
+<code>/usr/bin</code>.</p>
 </body>
 </html>

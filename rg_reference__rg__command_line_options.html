@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>profile performance</title>
+  <title>`rg` command line options</title>
   <style>
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -95,52 +95,111 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">profile performance</h1>
+<h1 class="title">`rg` command line options</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
-<li><a href="#in-python-command-line" id="toc-in-python-command-line">In
-python command line</a></li>
-<li><a href="#in-ipython" id="toc-in-ipython">In iPython</a></li>
-<li><a href="#read-output-from-profiler"
-id="toc-read-output-from-profiler">Read Output from profiler</a></li>
+<li><a href="#rg-and-then-vim" id="toc-rg-and-then-vim">rg and then
+vim</a></li>
+<li><a href="#multi-lines-matching" id="toc-multi-lines-matching">multi
+lines matching</a></li>
+<li><a href="#search-for-different-casing"
+id="toc-search-for-different-casing">search for different
+casing</a></li>
 </ul>
 </nav>
-<h2 id="in-python-command-line">In python command line</h2>
-<pre><code>... python -m cProfile -o stats ...</code></pre>
-<h2 id="in-ipython">In iPython</h2>
-<p><strong><code>%%prun -r</code> returns profiling object</strong></p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>prun <span class="op">-</span>D stats</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> oneview.models.helpers.imports <span class="im">import</span> pull_accounts_no_threaded</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>pull_accounts_no_threaded()</span></code></pre></div>
-<h2 id="read-output-from-profiler">Read Output from profiler</h2>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pstats</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># read profile output from a file called `stats`</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>stats <span class="op">=</span> pstats.Stats(<span class="st">&#39;stats&#39;</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># starts with Cumulative time to get a sense of the time taken,</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># try to spot unexpected time spent and large number of function calls</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>stats.sort_stats(<span class="st">&#39;cumtime&#39;</span>).print_stats(<span class="dv">100</span>)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># `tottime` for the total time spent in the given function (and excluding time</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># made in calls to sub-functions)</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>stats.sort_stats(<span class="st">&#39;tottime&#39;</span>).print_stats(<span class="dv">100</span>)</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>stats.sort_stats(<span class="st">&#39;filename&#39;</span>).print_stats(<span class="dv">100</span>)</span></code></pre></div>
-<p><strong>Alternatively, Just timeit once</strong></p>
-<pre><code>%%timeit -n 1 -r 1
+<table>
+<colgroup>
+<col style="width: 36%" />
+<col style="width: 64%" />
+</colgroup>
+<tbody>
+<tr>
+<td><code>--vimgrep</code></td>
+<td>output to vim format for quickfix</td>
+</tr>
+<tr>
+<td><code>-F, --fixed-strings</code></td>
+<td>Fixed String Matches</td>
+</tr>
+<tr>
+<td><code>-w, --word-regexp</code></td>
+<td>Word Regexp</td>
+</tr>
+<tr>
+<td><code>-e, --regexp</code></td>
+<td>search for pattern, supports multiples</td>
+</tr>
+<tr>
+<td><code>-t py</code></td>
+<td>select only python files</td>
+</tr>
+<tr>
+<td><code>-o</code></td>
+<td>output only matching part, not full line</td>
+</tr>
+<tr>
+<td><code>--no-heading</code></td>
+<td>use with <code>cut -d : -f 2</code> to remove filepath</td>
+</tr>
+<tr>
+<td><code>-f, --file PATTERNFILE</code></td>
+<td>search for all patterns, one pattern per line</td>
+</tr>
+<tr>
+<td><code>-s</code></td>
+<td>case sensitive</td>
+</tr>
+<tr>
+<td><code>-i</code></td>
+<td>case insensitive</td>
+</tr>
+<tr>
+<td><code>-S</code></td>
+<td>smart case</td>
+</tr>
+<tr>
+<td><code>-g "**/tests/**"</code></td>
+<td>search only tests files with glob</td>
+</tr>
+<tr>
+<td><code>-g "!**/tests/**"</code></td>
+<td>don’t search test files with inverse glob <code>!</code></td>
+</tr>
+<tr>
+<td><code>--stats</code></td>
+<td>number of matches, number of line matches</td>
+</tr>
+<tr>
+<td><code>--sort created/modified</code></td>
+<td>sort results by file created/modified time</td>
+</tr>
+<tr>
+<td><code>-p, --pretty</code></td>
+<td><code>rg -p foo | less</code>, pipe color to other program</td>
+</tr>
+</tbody>
+</table>
+<h2 id="rg-and-then-vim">rg and then vim</h2>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">rg</span> <span class="at">--vimgrep</span> ... <span class="op">&gt;</span> ./quickfix.vim</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">vim</span> <span class="at">-q</span> ./quickfix.vim <span class="at">-c</span> <span class="st">&#39;:copen&#39;</span></span></code></pre></div>
+<h2 id="multi-lines-matching">multi lines matching</h2>
+<p><strong>Find Python Function Definitions and Usages</strong></p>
+<pre><code># this prints Definitions too because I don&#39;t know how to ignore lines
+# starts with `def`
+# 
+# [^,] for removing imports
 
-from oneview.models.helpers.imports import pull_accounts, pull_accounts_no_threaded
-pull_accounts()</code></pre>
-<p>See also - <a
-href="https://docs.python.org/3/library/profile.html#pstats.Stats.sort_stats">pstat
-sort keys</a> - <a
-href="https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-prun">%prun
-documentation</a> - <a
-href="https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-timeit">%timeit
-documentation</a></p>
+rg --multiline --multiline-dotall &#39;foo_function_name\(.*?\)[^,]&#39; -g &quot;!**/tests**&quot;</code></pre>
+<h2 id="search-for-different-casing">search for different casing</h2>
+<p><code>foo_?bar</code> searches for <code>foo_bar</code>,
+<code>FOO_BAR</code>, <code>FOOBAR</code>, <code>fooBar</code></p>
+<p>it works because</p>
+<ol type="1">
+<li><code>_?</code> means <code>_</code> is optional, i.e. the searched
+words can contain 0 or 1 <code>_</code></li>
+<li>The search is case insensitive by default</li>
+</ol>
 </body>
 </html>

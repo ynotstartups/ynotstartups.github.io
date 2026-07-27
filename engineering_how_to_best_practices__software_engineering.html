@@ -34,30 +34,62 @@
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
-<li><a href="#regular-todos" id="toc-regular-todos">Regular
-todos</a></li>
+<li><a href="#full-development-cycle"
+id="toc-full-development-cycle">Full Development Cycle</a></li>
 <li><a href="#database-performance-and-concurrency"
 id="toc-database-performance-and-concurrency">Database Performance and
 Concurrency</a></li>
+<li><a href="#concurrency-problem"
+id="toc-concurrency-problem">Concurrency Problem</a></li>
+<li><a href="#python-exception-design"
+id="toc-python-exception-design">Python Exception Design</a></li>
 </ul>
 </nav>
-<h2 id="regular-todos">Regular todos</h2>
+<h2 id="full-development-cycle">Full Development Cycle</h2>
 <ul>
-<li>maintain documentation + index for documentation</li>
-<li>security patches</li>
-<li>dependency Upgrades
+<li>backlog refinement meeting and estimations</li>
+<li>planning meeting</li>
+<li>business requirements epic and tickets (Happy Path, Unhappy
+Path)</li>
+<li>FE &amp; BE contract: REST API Specs, GraphQL Schema (both mutation
+and resolver)</li>
+<li>Design documentation</li>
+<li>Infrastructure As Code Setup</li>
+<li>feature flags</li>
+<li>code documentation</li>
+<li>code logics implementation
 <ul>
-<li>docker base linux image, python, postgres, rabbitmq, python
-dependencies</li>
-<li>check aws alerts</li>
+<li>clarify requirements in ticket</li>
+<li>consider unhappy paths such as exception handling (ask business to
+requirement on unhappy path)</li>
 </ul></li>
+<li>lints, unittests, code reviews</li>
+<li>developer manual e2e tests</li>
+<li>QA / functional testings (deploy to test env, setup test
+accounts)</li>
+<li>deployment and rollbacks</li>
+<li>e2e tests in production to check production configuration</li>
+<li>monitoring
+<ul>
+<li>engineering: errors, performance, retrospective debugging logs,</li>
+<li>operation: CPU, Memory, number of invokes, latency,
+throughputs,</li>
+</ul></li>
+<li>iteration on released feature</li>
+<li>software support, BA warranty period</li>
+</ul>
+<p><strong>Regular TODO</strong></p>
+<ul>
+<li>prod hotfix with security patches</li>
+<li>monthly upgrade dependencies</li>
+<li>maintain documentation + index for documentation</li>
 </ul>
 <h2 id="database-performance-and-concurrency">Database Performance and
 Concurrency</h2>
 <ul>
 <li>consider transaction
 <ul>
-<li>mutiple save</li>
+<li>multiple save</li>
 <li>select + save, submit endpoint to avoid introducing concurrent
 overwritten issue? consider <code>select_for_update</code>!</li>
 </ul></li>
@@ -72,5 +104,21 @@ overwritten issue? consider <code>select_for_update</code>!</li>
 <li>express relative performance gain or decrease by Time old/Time new
 or Time before/Time after (CS:APP P.59)</li>
 </ul>
+<h2 id="concurrency-problem">Concurrency Problem</h2>
+<ul>
+<li>submission endpoints especially submitting to third party API, must
+handle concurrent requests by using <code>select_for_update</code>,
+e.g. user can easily trigger multiple submission by clicking button
+multiple times
+<ul>
+<li>see notes <code>Django Concurrency Problems</code></li>
+</ul></li>
+</ul>
+<h2 id="python-exception-design">Python Exception Design</h2>
+<p>Each feature should have a base class with specific errors inherited
+from this base class, so that caller only needs to catch 1 error, the
+base error.</p>
+<p>For example, base exception <code>OneFeeCalculatorError</code>,
+inherited by exceptions <code>UnexpectedCalculatorDataError</code>.</p>
 </body>
 </html>

@@ -34,21 +34,37 @@
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
-<li><a href="#first-thing-to-consider"
-id="toc-first-thing-to-consider">First Thing to Consider</a></li>
-<li><a href="#design-considerations"
-id="toc-design-considerations">Design Considerations:</a></li>
 <li><a href="#design-step-by-step" id="toc-design-step-by-step">Design
 Step by step:</a></li>
+<li><a href="#design-considerations"
+id="toc-design-considerations">Design Considerations:</a></li>
 </ul>
 </nav>
-<h2 id="first-thing-to-consider">First Thing to Consider</h2>
+<h2 id="design-step-by-step">Design Step by step:</h2>
+<ol type="1">
+<li>understand business requirements
 <ul>
 <li>What is the goal? ask why we are doing it? what is the problem
 statement?</li>
 <li>Does it bring value to business? what’s the priority for the
 business?</li>
-</ul>
+</ul></li>
+<li>write design documentation</li>
+<li>functional/business requirements</li>
+<li>non-functional/technical requirements
+<ul>
+<li>reliable</li>
+<li>maintainable and operable (sustainable delivery of valuable, working
+software)</li>
+<li>scalable, performance</li>
+</ul></li>
+<li>Database Design and API Interfaces, services, functions etc..
+<ul>
+<li>design both mutation and resolver i.e. can FE reproduces Input from
+query?</li>
+</ul></li>
+<li>ask for feedbacks as early as possible</li>
+</ol>
 <h2 id="design-considerations">Design Considerations:</h2>
 <ul>
 <li>Design it three times
@@ -72,23 +88,5 @@ than damaging developer experience.</li>
 improve/speed up a large fraction of the overall system. (Amdahls’ Law,
 CS:APP P58)</li>
 </ul>
-<h2 id="design-step-by-step">Design Step by step:</h2>
-<ol type="1">
-<li>write design documentation</li>
-<li>functional/business requirements</li>
-<li>non-functional/technical requirements
-<ul>
-<li>reliable</li>
-<li>maintainable and operable (sustainable delivery of valuable, working
-software)</li>
-<li>scalable, performance</li>
-</ul></li>
-<li>core entities (DATA) and API Interfaces, services, functions etc..
-<ul>
-<li>design both mutation and resolver i.e. can FE reproduces Input from
-query?</li>
-</ul></li>
-<li>ask for feedbacks as early as possible</li>
-</ol>
 </body>
 </html>

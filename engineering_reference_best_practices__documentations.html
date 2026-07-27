@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>best practices: documentations</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="https://d392viioakuayd.cloudfront.net/public/favicon.webp">
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">best practices: documentations</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#on-reading-documentation"
+id="toc-on-reading-documentation">On reading documentation</a></li>
+<li><a href="#why-write-documentation"
+id="toc-why-write-documentation">Why write documentation?</a></li>
+<li><a href="#how-to-write-documentation"
+id="toc-how-to-write-documentation">How to write documentation?</a></li>
+</ul>
+</nav>
+<h2 id="on-reading-documentation">On reading documentation</h2>
+<ul>
+<li>be patient and read all documentation, the answer is always at the
+next line :)</li>
+</ul>
+<h2 id="why-write-documentation">Why write documentation?</h2>
+<ul>
+<li>the overall idea for documentation is to capture information that
+was in the mind of the designer but couldn’t be represented in the
+code</li>
+</ul>
+<h2 id="how-to-write-documentation">How to write documentation?</h2>
+<ul>
+<li>write <strong>before implementation</strong></li>
+<li>keep in mind the four types of documentation
+<ul>
+<li>Tutorial e.g. get started with working code</li>
+<li>How-To e.g. Step by Step Guides like Recipes</li>
+<li>Explanation e.g. experts deep dive</li>
+<li>Reference e.g. function docstring or python official
+documentations</li>
+</ul></li>
+<li>starts with executive summary</li>
+<li>add order of operations (function calls/rest api calls) to
+documentation
+<ul>
+<li>inspiration: a network protocol defines the format and the order of
+messages exchanged between two or more communicating entities, as well
+as the actions taken on the transmission and/or receipt of a message or
+other event.</li>
+</ul></li>
+<li>write present tense with full sentence</li>
+<li>Read documentations before using a new tool
+<ul>
+<li>for new technology, it’s important to understand how to use them
+before we use them</li>
+<li>understanding a tool also sparks new ideas on how to use this
+tool</li>
+<li>this implies prefer using tool with good doc e.g. <code>fish</code>
+instead <code>bash</code></li>
+</ul></li>
+<li>python docstring should what <code>Exception</code> can be raised in
+feature entry point
+<ul>
+<li>such as for entry point function <code>one_fee_calculator</code>,
+detail all possible expected exceptions raised in downstream
+functions</li>
+</ul></li>
+<li>always write input and output from and to third party API system
+calls</li>
+</ul>
+</body>
+</html>

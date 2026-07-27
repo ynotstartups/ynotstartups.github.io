@@ -32,28 +32,20 @@
 <header id="title-block-header">
 <h1 class="title">AWS command line commands</h1>
 </header>
-<nav id="TOC" role="doc-toc">
 <ul>
-<li><a href="#findout-who-am-i" id="toc-findout-who-am-i">findout who am
-I?</a></li>
-<li><a href="#also-findout-out-who-am-i-with-more-details"
-id="toc-also-findout-out-who-am-i-with-more-details">also findout out
-who am I with more details</a></li>
-<li><a href="#get-secret" id="toc-get-secret">get secret</a></li>
-<li><a href="#change-secret" id="toc-change-secret">change
-secret</a></li>
+<li>find out who am I
+<ul>
+<li><code>aws sts get-caller-identity</code></li>
+<li><code>aws iam get-user</code></li>
+</ul></li>
+<li>get secret
+<ul>
+<li><code>aws secretsmanager get-secret-value --secret-id foo</code></li>
+</ul></li>
+<li>change secret
+<ul>
+<li><code>aws secretsmanager update-secret --secret-id foo --secret-string "{\"json\":\"string\",\"foo\":\"bar\"}</code></li>
+</ul></li>
 </ul>
-</nav>
-<h2 id="findout-who-am-i">findout who am I?</h2>
-<p>aws sts get-caller-identity</p>
-<h2 id="also-findout-out-who-am-i-with-more-details">also findout out
-who am I with more details</h2>
-<p>aws iam get-user</p>
-<h2 id="get-secret">get secret</h2>
-<p>aws secretsmanager get-secret-value –secret-id foo</p>
-<h2 id="change-secret">change secret</h2>
-<p>aws secretsmanager update-secret<br />
-–secret-id foo<br />
-–secret-string “{"json":"string","foo":"bar"}”</p>
 </body>
 </html>

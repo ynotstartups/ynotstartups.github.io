@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>best practices: design</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="https://d392viioakuayd.cloudfront.net/public/favicon.webp">
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">best practices: design</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#design-step-by-step" id="toc-design-step-by-step">Design
+Step by step:</a></li>
+<li><a href="#design-considerations"
+id="toc-design-considerations">Design Considerations:</a></li>
+</ul>
+</nav>
+<h2 id="design-step-by-step">Design Step by step:</h2>
+<ol type="1">
+<li>understand business requirements
+<ul>
+<li>What is the goal? ask why we are doing it? what is the problem
+statement?</li>
+<li>Does it bring value to business? what’s the priority for the
+business?</li>
+</ul></li>
+<li>write design documentation</li>
+<li>functional/business requirements</li>
+<li>non-functional/technical requirements
+<ul>
+<li>reliable</li>
+<li>maintainable and operable (sustainable delivery of valuable, working
+software)</li>
+<li>scalable, performance</li>
+</ul></li>
+<li>Database Design and API Interfaces, services, functions etc..
+<ul>
+<li>design both mutation and resolver i.e. can FE reproduces Input from
+query?</li>
+</ul></li>
+<li>ask for feedbacks as early as possible</li>
+</ol>
+<h2 id="design-considerations">Design Considerations:</h2>
+<ul>
+<li>Design it three times
+<ul>
+<li>write down three designs, each with pros and cons, then there will
+appear more designs with combined pros and less cons</li>
+</ul></li>
+<li>Architect great design rather than just working codes, then writing
+documentations and code should be fun since that’s how you identify the
+best design</li>
+<li>Choosing the proper boundaries between functions is perhaps the
+primary activity of the computer system designer</li>
+<li>Reduce complexity by adding or removing abstraction</li>
+<li>Designing new process that is easy to sell to the Team!
+<ul>
+<li>use boring/familiar technology. easy to pick up. improves overall
+dev experience, should improve the overall developer experience rather
+than damaging developer experience.</li>
+</ul></li>
+<li>To significantly improve/speed up the entire system, one must
+improve/speed up a large fraction of the overall system. (Amdahls’ Law,
+CS:APP P58)</li>
+</ul>
+</body>
+</html>

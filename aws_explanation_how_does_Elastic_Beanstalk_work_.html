@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>how does Elastic Beanstalk work?</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="https://d392viioakuayd.cloudfront.net/public/favicon.webp">
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">how does Elastic Beanstalk work?</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#overview" id="toc-overview">Overview</a></li>
+<li><a
+href="#elastic-beanstalk-how-does-a-http-request-from-the-internect-get-response"
+id="toc-elastic-beanstalk-how-does-a-http-request-from-the-internect-get-response"><code>Elastic Beanstalk</code>:
+how does a http request from the Internect get response?</a>
+<ul>
+<li><a href="#elastic-load-balancer-uses-application-load-balancer"
+id="toc-elastic-load-balancer-uses-application-load-balancer">Elastic
+Load Balancer uses Application Load balancer</a></li>
+<li><a href="#ec2" id="toc-ec2">EC2</a></li>
+<li><a href="#amazon-ec2-auto-scaling"
+id="toc-amazon-ec2-auto-scaling">Amazon EC2 Auto Scaling</a></li>
+<li><a href="#route-53" id="toc-route-53">Route 53</a></li>
+<li><a href="#aws-waf" id="toc-aws-waf">AWS WAF</a></li>
+</ul></li>
+<li><a href="#see-also" id="toc-see-also">See also</a></li>
+</ul>
+</nav>
+<h2 id="overview">Overview</h2>
+<figure>
+<img src="./images/elastic-beanstalk-overview.png"
+alt="Elastic Beanstalk Overview" />
+<figcaption aria-hidden="true">Elastic Beanstalk Overview</figcaption>
+</figure>
+<p>Internet -&gt; Elastic Load Balancer -&gt; EC2 instances</p>
+<h2
+id="elastic-beanstalk-how-does-a-http-request-from-the-internect-get-response"><code>Elastic Beanstalk</code>:
+how does a http request from the Internect get response?</h2>
+<ol type="1">
+<li>Browser resolves the ip using <code>Route53</code></li>
+<li>Browser TCP+TLS request reaches <code>Elastic Load Balancer</code>,
+<code>ELB</code> then forwards the request to <code>EC2s</code></li>
+</ol>
+<h3 id="elastic-load-balancer-uses-application-load-balancer">Elastic
+Load Balancer uses Application Load balancer</h3>
+<p><strong>ALB Responsibilities</strong></p>
+<ul>
+<li>distributes workloads across multiple EC2 resources</li>
+<li>You can add and remove compute resources from your load balancer as
+your needs change, without disrupting the overall flow of requests to
+your applications.</li>
+<li>You can configure health checks, which monitor the health of the
+compute resources, so that the load balancer sends requests only to the
+healthy ones.</li>
+<li>You can also offload the work of encryption and decryption to your
+load balancer so that your compute resources can focus on their main
+work. <strong>HTTPS</strong> - <code>Elastic Load Balancer</code>
+decrypts incoming HTTPS (SSL/TLS) traffic then forward plain HTTP to EC2
+services.</li>
+</ul>
+<p><strong>Note</strong></p>
+<ul>
+<li>An ELB always uses a secruity group which is like a network
+firewall.</li>
+<li>AWS Certificate Manager — When you create an HTTPS listener, you can
+specify certificates provided by ACM. The load balancer uses
+certificates to terminate connections and decrypt requests from
+clients.</li>
+</ul>
+<h3 id="ec2">EC2</h3>
+<blockquote>
+<p>Virtual servers that run your applications in the cloud.</p>
+</blockquote>
+<h3 id="amazon-ec2-auto-scaling">Amazon EC2 Auto Scaling</h3>
+<blockquote>
+<p>Ensures that you are running your desired number of instances, even
+if an instance fails. Amazon EC2 Auto Scaling also enables you to
+automatically increase or decrease the number of instances as the demand
+on your instances changes. If you enable Auto Scaling with Elastic Load
+Balancing, instances that are launched by Auto Scaling are automatically
+registered with the load balancer. Likewise, instances that are
+terminated by Auto Scaling are automatically de-registered from the load
+balancer.</p>
+</blockquote>
+<h3 id="route-53">Route 53</h3>
+<blockquote>
+<p>Provides a reliable and cost-effective way to route visitors to
+websites by translating domain names (such as www.example.com) into the
+numeric IP addresses (such as 192.0.2.1) that computers use to connect
+to each other. AWS assigns URLs to your resources, such as load
+balancers. However, you might want a URL that is easy for users to
+remember. For example, you can map your domain name to a load balancer.
+For more information, see Routing traffic to an ELB load balancer in the
+Amazon Route 53 Developer Guide.</p>
+</blockquote>
+<h3 id="aws-waf">AWS WAF</h3>
+<blockquote>
+<p>You can use AWS WAF with your Application Load Balancer to allow or
+block requests based on the rules in a web access control list (web
+ACL). For more information, see AWS WAF.</p>
+</blockquote>
+<h2 id="see-also">See also</h2>
+<p>https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/GettingStarted.html</p>
+<blockquote>
+<p>Platform A platform is a combination of an operating system,
+programming language runtime, web server, application server, and
+additional Elastic Beanstalk components. Elastic Beanstalk provides
+manged platforms, or you can provide your own platform in a container.
+Elastic Beanstalk supports platforms for different programming
+languages, application servers, and Docker containers. When you create
+an environment, you must choose the platform. You can upgrade the
+platform, but you cannot change the platform for an environment.</p>
+</blockquote>
+<p>Platform used: Docker running on 64bit Amazon Linux 2/4.0.5</p>
+<blockquote>
+<p>To configure service access Next, you need two roles. A service role
+allows Elastic Beanstalk to monitor your EC2 instances and upgrade you
+environment’s platform. An EC2 instance profile role permits tasks such
+as writing logs and interacting with other services.</p>
+</blockquote>
+<ul>
+<li>aws-elasticbeanstalk-ec2-role</li>
+<li>aws-elasticbeanstalk-service-role</li>
+<li>AWSServiceRoleForElasticLoadBalancing ?</li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Django Concurrency Problems</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="https://d392viioakuayd.cloudfront.net/public/favicon.webp">
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Django Concurrency Problems</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#assumptions-for-readers"
+id="toc-assumptions-for-readers">Assumptions for readers</a></li>
+<li><a href="#two-real-concurrency-issues-encountered-in-real-world"
+id="toc-two-real-concurrency-issues-encountered-in-real-world">Two Real
+Concurrency Issues Encountered In Real World</a>
+<ul>
+<li><a
+href="#dependent-service-calls-two-rest-apis-both-write-to-the-same-record"
+id="toc-dependent-service-calls-two-rest-apis-both-write-to-the-same-record">1.
+Dependent Service calls two REST APIs both write to the same
+record</a></li>
+<li><a
+href="#use-clicked-submission-button-twice-within-a-short-amount-of-time"
+id="toc-use-clicked-submission-button-twice-within-a-short-amount-of-time">2.
+Use clicked submission button twice within a short amount of
+time</a></li>
+</ul></li>
+<li><a href="#breaking-down-concurrency-problems-encountered"
+id="toc-breaking-down-concurrency-problems-encountered">Breaking Down
+Concurrency Problems Encountered</a></li>
+<li><a href="#wrong-solution" id="toc-wrong-solution">Wrong
+Solution</a></li>
+<li><a href="#wrong-solution-1" id="toc-wrong-solution-1">Wrong
+Solution</a></li>
+<li><a href="#correct-solution" id="toc-correct-solution">Correct
+Solution</a></li>
+<li><a href="#recipe-to-guard-against-duplicate-write"
+id="toc-recipe-to-guard-against-duplicate-write">Recipe to guard against
+duplicate write</a></li>
+<li><a href="#is-there-alternative-to-select_for_update"
+id="toc-is-there-alternative-to-select_for_update">Is there alternative
+to <code>select_for_update</code>?</a></li>
+<li><a href="#see-also" id="toc-see-also">See also</a></li>
+<li><a href="#public-praise-from-katie-thorn"
+id="toc-public-praise-from-katie-thorn">2026 public praise from Katie
+Thorn</a></li>
+</ul>
+</nav>
+<ul>
+<li>Understand the concurrency problems encountering in real world?</li>
+<li>Understand why a simple Backend solution is to use
+<code>select_for_update</code>?</li>
+</ul>
+<h2 id="assumptions-for-readers">Assumptions for readers</h2>
+<ul>
+<li>assume little to no database knowledge</li>
+<li>understand atomicity of database system</li>
+</ul>
+<h2 id="two-real-concurrency-issues-encountered-in-real-world">Two Real
+Concurrency Issues Encountered In Real World</h2>
+<h3
+id="dependent-service-calls-two-rest-apis-both-write-to-the-same-record">1.
+Dependent Service calls two REST APIs both write to the same record</h3>
+<ul>
+<li>Dependent Service uses a function <code>update_contact_foo</code>
+which sets foo score and set <code>pending = False</code></li>
+<li>Dependent Service calls rest API that fetches from curo and does a
+<code>handle_put</code> for the foo.</li>
+</ul>
+<pre><code># comment: Client Completed ATR
+
+--- Change at: 2025-08-04 14:38:35.409104+00:00 by admin ---
+date_updated: 2025-06-24 07:45:29.248338+00:00 → 2025-08-04 14:38:35.406381+00:00
+value: None → 3
+date_submitted: None → 2025-08-04 14:38:34+00:00
+pending: True → False
+
+
+# comment: Data Reverted
+
+--- Change at: 2025-08-04 14:38:38.187071+00:00 by None ---
+date_updated: 2025-08-04 14:38:37.144342+00:00 → 2025-08-04 14:38:36.952026+00:00
+value: 3 → None
+date_submitted: 2025-08-04 14:38:34+00:00 → None
+pending: False → True
+
+# comment: handle_put Curo Sync Happened
+
+--- Change at: 2025-08-04 14:38:38.386802+00:00 by None ---
+date_updated: 2025-08-04 14:38:36.952026+00:00 → 2025-08-04 14:38:38.384281+00:00
+value: None → 3
+date_submitted: None → 2025-08-04 00:00:00+00:00</code></pre>
+<p>Note this line
+<code>date_updated: 2025-08-04 14:38:37.144342+00:00 → 2025-08-04 14:38:36.952026+00:00</code>
+where the <code>date_updated</code> is changed from later date or older
+date.</p>
+<h3
+id="use-clicked-submission-button-twice-within-a-short-amount-of-time">2.
+Use clicked submission button twice within a short amount of time</h3>
+<p><strong>User clicked submission button twice within few seconds to
+trigger two call to submission mutation endpoints</strong></p>
+<ul>
+<li>At time 22 minute 03 seconds, user clicks the Submit instruction for
+the first time.</li>
+<li>At time 22 minute 09 seconds, user switched tab to Documents and
+encountered error pop up Client folder is being setup _ At time 22
+minute 14 seconds, user switched back to tab Instruction and clicked the
+Submit instruction for the second time</li>
+</ul>
+<p>This leads to handover being submitted twice, hence resulted in
+duplicated records.</p>
+<h2 id="breaking-down-concurrency-problems-encountered">Breaking Down
+Concurrency Problems Encountered</h2>
+<p>These two Concurrency problems boil down to there are two http
+requests both doing select, then update, there is no coordination
+between two requests.</p>
+<p>Consider this simple example, <code>A</code> and <code>B</code> stand
+for request A and B</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>A: review <span class="op">=</span> Review.objects.get(<span class="bu">id</span><span class="op">=</span>review_id)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>B: review <span class="op">=</span> Review.objects.get(<span class="bu">id</span><span class="op">=</span>review_id)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>A: call third party api to submit review</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>B: call third party api to submit review</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>A: review.third_party_id <span class="op">=</span> <span class="st">&#39;AAAA&#39;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>B: review.third_party_id <span class="op">=</span> <span class="st">&#39;BBBB&#39;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>A: review.save()</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>B: review.save()</span></code></pre></div>
+<p>When Request A and B runs concurrently, this review might have
+<code>third_party_id</code> sets with either <code>AAAA</code> or
+<code>BBBB</code>.</p>
+<p>What we really want is to correctly handle two concurrency requests
+modifying the same database entity, so the review.third_party_id is ONLY
+set once to either be <code>AAAA</code> or <code>BBBB</code>!</p>
+<p>What we really really want is to correctly handle two concurrency
+requests to submission, to ensure there only 1 call to third party API
+endpoints. So we need to find a way to ensure submission logics
+(database write or third party API call) only ever happens once!</p>
+<h2 id="wrong-solution">Wrong Solution</h2>
+<p>Naively check <code>review.third_party_id</code> cannot be None!</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>review <span class="op">=</span> Review.objects.get(<span class="bu">id</span><span class="op">=</span>review_id)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> review.third_party_id:</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">&#39;This review is already submitted&#39;</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>review.third_party_id <span class="op">=</span> <span class="st">&#39;AAAA&#39;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>review.save()</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Request B</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>review <span class="op">=</span> Review.objects.get(<span class="bu">id</span><span class="op">=</span>review_id)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> review.third_party_id:</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">&#39;This review is already submitted&#39;</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>review.third_party_id <span class="op">=</span> <span class="st">&#39;BBBB&#39;</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>review.save()</span></code></pre></div>
+<p>So when Request A and B runs concurrently, this review might have
+<code>third_party_id</code> sets with either <code>AAAA</code> or
+<code>BBBB</code>.</p>
+<p>Counter Example: On concurrent requests A and B, The
+<code>third_party_id</code> check can happen before the write.</p>
+<pre><code>A: review = Review.objects.get(id=review_id)
+A: call third party api to submit review
+
+B: review = Review.objects.get(id=review_id)
+# Note that review.third_party_id is still None
+B: call third party api to submit review
+
+A: review.third_party_id = &#39;AAAA&#39;
+A: review.save()
+B: review.third_party_id = &#39;BBBB&#39;
+B: review.save()</code></pre>
+<h2 id="wrong-solution-1">Wrong Solution</h2>
+<p>wrap two requests in a transaction.atomic block, and check for
+<code>third_party_id</code></p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> review.third_party_id <span class="op">==</span> <span class="va">None</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Request A</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> transaction.atomic():</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    review <span class="op">=</span> Review.objects.get(<span class="bu">id</span><span class="op">=</span>review_id)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> review.third_party_id:</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">&#39;This review is already submitted&#39;</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    review.third_party_id <span class="op">=</span> <span class="st">&#39;AAAA&#39;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    review.save()</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Request B</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> transaction.atomic():</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    review <span class="op">=</span> Review.objects.get(<span class="bu">id</span><span class="op">=</span>review_id)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> review.third_party_id:</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">&#39;This review is already submitted&#39;</span>)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    review.third_party_id <span class="op">=</span> <span class="st">&#39;BBBB&#39;</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    review.save()</span></code></pre></div>
+<p>A transaction only ensures atomicity. i.e. <code>atomicity</code> If
+the block of code is successfully completed, the changes are committed
+to the database. If there is an exception, the changes are rolled
+back.</p>
+<p>A transaction doesn’t handle concurrent requests by default!</p>
+<p>So an counter example is exactly same as previous failure case, as
+follow.</p>
+<pre><code>A: review = Review.objects.get(id=review_id)
+A: call third party api to submit review
+
+B: review = Review.objects.get(id=review_id)
+# Note that review.third_party_id is still None
+B: call third party api to submit review
+
+A: review.third_party_id = &#39;AAAA&#39;
+A: review.save()
+B: review.third_party_id = &#39;BBBB&#39;
+B: review.save()</code></pre>
+<h2 id="correct-solution">Correct Solution</h2>
+<p>What we really need is a way to ensure <strong>business
+logics</strong> from two concurrent requests only happen once!</p>
+<p>i.e. in concurrent computing language, the <strong>business
+logics</strong> are critical section such that this critical section
+cannot be entered by two or more processes at the same time.</p>
+<p>We need some sort of LOCK!</p>
+<p>Django’s <code>select_for_update</code> acquires a database row-level
+lock which blocks another transaction trying to acquire the same
+row-level lock for this particular object.</p>
+<blockquote>
+<p>FOR UPDATE causes the rows retrieved by the SELECT statement to be
+locked as though for update. This prevents them from being locked,
+modified or deleted by other transactions until the current transaction
+ends. That is, other transactions that attempt UPDATE, DELETE, SELECT
+FOR UPDATE, SELECT FOR NO KEY UPDATE, SELECT FOR SHARE or SELECT FOR KEY
+SHARE of these rows will be blocked until the current transaction ends;
+conversely, SELECT FOR UPDATE will wait for a concurrent transaction
+that has run any of those commands on the same row, and will then lock
+and return the updated row (or no row, if the row was deleted)</p>
+</blockquote>
+<ul>
+<li><a
+href="https://www.postgresql.org/docs/current/explicit-locking.html#LOCKING-ROWS">Postgres
+doc on FOR UPDATE</a></li>
+</ul>
+<p>In our example, when the first request (either A or B) locks
+<code>review with id = review_id</code>, which will BLOCK the other
+concurrent request, it will block until the first request exit the
+transaction, then the second request will run.</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># request A</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> transaction.atomic():</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    review <span class="op">=</span> review.objects.select_for_update().get(<span class="bu">id</span><span class="op">=</span>review_id)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> review.third_party_id:</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">&#39;This review is already submitted&#39;</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    review.third_party_id <span class="op">=</span> <span class="st">&#39;AAAA&#39;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    review.save()</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># request B</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> transaction.atomic():</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    review <span class="op">=</span> review.objects.select_for_update().get(<span class="bu">id</span><span class="op">=</span>review_id)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> review.third_party_id:</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">&#39;This review is already submitted&#39;</span>)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    review.third_party_id <span class="op">=</span> <span class="st">&#39;BBBB&#39;</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    review.save()</span></code></pre></div>
+<p><strong>IMPORTANT</strong>: You must use
+<code>select_for_update</code> is within a transaction
+<code>with transaction.atomic()</code>!</p>
+<p>Due to the write lock by using <code>select_for_update</code>,
+oneview backend ensures there are only 2 possible ways of execution! So
+<code>third_party_id</code> can only be set to <code>AAAA</code> or
+<code>BBBB</code>! and critical business logics is only happened
+once!</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># request A</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>review <span class="op">=</span> review.objects.select_for_update().get(<span class="bu">id</span><span class="op">=</span>review_id)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> review.third_party_id: <span class="co"># review.third_party_id is None, skipping the Raise</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">&#39;This review is already submitted&#39;</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># call third party api to submit review</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>review.third_party_id <span class="op">=</span> <span class="st">&#39;AAAA&#39;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>review.save()</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># request B</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>review <span class="op">=</span> review.objects.select_for_update().get(<span class="bu">id</span><span class="op">=</span>review_id)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Note: this review has latest data with third_party_id not None!</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> review.third_party_id:</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># return from here</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">&#39;This review is already submitted&#39;</span>)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co"># DOES NOT call third party api to submit review</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># request B</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>review <span class="op">=</span> review.objects.select_for_update().get(<span class="bu">id</span><span class="op">=</span>review_id)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> review.third_party_id: <span class="co"># review.third_party_id is None, skipping the Raise</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">&#39;This review is already submitted&#39;</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># call third party api to submit review</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>review.third_party_id <span class="op">=</span> <span class="st">&#39;BBBB&#39;</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>review.save()</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># request A</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>review <span class="op">=</span> review.objects.select_for_update().get(<span class="bu">id</span><span class="op">=</span>review_id)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> review.third_party_id:</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">&#39;This review is already submitted&#39;</span>)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co"># DOES NOT call third party api to submit review</span></span></code></pre></div>
+<p>To understand how exactly is <code>select_for_update</code> work, See
+more <a
+href="https://www.postgresql.org/docs/current/explicit-locking.html#LOCKING-ROWS">Official
+Postgres Documentation on FOR UPDATE row level lock</a></p>
+<h2 id="recipe-to-guard-against-duplicate-write">Recipe to guard against
+duplicate write</h2>
+<p>In a transaction,</p>
+<ol type="1">
+<li>Use <code>select_for_update</code> to avoid concurrency write</li>
+<li>then do an idempotent check to ensure this action hasn’t happen</li>
+<li>use try except Exception to avoid unexpected transaction rollback?
+(unsure about this last step)</li>
+</ol>
+<p><strong>Why do we need step3 a try except?</strong>?</p>
+<p>The messy real world: not just 1 submission of review, rather many
+others submission so transaction takes longer, need to be careful to not
+raise errors in submission functions due to atomicity of transaction!
+Consider a solution is to have a wide try except Exception to catch all
+errors y one safe.</p>
+<h2 id="is-there-alternative-to-select_for_update">Is there alternative
+to <code>select_for_update</code>?</h2>
+<ul>
+<li>Postgres Serializable Isolation Level</li>
+</ul>
+<h2 id="see-also">See also</h2>
+<ul>
+<li><a href="https://www.postgresql.org/docs/current/mvcc.html">Official
+Postgres Documentation on Concurrency Control</a></li>
+<li><a
+href="https://www.postgresql.org/docs/current/explicit-locking.html#LOCKING-ROWS">Official
+Postgres Documentation on FOR UPDATE row level lock</a></li>
+<li><a
+href="https://docs.djangoproject.com/en/6.0/ref/models/querysets/#select-for-update">django
+doc on select_for_update</a></li>
+<li><a href="https://coderanger.net/select-for-update/">another
+introduction on why use <code>select_for_update</code></a></li>
+</ul>
+<h2 id="public-praise-from-katie-thorn">2026 public praise from Katie
+Thorn</h2>
+<p>tags:reference, work,</p>
+<p>I’d like to give a huge thank you to Tiger for consistently going
+above and beyond to make life easier for the Product team. Over the past
+few months, we’ve been dealing with an issue where the risk score for a
+secondary contact wasn’t pulling through to OneView. Whilst the
+underlying issue has now been resolved, we knew there would still be a
+handful of historic reviews affected. Rather than leaving us to raise
+bug tickets every time one cropped up, Tiger worked his magic and gave
+us the ability to self-serve those remaining cases. It means we can now
+fix the impacted reviews ourselves in a matter of moments instead of
+waiting for developer intervention. It might sound like a small change,
+but it will save us a huge amount of time and makes the whole process so
+much smoother. This is just one example of the way Tiger works. His
+investigation notes and root cause analyses are always incredibly
+detailed, making it so much easier for our team to understand not just
+what went wrong, but why. That level of detail really helps us
+communicate issues to the business, spot trends and improve our own
+knowledge. Thank you, Tiger, for always thinking beyond the immediate
+fix and looking for ways to make life easier for everyone else. Your
+technical expertise is invaluable, but it’s your willingness to share
+your knowledge and improve the wider process that really stands out.</p>
+</body>
+</html>

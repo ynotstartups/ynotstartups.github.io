@@ -34,14 +34,14 @@
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
-<li><a href="#concepts" id="toc-concepts">Concepts</a></li>
+<li><a href="#keywords" id="toc-keywords">Keywords</a></li>
 <li><a href="#command-line" id="toc-command-line">Command Line</a></li>
+<li><a href="#use-cases" id="toc-use-cases">Use Cases</a></li>
+<li><a href="#concepts" id="toc-concepts">Concepts</a></li>
 </ul>
 </nav>
-<h2 id="concepts">Concepts</h2>
+<h2 id="keywords">Keywords</h2>
 <ul>
-<li><code>terraform</code> - terraform settings and dependent
-providers</li>
 <li><code>data</code> - data source, requests terraform read from a
 given data source</li>
 <li><code>provider</code> - configs for the specific provider
@@ -50,14 +50,13 @@ e.g. <code>aws</code> with specified version</li>
 infrastructure</li>
 <li><code>variable</code> - defines variables</li>
 <li><code>output</code> - use to connect the terraform projects with
-other poarts of your infrastructure or with other terraform
-projects</li>
-<li><code>local</code> - local variables</li>
+other parts of your infrastructure or with other terraform projects</li>
+<li><code>local</code> - local variables to be reuse in this file</li>
 </ul>
 <p><strong>Difference of resource and data</strong></p>
 <ul>
 <li><code>data</code> is read only where <code>resource</code> cause
-terraform to create, update and delete infra objects</li>
+terraform to create, update and delete infrastructure objects</li>
 </ul>
 <h2 id="command-line">Command Line</h2>
 <ul>
@@ -67,15 +66,20 @@ times.</li>
 </ul>
 <p><strong>Provisioning Infrastructure</strong></p>
 <ul>
-<li><code>plan</code> - presents a plan for making changes, dry-run of
+<li>start with write author infrastructure as code</li>
+<li><code>validate</code> - check whether the configuration is
+valid</li>
+<li><code>plan</code> - present a plan for making changes, dry-run of
 <code>apply</code></li>
-<li><code>apply</code> - applies the planned changes to each resource
+<li><code>apply</code> - apply the planned changes to each resource
 using the relevant infrastructure provider’s API</li>
-<li><code>destroy</code> - destroys all of the resources being managed
-by the current working directory and workspace</li>
 </ul>
+<p>Interally, Terraform uses API to create and manage cloud
+resources.</p>
 <p><strong>Inspecting Infrastructure</strong></p>
 <ul>
+<li><code>console</code> - inspect outputs interactively
+e.g. <code>&gt; data.terraform.remote_state.shared</code></li>
 <li><code>graph</code> - creates a visual representation of a
 configuration or a set of planned changes.</li>
 <li><code>output</code> - can get the values for the top-level output
@@ -83,6 +87,7 @@ values of a configuration</li>
 <li><code>show</code> - can generate human-readable versions of a state
 file or plan file, or generate machine-readable versions that can be
 integrated with other tools.</li>
+<li><code>state list</code> - List resources in the state</li>
 </ul>
 <p><strong>Developing</strong></p>
 <ul>
@@ -94,5 +99,110 @@ remote services such as remote state, provider APIs, etc.</li>
 <p>See Also: <a
 href="https://developer.hashicorp.com/terraform/cli">terraform cli
 doc</a></p>
+<h2 id="use-cases">Use Cases</h2>
+<ul>
+<li>multi-cloud development: google cloud, aws, azure</li>
+<li>application infrastructure deployment, scaling and monitoring tools
+<ul>
+<li>terraform can handle dependencies to deploy database before
+provisioning the web servers</li>
+</ul></li>
+<li>platform team to build self-service clusters
+<ul>
+<li>use terraform to build a self-service infrastructure model that lets
+product teams manage their own infrastructure independently. You can
+create and use Terraform modules that codify the standards for deploying
+and managing services</li>
+</ul></li>
+<li>setup Platform as a service
+<ul>
+<li>use Terraform to codify the setup required for a Heroku application,
+configure a DNSimple to set a CNAME, and set up Cloudflare as a Content
+Delivery Network (CDN) for the app. Terraform can quickly and
+consistently do all of this without a web interface.</li>
+</ul></li>
+<li>manage Kubernetes</li>
+<li>setup parallel environments: development, test, QA and
+production</li>
+<li>setup software demo</li>
+</ul>
+<h2 id="concepts">Concepts</h2>
+<p><strong>Terraform module</strong></p>
+<ol type="1">
+<li>Group resources that you usually deploy together, letting you define
+reusable units of infrastructure code. For example, the official “VPC
+module” let you customise using input variables to quickly create VPC,
+subnets, route table, internet gateway, security groups…</li>
+<li>Help teams establish infrastructure configuration standards. For
+example, you can write a module to create a database used by your
+application that includes all of the defaults that your architecture
+requires. The module can define the database size, type and handle all
+of the required networking. This ensures that module consumers provision
+infrastructure in line with your organisation standard and
+requirements.</li>
+</ol>
+<p><strong>Terraform state</strong></p>
+<p>Terraform stores state about your workspace’s managed infrastructure
+and configuration due to following reasons.</p>
+<p>Why does Terraform use state?</p>
+<ol type="1">
+<li>Terraform uses your workspace’s state of map real world resources to
+your configuration.Prior to any operation, Terraform does a “refresh” to
+update the state with the real infrastructure. The primary purpose of
+state is to store bindings between objects in a remote system and
+resource instances declared in your configuration. When Terraform
+creates a remote object in response to a change of configuration, it
+records the identify of that remote object against a particular resource
+instance, and potentially updates and deleted that objects in response
+to future configuration changes.</li>
+<li>keep track of metadata, such as resource dependencies, terraform
+uses configuration to determine dependency order.</li>
+<li>remote backend is for securely store state and collaborates with
+team members.</li>
+<li>performance, cache attribute values for remote resources, avoid
+network requests, more useful for large infrastructure.</li>
+</ol>
+<p>The primary purpose of state is to store bindings between objects in
+a remote system and resource instances declared in your configuration.
+When Terraform creates a remote object in response to a change of
+configuration, it records the identity of that remote object against a
+particular resource instance, and potentially updates and deletes that
+objects in response to future configuration changes.</p>
+<p>Internal to terraform, workspace state is stored as JSON file. Do not
+directly edit this file. Terraform expects a one-to-one mapping between
+configured resource instance and remote objects. Normally that is
+guranteed by Terraform being the one to create each object and record
+its identity in the state, or to destroy an object and then remove the
+binding for it. If you add or remote bindings in the state by other
+means, such as by importing externally - created objects with ‘terraform
+import’, or by asking Terraform to ‘forget’ an existing object with
+‘terraform state rm’, you’ll then need to ensure for yourself that this
+one-to-one rule is followed, such as by manually deleting an object that
+you asked terraform to forget, or by re-importing it to bind it to some
+other resource instance.</p>
+<p><strong>remote state backends</strong></p>
+<p>Helps collaboration and coordinate execution for multiple developers
+working on the same codebase.</p>
+<ul>
+<li>state locking: Terraform will lock your state for all operations
+that could write state. State locking prevents concurrent Terraform
+operations on a single state file.</li>
+<li>state file may contain sensitive data, use state encryption.</li>
+</ul>
+<p><strong>scale Terraform</strong></p>
+<p>how to define boundaries or infrastructure ownership. need to decide
+on a cloud deployment strategy, possible approaches include using a
+single account in a single cloud provider, a hybrid or multi-cloud
+approach, or to divide up resources across accounts by environments.</p>
+<p><strong>Divide infrastructure responsibility</strong></p>
+<p>It’s common for different teams to focus on different parts of your
+organisation’s infrastructure. Networking team manage the VPCs,
+application team only needs to know where to deploy their application
+and focus on configuring servers and databases. But application still
+needs to access data about the networking resources for their own
+configuration - use reference data about other resources in your
+configuration without having to manage them in the same state file,
+allowing you to maintain distinct areas of ownership and infrastructure
+decoupling.</p>
 </body>
 </html>
